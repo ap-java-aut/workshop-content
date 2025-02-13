@@ -26,11 +26,15 @@ the teaching assistants need but the students don't.
 assignments, videos, and everything they need to complete the work for that week. Also, there's a README.md file,
 which outlines that week's learning process for students.
 
+**guideline**: Here are the guidelines to ensure high-quality content in this workshop. 
+
 ## TA contribution
 
 Create a branch from `main`, then submit a pull request to merge it. If you're working in a group, everyone should use 
 the same branch. Please avoid creating multiple branches in the repository for a single week. use kebab-case for your 
-branch name.
+branch name. Also, Don't forget to provide a README.md file for the students.
+
+Before writing a new document, carefully read the instructions provided in [how-to-write-a-good-doc](guideline/how-to-write-a-good-doc.pdf).
 
 ## Conventions
 
