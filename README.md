@@ -23,7 +23,8 @@ starting from Week 0 (don’t ask why). Each week’s content is split into two 
 - **ta:** This directory contains answers to the week’s problems or projects, editable .docx files, and everything 
 the teaching assistants need but the students don't.
 - **student:** This directory holds content intended for students, including PDF files of documents, project templates, 
-assignments, videos, and everything they need to complete the work for that week.
+assignments, videos, and everything they need to complete the work for that week. Also, there's a README.md file,
+which outlines that week's learning process for students.
 
 ## TA contribution
 
