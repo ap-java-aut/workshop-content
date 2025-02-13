@@ -31,3 +31,9 @@ which outlines that week's learning process for students.
 Create a branch from `main`, then submit a pull request to merge it. If you're working in a group, everyone should use 
 the same branch. Please avoid creating multiple branches in the repository for a single week. use kebab-case for your 
 branch name.
+
+## Conventions
+
+Use kebab-case for everything! Apply kebab-case to directory names, files, and similar items, unless there's a more 
+common convention that specifies otherwise. use imperative verbs in the present tense for your commit messages, and 
+write them in all lowercase.
