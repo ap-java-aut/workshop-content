@@ -29,4 +29,5 @@ which outlines that week's learning process for students.
 ## TA contribution
 
 Create a branch from `main`, then submit a pull request to merge it. If you're working in a group, everyone should use 
-the same branch. Please avoid creating multiple branches in the repository for a single week.
+the same branch. Please avoid creating multiple branches in the repository for a single week. use kebab-case for your 
+branch name.
