@@ -1,5 +1,5 @@
 import javax.swing.*;
-import packages.Page1;
+import packages.informationPage;
 
 public class Main {
 
@@ -39,8 +39,8 @@ public class Main {
             frame.repaint();
 
             // Load and display the first page
-            Page1 page1 = new Page1();
-            page1.create(frame);
+            informationPage informationPage = new informationPage();
+            informationPage.create(frame);
 
             // Refresh the frame
             frame.revalidate();

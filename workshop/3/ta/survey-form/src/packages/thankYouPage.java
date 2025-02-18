@@ -2,7 +2,7 @@ package packages;
 
 import javax.swing.*;
 
-public class Page3 {
+public class thankYouPage {
 
     public void create(JFrame frame) {
 
