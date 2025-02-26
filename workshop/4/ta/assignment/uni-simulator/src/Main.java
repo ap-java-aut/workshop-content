@@ -1,8 +1,5 @@
-import java.util.*;
-
-import edu.uni.party.Person;
-import edu.uni.entities.*;
-import edu.uni.components.*;
+import base.Person;
+import uni.*;
 
 public class Main {
     public static void main(String[] args) {

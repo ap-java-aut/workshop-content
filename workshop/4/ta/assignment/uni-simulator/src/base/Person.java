@@ -1,4 +1,4 @@
-package edu.uni.party;
+package base;
 
 import java.util.*;
 
