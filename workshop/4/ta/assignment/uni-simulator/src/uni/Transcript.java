@@ -1,6 +1,4 @@
-package edu.uni.components;
-
-import edu.uni.entities.Course;
+package uni;
 
 import java.util.*;
 

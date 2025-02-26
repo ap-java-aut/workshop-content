@@ -1,4 +1,4 @@
-package edu.uni.entities;
+package uni;
 
 import java.util.*;
 
