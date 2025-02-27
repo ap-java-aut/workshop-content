@@ -12,15 +12,24 @@ public class Transcript{
     }
 
     public void setGrade(int presentedCourseID, Double grade){
-        if (PresentedCourse.findById(presentedCourseID).studentIDList.contains(studentID)) {
-            this.transcript.put(presentedCourseID, grade);
+        PresentedCourse pc = PresentedCourse.findById(presentedCourseID);
+        if (pc != null){
+            if (pc.studentIDList.contains(studentID)) {
+                this.transcript.put(presentedCourseID, grade);
+            }
         }
     }
 
     public void printTranscript(){
         for (var entry : transcript.entrySet()) {
             PresentedCourse pc = PresentedCourse.findById(entry.getKey());
-            System.out.println(Course.findById(pc.courseID).title + ": " + entry.getValue());
+            Course course = null;
+            if (pc != null) {
+                course = Course.findById(pc.courseID);
+            }
+            if (course != null) {
+                System.out.println(course.title + ": " + entry.getValue());
+            }
         }
     }
 
@@ -30,9 +39,14 @@ public class Transcript{
         double GPA = 0;
         for (var entry : transcript.entrySet()) {
             PresentedCourse pc = PresentedCourse.findById(entry.getKey());
-            Course course = Course.findById(pc.courseID);
-            totalGradePoints += entry.getValue() * course.units;
-            totalUnits += course.units;
+            Course course = null;
+            if (pc != null) {
+                course = Course.findById(pc.courseID);
+            }
+            if (course != null) {
+                totalGradePoints += entry.getValue() * course.units;
+                totalUnits += course.units;
+            }
         }
         if (totalUnits > 0) {
             GPA = totalGradePoints / totalUnits;

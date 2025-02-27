@@ -28,6 +28,10 @@ public class PresentedCourse{
     }
 
     public void addStudent(int studentID) {
-        studentIDList.add(studentID);
+        if (this.studentIDList.size() == maxCapacity){
+            System.out.println("Student number has reached it's max capacity.");
+        } else {
+            studentIDList.add(studentID);
+        }
     }
 }
