@@ -28,6 +28,8 @@ which outlines that week's learning process for students.
 
 **guideline**: Here are the guidelines to ensure high-quality content in this workshop. 
 
+**project**: Different projects assigned to the students
+
 ## TA contribution
 
 Create a branch from `main`, then submit a pull request to merge it. If you're working in a group, everyone should use 
