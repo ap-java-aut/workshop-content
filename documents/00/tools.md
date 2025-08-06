@@ -125,19 +125,19 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
 
 در این صفحه نام و مسیر ذخیره‌سازی پروژه را انتخاب کنید. زبان را بر روی جاوا و Build System را بر روی IntelliJ بگذارید. در صورتی که می‌خواهید در بدو ایجاد پروژه کلاس Main به همراه کد آماده‌ی کوتاه وجود داشته باشد، تیک Add Sample Code را بزنید.
 
-![ایجاد پروژهٔ جدید در IntelliJ](./pics/idea-create-project.png)
+![ایجاد پروژهٔ جدید در IntelliJ](./pic/idea-create-project.png)
 
 سپس می‌بایست JDK را که قبلاً نصب کردید انتخاب کنید. برای این کار مطابق تصویر زیر عمل کنید. در پایان بر روی گزینه Create بزنید.
 
-![صفحهٔ انتخاب JDK](./pics/idea-choose-jdk.png)
+![صفحهٔ انتخاب JDK](./pic/idea-choose-jdk.png)
 
 چنانچه پس از ایجاد پروژه، مایل به اضافه کردن کلاس دیگری بودید و یا اگر کلاس Main به‌صورت پیش‌فرض در پروژه‌ی شما ساخته نشده بود، مطابق تصویر زیر از منوی File گزینه New و سپس گزینه‌ی Java Class را انتخاب کنید.
 
-![اضافه کردن کلاس جدید](./pics/idea-add-class.png)
+![اضافه کردن کلاس جدید](./pic/idea-add-class.png)
 
 پس از ساخت پروژه یک فایل پیش‌فرض `Main.java` با برنامه مربوط به چاپ `"!Hello World"` ساخته می‌شود. با استفاده کلید سبزرنگ Run در نوار بالایی می‌توانید کد را اجرا کنید و مطمئن شوید  تمامی ابزارها به درستی کار می‌کنند و عبارت `"!Hello World"` در ترمینال چاپ شده است.
 
-![اجرای برنامه منجر به چاپ Hello World می‌شود](./pics/idea-hello-world.png)
+![اجرای برنامه منجر به چاپ Hello World می‌شود](./pic/idea-hello-world.png)
 
 # گیت 
 
@@ -147,45 +147,45 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
 
 ابتدا به [سایت گیت](https://git-scm.com/) مراجعه کنید و بر روی گزینه‌ی Download for windows بزنید.
 
-![صفحهٔ وب‌سایت git](./pics/git-website.png)
+![صفحهٔ وب‌سایت git](./pic/git-website.png)
 
 سپس بر روی Click Here to download بزنید تا دانلود آخرین نسخه آغاز شود.
 
-![دانلود git برای ویندوز](./pics/git-download-windows.png)
+![دانلود git برای ویندوز](./pic/git-download-windows.png)
 
 پس از پایان دانلود بر روی فایل setup دانلود شده بزنید. مطابق تصاویر زیر، مراحل دانلود را ادامه دهید.
 
-![صفحهٔ اول نصب گیت](./pics/git-install-win-1.png)
+![صفحهٔ اول نصب گیت](./pic/git-install-win-1.png)
 
-![صفحهٔ دوم نصب گیت](./pics/git-install-win-2.png)
+![صفحهٔ دوم نصب گیت](./pic/git-install-win-2.png)
 
-![صفحهٔ سوم نصب گیت](./pics/git-install-win-3.png)
+![صفحهٔ سوم نصب گیت](./pic/git-install-win-3.png)
 
-![صفحهٔ چهارم نصب گیت](./pics/git-install-win-4.png)
+![صفحهٔ چهارم نصب گیت](./pic/git-install-win-4.png)
 
 در مرحلهٔ Choosing the default editor used by Git از شما خواسته می‌شود یک ادیتور پیش‌فرض برای گیت، از بین ادیتورهای موجود در دستگاه خود انتخاب کنید. توجه داشته باشید که این تنظیمات پس از نصب نیز قابل‌تغییر است و در این مرحله ضرورتی در تغییر آن نیست. نصب را بر اساس تصاویر ادامه دهید.
 
-![صفحهٔ پنجم نصب گیت](./pics/git-install-win-5.png)
+![صفحهٔ پنجم نصب گیت](./pic/git-install-win-5.png)
 
-![صفحهٔ ششم نصب گیت](./pics/git-install-win-6.png)
+![صفحهٔ ششم نصب گیت](./pic/git-install-win-6.png)
 
-![صفحهٔ هفتم نصب گیت](./pics/git-install-win-7.png)
+![صفحهٔ هفتم نصب گیت](./pic/git-install-win-7.png)
 
-![صفحهٔ هشتم نصب گیت](./pics/git-install-win-8.png)
+![صفحهٔ هشتم نصب گیت](./pic/git-install-win-8.png)
 
-![صفحهٔ نهم نصب گیت](./pics/git-install-win-9.png)
+![صفحهٔ نهم نصب گیت](./pic/git-install-win-9.png)
 
-![صفحهٔ دهم نصب گیت](./pics/git-install-win-10.png)
+![صفحهٔ دهم نصب گیت](./pic/git-install-win-10.png)
 
-![صفحهٔ یازدهم نصب گیت](./pics/git-install-win-11.png)
+![صفحهٔ یازدهم نصب گیت](./pic/git-install-win-11.png)
 
-![صفحهٔ دوازدهم نصب گیت](./pics/git-install-win-12.png)
+![صفحهٔ دوازدهم نصب گیت](./pic/git-install-win-12.png)
 
-![صفحهٔ سیزدهم نصب گیت](./pics/git-install-win-13.png)
+![صفحهٔ سیزدهم نصب گیت](./pic/git-install-win-13.png)
 
 بعد از پایان فرآیند Installation، در صفحه‌ی زیر Finish را بزنید.
 
-![صفحهٔ نهایی نصب گیت](./pics/git-install-win-finish.png)
+![صفحهٔ نهایی نصب گیت](./pic/git-install-win-finish.png)
 
 اکنون نصب به پایان رسیده است. می‌توانید از طریق Git Bash یا Command Prompt دستورات را نوشته و با گیت کار کنید. همچنین می‌توانید از Git GUI استفاده کنید که محیط گرافیکی برای استفاده از گیت می‌باشد. در ادامه درس، توضیحات کامل درباره نحوه کارکرد گیت و چرایی استفاده و اهمیت آن در برنامه‌نویسی داده می‌شود.
 
