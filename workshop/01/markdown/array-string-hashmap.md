@@ -252,7 +252,17 @@ System.out.println(b);
 
 در مورد این که چرا وقتی `int` رو داریم، به `Integer` هم نیاز داریم بعدا بهتون توضیح بدیم. برای الآن بدونید که این reference typeها وجود دارن و تا حد خیلی خوبی هم معادل همتای primitive typeشونن. فهرست کامل اون‌ها توی جدول زیر اومده:
 
-![primitive-reference-types](photos/primitive-reference-types.png)
+| Primitive Type | Reference Type (Wrapper Class) |
+| -------------- | ------------------------------ |
+| `boolean`      | `Boolean`                      |
+| `byte`         | `Byte`                         |
+| `char`         | `Character`                    |
+| `short`        | `Short`                        |
+| `int`          | `Integer`                      |
+| `long`         | `Long`                         |
+| `float`        | `Float`                        |
+| `double`       | `Double`                       |
+
 
 توی `ArrayList` ها، ما از این reference type ها استفاده می‌کنیم.
 
