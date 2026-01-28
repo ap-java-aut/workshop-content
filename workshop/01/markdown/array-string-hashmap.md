@@ -6,7 +6,7 @@ writers:
 semester: بهار ۱۴۰۴
 course: برنامه‌سازی پیشرفته و کارگاه
 professor: دکتر مهدی قطعی
-professor 2: بهنام یوسفی‌مهر
+professor_2: بهنام یوسفی‌مهر
 department: دانشکده ریاضی و علوم کامپیوتر
 institution: دانشگاه صنعتی امیرکبیر
 ---
@@ -138,7 +138,7 @@ public class Main {
 
 آرایه‌های چندبعدی برای ذخیره و مدیریت داده‌های پیچیده‌تر به کار میرن. تصویر پایین هم یه مثال خوب از آرایه دو بعدی رو نشون می‌ده:
 
-![multi-dimensional-array](photos/multi-dimensional-array.png)
+![](images/multi-dimensional-array.png)
 
 همون‌طور که تو شکل می‌بینید، هر کدوم از عناصر آرایه بیرونی، خودشون یک آرایه هستن. برای راحت‌تر فهمیدن، می‌تونید آرایه دو بعدی رو مثل یه ماتریس در نظر بگیرید.
 
@@ -262,6 +262,7 @@ System.out.println(b);
 | `long`         | `Long`                         |
 | `float`        | `Float`                        |
 | `double`       | `Double`                       |
+
 
 
 توی `ArrayList` ها، ما از این reference type ها استفاده می‌کنیم.
