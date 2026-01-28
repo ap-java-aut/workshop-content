@@ -147,7 +147,9 @@ for (int i = 0; i < n; i++) {
 پس به همون حرف اولمون برمی‌گردیم؛ اگه متغیری کم‌اهمیته یا طول عمر کمی داره، چنین نام‌گذاری‌هایی مشکلی ایجاد نمی‌کنه. اما دقت کنید که تکیه به این اسم‌های بی‌دقت برای همه متغیرها راه‌حل ایده‌آلی نیست و ممکنه به خوانایی کد ضربه بزنه.
 
 ##### ویدیوی یوتوب
+
 ![youtube-thumbnail-how-not-to-name-things](photos/youtube-thumbnail-how-not-to-name-things.png)
+
 
 [**Naming Things In Code – CodeAesthetic**](https://www.youtube.com/watch?si=s9ljN1tAi_hgUDEL&v=-J3wNP6u5YU&feature=youtu.be)
 
@@ -166,7 +168,9 @@ Naming Convention یک مفهوم درباره‌ی برنامه‌های کام
 #### camelCase یا چگونه یک شتر به ما کمک کرد که توی جاوا تمیزتر کد بزنیم!
 
 زبان جاوا از فرمت Camel Case برای اغلب نام‌گذاری‌ها استفاده می‌کنه. ایده‌ی اصلی این فرمت اینه که بین کلمات از هیچ جداکننده‌ای مثل آندرلاین یا نقطه استفاده نشه و همچنین بزرگ یا کوچیک بودن حروف، کاربرد اسامی رو از همدیگه متمایز کنه.
+
 ![camelCase](photos/camelCase.png)
+
 نام‌گذاری این فرمت، از کوهان شتر الهام گرفته شده!
 
 #### قواعد نام‌گذاری در جاوا
@@ -287,7 +291,9 @@ if (status == STATUS_APPROVED){
 با مثال بالا یه نکته‌ی مهم رو می‌شه فهمید؛ اینکه خیلی از مواقع با کمی تغییر می‌شه جای کامنت گذاشتن، صرفاً کد خوبی نوشت. بار رسوندن اطلاعات کد، روی دوش خود کده و واقعیت اینه که اکثر اوقات کامنت گذاشتن و توضیح دادن یعنی «این قسمت از کد من خوب نوشته نشده»!
 
 #### ویدیوی یوتوب
+
 ![youtube-thumbnail-dont-write-comments](photos/youtube-thumbnail-dont-write-comments.png)
+
 
 **[Don’t Write Comments – CodeAesthetic](https://www.youtube.com/watch?v=Bf7vDBBOBUA)**
 
