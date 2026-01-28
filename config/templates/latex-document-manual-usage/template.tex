@@ -1,0 +1,115 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{
+%% TODO
+}
+
+\newcommand{\CourseTitle}{
+%% TODO
+}
+
+\newcommand{\Semester}{
+%% TODO
+}
+
+
+\newcommand{\FirstProfessor}{
+%% TODO
+}
+
+\newcommand{\SecondProfessor}{
+%% TODO
+}
+
+\newcommand{\Writers}{
+%% TODO
+}
+
+\newcommand{\Faculty}{
+%% TODO
+}
+
+\newcommand{\University}{
+%% TODO
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1.5cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{2cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	{\fontsize{18}{22}\selectfont \textbf{ \Writers } }
+	
+	\vspace{4cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{1.5cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	\vspace{0.5cm}
+	
+	{\fontsize{14}{22}\selectfont  \rl{استاد دوم درس:}}\\
+	{\fontsize{16}{22}\selectfont \textbf{ \SecondProfessor } }
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+
+%% TODO - Body
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

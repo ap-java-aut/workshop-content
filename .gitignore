@@ -32,3 +32,57 @@ bin/
 
 ### Word ###
 ~$*.docx
+
+# Core LaTeX generated files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.lol
+
+# Bibliography files
+*.bcf
+*.run.xml
+
+# Glossary/Index files
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+# Auxiliary files from various packages
+*.synctex.gz
+*.synctex(busy)
+*.nav
+*.snm
+*.vrb
+
+# PDF output (optional - include if you don't want to commit PDFs)
+*.pdf
+
+# Temporary files
+*~
+*.backup
+*.bak
+*.swp
+
+# Editor-specific files
+# Vim
+*.swp
+*.swo
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
