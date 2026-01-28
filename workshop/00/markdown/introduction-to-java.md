@@ -117,10 +117,10 @@ public class Main {
       boolean c = true;
       char d = 'a';  
   
-      System._out_.println(a);  
-      System._out_.println(b);  
-      System._out_.println(c);  
-      System._out_.println(d);  
+      System.out.println(a);  
+      System.out.println(b);  
+      System.out.println(c);  
+      System.out.println(d);  
     }  
 }
 ```
@@ -140,7 +140,7 @@ public class Main {
    public static void main(String[] args) {  
       String str = "Hello, World!";  
   
-      System._out_.println(str);  
+      System.out.println(str);  
    }  
 }
 ```
@@ -151,7 +151,7 @@ public class Main {
 String name = "Arman";  
 int age = 27;  
 
-System._out_.printf("Name: %s\nAge: %d\n", name, age);
+System.out.printf("Name: %s\nAge: %d\n", name, age);
 ```
 
 شما می‌تونید تمام عملیات‌های ریاضی که توی زبان‌های دیگه مثل C روی متغیرها انجام می‌دادین رو این‌جا هم انجام بدین، طبیعتا جاوا هم مثل همهٔ زبان‌های دیگه، اولویت ریاضی بین اون‌ها رو رعایت می‌کنه:
@@ -196,7 +196,7 @@ public static void main(String[] args) {
 
 ```java
 int a;  
-System._out_.println(a);
+System.out.println(a);
 ```
 
 جاوا خطای زیر رو بهتون می‌ده:
@@ -207,7 +207,7 @@ System._out_.println(a);
 var a = 10;  
 var b = 20;  
 
-System._out_.println(a + b);
+System.out.println(a + b);
 ```
 
 توی کد بالا، چون مقادیر `10` و `20` رو به `a` و `b` دادین، کامپایلر جاوا متوجه می‌شه که این دو متغیر از نوع `int` هستن و باهاشون مثل `int` برخورد می‌کنه. نکته اینه که `var` یه data type جدید نیست، فقط یک روش برای راحت‌تر کردن کار شماست که دیگه لازم نیست برای همهٔ متغیرها، typeشون رو بنویسید. کامپایلر خودش نوع متغیرها رو براساس مقدار اولیه‌ای که می‌گیرن، تشخیص می‌ده.
@@ -220,7 +220,7 @@ System._out_.println(a + b);
 public static void main(String[] args) {  
    long a = 99999999999;  
 
-   System._out_.println(a);  
+   System.out.println(a);  
 }
 ```
 
@@ -242,7 +242,7 @@ long a = 99999999999L;
 int r = 10;  
 char next_line = '\n';  
 
-System._out_.printf("Circle area: %f%c", 3.14 * r * r, next_line);
+System.out.printf("Circle area: %f%c", 3.14 * r * r, next_line);
 ```
 
 این `literal`ها به ترتیب `10`، `'\n'` و `3.14` هستن. همونطور که قبلاً گفتیم، `literal` ها هم مثل متغیرها type دارن. مثلاً عدد `123` از نوع `int` هست و `123L` از نوع `long`. همینطور وقتی عددی مثل `3.14` رو به صورت اعشاری تعریف می‌کنید، به طور پیش‌فرض جاوا نوع اون رو `double` در نظر می‌گیره و اگه بخواید که نوعش `float` باشه باید از `3.14F` استفاده کنید. همچنین می‌تونید از نمایش علمی برای اعداد اعشاری هم استفاده کنید:
@@ -260,7 +260,7 @@ float g = 3.00e+8F;
 int a = 999999999; // Very hard to read!  
 int b = 999_999_999; // Easy :)  
 
-System._out_.printf("a = %d, b = %d\n", a, b);
+System.out.printf("a = %d, b = %d\n", a, b);
 ```
 
 توی کد بالا، مقادیر `a` و `b` یکسان هستن، ولی یکی‌شون رو خیلی راحت‌تر می‌شه خوند!
@@ -277,7 +277,7 @@ public class Main {
       int age = 102;
 
       if (age > MAX_AGE) {  
-         System._out_.println("You're too old!");  
+         System.out.println("You're too old!");  
       }  
    }  
 }
@@ -293,11 +293,11 @@ public class Main {
 int radius = 10;
 
 if (radius <= 20) {  
-   System._out_.println("Radius is too small");  
+   System.out.println("Radius is too small");  
 } else if (radius >= 50 && radius <= 100) {  
-   System._out_.println("Radius is too big");  
+   System.out.println("Radius is too big");  
 } else {  
-   System._out_.println("Other stuff");  
+   System.out.println("Other stuff");  
 }
 ```
 
@@ -322,7 +322,7 @@ if (a.equals("Arman")) {
 
 ```java
 for (int i = 0; i < 100; i++) {  
-   System._out_.println(i);  
+   System.out.println(i);  
    int j = i;  
    // do any other work needed  
 }
@@ -332,13 +332,13 @@ for (int i = 0; i < 100; i++) {
 
 ```java
 for (int i = 0; i < 100; i += 2) {  
-    System._out_.println(i);  
+    System.out.println(i);  
 }
 ```
 
 ```java
 for (int i = 0; i < 100;) {  
-    System._out_.println(i);  
+    System.out.println(i);  
 }
 ```
 
@@ -346,7 +346,7 @@ for (int i = 0; i < 100;) {
 
 ```java
 for (; true;) {  
-    System._out_.println("running forever!");  
+    System.out.println("running forever!");  
 }
 ```
 
@@ -357,12 +357,12 @@ for (; true;) {
 ```java
 int count = 10;
 while (count > 0) {  
-    System._out_.println("Counting down: " + count);
+    System.out.println("Counting down: " + count);
     // maybe do other useful things  
     // and decrement our count
     count = count - 1;  
 }  
-System._out_.println("Done");
+System.out.println("Done");
 ```
 
 توی java، ما `do while` هم داریم. این نوع حلقه، شبیه `while` ‍ه، با این تفاوت که اول کدهای داخل `while` اجرا می‌شه، بعد از اون شرطش چک می‌شه، و این فرآیند تا زمانی که شرط درست باشه ادامه پیدا می‌کنه. پس کد داخل `do while`، حداقل یک بار اجرا می‌شه، حتی اگر شرط `while` غلط باشه.
@@ -370,7 +370,7 @@ System._out_.println("Done");
 ```java
 int i = 0;
 do {  
-    System._out_.println(i);  
+    System.out.println(i);  
     i++;  
 } while (i < 5);
 ```
@@ -385,7 +385,7 @@ do {
 for (int i = 0; i < 10; i++) {
     if (i == 5)
         continue;  
-    System._out_.println(i);  
+    System.out.println(i);  
 }
 ```
 
@@ -423,10 +423,10 @@ public class Main {
     public static void main(String[] args) {  
         String email = "armanhosseini@gmail.com";
 
-        if (!_checkEmail_(email)) {  
-            System._out_.printf("%s is not a valid email address\n", email);  
+        if (!checkEmail(email)) {  
+            System.out.printf("%s is not a valid email address\n", email);  
         } else {  
-            System._out_.println("Ok");  
+            System.out.println("Ok");  
         }  
     }  
 }
@@ -450,7 +450,7 @@ public class Main {
     public static void main(String[] args) {
         int n = 10;  
   
-        System._out_.println(fib(n));  
+        System.out.println(fib(n));  
     }  
 }
 ```
@@ -465,7 +465,7 @@ public class Main {
 public class Main {
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {  
-            System._out_.println(i);  
+            System.out.println(i);  
         }  
     }  
 }
@@ -480,7 +480,7 @@ public class Main {
   
         {
             int r = 12;  
-            System._out_.println(pi * r * r);  
+            System.out.println(pi * r * r);  
         }  
     }  
 }
@@ -495,7 +495,7 @@ float pi = 3.14F;
     int r = 12;  
 }  
   
-System._out_.println(pi * r * r);
+System.out.println(pi * r * r);
 ```
 
 خطای زیر رو می‌گیرید:
@@ -525,11 +525,11 @@ public class Main {
     public static void main(String[] args) {
         var scn = new Scanner(System.in);  
   
-        System._out_.print("Enter your age: ");
+        System.out.print("Enter your age: ");
         int age = scn.nextInt();
 
         if (age >= 18) {  
-            System._out_.println("You're an adult now.");  
+            System.out.println("You're an adult now.");  
         }  
     }  
 }
@@ -544,11 +544,11 @@ public class Main {
     public static void main(String[] args) {
         var scn = new Scanner(System.in);  
   
-        System._out_.print("gmail: ");  
+        System.out.print("gmail: ");  
         String email = scn.nextLine();
 
         if (!email.contains("@gmail.com")) {  
-            System._out_.println("provide a valid gmail address");  
+            System.out.println("provide a valid gmail address");  
         }  
     }  
 }
@@ -575,7 +575,7 @@ public class Main {
 ```java
 public class Main {
     public static void main(String[] args) {  
-        System._out_.println("Given arg: " + args[0]);  
+        System.out.println("Given arg: " + args[0]);  
     }  
 }
 ```
