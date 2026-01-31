@@ -51,6 +51,8 @@ public class Main {
 
 صفحهٔ جدیدی براتون باز می‌شه که شامل پیاده‌سازی تایپ `String ‍ه`:
 
+![](images/oop-1-2.png)
+
 شما احتمالا هنوز کامل این کد رو نمی‌فهمید، ولی توی این کد، نشون داده می‌شه که تایپ `String` از کنار هم گذاشتن چه تایپ‌های دیگه‌ای درست شده. مثلا، توی خط ۱۶۰ همین تصویر می‌بینید که `String`، توی خودش یک آرایه از `byte` ها داره که اسمش `value` ‍ه. پایین‌تر می‌بینید که توی خودش، یه `int` به اسم `hash` داره. اگر دوست دارین، یه مقدار توی این کد بالا و پایین بشین، خیلی از تیکه‌های اون براتون غریبه‌ن و البته خیلی از بخش‌هاش هم براتون آشنا به نظر میاد.
 
 ## کلاس‌ها
@@ -93,10 +95,10 @@ public static void main(String[] args) {
 حالا، مشخصات این دانشجو رو چاپ کنید:
 
 ```java
-System._out_.println("New student:");  
-System._out_.println("\t+ Name: " + gholi.name);  
-System._out_.println("\t+ StudentID: " + gholi.studentID);  
-System._out_.println("\t+ Age: " + gholi.age);
+System.out.println("New student:");  
+System.out.println("\t+ Name: " + gholi.name);  
+System.out.println("\t+ StudentID: " + gholi.studentID);  
+System.out.println("\t+ Age: " + gholi.age);
 ```
 
 کدتون رو اجرا کنید. خروجی زیر رو می‌بینید:
@@ -135,13 +137,13 @@ gholi.grades.add(0.0);
 حالا، اون‌جا که دارین مشخصات قلی رو چاپ می‌کنید، این نمرات هم چاپ کنید:
 
 ```java
-System._out_.println("New student:");  
-System._out_.println("\t+ Name: " + gholi.name);  
-System._out_.println("\t+ StudentID: " + gholi.studentID);  
-System._out_.println("\t+ Age: " + gholi.age);  
-System._out_.print("\t+ Grades: ");
+System.out.println("New student:");  
+System.out.println("\t+ Name: " + gholi.name);  
+System.out.println("\t+ StudentID: " + gholi.studentID);  
+System.out.println("\t+ Age: " + gholi.age);  
+System.out.print("\t+ Grades: ");
 for (var grade: gholi.grades) {  
-    System._out_.print(grade + ", ");  
+    System.out.print(grade + ", ");  
 }
 ```
 
@@ -182,8 +184,8 @@ class Student {
 اون‌جای کدتون که دارین مشخصات `gholi` رو چاپ می‌کنید، خطوط زیر رو اضافه کنید:
 
 ```java
-System._out_.println();  
-System._out_.println("\t+ Average Grade: " + gholi.getAverageGrade());
+System.out.println();  
+System.out.println("\t+ Average Grade: " + gholi.getAverageGrade());
 ```
 
 کدتون رو دوباره اجرا کنید. خروجی‌ای مثل زیر می‌بینید:
@@ -308,16 +310,16 @@ public static void main(String[] args) {
 
 ```java
 public void printInfo() {  
-    System._out_.println("Student info:");  
-    System._out_.println("\t+ Name: " + name);  
-    System._out_.println("\t+ StudentID: " + studentID);  
-    System._out_.println("\t+ Age: " + age);  
-    System._out_.print("\t+ Grades: ");
+    System.out.println("Student info:");  
+    System.out.println("\t+ Name: " + name);  
+    System.out.println("\t+ StudentID: " + studentID);  
+    System.out.println("\t+ Age: " + age);  
+    System.out.print("\t+ Grades: ");
     for (var grade: grades) {  
-        System._out_.print(grade + ", ");  
+        System.out.print(grade + ", ");  
     }  
-    System._out_.println();  
-    System._out_.println("\t+ Average Grade: " + getAverageGrade());  
+    System.out.println();  
+    System.out.println("\t+ Average Grade: " + getAverageGrade());  
 }
 ```
 
@@ -378,6 +380,8 @@ Student pedram = new Student();
 
 همچین خطایی می‌گیرید:
 
+![](images/oop-1-3.png)
+
 از اون‌جایی که کلاس `student`، الآن یک `constructor` برای خودش داره، جاوا برای شما کانستراکتور دیفالت رو درست نمی‌کنه.
 
 ### کلاس‌ها با چند کانستراکتور
@@ -428,10 +432,10 @@ var shahram = new Student();
 برای الآن، بدون این که فیلدهای شهرام رو مقداردهی کنید، سعی کنید تا اطلاعات اون رو چاپ کنید:
 
 ```java
-System._out_.println("Shahram: ");  
-System._out_.println("\t+ Name: " + shahram.name);  
-System._out_.println("\t+ Age: " + shahram.age);  
-System._out_.println("\t+ StudentID: " + shahram.studentID);
+System.out.println("Shahram: ");  
+System.out.println("\t+ Name: " + shahram.name);  
+System.out.println("\t+ Age: " + shahram.age);  
+System.out.println("\t+ StudentID: " + shahram.studentID);
 ```
 
 کدتون رو اجرا کنید، خروجی زیر رو برای شهرام می‌بینید:
@@ -453,7 +457,7 @@ Shahram:
 
 ```java
 if (shahram.studentID == null) {  
-    System._out_.println("Shahram does not have a studentID");  
+    System.out.println("Shahram does not have a studentID");  
 }
 ```
 
@@ -502,13 +506,13 @@ public Student(int newStudentAge, String newStudentName, String newStudentID) {
 ```java
 public static void main(String[] args) {
     var gholi = new Student();  
-    System._out_.println("Current number of students: " + Student.totalNumberOfStudents);
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);
 
     var mamad = new Student();  
-    System._out_.println("Current number of students: " + Student.totalNumberOfStudents);
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);
 
     var javad = new Student();  
-    System._out_.println("Current number of students: " + Student.totalNumberOfStudents);  
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);  
 }
 ```
 
@@ -523,7 +527,7 @@ Current number of students: 3
 می‌بینید که ما برای دسترسی به `totalNumberOfStudents`، از خود کلاس `Student` استفاده کردیم. می‌تونستید با کد زیر، از هر کدوم از instance های `student` هم به اون دسترسی پیدا کنین، ولی کار چندان خوبی نیست:
 
 ```java
-System._out_.println("Current number of students: " + gholi.totalNumberOfStudents);
+System.out.println("Current number of students: " + gholi.totalNumberOfStudents);
 ```
 
 ## method ها
@@ -538,11 +542,11 @@ public class Refrigerator {
         boolean enoughBananas = numberOfBananas >= n;
         if (enoughBananas) {
             numberOfBananas -= n;  
-            System._out_.println(
+            System.out.println(
                     "You took " + n + " bananas out of your fridge!"
             );  
         } else {  
-            System._out_.println(
+            System.out.println(
                     "You don't have that many bananas in your fridge!"
             );  
         }  
@@ -555,7 +559,7 @@ public class Refrigerator {
 ```java
 public void putBananas(int n) {    
     numberOfBananas += n;  
-    System._out_.println("You put " + n + " bananas in your fridge!");  
+    System.out.println("You put " + n + " bananas in your fridge!");  
 }
 ```
 
@@ -567,13 +571,15 @@ public void putBananas(int n) {   
 
 ```java
 public void putBananas(int n) {  
-    System._out_.println(enoughBananas);
+    System.out.println(enoughBananas);
     numberOfBananas += n;  
-    System._out_.println("You put " + n + " bananas in your fridge!");  
+    System.out.println("You put " + n + " bananas in your fridge!");  
 }
 ```
 
 احتمالاً می­­بینید که `enoughBananas` قرمز شده. موستون رو ببرید روش؛ با همچین چیزی مواجه می­شید:
+
+![](images/oop-1-4.png)
 
 اینجا Intellij داره بهتون می­گه که نمی­تونه `enoughBananas` رو پیدا کنه! دلیلش هم همونطور که گفتیم اینه که `enoughBananas` توی متد `getBananas` تعریف شده و مربوط به همون متده و توی `putBananas` همچین متغیری وجود نداره! حالا یک متد `main` خالی توی کلاستون بنویسید و سعی کنید اجراش کنید:
 
@@ -585,20 +591,20 @@ public class Refrigerator {
 		boolean enoughBananas = numberOfBananas >= n;
 		if (enoughBananas) {
 			numberOfBananas -= n;
-			System._out_.println(
+			System.out.println(
 			   "You took " + n + " bananas out of your fridge!"
 			);  
 			} else {
-			System._out_.println(
+			System.out.println(
 				"You don't have that many bananas in your fridge!"
 			);  
 		}  
 	}
 
 	public void putBananas(int n) {  
-		System._out_.println(enoughBananas);
+		System.out.println(enoughBananas);
 		numberOfBananas += n;
-		System._out_.println("You put " + n + " bananas in your fridge!");  
+		System.out.println("You put " + n + " bananas in your fridge!");  
     }
     
     public static void main(String[] args) {  
@@ -607,6 +613,8 @@ public class Refrigerator {
 ```
 
 کدتون کامپایل نمیشه، و با همچین چیزی مواجه می­شید:
+
+![](images/oop-1-5.png)
 
 اینجا جاوا نتونسته کدتون رو کامپایل کنه و بهتون میگه که نمی­تونه `enoughBananas` رو پیدا کنه. باید هشدار های Intellij رو جدی می­گرفتید!
 
@@ -685,7 +693,7 @@ public class Car {
 	double y;
 	
 	public void moveTo(double x, double y) {  
-		System._out_.println("The car is moving to " + x + ", " + y);  
+		System.out.println("The car is moving to " + x + ", " + y);  
 	}  
 }
 ```
@@ -705,16 +713,16 @@ public class Car {
 	double gas;
 	
 	public void moveTo(double x, double y) {
-		double distance = Math._sqrt_(  
+		double distance = Math.sqrt(  
 			(this.x - x) * (this.x - x) + (this.y - y) * (this.y - y)  
 		);
 		if (5 * distance > gas) {  
-			System._out_.println("Not enough gas!");  
+			System.out.println("Not enough gas!");  
 		} else {
 			this.x = x;
 			this.y = y;
 			gas -= 5 * distance;  
-			System._out_.println("The car is moving to " + x + ", " + y);  
+			System.out.println("The car is moving to " + x + ", " + y);  
 		}  
 	}  
 }
@@ -732,15 +740,19 @@ public class Car {
 
 دوباره از `Arrays.sort()` استفاده کنید یا جایی که اون رو نوشتید رو بیارید، بعد روش راست کلیک کنید و گزینه Go To و بعد Declaration or Usages رو انتخاب کنید:
 
+![](images/oop-1-6.png)
+
 با همچین کدی مواجه می­شید:
+
+![](images/oop-1-7.png)
 
 همونطور که می­بینید، پشت این متد از کلیدواژه static استفاده شده. این نشون میده که این متد، یک متد استاتیکه. حالا که می­دونید متد­های استاتیک چجوری تعریف می­شن، بیاید برای کلاس Car که تا الان داشتیم یک متد استاتیک تعریف کنیم:
 
  ```java
 public class Car {
-	public static final int _SUV_ = 0;
-	public static final int _SEDAN_ = 1;
-	public static final int _HATCHBACK_ = 2;
+	public static final int SUV = 0;
+	public static final int SEDAN = 1;
+	public static final int HATCHBACK = 2;
 
 	double x;
 	double y;
@@ -777,9 +789,9 @@ public void printModelsCount(ArrayList<Car> list) {
 				break;  
 		}  
 	}
-	System._out_.println("SUV: " + suvCount);
-	System._out_.println("SEDAN: " + sedanCount);
-	System._out_.println("HATCHBACK: " + hatchbackCount);  
+	System.out.println("SUV: " + suvCount);
+	System.out.println("SEDAN: " + sedanCount);
+	System.out.println("HATCHBACK: " + hatchbackCount);  
 }
 ```
 
@@ -791,12 +803,16 @@ public void printModelsCount(ArrayList<Car> list) {
 
 ```java
 public static String[] getCarModels() {  
-    System._out_.println(model);
+    System.out.println(model);
     return new String[]{"SUV", "SEDAN", "HATCHBACK"};  
 }
 ```
 
 اگر موستون رو ببرید روی `model` یا سعی کنید کلاس `Car` رو کامپایل کنید و جایی ازش استفاده کنید، با همچین خطاهایی مواجه می­شید:
+
+![](images/oop-1-8.png)
+
+![](images/oop-1-9.png)
 
 همونطور که می­بینید، جاوا داره بهتون میگه که نمی­تونید یک فیلد غیر استاتیک مثل `model` رو توی یک متد استاتیک استفاده کنید. شما می­تونید متد `getCarModels` رو بدون داشتن هیچ آبجکتی صدا بزنید؛ پس این `model` ی که سعی دارید ازش استفاده کنید، مربوط به کدوم آبجکته؟ از اون جایی که متدهای استاتیک مربوط به کلاسن و از آبجکت­ها جدا هستن، طبیعیه که نمی­تونند به فیلدها و متدهای عادی که مربوط به هر آبجکت هستند دسترسی داشته باشن و فقط به متد ها و متغیر های استاتیک دسترسی دارند.
 
@@ -826,9 +842,9 @@ public class Sum {
 
     public static void main(String[] args) {  
         Sum s = new Sum();  
-        System._out_.println(s.sum(10, 20));  
-        System._out_.println(s.sum(10, 20, 30));  
-        System._out_.println(s.sum(10.5, 20.5));  
+        System.out.println(s.sum(10, 20));  
+        System.out.println(s.sum(10, 20, 30));  
+        System.out.println(s.sum(10.5, 20.5));  
     }  
 }
 ```
@@ -841,14 +857,14 @@ public class Sum {
 class Student {
     // Method 1
     public void getStudentInfo() {  
-        System._out_.println("Name :" + name + " "
+        System.out.println("Name :" + name + " "
                 + "ID :" + roll_ studentID);  
     }
 
     // Method 2
     public void getStudentInfo (String name) {
         // Again printing name and id of person
-        System._out_.println("ID :" + studentID + " "
+        System.out.println("ID :" + studentID + " "
                 + "Name :" + name);  
     }  
 }
@@ -893,10 +909,12 @@ public class Main {
 
 اگر مموری رو حین اجرای این برنامه ببینیم، همچین شکلی داره:
 
+![](images/oop-1-10.png)
+
 اگر مقدار خود متغیر چنگیز رو چاپ کنید:
 
 ```java
-System._out_.println(changiz);
+System.out.println(changiz);
 ```
 
 همچین خروجی‌ای می‌بینید:
@@ -915,6 +933,8 @@ Student bangiz = changiz;
 
 حالا، بنگیز و چنگیز هر دو به یک نقطه از heap اشاره می‌کنن:
 
+![](images/oop-1-11.png)
+
 حالا اگر شما، شماره دانشجویی چنگیز رو عوض کنید:
 
 ```java
@@ -924,8 +944,8 @@ changiz.studentID = "40113";
 و بعد، شماره دانشجویی چنگیز و بنگیز رو چاپ کنید:
 
 ```java
-System._out_.println("Changiz studentID: " + changiz.studentID);  
-System._out_.println("Bangiz studentID: " + bangiz.studentID);
+System.out.println("Changiz studentID: " + changiz.studentID);  
+System.out.println("Bangiz studentID: " + bangiz.studentID);
 ```
 
 می‌بینید که شماره دانشجویی بنگیز هم عوض شده!
@@ -936,6 +956,8 @@ Bangiz studentID: 40113
 ```
 
 عجیبه، نه؟ راستش نه اونقدران. اگر به مموری نگاه کنید، بعد از عوض شدن شماره دانشجویی چنگیز، همچین وضعیتی داره:
+
+![](images/oop-1-12.png)
 
 چنگیز، شماره دانشجویی آبجکتی که به اون اشاره می‌کرده رو تغییر داده. دست بر قضا، بنگیز هم به همین آبجکت اشاره می‌کرده و در نتیجه، شماره دانشجویی بنگیز هم واقعا عوض شده.
 
@@ -952,8 +974,8 @@ public static void resetID(Student student) {
 ```java
 resetID(changiz);  
   
-System._out_.println("Changiz studentID: " + changiz.studentID);  
-System._out_.println("Bangiz studentID: " + bangiz.studentID);
+System.out.println("Changiz studentID: " + changiz.studentID);  
+System.out.println("Bangiz studentID: " + bangiz.studentID);
 ```
 
 خروجی، به همچین شکلیه:
@@ -994,6 +1016,8 @@ var arr = new ArrayList<Integer>();
 ```
 
 اگر دقت کنید، به جای این که بین دو براکت از `int` استفاده کنید، از `Integer` استفاده کردین. اگر روی اون کلیک راست کنید و از Go To به Declaration and Usages برین، می‌تونید ببینید که پشت اون یک کلاسه:
+
+![](images/oop-1-13.png)
 
 این کلاس، معادل reference type گونه‌ای برای `int` ‍ه، و وقتی با کلاس‌ها سر و کار دارین ازش استفاده می‌شه. اگر خواستین بیشتر راجع به اون بدونین، به [این داکیومنت](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html) رجوع کنین.
 
@@ -1039,6 +1063,8 @@ int main() {
 
 شاید بپرسین که چطور این کار انجام میشه؟ خوب، جاوا از یه سری الگوریتم‌ها برای این کار استفاده می‌کنه. ولی ما اون‌ها رو اینجا بررسی نمی‌کنیم. توی این [ویدیوی یوتیوب](https://youtu.be/Mlbyft_MFYM?si=jhAdnlq12houCo1F) و این [داک اوراکل](https://docs.oracle.com/en/java/javase/21/gctuning/introduction-garbage-collection-tuning.html) می‌تونین مطالب بیشتری در رابطه با این موضوع ببینین.
 
+![**Thumbnail: *Java's Garbage Collection Explained - How It Saves your Lazy Programmer Bu***](images/oop-1-14.png)
+
 به طور کلی این ویژگی جاوا باعث میشه که شما تمرکز بیشتری روی منطق برنامه‌نویسی داشته باشین و دیگه نگران مدیریت دستی حافظه نباشین.
 
 حالا تو کد زیر، می‌تونین رفتار Garbage Collector رو در ارتباط با آبجکت `cuteCat` رو بگین؟
@@ -1049,6 +1075,8 @@ cuteCat = new Cat("Cat 2");
 ```
 
 شکل زیر میتونه نمایش خوبی از اتفاقات باشه. در اینجا `cuteCat` به جایی از حافظه اشاره [^3]  می‌کنه که توی اون یه آبجکت از جنس `Cat` (که فیلد اسمش `Cat1` هست) ذخیره شده. توی خط بعدی `cuteCat` به جایی از حافظه اشاره می‌کنه که توی اون یه آبجکت از جنس `Cat` (که فیلد اسمش Cat2 هست) ذخیره شده. اما الان هیچ فلشی به `Cat1` وارد نمیشه، پس Garbage Collector اون را آزاد می‌کنه.
+
+![](images/oop-1-15.png)
 
 [^3]: دقت کنین که لفظ «اشاره کردن» در جاوا خیلی درست نیست. به خاطر اینکه ما در جاوا `pointer` نداریم و مدیریت حافظه رو خود جاوا برامون انجام میده. در جاوا حتی دسترسی مستقیم به حافظه هم نداریم (برخلاف `C`). اما برای مشابهت با زبان `C`، در اینجا هم از لفظ اشاره کردن استفاده کردیم. در جاوا به متغیر هایی مثل `cuteCat`، میگن reference variable.
 ### Garbage Collector حواسش هست!
@@ -1062,8 +1090,8 @@ class Duck {
 
 public class Main {
     public static void main(String[] args) {  
-        Duck duck = _createDuck_(); // a duck object will be created
-        System._out_.println(duck.name);  
+        Duck duck = createDuck(); // a duck object will be created
+        System.out.println(duck.name);  
     }
 
 
@@ -1093,7 +1121,7 @@ A White Duck
 // MyClass.java
 public class MyClass {
     public void sayHello() {  
-        System._out_.println("Hello, Java!");  
+        System.out.println("Hello, Java!");  
     }  
 }
 ```
@@ -1121,7 +1149,7 @@ public class AnotherClass { } // Error! Only one public class is allowed.
 ```java
 public class Sample {
     public static void main(String[] args) {  
-        System._out_.println("Hello World!");  
+        System.out.println("Hello World!");  
     }  
 }
 ```
@@ -1136,23 +1164,45 @@ public class Sample {
 
 پکیج‌ها در جاوا مثل پوشه‌هایی هستن که کدهای برنامه‌نویسی (شامل کلاس ها و اینترفیس ها) رو داخلشون قرار می‌دیم تا همه چیز منظم و مرتب باشه. وقتی که برنامه‌های پیچیده‌تر رو می‌نویسیم، تعداد کلاس ها زیاد می‌شه و اینجاست که پکیج‌ها به کمکمون میاد تا بتونیم این کلاس‌ها رو دسته‌بندی کنیم.
 
+![](images/oop-1-16.png)
+
 ### چطور یک پکیج ایجاد کنیم؟
 
 اول یه پروژه به اسم `PackageDemo` ایجاد کنین. حالا روی پوشه `src` راست کلیک کنین و از نوار New، گزینه Package رو انتخاب کنین.
 
+![](images/oop-1-17.png)
+
 حالا اسم پکیج رو وارد کنین. مثلا در اینجا `edu.ap.animals` :
+
+![](images/oop-1-18.png)
 
 به همین شکل پکیج `edu.ap.vehicles` رو هم بسازین.
 
 الان باید چیزی شبیه به تصویر زیر رو توی پوشه `src` داشته باشین:
 
+![](images/oop-1-19.png)
+
 حالا بیاین چند تا کلاس به هر کدوم از این پکیج‌ها اضافه کنیم. مثلا کلاس های `Dog` و `Cat` رو به پکیج `animals` و کلاس های `Bike` و `Car` رو به پکیج `vehicles` اضافه کنیم. در نهایت باید چیزی شبیه به تصویر زیر رو داشته باشین:
 
+![](images/oop-1-20.png)
+
 پکیج‌هامون رو ساختیم! حالا ببینیم واقعا چه فایل هایی ایجاد شده. اگه از توی explorer به محل ایجاد پروژه‌تون برین و به ترتیب وارد پوشه های `src`، `edu`، `ap` و `animals` بشین چیزی شبیه به این ها می بینین:
+
+![](images/oop-1-21.png)
+
+![](images/oop-1-22.png)
+
+![](images/oop-1-23.png)
+
+![](images/oop-1-24.png)
+
+![](images/oop-1-25.png)
 
 پس دیدیم که وقتی ما داریم یه پکیج تعریف می‌کنیم، واقعا پوشه ایجاد می‌شه!
 
 در نهایت پکیج `edu.ds` شامل کلاس `Stack` رو درست کنین. در نهایت باید چیزی شبیه به این ببینین:
+
+![](images/oop-1-26.png)
 
 اما الان بریم کد Cat.java رو ببینیم:
 
@@ -1225,6 +1275,8 @@ public class Bike {
 
 تو شکل زیر میتونین یه نمای کلی از پکیج‌های جاوا ببینین:
 
+![](images/oop-1-27.png)
+
 ### import کردن کل پکیج
 
 شما میتونین تمام کلاس های موجود توی یک پکیج رو یکجا `import` کنین. این کار رو با عبارت `*` میتونین انجام بدین. مثلا کد زیر تمام کلاس های موجود در پکیج `edu.ap.animals` رو `import` می‌کنه.
@@ -1266,7 +1318,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int x;  
-        Scanner scanner = new Scanner(System._in_);  
+        Scanner scanner = new Scanner(System.in);  
         x = scanner.nextInt();  
     }  
 }
@@ -1297,6 +1349,8 @@ public class Main {
 همونطور که می‌تونیم حدس بزنیم، کلاس `JFrame` متعلق به پکیج `javax.swing` هست و چون ما میخوایم از این کلاس توی کدمون استفاده کنیم، اون رو `import` کردیم.
 
 می تونیم خیلی راحت این رو بررسی کنیم. هر موقع خواستین کد یک کلاس رو ببین (سورس کد جاوا)، می تونین روی اسم اون کلاس راست کلیک کنین و از نوار Go To قسمت Declaration or Usages رو انتخاب کنین. میبینین که به سورس کد اون کلاس منتقل میشین.
+
+![](images/oop-1-28.png)
 
 اگه این کار رو انجام بدین، توی فایل `JFrame.java` که بهش منتقل شدین، توی خطوط ابتدایی عبارت `package javax.swing;` رو میبینین.
 
