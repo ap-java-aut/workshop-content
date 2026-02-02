@@ -46,8 +46,8 @@ public class Bike {
     }
 
     public void showBikeInfo() {  
-        System._out_.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
-        System._out_.println("Has Carrier: " + hasCarrier);  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Has Carrier: " + hasCarrier);  
     }  
 }
 ```
@@ -73,8 +73,8 @@ public class Car {
     }
 
     public void showCarInfo() {  
-        System._out_.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
-        System._out_.println("Doors: " + doors);  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Doors: " + doors);  
     }  
 }
 ```
@@ -110,8 +110,8 @@ public class MotorCycle {
     }
 
     public void showMotorCycleInfo() {  
-        System._out_.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
-        System._out_.println("Has Sidecar: " + hasSidecar);  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Has Sidecar: " + hasSidecar);  
     }  
 }
 ```
@@ -153,7 +153,7 @@ public class Vehicle {
     }
 
     public void showInfo() {  
-        System._out_.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
     }  
 }
 ```
@@ -171,7 +171,7 @@ public class Car extends Vehicle {
 
     public void showCarInfo() {  
         showInfo();  
-        System._out_.println("Doors: " + doors);  
+        System.out.println("Doors: " + doors);  
     }  
 }
 ```
@@ -185,7 +185,7 @@ public static void main(String[] args) {
     Car myCar = new Car("Toyota", 180, 4);  
     myCar.showCarInfo();  
   
-    System._out_.println();  
+    System.out.println();  
   
     myCar.accelerate(5);  
     myCar.showCarInfo();  
@@ -219,7 +219,7 @@ public class MotorCycle extends Vehicle {
 
     public void showBikeInfo() {  
         showInfo();  
-        System._out_.println("Has Sidecar: " + hasSidecar);  
+        System.out.println("Has Sidecar: " + hasSidecar);  
     }  
 }
 ```
@@ -237,7 +237,7 @@ public class Bike extends Vehicle {
 
     public void showMotorCycleInfo() {  
         showInfo();  
-        System._out_.println("Has Carrier: " + hasCarrier);  
+        System.out.println("Has Carrier: " + hasCarrier);  
     }  
 }
 ```
@@ -249,12 +249,12 @@ public static void main(String[] args) {
     Bike myBike = new Bike("Yamaha", 120, true);  
     myBike.showBikeInfo();  
   
-    System._out_.println();  
+    System.out.println();  
       
     myBike.accelerate(5);  
     myBike.showBikeInfo();
 
-    System._out_.println();  
+    System.out.println();  
   
     MotorCycle myMotorcycle = new MotorCycle("Harley-Davidson", 160, false);  
     myMotorcycle.showMotorCycleInfo();  
@@ -303,7 +303,7 @@ public Vehicle(String brand, int speed) {
 ```java
 public void showBikeInfo() {
     super.showInfo();  
-    System._out_.println("Has Carrier: " + hasCarrier);  
+    System.out.println("Has Carrier: " + hasCarrier);  
 }
 ```
 
@@ -312,10 +312,10 @@ public void showBikeInfo() {
 ```java
 public void showBikeInfo() {
     super.showInfo();  
-    System._out_.println("Has Carrier: " + hasCarrier);  
+    System.out.println("Has Carrier: " + hasCarrier);  
       
-    System._out_.println("Speed: " + super.speed);  
-    System._out_.println("Brand: " + super.brand);  
+    System.out.println("Speed: " + super.speed);  
+    System.out.println("Brand: " + super.brand);  
 }
 ```
 
@@ -330,8 +330,8 @@ public static void main(String[] args) {
     int a = 10;
     long b = a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -349,8 +349,8 @@ public static void main(String[] args) {
     long a = 10_000_000_000L;
     int b = a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -373,8 +373,8 @@ public static void main(String[] args) {
     long a = 10_000_000_000L;
     int b = (int)a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -392,8 +392,8 @@ public static void main(String[] args) {
     long a = 100;
     int b = (int)a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -413,8 +413,8 @@ public static void main(String[] args) {
     int a = 100;
     double b = a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -432,8 +432,8 @@ public static void main(String[] args) {
     double a = 3.14;
     int b = a;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
 }
 ```
 
@@ -464,9 +464,9 @@ public static void main(String[] args) {
     int b = (int)a;
     double c = b;  
   
-    System._out_.println("a: " + a);  
-    System._out_.println("b: " + b);  
-    System._out_.println("c: " + c);  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+    System.out.println("c: " + c);  
 }
 ```
 
@@ -521,7 +521,7 @@ public static void main(String[] args) {
     Car myCar = new Car("Iran-Khodro", 180, 4);  
     myCar.showCarInfo();  
   
-    System._out_.println();  
+    System.out.println();  
   
     Vehicle myVehicle = myCar; // Casting from Car to Vehicle
     myVehicle.showInfo();  
@@ -546,17 +546,17 @@ public static void main(String[] args) {
     Car myCar = new Car("Iran-Khodro", 180, 4);  
     myCar.showCarInfo();  
   
-    System._out_.println();  
+    System.out.println();  
   
     Vehicle myVehicle = myCar; // Casting from Car to Vehicle
     myVehicle.showInfo();  
   
-    System._out_.println();  
+    System.out.println();  
   
     Bike myBike = new Bike("Scott", 10, false);  
     myBike.showBikeInfo();  
   
-    System._out_.println();  
+    System.out.println();  
   
     myVehicle = myBike; // Casting, again!
     myVehicle.showInfo();  
@@ -601,10 +601,10 @@ public class Main {
         Bike myBike = new Bike("Scott", 10, false);  
         MotorCycle myMotorCycle = new MotorCycle("Yamaha", 100, false);  
   
-        System._out_.println("time taken by myVehicle to move 10 km: " + _calculateTime_(10, myVehicle));  
-        System._out_.println("time taken by myCar to move 10 km: " + _calculateTime_(10, myCar));  
-        System._out_.println("time taken by myBike to move 10 km: " + _calculateTime_(10, myBike));  
-        System._out_.println("time taken by myMotorCycle to move 10 km: " + _calculateTime_(10, myMotorCycle));  
+        System.out.println("time taken by myVehicle to move 10 km: " + calculateTime(10, myVehicle));  
+        System.out.println("time taken by myCar to move 10 km: " + calculateTime(10, myCar));  
+        System.out.println("time taken by myBike to move 10 km: " + calculateTime(10, myBike));  
+        System.out.println("time taken by myMotorCycle to move 10 km: " + calculateTime(10, myMotorCycle));  
     }
 
     public static double calculateTime(double distance, Vehicle vehicle) {
@@ -633,12 +633,12 @@ public static void main(String[] args) {
     Car myCar = new Car("Iran-Khodro", 180, 4);  
     myCar.showCarInfo();  
       
-    System._out_.println();  
+    System.out.println();  
       
     Vehicle myVehicle = myCar;  
     myVehicle.showInfo();  
       
-    System._out_.println();  
+    System.out.println();  
       
     Car theSameCar = myVehicle;  
     theSameCar.showCarInfo();  
@@ -662,8 +662,8 @@ public static void main(String[] args) {
 ```java
 myVehicle.accelerate(100);  
   
-System._out_.println("myVehicle speed: " + myVehicle.speed);  
-System._out_.println("myCar speed: " + myCar.speed);
+System.out.println("myVehicle speed: " + myVehicle.speed);  
+System.out.println("myCar speed: " + myCar.speed);
 ```
 
 خروجی این کد به شکل زیره:
@@ -711,7 +711,7 @@ public static void main(String[] args) {
     Car myCar = new Car("Iran-Khodro", 180, 4);  
     myCar.showCarInfo();  
   
-    System._out_.println("Hash code: " + myCar.hashCode());  
+    System.out.println("Hash code: " + myCar.hashCode());  
 }
 ```
 
@@ -742,7 +742,7 @@ Hash code: 500977346
 شما تا الآن این متدها رو استفاده می‌کردین، بدون این که خبر داشته باشین. مثلا وقتی کد زیر رو بزنین:
 
 ```java
-System._out_.println(myCar);
+System.out.println(myCar);
 ```
 
 خروجی زیر رو می‌بینید:
@@ -754,7 +754,7 @@ Vehicle.Car@1ddc4ec2
 این output عجیب و غریب، در واقع خروجی متد `myCar.toString()` ‍ه. اگر کد زیر رو اجرا کنید:
 
 ```java
-System._out_.println(myCar.toString());
+System.out.println(myCar.toString());
 ```
 
 می‌بینید که خروجی‌تون هیچ تفاوتی نمی‌کنه و همچنان همونه:
@@ -767,11 +767,11 @@ Vehicle.Car@1ddc4ec2
 
 ```java
 public void println(Object x) {  
-    String s = String._valueOf_(x);
+    String s = String.valueOf(x);
     if (getClass() == PrintStream.class) {
         // need to apply String.valueOf again since first invocation  
         // might return null
-        writeln(String._valueOf_(s));  
+        writeln(String.valueOf(s));  
     } else {
         synchronized (this) {  
             print(s);  
@@ -819,7 +819,7 @@ public class Contractor {
     }
 
     public void showDetails() {  
-        System._out_.println("ID: " + id + ", Name: " + name);  
+        System.out.println("ID: " + id + ", Name: " + name);  
     }
 
     public double calculateSalary() {
@@ -843,7 +843,7 @@ public class FullTimeEmployee {
     }
 
     public void showDetails() {  
-        System._out_.println("ID: " + id + ", Name: " + name);  
+        System.out.println("ID: " + id + ", Name: " + name);  
     }
 
     public double calculateSalary() {
@@ -867,7 +867,7 @@ public class Employee {
     }
 
     public void showDetails() {  
-        System._out_.println("ID: " + id + ", Name: " + name);  
+        System.out.println("ID: " + id + ", Name: " + name);  
     }  
 }
 ```
@@ -933,7 +933,7 @@ public static void main(String[] args) {
         sumOfSalary += contractor.calculateSalary();  
     }  
       
-    System._out_.println("Salary this month: " + sumOfSalary);  
+    System.out.println("Salary this month: " + sumOfSalary);  
 }
 ```
 
@@ -992,7 +992,7 @@ public abstract class Employee {
     }
 
     public void showDetails() {  
-        System._out_.println("ID: " + id + ", Name: " + name);  
+        System.out.println("ID: " + id + ", Name: " + name);  
     }
 
     public abstract double calculateSalary();  
@@ -1022,7 +1022,7 @@ public static void main(String[] args) {
         sumOfSalary += employee.calculateSalary();  
     }  
   
-    System._out_.println("Salary this month: " + sumOfSalary);  
+    System.out.println("Salary this month: " + sumOfSalary);  
 }
 ```
 
@@ -1096,9 +1096,9 @@ class MathOperations {
 public class Main {  
 	public static void main(String[] args) {  
 		MathOperations math = new MathOperations();  
-		System._out_.println(math.add(5, 10)); // Output: 15  
-		System._out_.println(math.add(5.5, 2.2)); // Output: 7.7  
-		System._out_.println(math.add(1, 2, 3)); // Output: 6  
+		System.out.println(math.add(5, 10)); // Output: 15  
+		System.out.println(math.add(5.5, 2.2)); // Output: 7.7  
+		System.out.println(math.add(1, 2, 3)); // Output: 6  
 	}
 }
 ```
@@ -1117,14 +1117,14 @@ public class Main {
 ```java
 class Animal {
 	void makeSound() {  
-		System._out_.println("An animal makes a sound");
+		System.out.println("An animal makes a sound");
 	}  
 }  
   
 class Dog extends Animal {
 	@Override
 	void makeSound() {  
-        System._out_.println("Dog barks");
+        System.out.println("Dog barks");
 	}  
 }  
   
@@ -1214,12 +1214,12 @@ public class Circle implements Shape{
 
     @Override
     public double getArea() {
-        return Math._PI_ * radius * radius;  
+        return Math.PI * radius * radius;  
     }
 
     @Override
     public double getPerimeter() {
-        return 2.0 * Math._PI_ * radius;  
+        return 2.0 * Math.PI * radius;  
     }  
 }
 ```
@@ -1231,10 +1231,10 @@ public class ShapeMain {
     public static void main(String[] args){  
         Shape circle = new Circle(5);  
         Shape rectangle = new Rectangle(3, 6);  
-        System._out_.println("rectangle's area = " + rectangle.getArea());  
-        System._out_.println("rectangle's perimeter = " + rectangle.getPerimeter());  
-        System._out_.println("circle's area = " + circle.getArea());  
-        System._out_.println("circle's perimeter = " + circle.getPerimeter());  
+        System.out.println("rectangle's area = " + rectangle.getArea());  
+        System.out.println("rectangle's perimeter = " + rectangle.getPerimeter());  
+        System.out.println("circle's area = " + circle.getArea());  
+        System.out.println("circle's perimeter = " + circle.getPerimeter());  
     }  
 }
 ```
@@ -1363,53 +1363,53 @@ class SmartRobot implements Flyable, Swimmable, Speakable {
     //implementing fly methods
     @Override
     public void fly() {  
-        System._out_.println("Robot is flying ...");  
+        System.out.println("Robot is flying ...");  
     }
 
     @Override
     public void adjustAltitude(int height) {
         this.altitude = height;  
-        System._out_.println("Height has been set to " + height + " meters.");  
+        System.out.println("Height has been set to " + height + " meters.");  
     }
 
     @Override
     public void land() {
         this.altitude = 0;  
-        System._out_.println("Robot has landed successfully");  
+        System.out.println("Robot has landed successfully");  
     }
 
     // implementing swim methods
     @Override
     public void swim() {  
-        System._out_.println("Robot is swimming");  
+        System.out.println("Robot is swimming");  
     }
 
     @Override
     public void adjustDepth(int depth) {
         this.depth = depth;  
-        System._out_.println("Depth has been set to" + depth + " meters");  
+        System.out.println("Depth has been set to" + depth + " meters");  
     }
 
     @Override
     public void stopSwimming() {  
-        System._out_.println("Robot stopped swimming successfully");  
+        System.out.println("Robot stopped swimming successfully");  
     }
 
     // implementing speak methods
     @Override
     public void speak(String message) {  
-        System._out_.println("Robot says: " + message);  
+        System.out.println("Robot says: " + message);  
     }
 
     @Override
     public void setLanguage(String language) {
         this.language = language;  
-        System._out_.println("Language has been change into " + language);  
+        System.out.println("Language has been change into " + language);  
     }
 
     @Override
     public void processCommand(String command) {  
-        System._out_.println("Processing the command: " + command);  
+        System.out.println("Processing the command: " + command);  
     }  
 }
 ```
@@ -1437,14 +1437,14 @@ public class PrintStream extends FilterOutputStream implements Appendable, close
 ```java
 class Animal {
     void makeSound() {  
-        System._out_.println("What?");  
+        System.out.println("What?");  
     }  
 }  
   
 class Cat extends Animal {
     @Override
     void makeSound() {  
-        System._out_.println("Meow!");  
+        System.out.println("Meow!");  
     }  
 }
 ```
@@ -1470,7 +1470,7 @@ public class Main {
 @Deprecated  
 class Animal {
     void makeSound() {  
-        System._out_.println("What?");  
+        System.out.println("What?");  
     }  
 }
 ```
@@ -1488,14 +1488,14 @@ class Animal {
 ```java
 class Animal {
     void makeSound() {  
-        System._out_.println("What?");  
+        System.out.println("What?");  
     }  
 }  
   
 class Cat extends Animal{
     @Override
     void makeSound() {  
-        System._out_.println("Meow!");  
+        System.out.println("Meow!");  
     }  
 }
 ```
@@ -1506,10 +1506,10 @@ class Cat extends Animal{
 class Cat extends Animal{
     @Override
     void makeLoudSound() {  
-        System._out_.println("Meeeeeeeeeeeeeoooooooooow!");  
+        System.out.println("Meeeeeeeeeeeeeoooooooooow!");  
     }
     void makeQuietSound(){  
-        System._out_.println("Meow!");  
+        System.out.println("Meow!");  
     }  
 }
 ```
@@ -1714,7 +1714,7 @@ button.addActionListener(new ActionListener() {
 // Test can be an interface, an abstract class or a regular class
 Test test = new Test() {
     void testMethod(){  
-        System._out_.println("Test");  
+        System.out.println("Test");  
     }  
 };
 ```
@@ -1731,14 +1731,14 @@ interface Operator{
 class add implements Operator{
     @Override
     public void doOperation(double a, double b) {  
-        System._out_.println(a + b);  
+        System.out.println(a + b);  
     }  
 }  
   
 class multiple implements Operator{
     @Override
     public void doOperation(double a, double b) {  
-        System._out_.println(a * b);  
+        System.out.println(a * b);  
     }  
 }
 ```
@@ -1754,13 +1754,13 @@ public class Main {
         Operator add = new Operator() {
             @Override
             public void doOperation(double a, double b) {  
-                System._out_.println(a + b);  
+                System.out.println(a + b);  
             }  
         };
         Operator multiple = new Operator() {
             @Override
             public void doOperation(double a, double b) {  
-                System._out_.println(a * b);  
+                System.out.println(a * b);  
             }  
         };  
     }  
@@ -1832,7 +1832,7 @@ interface Operator{
 public class Main {
     public static void main(String[] args) {  
   
-        Operator add = (double a, double b) -> System._out_.println(a + b);  
+        Operator add = (double a, double b) -> System.out.println(a + b);  
         add.doOperation(5, 8);  
     }  
 }
@@ -1847,7 +1847,7 @@ public class Main {
 حالا مجددا به کد نگاه کنید. اینترفیس `Operator` فقط یک متد ابسترکت به اسم `doOperation` داره. یک آبجکت از این اینترفیس می‌نویسیم و یک عبارت لامبدا جلوش می‎‌نویسیم:
 
 ```java
-Operator add = (double a, double b) -> System._out_.println(a + b);
+Operator add = (double a, double b) -> System.out.println(a + b);
 ```
 
 این عبارت لامبدا دقیقا به همون تنها متد اینترفیس نسبت داده می‌شه. پس ورودی‌هایی که می‌نویسیم باید مطابق باشه. عبارت بعد از فلش هم دستوریه که می‌خوایم متد `doOperator` برای `add` انجام بده. حالا الان `add`، در واقع یک آبجکت از یک کلاس ناشناسه.
@@ -1864,7 +1864,7 @@ public class Main {
 	    Operator add = new Operator() {  
 	        @Override  
 	        public void doOperation(double a, double b) {  
-	            System._out_.println(a + b);  
+	            System.out.println(a + b);  
 	        }  
 	    };
 	    add.doOperation(5, 8);  
