@@ -148,7 +148,7 @@ for (int i = 0; i < n; i++) {
 
 ##### ویدیوی یوتوب
 
-![](images/youtube-thumbnail-how-not-to-name-things.png)
+![](images/clean-code-1-youtube-thumbnail-how-not-to-name-things.png)
 
 
 [**Naming Things In Code – CodeAesthetic**](https://www.youtube.com/watch?si=s9ljN1tAi_hgUDEL&v=-J3wNP6u5YU&feature=youtu.be)
@@ -169,7 +169,7 @@ Naming Convention یک مفهوم درباره‌ی برنامه‌های کام
 
 زبان جاوا از فرمت Camel Case برای اغلب نام‌گذاری‌ها استفاده می‌کنه. ایده‌ی اصلی این فرمت اینه که بین کلمات از هیچ جداکننده‌ای مثل آندرلاین یا نقطه استفاده نشه و همچنین بزرگ یا کوچیک بودن حروف، کاربرد اسامی رو از همدیگه متمایز کنه.
 
-![](images/camelCase.png)
+![](images/clean-code-1-camelCase.png)
 
 نام‌گذاری این فرمت، از کوهان شتر الهام گرفته شده!
 
@@ -292,7 +292,7 @@ if (status == STATUS_APPROVED){
 
 #### ویدیوی یوتوب
 
-![](images/youtube-thumbnail-dont-write-comments.png)
+![](images/clean-code-1-youtube-thumbnail-dont-write-comments.png)
 
 
 **[Don’t Write Comments – CodeAesthetic](https://www.youtube.com/watch?v=Bf7vDBBOBUA)**
