@@ -19,13 +19,13 @@ Contains all course assignments organized by semester:
   - `weekly-assignments/` - Weekly homeworks
   - `workshop-exercises/` - Practical coding exercises for 2-hour workshops
 
-### ⚙️ `config/`
+### `config/`
 Configuration files and document templates:
 - **Templates** for LaTeX and Word documents
 - **Fonts** (Estedad font family) with Persian support
 - **Automation scripts** for document processing (from Markdown to LaTex)
 
-### 📄 `documents/`
+### `documents/`
 Course content in multiple formats:
 - **`markdown-source-files/`** - Raw Markdown content organized by topic:
   - Introduction to Java
@@ -38,16 +38,16 @@ Course content in multiple formats:
   - MySQL Database and Hibernate ORM
 - **`semester-1403-02/`** - Compiled documents (PDF and DOCX)
 
-### 📖 `guideline/`
+### `guideline/`
 Style and quality guidelines for creating educational content.
 
-### 🚀 `projects/`
+### `projects/`
 Semester-long projects with detailed documentation:
 - **`semester-1403-02/`** - Current semester assignments
   - Todo List - In-memory database implementation
   - Milou Project - Simple E-Mail system
 
-## 👨‍🏫 Teaching Assistant Contribution Guidelines
+## Teaching Assistant Contribution Guidelines
 
 ### Branch Strategy
 1. Create a branch from `main` using kebab-case naming (e.g., `add-week3-content`)
@@ -63,7 +63,7 @@ Semester-long projects with detailed documentation:
 Before creating new content, review the guidelines in:
 - [How to Write a Good Document](guideline/how-to-write-a-good-doc.pdf)
 
-## 🏷️ Naming Conventions
+## Naming Conventions
 
 ### File and Directory Names
 - Use **kebab-case** for everything
@@ -78,7 +78,7 @@ Before creating new content, review the guidelines in:
 - Separate source files from compiled documents
 - Include images in dedicated `images/` subdirectories
 
-## 🔄 Workflow Notes
+## Workflow Notes
 
 - **Markdown** files in `documents/markdown-source-files/` serve as the source for all documents
 - **Templates** in `config/templates/` ensure consistent formatting
