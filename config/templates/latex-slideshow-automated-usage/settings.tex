@@ -1,0 +1,164 @@
+\documentclass[aspectratio=169,xcolor={dvipsnames}]{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (1) LOAD PACKAGES *BEFORE* xepersian (bidi)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{url}
+\usepackage{minted}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins,minted}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{caption}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning}
+\usepackage{nicematrix}
+\usetikzlibrary{plotmarks}
+\usepackage{xstring}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (2) NOW load xepersian (which will load bidi)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xepersian}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3) FONT SETUP (after xepersian)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\settextfont[
+Path = fonts/,
+Extension = .ttf,
+UprightFont = Estedad-Regular,
+BoldFont = Estedad-Bold,
+ItalicFont = Estedad-Regular,
+BoldItalicFont = Estedad-Bold,
+Scale = 1.0
+]{Estedad}
+
+\newfontfamily\estedadThin{Estedad-Thin.ttf}
+\newfontfamily\estedadLight{Estedad-Light.ttf}
+\newfontfamily\estedadMedium{Estedad-Medium.ttf}
+\newfontfamily\estedadSemiBold{Estedad-SemiBold.ttf}
+\newfontfamily\estedadExtraBold{Estedad-ExtraBold.ttf}
+\newfontfamily\estedadBlack{Estedad-Black.ttf}
+\newfontfamily\estedadBold{Estedad-Bold.ttf}
+
+\defaultfontfeatures[\rmfamily,\sffamily]{}
+\setlatintextfont[
+Ligatures      = TeX,
+UprightFont    = * ,
+BoldFont       = * Bold ,
+ItalicFont     = * Italic ,
+BoldItalicFont = * Bold Italic
+]{Times New Roman}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4) BEAMER THEME CONFIGURATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Customize colors
+\definecolor{primarycolor}{RGB}{0,51,102}
+\definecolor{secondarycolor}{RGB}{0,102,204}
+\definecolor{accentcolor}{RGB}{204,0,0}
+
+\setbeamercolor{structure}{fg=primarycolor}
+\setbeamercolor{frametitle}{bg=primarycolor,fg=white}
+\setbeamercolor{title}{fg=primarycolor}
+\setbeamercolor{subtitle}{fg=secondarycolor}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{date}{fg=black}
+\setbeamercolor{institute}{fg=black}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Add frame numbers
+\setbeamertemplate{footline}[frame number]
+
+% Customize frame title
+\setbeamertemplate{frametitle}{
+  \vspace{0.5cm}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm,dp=0.5cm,left]{frametitle}
+    \hspace{0.5cm}\insertframetitle
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (5) CUSTOM CODE BLOCK COMMAND - PERSIAN COMPATIBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{darkcodebg}{rgb}{0.1,0.1,0.1}
+\definecolor{darkcodefg}{rgb}{0.95,0.95,0.95}
+\definecolor{linenumcolor}{rgb}{0.7,0.7,0.7}
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+
+\setminted{
+	style       = vs,
+	bgcolor     = codebg,
+	tabsize     = 4,
+	tab         = {~~~~},
+}
+
+\renewcommand{\theFancyVerbLine}{\textcolor{linenumcolor}{\small\arabic{FancyVerbLine}}}
+
+\NewDocumentEnvironment{codebox}{O{} m}{%
+	\VerbatimEnvironment%
+	\setLTR%
+	\latinfont%
+	\color{darkcodefg}%
+	\begin{minted}[
+		style=monokai,
+		bgcolor=darkcodebg,
+		fontsize=\footnotesize,
+		fontfamily=tt,
+		breaklines,
+		breakanywhere=false,
+		tabsize=4,
+		showtabs=false,
+		showspaces=false,
+		baselinestretch=1.0,
+		linenos,
+		numbersep=5pt,
+		numbers=left,
+		stepnumber=1,
+		firstnumber=1,
+		xleftmargin=0pt,
+		frame=none,
+		stripnl=false,
+		encoding=utf8,
+		]{#2}%
+	}{%
+	\end{minted}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (6) Fix PANDOC DEFAULTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Prevent pandocbounded wrapper for images
+\makeatletter
+\def\pandocbounded#1{#1}
+\makeatother
+
+% Define tightlist as empty (no extra spacing in lists)
+\providecommand{\tightlist}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (7) PRESENTATION NOTES SUPPORT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Enable notes on second screen for manual addition later
+% Uncomment the line below when you want to see notes during presentation
+% \setbeameroption{show notes on second screen}
+
+% For now, notes are hidden but can be manually added to slides
+\setbeameroption{hide notes}
