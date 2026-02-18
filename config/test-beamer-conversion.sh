@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # test-beamer-conversion.sh
 # Script to test the beamer slideshow template conversion
 
