@@ -1,45 +1,86 @@
-# java workshop
+# Advanced Programming (Java) of MCS AUT
 
 ## Introduction
 
-This project is dedicated to teaching an advanced programming course in Java. The course starts with the fundamentals 
-and gradually covers more complex topics. Along the way, we also explore essential tools like Git, IntelliJ, and other 
-technologies that are part of a Java programmer's daily workflow.
+This project is dedicated to teaching an advanced programming course in Java. The course starts with the fundamentals and gradually covers more complex topics. Along the way, we also explore essential tools like Git, IntelliJ, and other technologies that are part of a Java programmer's daily workflow.
 
-## Quera
+## Course Platform
 
-This course is offered to students through [Quera](https://quera.org).  
-Here are the links to access the Quera page for each semester:
+The course material is offered to students through [Quera](https://quera.org).
 
-- [Spring 2025](https://quera.org/course/add_to_course/course/20556/)
+### Current Semester
+- **Semester 1403-02** (Spring 2025): Available at [Quera Course Page](https://quera.org/course/add_to_course/course/20556/)
 
-## Repo Structure
+## Repository Structure
 
-**template:** Here is the template we use for our documents. We use the 'Estedad' font for these, 
-and the font file is located right next to the template.
+### `assignments/`
+Contains all course assignments organized by semester:
+- **`semester-1403-02/`** - Current semester assignments
+  - `weekly-assignments/` - Weekly homeworks
+  - `workshop-exercises/` - Practical coding exercises for 2-hour workshops
 
-**workshop:** The main content is located here. The content for each week is organized into separate directories, 
-starting from Week 0 (don’t ask why). Each week’s content is split into two directories:
-- **ta:** This directory contains answers to the week’s problems or projects, editable .docx files, and everything 
-the teaching assistants need but the students don't.
-- **student:** This directory holds content intended for students, including PDF files of documents, project templates, 
-assignments, videos, and everything they need to complete the work for that week. Also, there's a README.md file,
-which outlines that week's learning process for students.
+### `config/`
+Configuration files and document templates:
+- **Templates** for LaTeX and Word documents
+- **Fonts** (Estedad font family) with Persian support
+- **Automation scripts** for document processing (from Markdown to LaTex)
 
-**guideline**: Here are the guidelines to ensure high-quality content in this workshop. 
+### `documents/`
+Course content in multiple formats:
+- **`markdown-source-files/`** - Raw Markdown content organized by topic:
+  - Introduction to Java
+  - Git version control
+  - Graphics (Swing)
+  - Clean Code principles
+  - Object-oriented programming in Java
+  - File I/O in Java
+  - Java Collections Framework (JCF) and introduction "Data Structures and Aglrothms"
+  - MySQL Database and Hibernate ORM
+- **`semester-1403-02/`** - Compiled documents (PDF and DOCX)
 
-**project**: Different projects assigned to the students
+### `guideline/`
+Style and quality guidelines for creating educational content.
 
-## TA contribution
+### `projects/`
+Semester-long projects with detailed documentation:
+- **`semester-1403-02/`** - Current semester assignments
+  - Todo List - In-memory database implementation
+  - Milou Project - Simple E-Mail system
 
-Create a branch from `main`, then submit a pull request to merge it. If you're working in a group, everyone should use 
-the same branch. Please avoid creating multiple branches in the repository for a single week. use kebab-case for your 
-branch name. Also, Don't forget to provide a README.md file for the students.
+## Teaching Assistant Contribution Guidelines
 
-Before writing a new document, carefully read the instructions provided in [how-to-write-a-good-doc](guideline/how-to-write-a-good-doc.pdf).
+### Branch Strategy
+1. Create a branch from `main` using kebab-case naming (e.g., `add-week3-content`)
+2. If working in a group, collaborate on a single branch
+3. Avoid creating multiple branches for the same week's content
 
-## Conventions
+### Pull Request Process
+1. Submit a pull request to merge your branch into `main`
+2. Ensure all new content follows the established structure
+3. Include comprehensive README.md files for student-facing content
 
-Use kebab-case for everything! Apply kebab-case to directory names, files, and similar items, unless there's a more 
-common convention that specifies otherwise. use imperative verbs in the present tense for your commit messages, and 
-write them in all lowercase.
+### Document Quality
+Before creating new content, review the guidelines in:
+- [How to Write a Good Document](guideline/how-to-write-a-good-doc.pdf)
+
+## Naming Conventions
+
+### File and Directory Names
+- Use **kebab-case** for everything
+
+### Commit Messages
+- Use **imperative mood** in present tense
+- Write in **all lowercase**
+
+
+### Content Organization
+- Group related materials under topic-specific directories
+- Separate source files from compiled documents
+- Include images in dedicated `images/` subdirectories
+
+## Workflow Notes
+
+- **Markdown** files in `documents/markdown-source-files/` serve as the source for all documents
+- **Templates** in `config/templates/` ensure consistent formatting
+- **Assignments** include both problem statements and reference solutions
+- **Projects** provide real-world application of course concepts

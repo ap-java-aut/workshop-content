@@ -1,0 +1,129 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$if(title)$
+\newcommand{\DocTitle}{$title$}
+$else$
+\newcommand{\DocTitle}{}
+$endif$
+
+$if(course)$
+\newcommand{\CourseTitle}{$course$}
+$else$
+\newcommand{\CourseTitle}{}
+$endif$
+
+$if(semester)$
+\newcommand{\Semester}{$semester$}
+$else$
+\newcommand{\Semester}{}
+$endif$
+
+$if(professor)$
+\newcommand{\FirstProfessor}{$professor$}
+$else$
+\newcommand{\FirstProfessor}{}
+$endif$
+
+$if(professor_2)$
+\newcommand{\SecondProfessor}{$professor_2$}
+$else$
+\newcommand{\SecondProfessor}{}
+$endif$
+
+$if(writers)$
+\newcommand{\Writers}{$for(writers)$$writers$$sep$، $endfor$}
+$else$
+\newcommand{\Writers}{}
+$endif$
+
+$if(department)$
+\newcommand{\Faculty}{$department$}
+$else$
+\newcommand{\Faculty}{}
+$endif$
+
+$if(institution)$
+\newcommand{\University}{$institution$}
+$else$
+\newcommand{\University}{}
+$endif$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1.5cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{2cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	{\fontsize{18}{22}\selectfont \textbf{ \Writers } }
+	
+	\vspace{4cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{1.5cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	\vspace{0.5cm}
+	
+	{\fontsize{14}{22}\selectfont  \rl{استاد دوم درس:}}\\
+	{\fontsize{16}{22}\selectfont \textbf{ \SecondProfessor } }
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+$body$
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
