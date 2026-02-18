@@ -22,8 +22,11 @@ Contains all course assignments organized by semester:
 ### `config/`
 Configuration files and document templates:
 - **Templates** for LaTeX and Word documents
+  - `latex-document-automated-usage/` - Document template with Persian support
+  - `latex-slideshow-automated-usage/` - Beamer slideshow template with Persian support
 - **Fonts** (Estedad font family) with Persian support
-- **Automation scripts** for document processing (from Markdown to LaTex)
+- **Automation scripts** for document processing (from Markdown to LaTeX/PDF)
+- **Usage guides** for converting markdown to documents and slideshows
 
 ### `documents/`
 Course content in multiple formats:
@@ -84,3 +87,32 @@ Before creating new content, review the guidelines in:
 - **Templates** in `config/templates/` ensure consistent formatting
 - **Assignments** include both problem statements and reference solutions
 - **Projects** provide real-world application of course concepts
+
+## Document Generation
+
+### Converting Markdown to PDF Documents
+
+Use the document template for creating PDF reports:
+```bash
+pandoc input.md -o output.pdf \
+  --pdf-engine=xelatex \
+  --template=config/templates/latex-document-automated-usage/template.tex \
+  --lua-filter=config/latex-document-automated-filter.lua
+```
+
+### Converting Markdown to Beamer Slideshows
+
+Use the slideshow template for creating presentations:
+```bash
+pandoc input.md -o slides.pdf \
+  --pdf-engine=xelatex \
+  --pdf-engine-opt=-shell-escape \
+  --template=config/templates/latex-slideshow-automated-usage/template.tex \
+  --lua-filter=config/latex-slideshow-automated-filter.lua \
+  --resource-path=config/templates/latex-slideshow-automated-usage
+```
+
+For detailed usage instructions, see:
+- **Document template**: `config/templates/latex-document-automated-usage/README.md`
+- **Slideshow template**: `config/templates/latex-slideshow-automated-usage/README.md`
+- **Comprehensive guide**: `config/BEAMER-USAGE-GUIDE.md`
