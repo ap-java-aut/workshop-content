@@ -50,7 +50,7 @@ institution: دانشگاه صنعتی امیرکبیر
 
 #### دانلود و نصب (JDK (Java Development Kit در ویندوز
 
-ابتدا به [این آدرس](https://www.oracle.com/java/technologies/downloads) مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK23 بزنید و Windows را انتخاب کنید. در نهایت بر روی لینک مقابل گزینه x64 MSI installer کلیک کنید تا دانلود آغاز شود.
+ابتدا به [این آدرس](https://www.oracle.com/java/technologies/downloads) مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK 25 بزنید و Windows را انتخاب کنید. در نهایت بر روی لینک مقابل گزینه x64 MSI installer کلیک کنید تا دانلود آغاز شود.
 
 
 ![](images/tools-9.png)
