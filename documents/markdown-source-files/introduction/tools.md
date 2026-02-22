@@ -92,7 +92,7 @@ java --version
 
 #### دانلود و نصب (JDK (Java Development Kit در مک
 
-ابتدا به [این آدرس](https://www.oracle.com/java/technologies/downloads) مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK23 بزنید و سپس macOS را انتخاب کنید.
+ابتدا به [این آدرس](https://www.oracle.com/java/technologies/downloads/#jdk25-mac) مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK 25 بزنید و سپس macOS را انتخاب کنید.
 
 ![](images/tools-18.png)
 
