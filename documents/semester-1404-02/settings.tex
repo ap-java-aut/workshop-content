@@ -1,0 +1,199 @@
+\documentclass[12pt]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (1) LOAD PACKAGES *BEFORE* xepersian (bidi)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{framed}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lineno}
+\usepackage{pgf}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyvrb}
+\usepackage{tocloft}
+\usepackage{url}
+\usepackage{minted}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins,minted}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{caption}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning}
+\usepackage{nicematrix}
+\usetikzlibrary{plotmarks}
+\usepackage{xstring}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (2) NOW load xepersian (which will load bidi)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xepersian}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3) INCREASE LINE SPACING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setstretch{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4) FONT SETUP (after xepersian)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\settextfont[
+Path = fonts/,
+Extension = .ttf,
+UprightFont = Estedad-Regular,
+BoldFont = Estedad-Bold,
+ItalicFont = Estedad-Regular,
+BoldItalicFont = Estedad-Bold,
+Scale = 1.0
+]{Estedad}
+
+\newfontfamily\estedadThin{Estedad-Thin.ttf}
+\newfontfamily\estedadLight{Estedad-Light.ttf}
+\newfontfamily\estedadMedium{Estedad-Medium.ttf}
+\newfontfamily\estedadSemiBold{Estedad-SemiBold.ttf}
+\newfontfamily\estedadExtraBold{Estedad-ExtraBold.ttf}
+\newfontfamily\estedadBlack{Estedad-Black.ttf}
+\newfontfamily\estedadBold{Estedad-Bold.ttf}
+
+\defaultfontfeatures[\rmfamily,\sffamily]{}
+\setlatintextfont[
+Ligatures      = TeX,
+UprightFont    = * ,
+BoldFont       = * Bold ,
+ItalicFont     = * Italic ,
+BoldItalicFont = * Bold Italic
+]{Times New Roman}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (5) GEOMETRY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{
+	a4paper,
+	top    = 2cm,
+	bottom = 3cm,
+	left   = 2.5cm,
+	right  = 2.5cm,
+	headheight = 15pt,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (6) CUSTOM CODE BLOCK COMMAND - PERSIAN COMPATIBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{darkcodebg}{rgb}{0.1,0.1,0.1}
+\definecolor{darkcodefg}{rgb}{0.95,0.95,0.95}
+\definecolor{linenumcolor}{rgb}{0.7,0.7,0.7}
+
+\setminted{
+	style       = vs,
+	bgcolor     = codebg,
+	tabsize     = 4,
+	tab         = {~~~~},
+}
+
+\renewcommand{\theFancyVerbLine}{\textcolor{linenumcolor}{\small\arabic{FancyVerbLine}}}
+
+\NewDocumentEnvironment{codebox}{O{} m}{%
+	\VerbatimEnvironment%
+	\setLTR%
+	\latinfont%
+	\color{darkcodefg}%
+	\begin{minted}[
+		style=monokai,
+		bgcolor=darkcodebg,
+		fontsize=\small,
+		fontfamily=tt,
+		breaklines,
+		breakanywhere=false,
+		tabsize=4,
+		showtabs=false,
+		showspaces=false,
+		baselinestretch=1.2,
+		linenos,
+		numbersep=8pt,
+		numbers=left,
+		stepnumber=1,
+		firstnumber=1,
+		xleftmargin=0pt,
+		frame=none,
+		stripnl=false,
+		encoding=utf8,
+		]{#2}%
+	}{%
+	\end{minted}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (7) TITLES & TOC DOTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\chapter}
+{\fontsize{20}{24}\bfseries}
+{\filleft\chaptertitlename\ \thechapter}
+{1em}
+{}
+
+\titleformat{\section}
+{\fontsize{16}{18}\bfseries}
+{\thesection}
+{1em}
+{}
+
+\titleformat{\subsection}
+{\fontsize{14}{16}\bfseries}
+{\thesubsection}
+{1em}
+{}
+
+\dottedcontents{chapter}[1.5em]{\bfseries}{1.5em}{1pc}
+\dottedcontents{section}[3.5em]{}{2.5em}{1pc}
+\dottedcontents{subsection}[6em]{}{3.5em}{1pc}
+
+\setlength{\cftchapnumwidth}{2.5em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{4em}
+\setlength{\cftparskip}{0pt}
+\setlength{\cftbeforechapskip}{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (8) FANCYHDR FOR HEADER & FOOTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fancypagestyle{aftertitle}{
+	\fancyhf{}
+	\lhead{\Semester}
+	\chead{\CourseTitle}
+	\rhead{\DocTitle}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\cfoot{\thepage}
+}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\lhead{\Semester}
+	\chead{\CourseTitle}
+	\rhead{\DocTitle}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\cfoot{\thepage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (9) Fix PANDOC DEFAULTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Prevent pandocbounded wrapper for images
+\makeatletter
+\def\pandocbounded#1{#1}
+\makeatother
+
+% Define tightlist as empty (no extra spacing in lists)
+\providecommand{\tightlist}{}
