@@ -1,4 +1,4 @@
----
+<img width="1919" height="734" alt="image" src="https://github.com/user-attachments/assets/c743b6c5-51c2-4c19-8fdd-642c9edcef40" />---
 title: ابزارها
 writers:
   - پدرام اسماعیل پور
@@ -159,11 +159,11 @@ java --version  
 
 #### آموزش دانلود و نصب گیت در ویندوز
 
-ابتدا به [سایت گیت](https://git-scm.com) مراجعه کنید و بر روی گزینه‌ی Download for windows بزنید.
+ابتدا به [سایت گیت](https://git-scm.com) مراجعه کنید و بر روی گزینه‌ی Install for windows بزنید.
 
 ![](images/tools-32.png)
 
-سپس بر روی Click Here to download بزنید تا دانلود آخرین نسخه آغاز شود.
+سپس بر روی Git for Windows/x64 Setup بزنید تا دانلود آخرین نسخه آغاز شود.
 
 ![](images/tools-33.png)
 
