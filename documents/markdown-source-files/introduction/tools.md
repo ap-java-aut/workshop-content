@@ -1,4 +1,3 @@
-<img width="1919" height="734" alt="image" src="https://github.com/user-attachments/assets/c743b6c5-51c2-4c19-8fdd-642c9edcef40" />---
 title: ابزارها
 writers:
   - پدرام اسماعیل پور
