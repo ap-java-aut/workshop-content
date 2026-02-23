@@ -10,7 +10,11 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{framed}
-\usepackage[colorlinks=true]{hyperref}
+\usepackage[colorlinks=true,
+            linkcolor=blue,
+            urlcolor=blue,
+            citecolor=blue,
+            anchorcolor=blue]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{lineno}
 \usepackage{pgf}
@@ -69,13 +73,23 @@ Scale = 1.0
 \newfontfamily\estedadBold{Estedad-Bold.ttf}
 
 \defaultfontfeatures[\rmfamily,\sffamily]{}
+%\setlatintextfont[
+%Ligatures      = TeX,
+%UprightFont    = * ,
+%BoldFont       = * Bold ,
+%ItalicFont     = * Italic ,
+%BoldItalicFont = * Bold Italic
+%]{Times New Roman}
 \setlatintextfont[
-Ligatures      = TeX,
-UprightFont    = * ,
-BoldFont       = * Bold ,
-ItalicFont     = * Italic ,
-BoldItalicFont = * Bold Italic
-]{Times New Roman}
+Path = fonts/,
+Extension = .ttf,
+UprightFont = Estedad-Light,      % Lighter for Latin
+BoldFont = Estedad-SemiBold,       % Semi-bold for emphasis
+ItalicFont = Estedad-Light,        % No italic, using light
+BoldItalicFont = Estedad-SemiBold, % No bold italic
+AutoFakeSlant = 0.2,
+Scale = 1.0
+]{Estedad}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (5) GEOMETRY
@@ -169,7 +183,7 @@ BoldItalicFont = * Bold Italic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (8) FANCYHDR FOR HEADER & FOOTER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\fancypagestyle{aftertitle}{
+\fancypagestyle{aftertitle}{%
 	\fancyhf{}
 	\lhead{\Semester}
 	\chead{\CourseTitle}
@@ -179,12 +193,12 @@ BoldItalicFont = * Bold Italic
 }
 
 \fancypagestyle{plain}{
-	\fancyhf{}
-	\lhead{\Semester}
-	\chead{\CourseTitle}
-	\rhead{\DocTitle}
-	\renewcommand{\headrulewidth}{0.4pt}
-	\cfoot{\thepage}
+	\fancyhf{}%
+	\lhead{\Semester}%
+	\chead{\CourseTitle}%
+	\rhead{\DocTitle}%
+	\renewcommand{\headrulewidth}{0.4pt}%
+	\cfoot{\thepage}%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

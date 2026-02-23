@@ -10,9 +10,9 @@
 
 \newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
 
-\newcommand{\Semester}{ترم دوم ۱۴۰۴ - ۱۴۰۵}
+\newcommand{\Semester}{بهار ۱۴۰۴ - ۱۴۰۵}
 
-\newcommand{\FirstProfessor}{دکتر احمدیان}
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
 
 \newcommand{\SecondProfessor}{}
 
@@ -40,29 +40,34 @@
 		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
 	\end{figure}
 	
-	\vspace{1.5cm}
-	
-	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
-	
-	\vspace{2cm}
-	
-	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
-	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
-	
-	\vspace{4cm}
+	\vspace{1cm}
 	
 	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
 	
-	\vspace{2cm}
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
 	
 	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
 	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
 	
 	
 	\vfill
 	
 	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
 	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
 	
 	\par
 	
@@ -88,28 +93,28 @@
 
 قدم اول برای درس برنامه‌نویسی پیشرفته با زبان جاوا، آماده کردن شرایط کافی
 برای برنامه‌نویسی با این زبان است که شامل نصب پکیج کامل زبان جاوا (کیت
-توسعه جاوا) و همچنین یک محیط توسعه\href{\#footnote-1}{[1]} می‌باشد. در
-این دستور کار منابعی برای آموزش دانلود و نصب Java JDK و IntelliJ IDEA
-قرار گرفته است. IntelliJ IDEA یک محیط توسعه یکپارچه برای زبان جاوا و
-محصول شرکت JetBrains است. این IDE یکی از قدرتمندترین‌ها برای زبان جاوا
-است که ویژگی‌ها و امکانات گوناگونی دارد. پیشنهاد می‌شود که همگی از همین
-IDE استفاده کنید.
+توسعه جاوا) و همچنین یک محیط توسعه \footnote{\lr{IDE}} می‌باشد. در این
+دستور کار منابعی برای آموزش دانلود و نصب \lr{Java JDK} و
+\lr{IntelliJ IDEA} قرار گرفته است. \lr{IntelliJ IDEA} یک محیط توسعه
+یکپارچه برای زبان جاوا و محصول شرکت \lr{JetBrains} است. این \lr{IDE} یکی
+از قدرتمندترین‌ها برای زبان جاوا است که ویژگی‌ها و امکانات گوناگونی دارد.
+پیشنهاد می‌شود که همگی از همین \lr{IDE} استفاده کنید.
 
-\section{آموزش نصب IntelliJ و JDK در ویندوز}
+\section{آموزش نصب \lr{IntelliJ} و \lr{JDK} در ویندوز}
 
-\subsubsection{دانلود و نصب IntelliJ در ویندوز}
+\subsubsection{دانلود و نصب \lr{IntelliJ} در ویندوز}
 
-ابتدا به
-\href{https://www.jetbrains.com/idea}{صفحه رسمی معرفی اینتلی جی} مراجعه
-کنید، سپس در صفحه‌ی زیر بر روی گزینه‌ی Download سفید رنگ بزنید.
+ابتدا به \href{https://www.jetbrains.com/idea}{صفحه رسمی معرفی اینتلی
+جی} مراجعه کنید، سپس در صفحه‌ی زیر بر روی گزینه‌ی \lr{Download} سفید رنگ
+بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-1.png}
 \end{figure}
 
-در صفحه زیر گزینه ویندوز را انتخاب کنید، و مطابق تصویر زیر روی download
-کلیک کنید.
+در صفحه زیر گزینه ویندوز را انتخاب کنید، و مطابق تصویر زیر روی
+\lr{download} کلیک کنید.
 
 \begin{figure}[H]
 \centering
@@ -117,8 +122,8 @@ IDE استفاده کنید.
 \end{figure}
 
 پس از اتمام دانلود، بر روی فایل کلیک کنید تا پنجره‌ی زیر باز شود. سپس
-گزینه Next را بزنید.(ممکن است در تصاویر ارائه‌شده با فرآیند نصب فعلی شما
-تفاوت‌هایی مشاهده شود. این موارد تأثیری در روند کار ندارند و صرفاً
+گزینه \lr{Next} را بزنید.(ممکن است در تصاویر ارائه‌شده با فرآیند نصب فعلی
+شما تفاوت‌هایی مشاهده شود. این موارد تأثیری در روند کار ندارند و صرفاً
 به‌روزرسانی‌های نسخه‌های مختلف مربوط می‌شوند. لطفاً مراحل را مطابق مسیر
 تعیین‌شده ادامه دهید.)
 
@@ -127,7 +132,7 @@ IDE استفاده کنید.
 \includegraphics[width=0.8\textwidth]{images/tools-4.png}
 \end{figure}
 
-در صفحه‌ی زیر مسیر نصب را مشخص کنید و بر روی گزینه Next ضربه بزنید.
+در صفحه‌ی زیر مسیر نصب را مشخص کنید و بر روی گزینه \lr{Next} ضربه بزنید.
 
 \begin{figure}[H]
 \centering
@@ -136,14 +141,14 @@ IDE استفاده کنید.
 
 در صفحه بعدی نیز برخی آپشن‌ها نظیر ایجاد شورت‌کات از شما سوال شده است.
 همه‌ی این آپشن‌ها بعد از نصب برنامه نیز قابل افزودن هستند. بعد از انتخاب
-گزینه‌های مدنظر خود، Next را بزنید.
+گزینه‌های مدنظر خود، \lr{Next} را بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-6.png}
 \end{figure}
 
-در صفحه‌ی زیر نیاز به تغییر وجود ندارد. گزینه‌ی Install را بزنید.
+در صفحه‌ی زیر نیاز به تغییر وجود ندارد. گزینه‌ی \lr{Install} را بزنید.
 
 \begin{figure}[H]
 \centering
@@ -151,20 +156,19 @@ IDE استفاده کنید.
 \end{figure}
 
 پس از پایان فرآیند Installation، در صفحه‌ی زیر بدون نیاز به تغییر، گزینه‌ی
-Finish را بزنید. اکنون برنامه نصب شده و قابل اجرا می‌باشد.
+\lr{Finish} را بزنید. اکنون برنامه نصب شده و قابل اجرا می‌باشد.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-8.png}
 \end{figure}
 
-\subsubsection{دانلود و نصب (JDK (Java Development Kit در ویندوز}
+\subsubsection{دانلود و نصب \lr{(JDK (Java Development Kit} در ویندوز}
 
-ابتدا به
-\href{https://www.oracle.com/java/technologies/downloads}{این آدرس}
-مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK 25 بزنید و Windows را انتخاب
-کنید. در نهایت بر روی لینک مقابل گزینه x64 MSI installer کلیک کنید تا
-دانلود آغاز شود.
+ابتدا به \href{https://www.oracle.com/java/technologies/downloads}{این
+آدرس} مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی \lr{JDK 25} بزنید و
+\lr{Windows} را انتخاب کنید. در نهایت بر روی لینک مقابل گزینه
+\lr{x64 MSI installer} کلیک کنید تا دانلود آغاز شود.
 
 \begin{figure}[H]
 \centering
@@ -172,24 +176,25 @@ Finish را بزنید. اکنون برنامه نصب شده و قابل اجر
 \end{figure}
 
 پس از اجرای فایل دانلود شده، با پنجره‌ای مشابه تصویر زیر روبه‌رو می‌شوید.
-در این صفحه بر روی گزینه‌ی Next کلیک کنید، در صفحه بعدی مسیر نصب را مشخص
-کنید و مجدداً بر روی گزینه Next ضربه بزنید.
+در این صفحه بر روی گزینه‌ی \lr{Next} کلیک کنید، در صفحه بعدی مسیر نصب را
+مشخص کنید و مجدداً بر روی گزینه \lr{Next} ضربه بزنید.
 
 \begin{table}[H]
-	\centering
-	\setLTR
-	\begin{tabular}{ll}
-		\hline
-		\textbf{(1) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-10.png}}} & \textbf{(2) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-11.png}}} \\
-		\hline
-		(3) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-12.png}} &  \\
-		\hline
-	\end{tabular}
+\centering
+\setLTR
+\begin{tabular}{ll}
+\hline
+\textbf{(1) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-10.png}}} & \textbf{(2) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-11.png}}} \\
+\hline
+(3) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-12.png}} &  \\
+\hline
+\end{tabular}
 \end{table}
 
-پس از پایان فرآیند Installation، در صفحه‌ی آخر گزینه‌ی Close را بزنید.
-اکنون نصب به پایان رسیده است. می‌توانید با اجرای دستور زیر در command
-line از نصب شدن جاوا مطمئن شوید و نسخه نصب‌شده را مشاهده کنید.
+پس از پایان فرآیند Installation، در صفحه‌ی آخر گزینه‌ی \lr{Close} را
+بزنید. اکنون نصب به پایان رسیده است. می‌توانید با اجرای دستور زیر در
+\lr{command line} از نصب شدن جاوا مطمئن شوید و نسخه نصب‌شده را مشاهده
+کنید.
 
 \begin{codebox}{bash}
 java --version
@@ -200,40 +205,41 @@ java --version
 \includegraphics[width=0.8\textwidth]{images/tools-13.png}
 \end{figure}
 
-\section{آموزش نصب IntelliJ و JDK در مک}
+\section{آموزش نصب \lr{IntelliJ} و \lr{JDK} در مک}
 
-\subsubsection{دانلود و نصب IntelliJ در مک}
+\subsubsection{دانلود و نصب \lr{IntelliJ} در مک}
 
 ابتدا به \href{https://www.jetbrains.com/idea}{صفحه رسمی معرفی اینتلیجی}
-مراجعه کنید، سپس در صفحه‌ی زیر بر روی گزینه‌ی Download سفید رنگ بزنید.
+مراجعه کنید، سپس در صفحه‌ی زیر بر روی گزینه‌ی \lr{Download} سفید رنگ
+بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-14.png}
 \end{figure}
 
-در صفحه زیر گزینه macOS را انتخاب کنید , مطابق تصویر روی download کلیک
-کنید.
+در صفحه زیر گزینه \lr{macOS} را انتخاب کنید , مطابق تصویر روی
+\lr{download} کلیک کنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-15.png}
 \end{figure}
 
-پس از اتمام این فرآیند، فایل دانلود شده را به داخل پوشه Applications
-بکشید تا عملیات نصب انجام شود.
+پس از اتمام این فرآیند، فایل دانلود شده را به داخل پوشه
+\lr{Applications} بکشید تا عملیات نصب انجام شود.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-17.png}
 \end{figure}
 
-\subsubsection{دانلود و نصب (JDK (Java Development Kit در مک}
+\subsubsection{دانلود و نصب \lr{(JDK (Java Development Kit} در مک}
 
 ابتدا به
-\href{https://www.oracle.com/java/technologies/downloads/\#jdk25-mac}{این آدرس}
-مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی JDK 25 بزنید و سپس macOS را
-انتخاب کنید.
+\href{https://www.oracle.com/java/technologies/downloads/\#jdk25-mac}{این
+آدرس} مراجعه کنید. در صفحه‌ی زیر بر روی گزینه‌ی \lr{JDK 25} بزنید و سپس
+\lr{macOS} را انتخاب کنید.
 
 \begin{figure}[H]
 \centering
@@ -256,15 +262,15 @@ java --version
 \setLTR
 \begin{tabular}{ll}
 \hline
-\textbf{(1) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-20.png}}} & \textbf{(2) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-21.png}}} \\
+\textbf{(1) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-20.png}}} & \textbf{(2) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-21.png}}} \\
 \hline
-(3) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-22.png}} & (4) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-23.png}} \\
+(3) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-22.png}} & (4) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-23.png}} \\
 \hline
 \end{tabular}
 \end{table}
 
-در نهایت با اجرای دستور زیر در command line می‌توانید از نصب شدن جاوا در
-سیستم خود مطمئن شوید.
+در نهایت با اجرای دستور زیر در \lr{command line} می‌توانید از نصب شدن
+جاوا در سیستم خود مطمئن شوید.
 
 \begin{codebox}{bash}
 java --version  
@@ -275,23 +281,23 @@ java --version  
 \includegraphics[width=0.8\textwidth]{images/tools-24.png}
 \end{figure}
 
-\section{آموزش ایجاد پروژه در IntelliJ IDEA}
+\section{آموزش ایجاد پروژه در \lr{IntelliJ IDEA}}
 
 پس از پایان فرآیند نصب که پیش‌تر آموزش داده شد، برنامه را اجرا کرده و بر
-روی گزینه‌ی New Project بزنید.
+روی گزینه‌ی \lr{New Project} بزنید.
 
 در این صفحه نام و مسیر ذخیره‌سازی پروژه را انتخاب کنید. زبان را بر روی
-جاوا و Build System را بر روی IntelliJ بگذارید. در صورتی که می‌خواهید در
-بدو ایجاد پروژه کلاس Main به همراه کد آماده‌ی کوتاه وجود داشته باشد، تیک
-Add Sample Code را بزنید.
+جاوا و \lr{Build System} را بر روی \lr{IntelliJ} بگذارید. در صورتی که
+می‌خواهید در بدو ایجاد پروژه کلاس \lr{Main} به همراه کد آماده‌ی کوتاه وجود
+داشته باشد، تیک \lr{Add Sample Code} را بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-25.png}
 \end{figure}
 
-سپس می‌بایست JDK را که قبلاً نصب کردید انتخاب کنید. برای این کار مطابق
-تصویر زیر عمل کنید. در پایان بر روی گزینه Create بزنید.
+سپس می‌بایست \lr{JDK} را که قبلاً نصب کردید انتخاب کنید. برای این کار
+مطابق تصویر زیر عمل کنید. در پایان بر روی گزینه \lr{Create} بزنید.
 
 \begin{figure}[H]
 \centering
@@ -299,18 +305,19 @@ Add Sample Code را بزنید.
 \end{figure}
 
 چنانچه پس از ایجاد پروژه، مایل به اضافه کردن کلاس دیگری بودید و یا اگر
-کلاس Main به‌صورت پیش‌فرض در پروژه‌ی شما ساخته نشده بود، مطابق تصویر زیر از
-منوی File گزینه New و سپس گزینه‌ی Java Class را انتخاب کنید.
+کلاس \lr{Main} به‌صورت پیش‌فرض در پروژه‌ی شما ساخته نشده بود، مطابق تصویر
+زیر از منوی \lr{File} گزینه \lr{New} و سپس گزینه‌ی \lr{Java Class} را
+انتخاب کنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-27.png}
 \end{figure}
 
-پس از ساخت پروژه یک فایل پیش‌فرض Main.java با برنامه مربوط به چاپ ``Hello
-World!'' ساخته می‌شود. با استفاده کلید سبزرنگ Run در نوار بالایی می‌توانید
-کد را اجرا کنید و مطمئن شوید تمامی ابزارها به درستی کار می‌کنند و عبارت
-``Hello World!'' در ترمینال چاپ شده است.
+پس از ساخت پروژه یک فایل پیش‌فرض \lr{Main.java} با برنامه مربوط به چاپ
+``Hello World!'' ساخته می‌شود. با استفاده کلید سبزرنگ \lr{Run} در نوار
+بالایی می‌توانید کد را اجرا کنید و مطمئن شوید تمامی ابزارها به درستی کار
+می‌کنند و عبارت ``Hello World!'' در ترمینال چاپ شده است.
 
 \begin{figure}[H]
 \centering
@@ -334,20 +341,20 @@ World!'' ساخته می‌شود. با استفاده کلید سبزرنگ Run
 \end{figure}
 
 ابتدا وارد \href{https://github.com/}{وبسایت گیت‌هاب} می‌شویم. با انتخاب
-دکمه Sign up، یک صفحه به شکل صفحه پایین باز می‌شود شما میتوانید با زدن
-Continue with Google با استفاده از اکانت گوگل خود به راحتی مستقیم ثبت
-نام کنید. در غیر این صورت شما باید اطلاعات شخصی خود را در آن وارد کنید.
-توجه کنید که در قسمت ایمیل از ایمیل شخصی خود استفاده کنید و نه ایمیل
-دانشگاهی.
+دکمه \lr{Sign} up، یک صفحه به شکل صفحه پایین باز می‌شود شما میتوانید با
+زدن \lr{Continue with Google} با استفاده از اکانت گوگل خود به راحتی
+مستقیم ثبت نام کنید. در غیر این صورت شما باید اطلاعات شخصی خود را در آن
+وارد کنید. توجه کنید که در قسمت ایمیل از ایمیل شخصی خود استفاده کنید و
+نه ایمیل دانشگاهی.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-30.png}
 \end{figure}
 
-پس از وارد کردن اطلاعات و با فشردن دکمه continue یک صفحه به شکل زیر برای
-تایید هویت شما باز می‌شود تا کد کپچا و یا پازل را تکمیل کنید تا به مرحله
-بعدی بروید.
+پس از وارد کردن اطلاعات و با فشردن دکمه \lr{continue} یک صفحه به شکل زیر
+برای تایید هویت شما باز می‌شود تا کد کپچا و یا پازل را تکمیل کنید تا به
+مرحله بعدی بروید.
 
 پس از اتمام مرحله پازل یک کد هشت رقمی به ایمیلی که در صفحه اول وارد
 کردید ارسال می‌شود. شما باید آن را در صفحه زیر وارد کنید تا ایمیل شما
@@ -359,96 +366,98 @@ Continue with Google با استفاده از اکانت گوگل خود به ر
 \end{figure}
 
 پس از اتمام این مرحله، اکانت شما با موفقیت ساخته شده است. حال باید یک
-بار با این اکانت در گیت‌هاب sign in کنید و وارد اکانت خود شوید.
+بار با این اکانت در گیت‌هاب \lr{sign in} کنید و وارد اکانت خود شوید.
 
 \subsubsection{آموزش دانلود و نصب گیت در ویندوز}
 
 ابتدا به \href{https://git-scm.com}{سایت گیت} مراجعه کنید و بر روی
-گزینه‌ی Install for windows بزنید.
+گزینه‌ی \lr{Install for windows} بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-32.png}
 \end{figure}
 
-سپس بر روی Git for Windows/x64 Setup بزنید تا دانلود آخرین نسخه آغاز
-شود.
+سپس بر روی \lr{Git for Windows/x64 Setup} بزنید تا دانلود آخرین نسخه
+آغاز شود.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-33.png}
 \end{figure}
 
-پس از پایان دانلود بر روی فایل setup دانلود شده بزنید. در صفحه اول بر
-روی Next بزنید. سپس مطابق تصویر ۲ مسیر نصب را انتخاب کرده و Next را
-بزنید. در صفحه‌ی بعدی، اجزایی که می‌خواهید نصب شوند از شما پرسیده شده است.
-همانند تصویر ۳ اجزای ضروری به‌صورت پیش‌فرض انتخاب شدند. Next را بزنید،
-مطابق تصویر ۴ در این صفحه می‌توانید مسیر ایجاد شورت‌کات را انتخاب کنید که
-پیش‌فرض آن بر فولدر نصب برنامه تنظیم شده است و نیاز به تغییر آن نیست. سپس
-Next را بزنید.
+پس از پایان دانلود بر روی فایل \lr{setup} دانلود شده بزنید. در صفحه اول
+بر روی \lr{Next} بزنید. سپس مطابق تصویر ۲ مسیر نصب را انتخاب کرده و
+\lr{Next} را بزنید. در صفحه‌ی بعدی، اجزایی که می‌خواهید نصب شوند از شما
+پرسیده شده است. همانند تصویر ۳ اجزای ضروری به‌صورت پیش‌فرض انتخاب شدند.
+\lr{Next} را بزنید، مطابق تصویر ۴ در این صفحه می‌توانید مسیر ایجاد
+شورت‌کات را انتخاب کنید که پیش‌فرض آن بر فولدر نصب برنامه تنظیم شده است و
+نیاز به تغییر آن نیست. سپس \lr{Next} را بزنید.
 
 همانند تصویر ۵، در صفحه‌ی بعدی می‌توانید یک ادیتور پیش‌فرض برای گیت، از بین
 ادیتورهای موجود در دستگاه خود انتخاب کنید. توجه داشته باشید که این
 تنظیمات پس از نصب نیز قابل‌تغییر است و در این مرحله ضرورتی در تغییر آن
-نیست. سپس Next را بزنید. در مرحله‌ی بعد نیز مطابق تصویر ۶ می‌توانید نام
-branch اولیه‌ی خود را تغییر دهید. این عمل در هنگام کار با گیت برای هر
-Repository نیز ممکن است و نیازی به تغییر آن از حالت پیش‌فرض نیست. درباره‎ی
-چیستی و کارکرد branch و repository در ادامه‌ی ترم خواهید آموخت. Next را
-بزنید.
+نیست. سپس \lr{Next} را بزنید. در مرحله‌ی بعد نیز مطابق تصویر ۶ می‌توانید
+نام \lr{branch} اولیه‌ی خود را تغییر دهید. این عمل در هنگام کار با گیت
+برای هر \lr{Repository} نیز ممکن است و نیازی به تغییر آن از حالت پیش‌فرض
+نیست. درباره‎ی چیستی و کارکرد \lr{branch} و \lr{repository} در ادامه‌ی ترم
+خواهید آموخت. \lr{Next} را بزنید.
 
 \begin{table}[H]
 \centering
 \setLTR
 \begin{tabular}{ll}
 \hline
-\textbf{(1) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-34.png}}} & \textbf{(2) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-35.png}}} \\
+\textbf{(1) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-34.png}}} & \textbf{(2) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-35.png}}} \\
 \hline
-(3) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-36.png}} & (4) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-37.png}} \\
-(5) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-38.png}} & (6) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-39.png}} \\
-(7) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-40.png}} &  \\
+(3) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-36.png}} & (4) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-37.png}} \\
+(5) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-38.png}} & (6) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-39.png}} \\
+(7) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-40.png}} &  \\
 \hline
 \end{tabular}
 \end{table}
 
-در آخرین صفحه از تصاویر بالا (۷) می‌توانید command line مورداستفاده‌ی خود
-را انتخاب کنید. گزینه‌ی پیش‌فرض بهترین گزینه است. سپس Next را بزنید.
+در آخرین صفحه از تصاویر بالا (۷) می‌توانید \lr{command line} مورداستفاده‌ی
+خود را انتخاب کنید. گزینه‌ی پیش‌فرض بهترین گزینه است. سپس \lr{Next} را
+بزنید.
 
 در صفحات بعد (مطابق تصاویر ۸-۱۳)، درباره‌ی برخی تنظیمات و قابلیت‌ها سوال
 شده است. جزئیات هر کدام از این تنظیمات از مباحث کلاس خارج است و از
 آن‌جایی که همگی آن‌ها بعد از نصب نیز قابل تنظیم هستند، نیاز به تغییر شان
-از گزینه‌ی پیش‌فرض نیست. در این صفحات گزینه‌ی Next را بزنید و در نهایت در
-آخرین صفحه Install را بزنید.
+از گزینه‌ی پیش‌فرض نیست. در این صفحات گزینه‌ی \lr{Next} را بزنید و در نهایت
+در آخرین صفحه \lr{Install} را بزنید.
 
 \begin{table}[H]
 \centering
 \setLTR
 \begin{tabular}{ll}
 \hline
-\textbf{(8)\pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-41.png}}} & \textbf{(9) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-42.png}}} \\
+\textbf{(8)\pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-41.png}}} & \textbf{(9) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-42.png}}} \\
 \hline
-(10) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-43.png}} & (11) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-44.png}} \\
-(12) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-45.png}} & (13) \pandocbounded{\includegraphics[keepaspectratio, width=6.5cm]{images/tools-46.png}} \\
+(10) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-43.png}} & (11) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-44.png}} \\
+(12) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-45.png}} & (13) \pandocbounded{\includegraphics[width=0.45\textwidth]{images/tools-46.png}} \\
 \hline
 \end{tabular}
 \end{table}
 
-بعد از پایان فرآیند Installation، در صفحه‌ی زیر Finish را بزنید.
+بعد از پایان فرآیند Installation، در صفحه‌ی زیر \lr{Finish} را بزنید.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/tools-47.png}
 \end{figure}
 
-اکنون نصب به پایان رسیده است. می‌توانید از طریق Git Bash یا Command
-Prompt دستورات را نوشته و با گیت کار کنید. همچنین می‌توانید از Git GUI
-استفاده کنید که محیط گرافیکی برای استفاده از گیت می‌باشد. در ادامه درس،
-توضیحات کامل درباره نحوه کارکرد گیت و چرایی استفاده و اهمیت آن در
-برنامه‌نویسی داده می‌شود.
+اکنون نصب به پایان رسیده است. می‌توانید از طریق \lr{Git Bash} یا
+\lr{Command Prompt} دستورات را نوشته و با گیت کار کنید. همچنین می‌توانید
+از \lr{Git GUI} استفاده کنید که محیط گرافیکی برای استفاده از گیت می‌باشد.
+در ادامه درس، توضیحات کامل درباره نحوه کارکرد گیت و چرایی استفاده و
+اهمیت آن در برنامه‌نویسی داده می‌شود.
 
 \subsubsection{آموزش دانلود و نصب گیت در مک}
 
-در سیستم‌عامل macOS راحت‌ترین راه نصب گیت، نصب Xcode Command Line Tools
-است. با اجرای دستور زیر در ترمینال Xcode را نصب کنید.
+در سیستم‌عامل \lr{macOS} راحت‌ترین راه نصب گیت، نصب
+\lr{Xcode Command Line Tools} است. با اجرای دستور زیر در ترمینال
+\lr{Xcode} را نصب کنید.
 
 \begin{codebox}{bash}
 ~ xcode-select --install  
@@ -468,44 +477,64 @@ Prompt دستورات را نوشته و با گیت کار کنید. همچنی
 درسی اصلی ما هستند و درک شما از مفاهیم جاوا را عمیق‌تر می‌کنند.
 
 \begin{itemize}
+\tightlist
 \item
-  \textbf{دوره ۱۲ ساعته Bro Code:} دوره جامع ۱۲ ساعته Bro Code مجموعه
-  جذاب موضوعات ضروری در جاوا را پوشش می‌دهد و توضیحات واضح و مثال‌های عملی
-  را برای تقویت یادگیری شما ارائه می‌دهد. چه مبتدی باشید و چه به دنبال
-  تجدید مهارت‌های خود هستید، دوره Bro Code یک رویکرد ساختاریافته برای
-  تسلط بر اصول جاوا ارائه می‌دهد.\\
-  \href{https://www.youtube.com/watch?v=xTtL8E4LzTQ\&t=18816s}{لینک دوره Bro Code در یوتیوب}
+  \textbf{دوره ۱۲ ساعته \lr{Bro Code}:} دوره جامع ۱۲ ساعته \lr{Bro Code}
+  مجموعه جذاب موضوعات ضروری در جاوا را پوشش می‌دهد و توضیحات واضح و
+  مثال‌های عملی را برای تقویت یادگیری شما ارائه می‌دهد. چه مبتدی باشید و
+  چه به دنبال تجدید مهارت‌های خود هستید، دوره \lr{Bro Code} یک رویکرد
+  ساختاریافته برای تسلط بر اصول جاوا ارائه می‌دهد.
+\end{itemize}
+
+\href{https://www.youtube.com/watch?v=xTtL8E4LzTQ&t=18816s}{لینک دوره
+\lr{Bro Code} در یوتیوب}
+
+\begin{itemize}
+\tightlist
 \item
-  \textbf{MOOC (Massive Open Online Courses):} پلت‌فرم OOC، یک پلت‌فرم
-  یادگیری انعطاف‌پذیر و تعاملی است که به شما امکان می‌دهد با سرعت خود
-  مطالعه و کاوش کنید. با انبوهی از دوره‌های جاوا که در پلت‌فرم MOOC موجود
-  است، می‌توانید با انتخاب دوره‌ای که با سبک یادگیری و اهداف شما هم‌سو
-  باشد، روند یادگیری خود را بهبود ببخشید. به دنبال دوره‌هایی با رتبه‌بندی
-  بالا و نظرات مثبت باشید تا از تجربه یادگیری مفیدی مطمئن شوید.\\
-  \href{https://java-programming.mooc.fi/}{لینک پلت‌فرم MOOC}
+  \textbf{\lr{MOOC (Massive Open Online Courses)}:} پلت‌فرم OOC، یک
+  پلت‌فرم یادگیری انعطاف‌پذیر و تعاملی است که به شما امکان می‌دهد با سرعت
+  خود مطالعه و کاوش کنید. با انبوهی از دوره‌های جاوا که در پلت‌فرم
+  \lr{MOOC} موجود است، می‌توانید با انتخاب دوره‌ای که با سبک یادگیری و
+  اهداف شما هم‌سو باشد، روند یادگیری خود را بهبود ببخشید. به دنبال
+  دوره‌هایی با رتبه‌بندی بالا و نظرات مثبت باشید تا از تجربه یادگیری مفیدی
+  مطمئن شوید.
+\end{itemize}
+
+\href{https://java-programming.mooc.fi/}{لینک پلت‌فرم \lr{MOOC}}
+
+\begin{itemize}
+\tightlist
 \item
-  \textbf{وب‌سایت W3School:} یادگیری جاوای خود را با آموزش‌های جامع
-  W3School تکمیل کنید. این وب‌سایت منابع زیادی را ارائه می‌کند که برای
-  مبتدیان طراحی شده است و همه‌چیز، از مطالب اولیه تا مفاهیم پیشرفته جاوا
-  را پوشش می‌دهد. آموزش‌های گام به گام و تمرین‌های عملی آن‌ها فرصتی عالی
-  برای تقویت درک شما از اصول برنامه‌نویسی جاوا فراهم می‌کند.\\
-  \href{https://www.w3schools.com/java/}{وب‌سایت W3School}
+  \textbf{وب‌سایت \lr{W3School}:} یادگیری جاوای خود را با آموزش‌های جامع
+  \lr{W3School} تکمیل کنید. این وب‌سایت منابع زیادی را ارائه می‌کند که
+  برای مبتدیان طراحی شده است و همه‌چیز، از مطالب اولیه تا مفاهیم پیشرفته
+  جاوا را پوشش می‌دهد. آموزش‌های گام به گام و تمرین‌های عملی آن‌ها فرصتی
+  عالی برای تقویت درک شما از اصول برنامه‌نویسی جاوا فراهم می‌کند.
+\end{itemize}
+
+\href{https://www.w3schools.com/java/}{وب‌سایت \lr{W3School}}
+
+\begin{itemize}
+\tightlist
 \item
-  \textbf{کتاب Effective Java by Addison Wesley:} جاوا موثر اثر ادیسون،
-  کتابی است که خواندنش برای هر توسعه‌دهنده جاوا ضروری است. این کتاب
-  بینش‌های ارزشمند و بهترین شیوه‌ها را برای نوشتن کد جاوای کارآمد، قابل
-  نگه‌داری و قوی ارائه می‌دهد. در این کتاب طیف گسترده‌ای از موضوعات پوشش
-  داده شده است، از ایجاد شی و مقداردهی اولیه گرفته تا هم‌زمانی و مدیریت
-  خطا، با ارائه توصیه‌های عملی با پشتوانه نمونه‌های دنیای واقعی. چه مبتدی
-  باشید و چه یک توسعه‌دهنده با تجربه، «جاوا موثر» به شما کمک می‌کند تا
-  مهارت‌های کدنویسی خود را ارتقا دهید و برنامه‌های جاوا با کیفیت بالا
-  تولید کنید.
+  \textbf{کتاب \lr{Effective Java} از \lr{Addison Wesley}:} جاوا موثر
+  اثر ادیسون، کتابی است که خواندنش برای هر توسعه‌دهنده جاوا ضروری است.
+  این کتاب بینش‌های ارزشمند و بهترین شیوه‌ها را برای نوشتن کد جاوای
+  کارآمد، قابل نگه‌داری و قوی ارائه می‌دهد. در این کتاب طیف گسترده‌ای از
+  موضوعات پوشش داده شده است، از ایجاد شی و مقداردهی اولیه گرفته تا
+  هم‌زمانی و مدیریت خطا، با ارائه توصیه‌های عملی با پشتوانه نمونه‌های دنیای
+  واقعی. چه مبتدی باشید و چه یک توسعه‌دهنده با تجربه، «جاوا موثر» به شما
+  کمک می‌کند تا مهارت‌های کدنویسی خود را ارتقا دهید و برنامه‌های جاوا با
+  کیفیت بالا تولید کنید.
 \end{itemize}
 
 هر یک از این دوره‌های جانبی، یک رویکرد منحصربه‌فرد برای یادگیری جاوا ارائه
 می‌دهد که به شما امکان بررسی زبان از دیدگاه‌های مختلف و عمیق‌تر کردن تخصص
 خود را می‌دهد. ما شما را تشویق می‌کنیم که از این منابع برای بهبود سفر
 یادگیری خود و تقویت درک خود از مفاهیم برنامه‌نویسی جاوا استفاده کنید.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 	
 	
 	
