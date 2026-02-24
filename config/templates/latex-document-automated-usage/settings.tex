@@ -80,6 +80,7 @@ Scale = 1.0
 %ItalicFont     = * Italic ,
 %BoldItalicFont = * Bold Italic
 %]{Times New Roman}
+
 \setlatintextfont[
 Path = fonts/,
 Extension = .ttf,
@@ -121,32 +122,28 @@ Scale = 1.0
 
 \NewDocumentEnvironment{codebox}{O{} m}{%
 	\VerbatimEnvironment%
-	\setLTR%
-	\latinfont%
-	\color{darkcodefg}%
-	\begin{minted}[
-		style=monokai,
-		bgcolor=darkcodebg,
-		fontsize=\small,
-		fontfamily=tt,
-		breaklines,
-		breakanywhere=false,
-		tabsize=4,
-		showtabs=false,
-		showspaces=false,
-		baselinestretch=1.2,
-		linenos,
-		numbersep=8pt,
-		numbers=left,
-		stepnumber=1,
-		firstnumber=1,
-		xleftmargin=0pt,
-		frame=none,
-		stripnl=false,
-		encoding=utf8,
-		]{#2}%
-	}{%
-	\end{minted}%
+	\begin{latin}%
+		\color{darkcodefg}%
+		\begin{minted}[
+			style=monokai,
+			bgcolor=darkcodebg,
+			fontsize=\small,
+			fontfamily=tt,
+			breaklines=true,
+			breakanywhere=true,  % Change from false to true
+			breakbytoken=false,
+			tabsize=4,
+			showtabs=false,
+			showspaces=false,
+			baselinestretch=1.2,
+			xleftmargin=0pt,
+			frame=none,
+			stripnl=false,
+			encoding=utf8,
+			]{#2}%
+		}{%
+		\end{minted}%
+	\end{latin}%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
