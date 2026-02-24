@@ -123,22 +123,19 @@ Scale = 1.0
 \NewDocumentEnvironment{codebox}{O{} m}{%
 	\VerbatimEnvironment%
 	\begin{latin}%
+		\color{darkcodefg}%
 		\begin{minted}[
 			style=monokai,
 			bgcolor=darkcodebg,
 			fontsize=\small,
 			fontfamily=tt,
-			breaklines,
-			breakanywhere=false,
+			breaklines=true,
+			breakanywhere=true,  % Change from false to true
+			breakbytoken=false,
 			tabsize=4,
 			showtabs=false,
 			showspaces=false,
 			baselinestretch=1.2,
-			linenos,
-			numbersep=8pt,
-			numbers=left,
-			stepnumber=1,
-			firstnumber=1,
 			xleftmargin=0pt,
 			frame=none,
 			stripnl=false,

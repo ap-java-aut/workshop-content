@@ -634,7 +634,7 @@ public class Main {
 ![](images/intro-to-java-command-line-3.png)
 
 فایل `Main` که در `out` می‌بینید، نسخهٔ کامپایل‌شدهٔ برنامهٔ شماست. اگر روی آن دوبار کلیک کنید، IntelliJ آن را decompile می‌کند و کدی مشابه کد اصلی‌تان نمایش می‌دهد.
-روی دایرکتوری `out/production/{your-project-name}` راست‌کلیک کنید و گزینهٔ Copy Path/Reference… را انتخاب کنید.
+روی دایرکتوری `out/production/{your-project-name}` راست‌کلیک کنید و گزینهٔ `Copy Path/Reference…` را انتخاب کنید.
 صفحه‌ای مشابه زیر برای شما باز می‌شود. گزینهٔ Absolute Path را انتخاب کنید.
 
 ![](images/intro-to-java-command-line-4.png)
