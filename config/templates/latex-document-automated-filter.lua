@@ -3,7 +3,8 @@
 -- Merges consecutive English words into a single \lr{} block,
 -- converts headers to LaTeX sectioning commands without extra labels,
 -- and handles images, tables, code, math, links as before.
--- Trailing spaces and a single trailing colon (:) are moved outside \lr{}.
+-- Trailing spaces, a single trailing colon (:), or a Persian comma (،)
+-- are moved outside \lr{}.
 
 -- Helper: check if a string is English (ASCII only and contains at least one letter)
 local function is_english_str(s)
@@ -17,8 +18,14 @@ local function is_ascii_nonletter(s)
   return s:match("[A-Za-z]") == nil
 end
 
+-- Helper: test if a string ends with a given suffix (UTF-8 safe)
+local function ends_with(str, suffix)
+  return str:sub(-#suffix) == suffix
+end
+
 -- Merge consecutive English inlines into a single \lr{} block.
--- Trailing spaces and a single trailing colon (:) are moved outside the block.
+-- Trailing spaces, a single trailing colon (:), or a Persian comma (،)
+-- are moved outside the block.
 local function merge_english_inlines(inlines)
   local result = {}
   local i = 1
@@ -63,14 +70,39 @@ local function merge_english_inlines(inlines)
       end
       -- Combine the run into a single string
       local combined = table.concat(run_text, "")
-      -- Separate content, an optional trailing colon, and trailing spaces
-      local content, colon, spaces = combined:match("^(.-)(:?)( *)$")
-      -- Escape LaTeX special characters in the content (not in colon or spaces)
-      local escaped = content:gsub("\\", "\\textbackslash "):gsub("([#$%%&_{}])", "\\%1")
+      
+      -- Extract trailing punctuation (colon or Persian comma) and spaces
+      local content = combined
+      local punct = ""
+      local spaces = ""
+      
+      if ends_with(combined, "،") then
+        punct = "،"
+        local body = combined:sub(1, -3) -- remove the two‑byte comma
+        -- capture trailing spaces from the body
+        local _, nspaces = body:match("^(.-)(%s*)$")
+        content = body:match("^(.-)%s*$") or body
+        spaces = nspaces or ""
+      elseif ends_with(combined, ":") then
+        punct = ":"
+        local body = combined:sub(1, -2) -- remove the colon
+        local _, nspaces = body:match("^(.-)(%s*)$")
+        content = body:match("^(.-)%s*$") or body
+        spaces = nspaces or ""
+      else
+        -- no trailing punctuation, just capture trailing spaces
+        local _, nspaces = combined:match("^(.-)(%s*)$")
+        content = combined:match("^(.-)%s*$") or combined
+        spaces = nspaces or ""
+      end
+      
+      -- Escape LaTeX special characters in the content (not in punctuation or spaces)
+      -- Use \textbackslash{} instead of \textbackslash␣ to avoid unwanted space
+      local escaped = content:gsub("\\", "\\textbackslash{}"):gsub("([#$%%&_{}])", "\\%1")
       table.insert(result, pandoc.RawInline('latex', '\\lr{' .. escaped .. '}'))
-      -- Add colon if present (outside \lr{})
-      if colon ~= "" then
-        table.insert(result, pandoc.Str(":"))
+      -- Add punctuation if present (outside \lr{})
+      if punct ~= "" then
+        table.insert(result, pandoc.Str(punct))
       end
       -- Add trailing spaces as separate Space elements (outside \lr{})
       for _ = 1, #spaces do
@@ -184,10 +216,21 @@ function CodeBlock(el)
   return pandoc.RawBlock('latex', "\\begin{codebox}{" .. lang .. "}\n" .. el.text .. "\n\\end{codebox}")
 end
 
--- Process inline code to \texttt{} (no \lr{})
+-- Process inline code to \texttt{} and wrap in \lr{} if ASCII-only
 function Code(el)
-  local text = el.text:gsub("\\", "\\textbackslash "):gsub("([#$%%&_{}])", "\\%1")
-  return pandoc.RawInline('latex', '\\texttt{' .. text .. '}')
+  -- Normalize smart quotes to straight quotes (using UTF-8 byte sequences)
+  local text = el.text
+  text = text:gsub("\226\128\152", "'"):gsub("\226\128\153", "'")  -- ' and '
+  text = text:gsub("\226\128\156", '"'):gsub("\226\128\157", '"')  -- " and "
+  
+  -- Escape special LaTeX characters, but handle backslash specially for inline code
+  text = text:gsub("\\", "\\textbackslash "):gsub("([#$%%&_{}])", "\\%1")
+  local result = '\\texttt{' .. text .. '}'
+  -- If the code contains only ASCII characters, wrap it in \lr{} to ensure LTR direction
+  if el.text:match("^[%z\1-\127]*$") then
+    result = '\\lr{' .. result .. '}'
+  end
+  return pandoc.RawInline('latex', result)
 end
 
 -- Process math to preserve it (no \lr{})

@@ -137,8 +137,9 @@
 
 صفحه‌ای مشابه تصویر زیر برایتان باز می‌شود. نام پروژه را انتخاب کنید،
 اطمینان داشته باشید که مسیر ذخیره‌سازی صحیح است و حتماً بررسی کنید همان
-\lr{JDK} ی که قبل‌تر دانلود کرده‌اید انتخاب شده باشد. من نسخهٔ 25.0.2 را
-نصب کرده‌ام و برای این پروژه نیز از همان نسخه استفاده کرده‌ام:
+\lr{JDK} ی که قبل‌تر دانلود کرده‌اید انتخاب شده باشد. من نسخهٔ
+\lr{\texttt{25.0.2}} را نصب کرده‌ام و برای این پروژه نیز از همان نسخه
+استفاده کرده‌ام:
 
 \begin{figure}[H]
 \centering
@@ -247,9 +248,9 @@ System.out.println("Hello and welcome!");
 
 این تکه کد برای چاپ \lr{\texttt{"!Hello and welcome"}} نوشته شده‌است. اگر
 این خط را حذف کرده و دوباره بنویسید، متوجه خواهید شد که دستور
-\lr{println} علاوه بر رشته‌ها (String)، می‌تواند انواع دادهٔ دیگری مانند
-\lr{int} و \lr{boolean} را نیز چاپ کند. بنابراین می‌توانید با همان دستور،
-مقادیر متنوعی را در خروجی چاپ کنید:
+\lr{\texttt{println}} علاوه بر رشته‌ها \lr{(String)} ، می‌تواند انواع دادهٔ
+دیگری مانند \lr{\texttt{int}} و \lr{\texttt{boolean}} را نیز چاپ کند.
+بنابراین می‌توانید با همان دستور، مقادیر متنوعی را در خروجی چاپ کنید:
 
 \begin{figure}[H]
 \centering
@@ -259,8 +260,8 @@ System.out.println("Hello and welcome!");
 این یکی از قابلیت‌های کاربردی \lr{IntelliJ} است که امکان مشاهدهٔ نوع و نام
 پارامترهای یک متد و همچنین نوع خروجی آن را فراهم می‌کند. این ویژگی
 می‌تواند در فرآیند کدنویسی کمک قابل‌توجهی به شما داشته باشد. اکنون که به
-انواع داده‌ای مانند \lr{int} و \lr{boolean} و سایر نوع‌ها اشاره شد، بیایید
-نخستین متغیرهای خود را در جاوا تعریف کنیم.
+انواع داده‌ای مانند \lr{\texttt{int}} و \lr{\texttt{boolean}} و سایر
+نوع‌ها اشاره شد، بیایید نخستین متغیرهای خود را در جاوا تعریف کنیم.
 
 \section{متغیرها}
 
@@ -278,11 +279,11 @@ public class Main {
 
 در این کد، متغیر \lr{a} را از نوع \lr{\texttt{int}} تعریف کرده‌ایم، مقدار
 اولیهٔ 10 را به آن داده‌ایم و سپس مقدار آن را چاپ کرده‌ایم. به
-\lr{\texttt{int}} \texttt{،boolean} \texttt{،float} و انواع مشابه آن‌ها،
-\lr{data type} گفته می‌شود. \lr{data} type‌های اصلی جاوا که به آنها
-\lr{Primitive data types} هم گفته می‌شود، به همراه رنجی که پوشش می‌دهند،
-در جدول زیر آمده‌اند. همانند زبان C، نباید مقداری خارج از رنج تعریف‌شده
-برای هر \lr{type} به آن اختصاص دهید.
+\lr{\texttt{int}} ، \lr{\texttt{boolean}} ، \lr{\texttt{float}} و انواع
+مشابه آن‌ها، \lr{data type} گفته می‌شود. \lr{data} type‌ های اصلی جاوا که
+به آنها \lr{Primitive data types} هم گفته می‌شود، به همراه رنجی که پوشش
+می‌دهند، در جدول زیر آمده‌اند. همانند زبان \lr{C} ، نباید مقداری خارج از
+رنج تعریف‌شده برای هر \lr{type} به آن اختصاص دهید.
 
 \begin{table}[H]
 \centering
@@ -303,8 +304,8 @@ public class Main {
 \end{tabular}
 \end{table}
 
-می‌توانید به‌صورت مشابه، متغیرهایی از هر یک از این typeها تعریف کرده و
-آن‌ها را چاپ کنید:
+می‌توانید به‌صورت مشابه، متغیرهایی از هر یک از این \lr{type} ها تعریف کرده
+و آن‌ها را چاپ کنید:
 
 \begin{codebox}{java}
 public class Main {
@@ -333,8 +334,8 @@ a
 Process finished with exit code 0
 \end{codebox}
 
-در java، یک \lr{\texttt{type}} برای متغیرهاتون به اسم
-\lr{\texttt{String}} هم دارید، که البته جزو \lr{primitive data} typeها
+در \lr{java} ، یک \lr{\texttt{type}} برای متغیرهاتون به اسم
+\lr{\texttt{String}} هم دارید، که البته جزو \lr{primitive data type} ها
 نیست. برای نمونه \lr{\texttt{!Hello and welcome}}ای که در مثال اولتون
 \lr{\texttt{print}} کردید، نمونه‌ای از همین \lr{\texttt{type}} بود.
 می‌توانید به شکل زیر یک \lr{\texttt{String}} را تعریف کنید:
@@ -399,8 +400,8 @@ System.out.printf("Name: %s\nAge: %d\n", name, age);
 \end{tabular}
 \end{table}
 
-می‌توانید هنگام تعریف متغیر، آن را مقداردهی نکنید و صرفا به نوشتن typeشون
-اکتفا کنید:
+می‌توانید هنگام تعریف متغیر، آن را مقداردهی نکنید و صرفا به نوشتن
+\lr{type} شون اکتفا کنید:
 
 \begin{codebox}{java}
 public static void main(String[] args) {  
@@ -436,11 +437,12 @@ var b = 20;
 System.out.println(a + b);
 \end{codebox}
 
-در مثال بالا، چون مقادیر 10 و 20 به \lr{a} و \lr{b} داده شده‌اند،
-کامپایلر تشخیص می‌دهد که این دو متغیر از نوع \lr{int} هستند و مطابق آن
-رفتار می‌کند. توجه داشته باشید که \lr{var} یک \lr{data type} جدید نیست،
-بلکه صرفاً روشی برای ساده‌تر کردن نوشتن کد است. لازم نیست برای همه
-متغیرها، typeهای آن‌ها را بنویسید. کامپایلر نوع متغیرها را براساس مقدار
+در مثال بالا، چون مقادیر \lr{\texttt{10}} و \lr{\texttt{20}} به
+\lr{\texttt{a}} و \lr{\texttt{b}} داده شده‌اند، کامپایلر تشخیص می‌دهد که
+این دو متغیر از نوع \lr{\texttt{int}} هستند و مطابق آن رفتار می‌کند. توجه
+داشته باشید که \lr{\texttt{var}} یک \lr{data type} جدید نیست، بلکه صرفاً
+روشی برای ساده‌تر کردن نوشتن کد است. لازم نیست برای همه متغیرها،
+\lr{type} های آن‌ها را بنویسید. کامپایلر نوع متغیرها را براساس مقدار
 اولیه ای که دریافت می‌کند، تشخیص میدهد.
 
 \section{لیترال‌ها}
@@ -462,21 +464,24 @@ public static void main(String[] args) {
 \includegraphics[width=0.8\textwidth]{images/intro-to-java-6.png}
 \end{figure}
 
-این خطا کمی عجیب به نظر می‌رسد. با وجود آن‌که برای این عدد بسیار بزرگ،از
-متغیر \lr{long} استفاده کرده‌اید که از نظر ظرفیت باید توان نگه‌داری آن را
-داشته باشد همچنان با خطای \lr{number too large} مواجه می‌شوید. علت چیست؟
-خطی را که در آن \lr{a} را تعریف کرده‌اید، با خط زیر جایگزین کنید:
+این خطا کمی عجیب به نظر می‌رسد. با وجود آن‌که برای این عدد بسیار بزرگ، از
+متغیر \lr{\texttt{long}} استفاده کرده‌اید که از نظر ظرفیت باید توان
+نگه‌داری آن را داشته باشد همچنان با خطای \lr{number too large} مواجه
+می‌شوید. علت چیست؟ خطی را که در آن \lr{a} را تعریف کرده‌اید، با خط زیر
+جایگزین کنید:
 
 \begin{codebox}{java}
 long a = 99999999999L;
 \end{codebox}
 
-مشکل برطرف شد، درست است؟ علت خطای قبلی، نوع متغیر \lr{a} نبود؛ زیرا
-\lr{long} قادر است اعداد بسیار بزرگ‌تری را نیز در خود ذخیره کند. مسئله
-این بود که خود جاوا نمی‌دانست با عدد 99999999999 چگونه برخورد کند: آیا
-باید آن را \lr{int} در نظر بگیرد، \lr{long} بداند یا حتی double؟ در نسخهٔ
-دوم کد، با گذاشتن \lr{L} در انتهای عدد، به جاوا گفتید که این مقدار از
-نوع \lr{long} است و باید همانند یک \lr{long} با آن رفتار شود.
+مشکل برطرف شد، درست است؟ علت خطای قبلی، نوع متغیر \lr{\texttt{a}} نبود؛
+زیرا \lr{\texttt{long}} قادر است اعداد بسیار بزرگ‌تری را نیز در خود ذخیره
+کند. مسئله این بود که خود جاوا نمی‌دانست با عدد $99999999999$ چگونه
+برخورد کند: آیا باید آن را \lr{int} در نظر بگیرد، \lr{\texttt{long}}
+بداند یا حتی \lr{\texttt{double}}؟ در نسخهٔ دوم کد، با گذاشتن
+\lr{\texttt{L}} در انتهای عدد، به جاوا گفتید که این مقدار از نوع
+\lr{\texttt{long}} است و باید همانند یک \lr{\texttt{long}} با آن رفتار
+شود.
 
 به اعداد و کاراکترهایی که در برنامه \lr{hard code} می‌کنید،
 \lr{\texttt{literal}} می‌گن. کد زیر، شامل سه‌ \lr{\texttt{literal}} است:
@@ -489,14 +494,15 @@ System.out.printf("Circle area: %f%c", 3.14 * r * r, next_line);
 \end{codebox}
 
 این \lr{literal} ها به‌ترتیب \lr{\texttt{10}}،
-\lr{\texttt{'\textbackslash\{\}n'}} و \lr{\texttt{3.14}} هستند. همان‌طور
-که قبل‌تر اشاره شد، \lr{literal} ها نیز مانند متغیرها دارای \lr{type}
-هستند. برای مثال، عدد \lr{\texttt{123}} از نوع \lr{int} محسوب می‌شود، در
-حالی که \lr{123L} از نوع \lr{\texttt{long}} است. همچنین اگر عددی مانند
-\lr{\texttt{3.14}} را به‌صورت اعشاری بنویسید، جاوا به‌طور پیش‌فرض آن را از
-نوع \lr{double} در نظر می‌گیرد؛ و اگر بخواهید نوع آن \lr{float} باشد،
-باید از \lr{3.14F} استفاده کنید. افزون بر این، می‌توانید برای اعداد
-اعشاری از نمایش علمی \lr{(scientific notation)} نیز بهره ببرید:
+\lr{\texttt{'\textbackslash n'}} و \lr{\texttt{3.14}} هستند. همان‌طور که
+قبل‌تر اشاره شد، \lr{literal} ها نیز مانند متغیرها دارای \lr{type} هستند.
+برای مثال، عدد \lr{\texttt{123}} از نوع \lr{\texttt{int}} محسوب می‌شود،
+در حالی که \lr{\texttt{123L}} از نوع \lr{\texttt{long}} است. همچنین اگر
+عددی مانند \lr{\texttt{3.14}} را به‌صورت اعشاری بنویسید، جاوا به‌طور
+پیش‌فرض آن را از نوع \lr{\texttt{double}} در نظر می‌گیرد؛ و اگر بخواهید
+نوع آن \lr{\texttt{float}} باشد، باید از \lr{\texttt{3.14F}} استفاده
+کنید. افزون بر این، می‌توانید برای اعداد اعشاری از نمایش علمی
+\lr{(scientific notation)} نیز بهره ببرید:
 
 \begin{codebox}{java}
 double d = 8.31;  
@@ -540,8 +546,9 @@ public class Main {
 }
 \end{codebox}
 
-کلیدواژهٔ \lr{final} این امکان را به شما می‌دهد که یک \lr{constant} تعریف
-کنید. constantها پس از تعریف و مقداردهی، هرگز مقدارشان تغییر نمی‌کند.
+کلیدواژهٔ \lr{\texttt{final}} این امکان را به شما می‌دهد که یک
+\lr{constant} تعریف کنید. \lr{constant} ها پس از تعریف و مقداردهی، هرگز
+مقدارشان تغییر نمی‌کند.
 
 \section{شرط‌ها}
 
@@ -560,16 +567,17 @@ if (radius <= 20) {
 }
 \end{codebox}
 
-فقط توجه داشته باشید که Stringها را با == مقایسه نکنید. اگر این کار را
-انجام دهید، خود \lr{IntelliJ} به شما یک \lr{warning} می‌دهد و پیشنهاد
-می‌کند از متد \lr{equals} استفاده کنید:
+فقط توجه داشته باشید که \lr{\texttt{String}} ها را با \lr{\texttt{==}}
+مقایسه نکنید. اگر این کار را انجام دهید، خود \lr{IntelliJ} به شما یک
+\lr{warning} می‌دهد و پیشنهاد می‌کند از متد \lr{\texttt{equals}} استفاده
+کنید:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/intro-to-java-7.png}
 \end{figure}
 
-شیوهٔ صحیح مقایسهٔ Stringها در جاوا به این صورت است:
+شیوهٔ صحیح مقایسهٔ \lr{\texttt{String}} ها در جاوا به این صورت است:
 
 \begin{codebox}{java}
 if (a.equals("Arman")) {
@@ -577,7 +585,7 @@ if (a.equals("Arman")) {
 }
 \end{codebox}
 
-دلیل این موضوع آن است که همان‌طور که قبل‌تر گفتیم، \lr{String} یک
+دلیل این موضوع آن است که همان‌طور که قبل‌تر گفتیم، \lr{\texttt{String}} یک
 \lr{primitive type} نیست، بلکه یک \lr{reference type} است. در جلسات بعدی
 هر دوی این مفاهیم را تعریف می‌کنیم و تفاوت‌های آن‌ها را توضیح خواهیم داد.
 همچنین همواره سعی کنید به \lr{warning} ها، \lr{hint} ها و به‌طور کلی
@@ -763,9 +771,9 @@ public class Main {
 }
 \end{codebox}
 
-شاید برایتان جالب باشد بدانید که برای تعریف یک block، الزاماً نیازی به
-استفاده از \lr{\texttt{if}} ،\lr{\texttt{for}} یا ساختارهای مشابه نیست و
-می‌توانید بدون آن‌ها نیز یک \lr{block} ایجاد کنید:
+شاید برایتان جالب باشد بدانید که برای تعریف یک \lr{block} ، الزاماً نیازی
+به استفاده از \lr{\texttt{if}} ،\lr{\texttt{for}} یا ساختارهای مشابه
+نیست و می‌توانید بدون آن‌ها نیز یک \lr{block} ایجاد کنید:
 
 \begin{codebox}{java}
 public class Main {
@@ -804,9 +812,9 @@ System.out.println(pi * r * r);
 \includegraphics[width=0.8\textwidth]{images/intro-to-java-8.png}
 \end{figure}
 
-این خطا به این معناست که نمی‌توانید از متغیرهای محلی‌ای که داخل \lr{if}
-،for، متدها یا هر ساختار بلوکی دیگری تعریف شده‌اند، در بیرون از همان
-\lr{block} استفاده کنید.
+این خطا به این معناست که نمی‌توانید از متغیرهای محلی‌ای که داخل
+\lr{\texttt{if}} ،\lr{\texttt{for}} ، متدها یا هر ساختار بلوکی دیگری
+تعریف شده‌اند، در بیرون از همان \lr{block} استفاده کنید.
 
 \section{ورودی}
 
@@ -852,7 +860,7 @@ public class Main {
 
 این کد را اجرا کنید تا نگاهی نیز به نحوهٔ نمایش ورودی و خروجی در
 \lr{IntelliJ} بیندازید. برای خوندن یک \lr{\texttt{String}} از ورودی
-کاربر، از\lr{\texttt{nextLine()}} استفاده کنید:
+کاربر، از \lr{\texttt{nextLine()}} استفاده کنید:
 
 \begin{codebox}{java}
 public class Main {
@@ -916,16 +924,16 @@ public class Main {
 \includegraphics[width=0.8\textwidth]{images/intro-to-java-command-line-1.png}
 \end{figure}
 
-پس از انجام این کار، باید در کنار کدهایتان دایرکتوری‌ای به نام \lr{out}
-ایجاد شده باشد که شامل نسخهٔ کامپایل‌شدهٔ برنامهٔ شماست:
+پس از انجام این کار، باید در کنار کدهایتان دایرکتوری‌ای به نام
+\lr{\texttt{out}} ایجاد شده باشد که شامل نسخهٔ کامپایل‌شدهٔ برنامهٔ شماست:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/intro-to-java-command-line-2.png}
 \end{figure}
 
-روی \lr{out} کلیک کنید و سپس وارد \lr{production} شوید تا دایرکتوری‌ای با
-نام پروژهٔ خود مشاهده کنید؛ آن را نیز باز کنید.
+روی \lr{\texttt{out}} کلیک کنید و سپس وارد \lr{production} شوید تا
+دایرکتوری‌ای با نام پروژهٔ خود مشاهده کنید؛ آن را نیز باز کنید.
 
 \begin{figure}[H]
 \centering
@@ -951,13 +959,13 @@ public class Main {
 \lr{Linux} استفاده می‌کنید، \lr{terminal} را باز کنید. ابتدا بررسی کنید
 که دستور زیر برای شما اجرا شود:
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 java --version
 \end{codebox}
 
 باید خروجی‌ای مشابه تصویر مشاهده کنید:
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 java 25.0.2 2026-01-20 LTS
 Java(TM) SE Runtime Environment (build 25.0.2+10-LTS-69)
 Java HotSpot(TM) 64-Bit Server VM (build 25.0.2+10-LTS-69, mixed mode, sharing)
@@ -967,7 +975,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.0.2+10-LTS-69, mixed mode, sharing)
 بگیرید. در غیر این صورت، با استفاده از دستور \lr{cd} به دایرکتوری خروجی
 \lr{build} (که قبل‌تر کپی کرده‌اید) بروید.
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 cd /Users/armaho/Projects/Learning/first-java-project/out/production/first-java-project
 \end{codebox}
 
@@ -978,13 +986,13 @@ cd /Users/armaho/Projects/Learning/first-java-project/out/production/first-java-
 \lr{command-line argument} است و یکی از روش‌های دادن ورودی به برنامه
 محسوب می‌شود.
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 java Main ThisIsAnArgument
 \end{codebox}
 
 خروجی شما باید به شکل مورد انتظار نمایش داده شود:
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 Given arg: ThisIsAnArgument
 \end{codebox}
 
@@ -992,7 +1000,7 @@ Given arg: ThisIsAnArgument
 \lr{command-line} خوانده و آن را چاپ کرده‌اید. همچنین می‌توانستید بیش از
 یک \lr{argument} داشته باشید.
 
-\begin{codebox}{bash}
+\begin{codebox}{text}
 java Main arg1 arg2 arg3
 \end{codebox}
 

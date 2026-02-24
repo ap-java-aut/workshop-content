@@ -1,0 +1,128 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$if(title)$
+\newcommand{\DocTitle}{$title$}
+$else$
+\newcommand{\DocTitle}{}
+$endif$
+
+$if(course)$
+\newcommand{\CourseTitle}{$course$}
+$else$
+\newcommand{\CourseTitle}{}
+$endif$
+
+$if(semester)$
+\newcommand{\Semester}{$semester$}
+$else$
+\newcommand{\Semester}{}
+$endif$
+
+$if(professor)$
+\newcommand{\FirstProfessor}{$professor$}
+$else$
+\newcommand{\FirstProfessor}{}
+$endif$
+
+$if(professor_2)$
+\newcommand{\SecondProfessor}{$professor_2$}
+$else$
+\newcommand{\SecondProfessor}{}
+$endif$
+
+$if(writers)$
+\newcommand{\Writers}{$for(writers)$$writers$$sep$، $endfor$}
+$else$
+\newcommand{\Writers}{}
+$endif$
+
+$if(department)$
+\newcommand{\Faculty}{$department$}
+$else$
+\newcommand{\Faculty}{}
+$endif$
+
+$if(institution)$
+\newcommand{\University}{$institution$}
+$else$
+\newcommand{\University}{}
+$endif$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE SLIDE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+	\centering
+	\vspace{0.5cm}
+	
+	% Logo
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.15\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{0.5cm}
+	
+	% Title
+	{\fontsize{20}{24}\selectfont \textbf{\DocTitle}}
+	
+	\vspace{1cm}
+	
+	% Writers
+	{\fontsize{12}{16}\selectfont \rl{نگارش:}}\\
+	{\fontsize{14}{18}\selectfont \textbf{\Writers}}
+	
+	\vspace{1.5cm}
+	
+	% Course
+	{\fontsize{14}{18}\selectfont \textbf{\CourseTitle}}
+	
+	\vspace{0.5cm}
+	
+	% Professor(s)
+	{\fontsize{11}{14}\selectfont \rl{استاد درس:}}\\
+	{\fontsize{12}{16}\selectfont \textbf{\FirstProfessor}}
+	
+	\ifx\SecondProfessor\empty
+	\else
+		\vspace{0.3cm}
+		{\fontsize{11}{14}\selectfont \rl{استاد دوم درس:}}\\
+		{\fontsize{12}{16}\selectfont \textbf{\SecondProfessor}}
+	\fi
+	
+	\vfill
+	
+	% Institution
+	{\fontsize{11}{14}\selectfont \textbf{\Faculty}}\\
+	{\fontsize{11}{14}\selectfont \textbf{\University}}
+	
+	\vspace{0.3cm}
+	
+	{\fontsize{11}{14}\selectfont \textbf{\Semester}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === OUTLINE SLIDE (Table of Contents) ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rl{فهرست مطالب}}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$body$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
