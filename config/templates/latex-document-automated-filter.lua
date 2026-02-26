@@ -5,6 +5,8 @@
 -- and handles images, tables, code, math, links as before.
 -- Trailing spaces, a single trailing colon (:), or a Persian comma (،)
 -- are moved outside \lr{}.
+-- Now also processes metadata (title, author, etc.) by parsing strings
+-- to markdown and applying the same English merging recursively.
 
 -- Helper: check if a string is English (ASCII only and contains at least one letter)
 local function is_english_str(s)
@@ -118,95 +120,144 @@ local function merge_english_inlines(inlines)
   return result
 end
 
+-- Recursively process inline lists, applying English merging at each level.
+-- This ensures that nested formatting (Emph, Strong, etc.) also gets merged.
+local function process_inlines_deep(inlines)
+  -- First, recursively process any nested inlines
+  for _, el in ipairs(inlines) do
+    if el.content and type(el.content) == "table" then
+      el.content = process_inlines_deep(el.content)
+    end
+  end
+  -- Then apply English merging at this level
+  return merge_english_inlines(inlines)
+end
+
+-- Process metadata (title, author, etc.) to apply English merging.
+-- For MetaString, parse as markdown to obtain inlines, then process deeply.
+local function process_meta(meta)
+  local function recurse(v)
+    if v.t == "MetaInlines" then
+      v.content = process_inlines_deep(v.content)
+      return v
+    elseif v.t == "MetaString" then
+      -- Parse the string as markdown to get proper inline splitting
+      local doc = pandoc.read(v.text, 'markdown')
+      local inlines = {}
+      if #doc.blocks > 0 then
+        local block = doc.blocks[1]
+        if block.t == "Para" or block.t == "Plain" then
+          inlines = block.content
+        else
+          -- Fallback: treat as plain text
+          inlines = {pandoc.Str(v.text)}
+        end
+      else
+        inlines = {pandoc.Str(v.text)}
+      end
+      inlines = process_inlines_deep(inlines)
+      return pandoc.MetaInlines(inlines)
+    elseif v.t == "MetaList" then
+      for i, val in ipairs(v) do
+        v[i] = recurse(val)
+      end
+      return v
+    elseif v.t == "MetaMap" then
+      for k, val in pairs(v) do
+        v[k] = recurse(val)
+      end
+      return v
+    else
+      -- MetaBool, MetaNumber, etc. – return unchanged
+      return v
+    end
+  end
+  return recurse(meta)
+end
+
 -- Process headers: merge English, then convert to LaTeX sectioning command
 function Header(el)
-  -- First merge English inlines inside the header
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
 
-  -- Choose the appropriate LaTeX command based on level
   local commands = {[1] = "chapter", [2] = "section", [3] = "subsection",
                     [4] = "subsubsection", [5] = "paragraph"}
   local cmd = commands[el.level] or "paragraph"
 
-  -- Convert the modified content to LaTeX (preserves formatting and our \lr{})
   local header_latex = pandoc.write(pandoc.Pandoc({pandoc.Plain(el.content)}), 'latex')
-  -- Remove any trailing newline added by pandoc.write
   header_latex = header_latex:gsub("\n$", "")
 
-  -- Return as raw LaTeX block
   return pandoc.RawBlock('latex', '\\' .. cmd .. '{' .. header_latex .. '}')
 end
 
--- Apply merging to all other inline containers (but let Pandoc handle their output)
+-- Apply merging to all other inline containers
 function Para(el)
-  -- Handle image-only paragraphs separately
   if #el.content == 1 and el.content[1].t == "Image" then
     local img = el.content[1]
     local src = img.src or ""
     local latex = "\n\\begin{figure}[H]\n\\centering\n\\includegraphics[width=0.8\\textwidth]{" .. src .. "}\n\\end{figure}\n"
     return pandoc.RawBlock('latex', latex)
   end
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Plain(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Strong(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Emph(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Underline(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Strikeout(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Superscript(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Subscript(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function SmallCaps(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Span(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Quoted(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Cite(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
 function Link(el)
-  el.content = merge_english_inlines(el.content)
+  el.content = process_inlines_deep(el.content)
   return el
 end
 
@@ -218,15 +269,12 @@ end
 
 -- Process inline code to \texttt{} and wrap in \lr{} if ASCII-only
 function Code(el)
-  -- Normalize smart quotes to straight quotes (using UTF-8 byte sequences)
   local text = el.text
   text = text:gsub("\226\128\152", "'"):gsub("\226\128\153", "'")  -- ' and '
   text = text:gsub("\226\128\156", '"'):gsub("\226\128\157", '"')  -- " and "
   
-  -- Escape special LaTeX characters, but handle backslash specially for inline code
   text = text:gsub("\\", "\\textbackslash "):gsub("([#$%%&_{}])", "\\%1")
   local result = '\\texttt{' .. text .. '}'
-  -- If the code contains only ASCII characters, wrap it in \lr{} to ensure LTR direction
   if el.text:match("^[%z\1-\127]*$") then
     result = '\\lr{' .. result .. '}'
   end
@@ -250,8 +298,6 @@ end
 
 -- Helper for table cells (converts cell content to LaTeX)
 local function cell_to_latex(cell_contents)
-  -- Note: This does not apply English merging inside tables.
-  -- If needed, we could recursively process cell_contents here.
   local latex = pandoc.write(pandoc.Pandoc(cell_contents), 'latex')
   latex = latex:gsub("^%s+", ""):gsub("%s+$", ""):gsub("\n+", " ")
   latex = latex:gsub("\\includegraphics%[keepaspectratio%]", "\\includegraphics[width=0.45\\textwidth]")
@@ -296,6 +342,7 @@ end
 
 -- Return all filters
 return {
+  { Meta = process_meta },
   { CodeBlock = CodeBlock },
   { Header = Header },
   { Para = Para },
