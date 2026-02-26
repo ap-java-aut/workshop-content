@@ -1,11 +1,13 @@
 ---
-title: Array, String, HashMap & ArrayList
+title: آرایه و ArrayList ، کلاس String و HashMap
 writers:
   - پریا قره‌ خانی
   - نگین موسی‌ یی جو
-semester: بهار ۱۴۰۵
+  - امیرمحمد ذاکر
+  - کیانا پهلوان
+semester: ترم دوم ۱۴۰۴-۱۴۰۵
 course: برنامه‌سازی پیشرفته و کارگاه
-professor: دکتر احمدیان
+professor: دکتر روح‌الله احمدیان
 department: دانشکده ریاضی و علوم کامپیوتر
 institution: دانشگاه صنعتی امیرکبیر
 ---
