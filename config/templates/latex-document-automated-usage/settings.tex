@@ -182,18 +182,18 @@ Scale = 1.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \fancypagestyle{aftertitle}{%
 	\fancyhf{}
-	\lhead{\Semester}
-	\chead{\CourseTitle}
-	\rhead{\DocTitle}
+	\lhead{\small\parbox{0.25\textwidth}{\raggedright\Semester}}
+	\chead{\small\parbox{0.4\textwidth}{\centering\CourseTitle}}
+	\rhead{\small\parbox{0.25\textwidth}{\raggedleft\DocTitle}}
 	\renewcommand{\headrulewidth}{0.4pt}
 	\cfoot{\thepage}
 }
 
 \fancypagestyle{plain}{
 	\fancyhf{}%
-	\lhead{\Semester}%
-	\chead{\CourseTitle}%
-	\rhead{\DocTitle}%
+	\lhead{\small\parbox{0.25\textwidth}{\raggedright\Semester}}%
+	\chead{\small\parbox{0.4\textwidth}{\centering\CourseTitle}}%
+	\rhead{\small\parbox{0.25\textwidth}{\raggedleft\DocTitle}}%
 	\renewcommand{\headrulewidth}{0.4pt}%
 	\cfoot{\thepage}%
 }

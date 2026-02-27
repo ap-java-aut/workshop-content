@@ -1,0 +1,1170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{آرایه و ArrayList ، کلاس String و HashMap}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{ترم دوم ۱۴۰۴-۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{پریا قره‌ خانی، نگین موسی‌ یی جو، امیرمحمد
+ذاکر، کیانا پهلوان}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+این داکیومنت برای آشنایی با چند ساختمان داده \lr{(Data Structure)} آشنا
+در زبان جاوا می‌باشد، قرار است یاد بگیریم که این ساختمان داده ها به طور
+کلی به چه نحوی عمل می‌کنند و چه توابعی برای کار کردن با آن‌ها وجود دارد.
+
+\section{آرایه - \lr{Array}}
+
+اگر بخواهید یک سری داده هم‌نوع را ذخیره کنید، می‌توانید برای هر کدام به
+طور جداگانه یک متغیر درست کنید و مقدار دهی کنید، اما این روش خیلی بهینه
+نیست! راه بهتر این است که از آرایه استفاده کنید. آرایه یک ساختار داده‌است
+که می‌تواند چندین مقدار هم‌نوع را داخل یک متغیر نگه دارد و مدیریت این
+داده‌ها را خیلی راحت‌تر می‌کند. شما مشابه این \lr{Data Structure} را در
+زبان \lr{C} هم دیدید.
+
+بیایید ببینیم آرایه چه ویژگی‌هایی دارد و چطور کار می‌کند:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{اندیس گذاری \lr{(Indexing)}:} همان‌طور که احتمالا از زبان
+  \lr{C} به یاد دارید، آرایه‌ها \lr{zero-based} هستند، یعنی اولین عنصر
+  آن‌ها اندیس ۰ دارد و آخرین عنصر آن‌ها اندیس $(n-1)$ خواهد داشت که $n$
+  همان اندازه‌ی آرایه‌ست. مثلاً اگر یک آرایه ۵تایی داشته باشیم، اندیس هایش
+  از ۰ تا ۴ شماره‌گذاری می‌شوند.
+\item
+  \textbf{اندازهٔ ثابت:} وقتی یک آرایه را می‌سازیم، اندازه‌‌اش همان موقع
+  مشخص می‌شود و بعد از آن دیگر نمی‌توانیم آن را بزرگ‌تر یا کوچک‌تر کنیم.
+\item
+  \textbf{نوع داده یکسان:} تمامی خانه‌های یک آرایه باید از یک نوع داده
+  باشند، مثلاً اگر نوع دادهٔ آرایه \lr{\texttt{int}} باشد، نمی‌توانیم داخل
+  آن \lr{\texttt{String}} یا \lr{\texttt{float}} بگذاریم. همه‌ٔ اعضای
+  آرایه باید با هم هم‌نوع باشند. حالا بیایید ببینیم که آرایه در جاوا به
+  چه صورت کار می‌کند:
+\end{itemize}
+
+\subsection{تعریف آرایه در جاوا}
+
+حالا می‌خواهیم آرایه را تعریف کنیم، این کار را می‌توانیم به دو روش انجام
+بدهیم:
+
+\textbf{تعریف آرایه بدون مقدار دهی اولیه:} در این حالت فقط نوع داده‌ای که
+می‌خواهیم ذخیره کنیم و اندازه‌ٔ آرایه مشخص می‌شود:
+
+\begin{codebox}{java}
+int[] numbers = new int[5];
+\end{codebox}
+
+در کد بالا، یک آرایهٔ پنج عضوی تعریف کردیم، ولی مقادیر اولیهٔ اعضای آن را
+مشخص نکردیم. با این کار، اعضای آرایه مقدار دیفالت \lr{type} خود را
+دراختیار می‌گیرند. مثلاً مقدار دیفالت یک متغیر \lr{\texttt{int}} که
+مقداردهی نشده، صفر می‌باشد؛ به همین خاطر، اعضای آرایهٔ بالا همگی صفر
+هستند. این موضوع را می‌توانید با چاپ این آرایه بررسی کنید:
+
+\begin{codebox}{java}
+for (int i = 0; i < numbers.length; i++) {  
+    System.out.print(numbers[i] + ", ");  
+}
+\end{codebox}
+
+خروجی کد بالا، به شکل زیر خواهد بود:
+
+\begin{codebox}{text}
+0, 0, 0, 0, 0,
+\end{codebox}
+
+مقادیر دیفالت typeهای عددی مثل \lr{\texttt{int}}، \lr{\texttt{float}} و
+غیره در جاوا صفر است. مقدار دیفالت \lr{\texttt{boolean}} همان
+\lr{\texttt{false}} بوده و مقدار دیفالت \lr{\texttt{char}} هم
+\texttt{'\textbackslash n'} می‌باشد؛ اما مقدار دیفالت \lr{reference type}
+ها همیشه \lr{\texttt{null}} است که در مباحث مربوط به \lr{OOP} راجع به
+آن‌ها مطالعه خواهید کرد.
+
+\textbf{تعریف آرایه با مقدار دهی اولیه:} در این حالت مقادیر آرایه همان
+موقع که تعریف می‌کنیم مشخص می‌شوند.
+
+\begin{codebox}{java}
+int[] numbers = {1, 2, 3};
+\end{codebox}
+
+\subsection{دسترسی به عناصر آرایه}
+
+بالاتر هم دیدید، در زبان \lr{C} هم دیدید! برای دسترسی به عناصر یک آرایه،
+مثل کد زیر از \lr{index} آن‌ها استفاده می‌کنیم:
+
+\begin{codebox}{java}
+void main(String[] args) {
+    int[] numbers = {1, 2, 3};
+    int firstNumber = numbers[0];
+    numbers[2] = 25;
+
+    System.out.println(numbers);
+}  
+\end{codebox}
+
+\subsection{پیمایش بر روی آرایه}
+
+حالا بیایید تک تک عناصر آرایه را با استفاده از اندیس و یک حلقه
+\lr{\texttt{for}} چاپ کنیم.
+
+\begin{codebox}{java}
+void main(String[] args) {
+    int[] numbers = {1, 2, 3};
+    for (int i = 0; i < numbers.length; i++) { 
+    System.out.println("Index " + i + ": " + numbers[i]);
+    }  
+}  
+\end{codebox}
+
+ما، طول یک آرایه را با استفاده از \lr{\texttt{numbers.length}} بدست
+می‌آوریم. به متغیرهایی مثل \lr{\texttt{length}}یا \lr{\texttt{variable}}
+در جاوا \lr{field} های یک کلاس می‌گویند که از متغیرهای مربوط به آن کلاس
+می‌باشد. با این متغیرها و انواع آن‌ها وقتی \lr{OOP} را یاد گرفتید بیشتر
+آشنا خواهید شد. تا آن زمان، بیاید چندتا از متدها و فیلدهای پرکاربرد
+آرایه را بررسی کنیم:
+
+\subsection{متدها و فیلدهای کاربردی مرتبط با آرایه}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{length}}
+\end{itemize}
+
+متد \lr{\texttt{length}} طول آرایه را به شما نشان می‌دهد:
+
+\begin{codebox}{java}
+int[] numbers = {1, 2, 3};
+System.out.println("Array length: " + numbers.length); // Array length: 3
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{System.arraycopy}}
+\end{itemize}
+
+برای کپی کردن آرایه‌ها می‌توانید از متد \lr{\texttt{System.arraycopy()}}
+استفاده کنید، می‌توانید با استفاده از کد زیر، که آرایهٔ‌
+\lr{\texttt{numbers}} را داخل \lr{\texttt{copiedArray}} کپی می‌کند، این
+متد را بررسی کنید:
+
+\begin{codebox}{java}
+int[] numbers = {1, 2, 3};
+int[] copiedArray = new int[numbers.length];  
+  
+System.arraycopy(numbers, 0, copiedArray, 0, numbers.length);  
+  
+System.out.print("Copied array: ");
+for (int i = 0; i < copiedArray.length; i++) {  
+    System.out.print(copiedArray[i] + " ");  
+}
+\end{codebox}
+
+خروجی این کد، به شکل زیر می‌باشد:
+
+\begin{codebox}{text}
+Copied array: 1 2 3
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{Arrays.sort}}
+\end{itemize}
+
+با استفاده از متد \lr{\texttt{Arrays.sort}}، می‌توانید آرایه‌ها را سورت
+کنید. قبل از استفاده از آن، توجه کنید که حتماً پکیج \lr{(package)}
+\lr{\texttt{java.util.Arrays}} را \lr{\texttt{import}} کرده باشید:
+
+\begin{codebox}{java}
+import java.util.Arrays;   
+
+void main(String[] args) { 
+    int[] numbers = {5, 3, 8, 1, 2};
+    System.out.println("Original array: " + Arrays.toString(numbers)); 
+
+    Arrays.sort(numbers); 
+    System.out.println("Sorted array: " + Arrays.toString(numbers));
+}  
+\end{codebox}
+
+حال که آرایهٔ یک بعدی را یاد گرفته ایم، یک مرحله بالاتر برویم و در مورد
+آرایهٔ چند بعدی صحبت کنیم.
+
+\section{آرایه‌های چندبعدی}
+
+آرایه‌های چندبعدی برای ذخیره و مدیریت داده‌های پیچیده‌تر به کار می‌روند.
+تصویر پایین هم یک مثال خوب از آرایهٔ دو بعدی را نشان می‌دهد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/multi-dimensional-array.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/multi-dimensional-array2.png}
+\end{figure}
+
+در تصویر اول و سمت چپ تصویر دوم، شما یک آرایهٔ دوبعدی می‌بینید که هر کدام
+از عناصر آرایهٔ بیرونی، خود یک آرایه هستند. برای راحت‌تر فهمیدن، می‌توانید
+آرایهٔ دو بعدی را مثل یک ماتریس در نظر بگیرید. درکنار آرایهٔ دوبعدی، شما
+آرایهٔ سه‌بعدی را می‌بینید که درواقع آرایه‌ای از آرایه‌های دوبعدی است؛ یعنی
+هرعنصر آن، خود یک آرایهٔ دوبعدی است.
+
+\subsection{تعریف آرایه چند بعدی در جاوا}
+
+در ابتدا، نحوهٔ تعریف آرایه‌های دو بعدی و چند بعدی را تعریف می‌کنیم که مثل
+آرایهٔ یک‌بعدی، به دو روش مختلف می‌شود انجامش داد.
+
+\textbf{تعریف آرایه دو بعدی و چند بعدی بدون مقدار دهی اولیه:} مثل قبل،
+می‌توانید بدون مقداردهی اولیه آرایه تعریف کنید و باز هم خانه‌های آرایه‌ها
+با مقدار دیفالت \lr{type} شان پر می‌شوند.
+
+\begin{codebox}{java}
+// 2D array with 3 rows and 4 columns
+int[][] matrix = new int[3][4];
+
+// 3D array with 3 layers, each containing 3 rows and 3 columns
+int[][][] cube = new int[3][3][3];  
+  
+System.out.println(matrix[0][0]); // 0
+System.out.println(cube[0][0][0]); // 0
+\end{codebox}
+
+\textbf{تعریف آرایه دو بعدی و چند بعدی با مقدار دهی اولیه:} این روش هم،
+مشابه آرایه‌های یک بعدی هست:
+
+\begin{codebox}{java}
+int[][] matrix = {  
+        {1, 2, 3},  
+        {4, 5, 6},  
+        {7, 8, 9}  
+};
+
+int[][][] cube = {  
+        {  
+                {1, 2, 3},  
+                {4, 5, 6}  
+        },  
+        {  
+                {7, 8, 9},  
+                {10, 11, 12}  
+        }  
+};
+\end{codebox}
+
+\subsection{دسترسی به عناصر آرایه‌های چند بعدی}
+
+مجدداً، با استفاده از اندیس‌ها مثل زبان \lr{C} ، می‌توانیم به عناصر
+آرایه‌های چندبعدی دست پیدا کنیم:
+
+\begin{codebox}{java}
+int[][] matrix = {  
+        {1, 2, 3},  
+        {4, 5, 6},  
+        {7, 8, 9}  
+};  
+  
+int value1 = matrix[1][2];  
+matrix[0][1] = 42;
+\end{codebox}
+
+\subsection{پیمایش آرایه‌های چند بعدی}
+
+حالا بیایید تک تک عناصر آرایه را با استفاده از اندیس و یک حلقهٔ
+\lr{\texttt{for}} چاپ کنیم.
+
+\begin{codebox}{java}
+void main(String[] args) { 
+    int[][] matrix = {  
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}  
+    };
+
+    System.out.println("Matrix contents:");  
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[i].length; j++) {  
+            System.out.print(matrix[i][j] + " ");
+        System.out.println();
+        }  
+    }  
+}
+\end{codebox}
+
+تنها چیزی که داخل این کد، نسبت به کدی که برای آرایهٔ یک‌بعدی زدیم جدید
+است، متغیر \lr{\texttt{j}} است که از صفر شروع می‌شود و تا
+\lr{\texttt{matrix[i].length}} پیش می‌رود.
+\lr{\texttt{matrix[i].length}}، در واقع طول $i$-امین آرایه‌ای است که توی
+\lr{matrix} هست.
+
+\section{\texttt{ArrayList}}
+
+تصور کنید که یک ساختمان داده داشته باشیم که شبیه آرایه باشد، ولی بتوانیم
+اندازه‌اش را هر موقع که خواستیم تغییر بدهیم. این ویژگی را \lr{ArrayList}
+به ما می‌دهد. ArrayList، سایز متغیری دارد که آن را بر اساس مقادیر داخلش
+مشخص می‌کند و استفاده از آن خیلی شبیه به یک \lr{Array} معمولی است. حالا
+می‌خواهیم یک \lr{Array List} بسازیم و سپس مهم‌ترین متدهایی که دارد را
+توضیح بدهیم.
+
+\subsection{\lr{reference type} های معادل \lr{primitive type} ها در جاوا}
+
+برای هر \lr{primitive type} توی جاوا، مثل \lr{\texttt{int}}،
+\lr{\texttt{boolean}}، \lr{\texttt{char}} و امثال آن‌ها، یک معادل از جنس
+\lr{reference type} وجود دارد. وقتی که با مفهوم \lr{object} ها بیشتر
+آشنا بشویم، این موضوع را مجددا بررسی می‌کنیم، ولی چون برای
+\lr{\texttt{ArrayList}} به آن‌ها نیاز داریم، لازم است که یک نگاه مختصر به
+آن‌ها بیندازیم.
+
+کد زیر، یک متغیر \lr{\texttt{int}} ساده تعریف می‌کند:
+
+\begin{codebox}{java}
+int num = 10;
+\end{codebox}
+
+ما می‌توانیم این متغیر را، به جای \lr{\texttt{int}}، از جنس
+\lr{\texttt{Integer}} تعریف کنیم:
+
+\begin{codebox}{java}
+Integer num = 0;
+\end{codebox}
+
+تنها تفاوت این دو، این است که \lr{\texttt{Integer}}، \lr{reference type}
+ای است که معادل \lr{\texttt{int}} می‌باشد. کامپایلر شما حتی به شما این
+اجازه را می‌دهد که با متغیری از جنس \lr{\texttt{Integer}} مثل یک
+\lr{\texttt{int}} برخورد کنید:
+
+\begin{codebox}{java}
+int a = 10;  
+Integer b = a;  
+int c = a + b;  
+  
+System.out.println(a);  
+System.out.println(b);
+\end{codebox}
+
+در مورد این که چرا وقتی \lr{\texttt{int}} را داریم، به
+\lr{\texttt{Integer}} هم نیاز داریم بعدا توضیح خواهیم داد. برای الآن
+کافی است بدانید که این \lr{reference type} ها وجود دارند و تا حد خیلی
+خوبی هم معادل همتای \lr{primitive type} شان هستند. فهرست کامل آن‌ها در
+جدول زیر آمده است:
+
+\begin{table}[H]
+\centering
+\setLTR
+\begin{tabular}{ll}
+\hline
+\textbf{\lr{Primitive Type}} & \textbf{\lr{Reference Type (Wrapper Class)}} \\
+\hline
+\texttt{boolean} & \texttt{Boolean} \\
+\texttt{byte} & \texttt{Byte} \\
+\texttt{char} & \texttt{Character} \\
+\texttt{short} & \texttt{Short} \\
+\texttt{int} & \texttt{Integer} \\
+\texttt{long} & \texttt{Long} \\
+\texttt{float} & \texttt{Float} \\
+\texttt{double} & \texttt{Double} \\
+\hline
+\end{tabular}
+\end{table}
+
+در \lr{\texttt{ArrayList}} ها، ما از این \lr{reference type} ها استفاده
+می‌کنیم.
+
+\subsection{ساخت اولین \lr{ArrayList}}
+
+اول از همه باید \lr{package} مربوط به \lr{\texttt{ArrayList}} را
+\lr{\texttt{import}} کنیم.
+
+\begin{codebox}{java}
+import java.util.*;
+\end{codebox}
+
+سپس، با تکه کد زیر می‌توانیم یک \lr{\texttt{ArrayList}} از
+\lr{\texttt{Float}}ها و \lr{\texttt{Integer}}ها تعریف کنیم:
+
+\begin{codebox}{java}
+void main(String[] args) {  
+    ArrayList<Integer> intNumbers = new ArrayList<Integer>();  
+    ArrayList<Float> floatNumbers = new ArrayList<Float>();  
+}  
+\end{codebox}
+
+دقت کنید که شما نمی‌توانید \lr{\texttt{ArrayList}}ای از جنس
+\lr{primitive type} تعریف کنید. به همین خاطر است که ما از
+\lr{\texttt{Integer}} و \lr{\texttt{Float}} استفاده کردیم. چیزی که بین
+\lr{\texttt{<}} و \lr{\texttt{>}} جلوی \lr{ArrayList} می‌آید، جنس چیزی
+هست که داخل \lr{ArrayList} نگه می‌دارید.
+
+شما می‌توانید تایپ کامل \lr{\texttt{ArrayList}} را مقابل کلیدواژهٔ
+\lr{\texttt{new}} ننویسید و داخل \lr{\texttt{<>}} را خالی بگذارید، چون
+که قبل از اسم متغیر، تایپ آن را کامل مشخص کردید:
+
+\begin{codebox}{java}
+ArrayList<Integer> numbers = new ArrayList<>();
+\end{codebox}
+
+یا این که به کل از \lr{\texttt{var}} استفاده کنید:
+
+\begin{codebox}{java}
+var numbers = new ArrayList<Integer>();
+\end{codebox}
+
+\subsection{متدهای \lr{ArrayList}}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{add}}
+\end{itemize}
+
+برای اضافه کردن عناصر به \lr{\texttt{ArrayList}} از این متد استفاده
+می‌کنیم. می‌توانید به دو شکل زیر به یک \lr{\texttt{ArrayList}} عنصر اضافه
+کنید:
+
+\textbf{اضافه کردن به آخر لیست:} کد زیر به خوبی به شما نشان می‌دهد که
+چگونه می‌توانید از ساده‌ترین نوع \lr{\texttt{add}} استفاده کنید.
+
+\begin{codebox}{java}
+import java.util.ArrayList;  
+  
+void main(String[] args) {
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+        
+    System.out.println(numbers); // Output: [10, 20, 30, 40]    
+}  
+\end{codebox}
+
+همچنین می‌توانید، به جای این که از چندتا \lr{\texttt{add}} استفاده کنید
+تا مقداردهی اولیهٔ آرایه‌تان را انجام بدهید، آن را به این شکل تعریف کنید:
+
+\begin{codebox}{java}
+ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 3000, 40));  
+System.out.println(numbers); // Output: [1, 3000, 40]
+\end{codebox}
+
+با این کار، لازم نیست تا برنامه‌تان را پر از \lr{\texttt{add}} بکنید.
+
+\textbf{اضافه کردن در یک ایندکس مشخص از لیست:} می‌توانید با استفاده از
+متد زیر، به یک جای مشخص از \lr{\texttt{ArrayList}} یک عنصر را اضافه
+کنید.
+
+\begin{codebox}{java}
+ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 3000, 40));  
+System.out.println(numbers); // Output: [1, 3000, 40]
+
+numbers.add(1, 15);  
+System.out.println(numbers); // Output: [1, 15, 3000, 40]
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{remove}}
+\end{itemize}
+
+می‌توانیم با ورودی دادن \lr{index} عنصر دلخواهمان، آن را از آرایه پاک
+کنیم:
+
+\begin{codebox}{java}
+ArrayList<Character> letters = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F'));  
+letters.remove(2); // Removes the third element of letters
+
+System.out.println(letters); // Output: [A, B, D, E, F]
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{get}}
+\end{itemize}
+
+این متد برای دسترسی به یک عنصر بر اساس \lr{index} آن استفاده می‌شود و
+شبیه \lr{\texttt{arr[i]}}ای است که در \lr{Array} دیده بودیم:
+
+\begin{codebox}{java}
+var specialNumbers = new ArrayList<Double>(Arrays.asList(3.14, 2.71));
+var pi = specialNumbers.get(0);  
+  
+System.out.println(pi); // Output: 3.14
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{size}}
+\end{itemize}
+
+این متد تعداد عناصر موجود در لیست را برمی‌گرداند.
+
+\begin{codebox}{java}
+var names = new ArrayList<String>(Arrays.asList("Negin", "Paria", "Kiana"));
+
+for (int i = 0; i < names.size(); i++) {  
+    System.out.println(i + ". " + names.get(i));  
+}
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{set}}
+\end{itemize}
+
+برای تغییر مقدار یک عنصر در یک ایندکس خاص از این متد استفاده می‌شود.
+
+\begin{codebox}{java}
+var names = new ArrayList<String>(Arrays.asList("Negin", "Paria", "Kiana"));  
+System.out.println(names); // Output: [Negin, Paria, Kiana]  
+  
+names.set(1, "Dorsa");  
+System.out.println(names);// Output: [Negin, Dorsa, Kiana]
+\end{codebox}
+
+\section{کلاس استرینگ در جاوا}
+
+اکنون می‌خواهیم با یکی از مهم‌ترین کلاس‌های جاوا آشنا شویم. استرینگ در جاوا
+آرایه‌ای از کارکترهاست که به صورت زیر و با \lr{\texttt{""}} تعریف می‌شود.
+
+\begin{codebox}{java}
+void main(String[] args) {  
+    String str = "write your string here";
+}  
+\end{codebox}
+
+\subsection{متدهای کلاس استرینگ}
+
+اکنون در کد خود یک رشته به صورت گفته شده تعریف کنید. در زیر چندین متد
+مهم از کلاس استرینگ گفته شده است. آن‌ها را بر روی رشته ی خود اجرا کنید و
+کاربردهای گوناگون آنها را ببینید.
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{charAt}}
+\end{itemize}
+
+فرض کنید می‌خواهیم به بخش‌های گوناگون یک رشته دسترسی یابیم. متد
+\lr{\texttt{charAt()}} برای انجام این کار به ما کمک می‌کند. این متد
+کارکتر موجود در ایندکس مشخص شده از رشته را برمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "write your string here";  
+str.charAt(3); //returns t
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{toCharArray}}
+\end{itemize}
+
+این متد در هنگامی استفاده می‌شود که نیاز داریم روی هر کارکتر یک رشته
+عملیات خاصی انجام دهیم. این متد یک رشته را به آرایه‌ای از کارکترها تبدیل
+می‌کند.
+
+\begin{codebox}{java}
+String str = "Hello";  
+char[] charArray = str.toCharArray();  
+for (int i = 0; i < charArray.length-1; i++) {  
+    System.out.print(charArray[i] + ",");
+}  
+System.out.print(charArray[charArray.length-1]);
+\end{codebox}
+
+خروجی این کد \lr{\texttt{H,e,l,l,o}} است.
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{concat}}
+\end{itemize}
+
+به انتهای رشته، رشته‌ٔ مشخص شده را اضافه می‌کند.
+
+\begin{codebox}{java}
+String str = "Hello";  
+String name = " Negin";  
+str.concat(name); //returns Hello Negin
+\end{codebox}
+
+یک روش دیگر نیز برای افزودن رشته‌ها به یکدیگر وجود دارد:
+
+\begin{codebox}{java}
+String str = "Hello";  
+String name = " Paria";  
+String result = str + name;  
+System.out.println(result);
+\end{codebox}
+
+خروجی این کد \lr{\texttt{Hello Paria}} است.
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{contains}}
+\end{itemize}
+
+خروجی این متد \lr{\texttt{Boolean}} است. بررسی می‌کند که آیا در درون
+رشته، رشته‌ٔ مشخص‌شده وجود دارد یا خیر. اگر وجود داشته باشد
+\lr{\texttt{true}} و در غیر این صورت \lr{\texttt{false}} را برمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "Gharakhani’s house";  
+str.contains("house");
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{endsWith}}
+\end{itemize}
+
+متد دیگری که بررسی می‌کنیم متد \lr{\texttt{endsWith()}} است. این متد
+بررسی می‌کند که آیا رشته با عبارت مشخص‌شده پایان یافته است یا خیر.
+
+\begin{codebox}{java}
+String str = "write your string here";  
+str.endsWith("here");
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{startsWith}}
+\end{itemize}
+
+متد \lr{\texttt{startsWith()}} مشابه متد قبلی است. بررسی می‌کند که آیا
+رشته با عبارت مشخص‌شده شروع یافته است یا خیر.
+
+مثلاً فرض کنید شما در برنامه‌‌ از کاربران شماره تلفنشان را می‌خواهید.
+میتوانید با این متد بررسی کنید که شماره فرمت درستی دارد و با
+\lr{\texttt{091}} شروع شده است یا خیر.
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{equals}}
+\end{itemize}
+
+دو رشته را باهم مقایسه می‌کند. اگر برابر بودند \lr{\texttt{true}} را
+برمی‌گرداند و در غیر این صورت \lr{\texttt{false}} را برمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "AmirKabir University";  
+String sample= "University";  
+str.equals(sample); //returns false  
+str.equals("AmirKabir University"); //returns true
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{indexOf}}
+\end{itemize}
+
+اولین جایگاه کارکتر مشخص‌شده در رشته را برمی‌گرداند. اگر کارکتر در استرینگ
+وجود نداشت $-1$ برمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "write your string here";  
+str.indexOf('t'); //returns 3  
+str.indexOf('f'); //returns -1
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{length}}
+\end{itemize}
+
+این متد بسیار کاربردی نیز، طول استرینگ داده شده را برمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "write your string here";  
+str.length(); //returns 22
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{split}}
+\end{itemize}
+
+این متد رشته را با استفاده از کارکتر داده شده به بخش‌های جداگانه تقسیم
+می‌کند و نتیجه را به صورت یک آرایه بازمی‌گرداند.
+
+\begin{codebox}{java}
+String str = "pizza,pasta,burger";  
+String[] arr = str.split(",");  
+System.out.println(arr[1]);
+\end{codebox}
+
+خروجی این کد \lr{\texttt{pasta}} است.
+
+میتوانید کلماتی که میان آنها فاصله است را نیز با استفاده از این متد جدا
+کنید.
+
+\begin{codebox}{java}
+String str = "pizza pasta burger";  
+String[] arr = str.split(" ");  
+System.out.println(arr[1]);
+\end{codebox}
+
+خروجی این کد نیز \lr{\texttt{pasta}}است.
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{substring}}
+\end{itemize}
+
+در پایان با یکی از کاربردی ترین متد های کلاس استرینگ آشنا می‌شویم. این
+متد از ایندکس اولیه‌ٔ داده شده (\lr{\texttt{begIndex}}) تا قبل از ایندکس
+پایانی (\lr{\texttt{endIndex}}) رشته را باز می‌گرداند. میتوانید
+\lr{\texttt{endIndex}} را نگذارید و آنگاه تا اخر رشته برگردانده میشود.
+اکنون چند مثال از این متد می‌بینیم:
+
+\begin{codebox}{java}
+String str = "just keep swimming";  
+String result = str.substring(5,9);  
+System.out.println(result);
+\end{codebox}
+
+خروجی این کد \lr{\texttt{keep}} است.
+
+اما اگر ایندکس پایانی را مانند مثال زیر نگذاریم:
+
+\begin{codebox}{java}
+String str = "just keep swimming";  
+String result = str.substring(5);  
+System.out.println(result);
+\end{codebox}
+
+در اینجا تا پایان رشته گرفته شده و \lr{\texttt{keep swimming}} در خروجی
+چاپ می‌شود.
+
+حال با مهم ترین متدهای کلاس استرینگ آشنا شدید. این کلاس متدهای بسیار
+زیاد و گوناگونی دارد که در
+\href{https://www.w3schools.com/java/java_ref_string.asp}{این صفحه}
+می‌توانید با برخی دیگر از این متدها آشنا شوید.
+
+حال بیایید یک سوال ساده را با استفاده از متدهایی که یاد گرفتیم حل کنیم.
+
+\subsection{سوال \texttt{Wow!}}
+
+نگین که از کد زدن خسته شده است، به تازگی به رشته‌ٔ مهندسی برق علاقه پیدا
+کرده است. به همین دلیل تصمیم گرفته است تا درباره‌ٔ این رشته تحقیق کند. او
+به افراد مختلف مراجعه می‌کند و هرکدام یک مقدار اطلاعات به او می‌دهند. او
+به اندازه‌ی مقدار اطلاعاتی که از هر فرد می‌گیرد، متعجب می‌شود. مثلا اگر یک
+عدد اطلاعات بگیرد می‌گوید \lr{\texttt{Wow!}}، اگر سه تا اطلاعات بگیرد
+میگوید \lr{\texttt{Wooow!}} و به همین شکل تعداد \lr{\texttt{o}} ها زیاد
+میشود. حال اگر یک نفر به اندازه‌ی \lr{\texttt{n}} اطلاعات به نگین بدهد،
+ما باید انتظار چه کلمه‌ای را از او داشته باشیم؟
+
+سعی کنید سوال بالا را با متدهایی که آموزش دیده‌اید حل کنید. برای مثال
+می‌توانید در هر مرحله با استفاده از متد \lr{\texttt{substring()}} بخش
+\lr{\texttt{W}} ابتدایی را جدا کرده و در هر مرحله با استفاده از متد
+\lr{\texttt{concat()}} یک \lr{\texttt{o}} به آن بیافزایید. این کار را
+\lr{\texttt{n-1}} بار تکرار کنید. رشته‌ی نهایی پاسخ ما است.
+
+\section{\lr{HashMap}}
+
+فرض کنید می‌خواهیم نام دانشجویان و شماره دانشجویی آن‌ها را در یک
+\lr{Data Structure} ذخیره کنیم. می‌خواهیم به سرعت و راحتی به آن‌ها دسترسی
+داشته باشیم و در عین حال دانشجویان را از هم تفکیک کنیم. باتوجه به آن که
+هر دانشجو یک شماره دانشجویی یکتا دارد، ما از یک \lr{Data Structure} که
+از این ویژگی بهره می‌برد استفاده می‌کنیم. کلاس \lr{HashMap} یکی از
+نمونه‌های خوب این گونه ساختمان داده‌هاست.
+
+در این بخش، هدف ما آشنایی شما با مفهوم و کاربردهای کلاس دیکشنری است.
+دیکشنری یک نوع ساختار داده است که برای ذخیره کلید \lr{(key)} و مقدار
+\lr{(value)} استفاده می‌شود. برای مثال یک دفترچه تلفن را در نظر بگیرید.
+اسم افراد نقش \lr{\texttt{key}} و شماره تلفنشان نقش \lr{\texttt{value}}
+را دارد. مثلا به برنامه می‌گویید که کلید \lr{\texttt{Paria}} مقدار
+\lr{\texttt{09123456789}} دارد. کلیدها یکتا \lr{(unique)} هستند. مثلا
+شما دو کلید \lr{\texttt{Paria}} نمی‌توانید داشته باشید.
+
+\subsection{تعریف \lr{HashMap}}
+
+در جاوا، به شکل زیر می‌توانید یک HashMap، که جنس \lr{\texttt{key}} های آن
+\lr{\texttt{String}} و جنس \lr{\texttt{value}} هایش
+\lr{\texttt{Integer}} است تعریف کنید:
+
+\begin{codebox}{java}
+import java.util.HashMap;
+
+void main(String[] args) {  
+    HashMap<String,Integer> studentId = new HashMap<>();
+}  
+\end{codebox}
+
+حال، می‌توانید با استفاده از متد \lr{\texttt{put}}، به این
+\lr{\texttt{HashMap}} مقادیر دلخواه خود را اضافه کنید:
+
+\begin{codebox}{java}
+studentId.put("Negin", 13001);  
+studentId.put("Paria", 13002);
+\end{codebox}
+
+بعد از اجرای کد بالا، هش‌مپ ما، عدد \lr{\texttt{13001}} را برای کلید
+\lr{\texttt{Negin}} و عدد \lr{\texttt{13002}} را برای
+\lr{\texttt{Paria}} ذخیره کرده است. ما می‌توانیم با استفاده از متد
+\lr{\texttt{get}} و ورودی دادن کلید دلخواهمان، مقدار متناظر با آن کلید
+را به دست بیاوریم:
+
+\begin{codebox}{java}
+var neginStudentId = studentId.get("Negin");  
+System.out.println(neginStudentId); // Output: 13001
+\end{codebox}
+
+اگر کلیدی در \lr{HashMap} وجود نداشته باشد و ما آن را به عنوان ورودی به
+متد \lr{\texttt{get}} بدهیم، خروجی این متد برای ما \lr{\texttt{null}}
+است. \lr{\texttt{null}} ، مقدار خاصی برای \lr{reference type} هاست که
+نشان می‌دهد که آن‌ها هنوز وجود ندارند و با آن در \lr{OOP} بیشتر آشنا
+می‌شویم:
+
+\begin{codebox}{java}
+System.out.println(studentId.get("Yasin")); // Output: null
+\end{codebox}
+
+برای این که چک کنیم که هش‌مپ‌مان کلیدی را دارد یا نه، از
+\lr{\texttt{containsKey}} استفاده می‌کنیم:
+
+\begin{codebox}{java}
+if (studentId.containsKey("Paria")) {  
+    System.out.println("Paria: " + studentId.get("Paria"));  
+} else {  
+    System.out.println("Cannot find Paria");  
+}
+\end{codebox}
+
+\subsection{کاربردهای \lr{HashMap}}
+
+حال بیایید چند مثال و کاربرد از کلاس دیکشنری ببینیم تا به درک بهتری از
+آن برسیم.
+
+\begin{itemize}
+\tightlist
+\item
+  پیدا کردن سریع داده‌ها: میتوانید با دادن \lr{\texttt{key}} خیلی سریع
+  \lr{\texttt{value}} آن را پیدا کنید. در درس ساختمان داده خواهید دید که
+  این کار، بسیار سریع تر از گشتن در یک آرایه است:
+\end{itemize}
+
+\begin{codebox}{java}
+HashMap<String,Integer> studentId = new HashMap<>();  
+  
+studentId.put("Negin",13001);  
+studentId.put("Paria",13002);
+
+var neginStudentId = studentId.get("Negin"); // neginStudentId = 13001
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  شمارش تعداد دفعات تکرار کلمات: با هر بار دیدن کلمه در متن
+  \lr{\texttt{value}} تغییر داده شود و یک عدد به آن اضافه شود.
+\end{itemize}
+
+\begin{codebox}{java}
+HashMap<String,Integer> studentCredit = new HashMap<>();  
+  
+studentCredit.put("Negin",0);  
+studentCredit.put("Paria",0);  
+  
+String creditsList = "Paria,Negin,Paria";  
+  
+String[] gotCreditStudent = creditsList.split(",");
+for (String studentName : gotCreditStudent){
+    int temp = studentCredit.get(studentName);  
+  
+    studentCredit.put(studentName, temp + 1);  
+}  
+  
+System.out.println("Paria's Credit: " + studentCredit.get("Paria"));  
+System.out.println("Negin's Credit: " + studentCredit.get("Negin"));
+\end{codebox}
+
+حلقهٔ \lr{\texttt{for}} استفاده شده در اینجا به صورت
+\lr{enhanced for loop} است که اگر اکنون با آن آشنایی ندارید پس از به
+پایان رساندن \lr{Document} برگردید و این کد را دوباره مطالعه کنید.
+
+\begin{itemize}
+\tightlist
+\item
+  نگهداری ارتباط بین دو مجموعه داده: برای مثال \lr{\texttt{key}} نام
+  دانش‌آموز و \lr{\texttt{value}} مجموعه نمراتش باشد.
+\item
+  گروه‌بندی داده‌ها: برای مثال \lr{\texttt{key}} الکترونیک و
+  \lr{\texttt{value}} لیست محصولات الکترونیک (لپ تاپ، تلفن همراه و
+  \ldots) باشد.
+\end{itemize}
+
+\section{\lr{enhanced for loop}}
+
+حالا فرض کنید وقتی داریم یک آرایه یا هر ساختمان دادهٔ دیگه‌ای را پیمایش
+می‌کنیم و فقط به مقدار آن عنصر نیاز داریم و اصلاً کاری به ایندکسش نداریم.
+یعنی تمرکز ما بیشتر روی خود مقدار عنصر است تا ایندکسش. در این مواقع
+می‌توانیم از \lr{enhanced for loop} استفاده کنیم.
+
+در واقع، دستور \lr{enhanced for loop} همان حلقه \lr{\texttt{for}} معمولی
+است که تعدادی تغییرات در ساختار آن ایجاد کردیم. یکی از مهم‌ترین تفاوت‌هایش
+این است که در \lr{enhanced for loop} تمرکز بیشتر روی مقدار و ارزش هر
+عنصر است. این دستور برای پیمایش آرایه‌ها، \lr{\texttt{ArrayList}} و
+\ldots{} استفاده می‌شود.
+
+بگذارید با یک مثال بهتر توضیح دهیم:
+
+\begin{codebox}{java}
+void main(String[] args) {
+    // An array of fruits
+    String[] fruits = {"Apple", "Banana", "Orange"};
+
+    // Iterate over the array using for-each loop
+    for (String fruit : fruits) {
+        // Print each fruit
+        System.out.println(fruit);
+    }  
+}  
+\end{codebox}
+
+در اینجا متغیر \lr{\texttt{fruits}} آرایه ای از رشته‌ها است که در آن سه
+عنصر وجود دارد. این حلقه \lr{\texttt{for}} جوری کار می‌کند که از اولین
+عنصر شروع می‌کند و یکی‌یکی تمام مقدارهای داخل آرایه را می‌گیرد. در هر دور
+از حلقه، مقدار \lr{\texttt{fruit}} برابر با یکی از عناصر آرایه می‌شود
+(مثلاً در دور اول \lr{\texttt{Apple}} ، دور دوم \lr{\texttt{Banana}} و
+دور سوم \lr{\texttt{Orange}} ). بعد، مقدار \lr{\texttt{fruit}} چاپ
+می‌شود. همان‌طور که دیدیم، توی این مدل \lr{\texttt{for}} که به آن
+\lr{enhanced for loop} هم می‌گویند، بیشتر روی مقدار عنصر تمرکز داریم تا
+ایندکسش.
+
+\section{چه چیزی یاد گرفتیم؟}
+
+در این داکیومنت با چند ساختمان داده پرکاربرد در جاوا آشنا شدیم که در
+اکثر تمرین‌ها و پروژه‌ها به کار می‌آیند:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \lr{Array}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    آرایه برای ذخیره‌ی چند داده‌ی هم‌نوع استفاده می‌شود.
+  \item
+    اندازه‌ی آرایه ثابت است و بعد از ساخت قابل تغییر نیست.
+  \item
+    طول آرایه با \lr{\texttt{length}} به‌دست می‌آید.
+  \item
+    با حلقه‌ی \lr{\texttt{for}} یا \lr{enhanced for loop} می‌توان روی
+    اعضای آرایه پیمایش کرد.
+  \item
+    با \lr{\texttt{System.arraycopy}} برای کپی کردن و
+    \lr{\texttt{Arrays.sort}} برای مرتب‌سازی آرایه‌ها آشنا شدیم.
+  \item
+    آرایه‌های چندبعدی را مثل ماتریس/حجم دیدیم و نحوه‌ی تعریف، دسترسی و
+    پیمایش آن‌ها را یاد گرفتیم.
+  \end{itemize}
+\item
+  \lr{\texttt{ArrayList}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    شبیه آرایه است ولی اندازه‌ی آن می‌تواند با افزودن و حذف اعضا، زیاد و
+    یا کم شود. ‍ - فقط \lr{reference type} می‌گیرد، و آموختیم برای هر
+    \lr{primitive type} مثل \lr{\texttt{int}} و \lr{\texttt{float}} ، یک
+    \lr{reference type} مثل \lr{\texttt{Integer}} و \lr{\texttt{Float}}
+    وجود دارد.
+  \item
+    متدهای مهم \lr{\texttt{ArrayList}}:
+  \item
+    \lr{\texttt{add}} (اضافه کردن عنصر، هم آخر لیست هم در اندیس مشخص)
+  \item
+    \lr{\texttt{remove}} (حذف با اندیس یا حذف عنصر)
+  \item
+    \lr{\texttt{get}} (دسترسی به عنصر با اندیس)
+  \item
+    \lr{\texttt{set}} (تغییر مقدار در اندیس مشخص)
+  \item
+    \lr{\texttt{size}} (تعداد عناصر لیست)
+  \end{itemize}
+\item
+  \lr{\texttt{String}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    برای نگهداری متن استفاده می‌شود و با \lr{\texttt{""}} تعریف می‌شود.
+  \item
+    با متدهای پرکاربرد \lr{\texttt{String}} آشنا شدیم:
+  \item
+    \lr{\texttt{charAt}}, \lr{\texttt{toCharArray}}
+  \item
+    \lr{\texttt{concat}} و همچنین عملگر \lr{\texttt{+}}
+  \item
+    \lr{\texttt{contains}}, \lr{\texttt{startsWith}},
+    \lr{\texttt{endsWith}}
+  \item
+    \lr{\texttt{equals}}, \lr{\texttt{indexOf}}, \lr{\texttt{length}}
+  \item
+    \lr{\texttt{split}}, \lr{\texttt{substring}}
+  \end{itemize}
+\item
+  \lr{\texttt{HashMap}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    باید بدانید که \lr{key} و \lr{value} در مقداردهی یک هش‌مپ چیست.
+  \item
+    کلیدها (یا \lr{key} ها) یکتا هستند و با کلید می‌توان سریع به مقدار
+    رسید.
+  \item
+    متدهای مهم \lr{\texttt{HashMap}}:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \lr{\texttt{put}} (اضافه/به‌روزرسانی)
+    \item
+      \lr{\texttt{get}} (گرفتن مقدار؛ اگر کلید وجود نداشته باشد
+      \lr{\texttt{null}})
+    \item
+      \lr{\texttt{containsKey}} (بررسی وجود کلید)
+    \end{itemize}
+  \item
+    کاربردهای رایج:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      دسترسی سریع به اطلاعات (مثل دفترچه تلفن)
+    \item
+      شمارش تکرارها
+    \item
+      نگهداری ارتباط بین دو مجموعه داده و گروه‌بندی
+    \end{itemize}
+  \end{itemize}
+\item
+  \lr{enhanced for loop}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    وقتی فقط مقدار عناصر مهم است (نه اندیس)، و یا به هر دلیلی امکان
+    استفاده از اندیس برای ما مطلوب نیست، می‌توانیم از
+    \lr{enhanced for loop} استفاده کنیم.
+  \end{itemize}
+\end{enumerate}
+
+انتظار نمی‌رود که با این داکیومنت، از جزییات پیاده‌سازی کلاس‌های
+\lr{\texttt{ArrayList}} ، \lr{\texttt{String}} و \lr{\texttt{HashMap}} و
+نحوه‌ی کار آن‌ها اطلاع داشته باشید. در هفته‌ی دهم این درس با این مفاهیم
+بیش‌تر آشنا می‌شوید و در درس «ساختمان داده‌ها و الگوریتم‌ها»، به‌صورت عمیق با
+این مباحث کار خواهید کرد. در حال حاضر، صرفِ استفاده از این ابزارها برای
+شما کافی است.
+
+اگر در هر یک از این مفاهیم مشکلی دارید، حتماً از تدریس‌یارها بپرسید. حتی
+اگر پرسش شما ساده باشد، حتماً بپرسید و از بازخورد تدریس‌یارها استفاده
+کنید.
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
