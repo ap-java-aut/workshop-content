@@ -159,9 +159,9 @@ for (int i = 0; i < numbers.length; i++) {
 مقادیر دیفالت typeهای عددی مثل \lr{\texttt{int}}، \lr{\texttt{float}} و
 غیره در جاوا صفر است. مقدار دیفالت \lr{\texttt{boolean}} همان
 \lr{\texttt{false}} بوده و مقدار دیفالت \lr{\texttt{char}} هم
-\texttt{'n\textbackslash '} می‌باشد؛ اما مقدار دیفالت \lr{reference}
-typeها همیشه \lr{\texttt{null}} است که در مباحث مربوط به \lr{OOP} راجع
-به آن‌ها مطالعه خواهید کرد.
+\texttt{'\textbackslash n'} می‌باشد؛ اما مقدار دیفالت \lr{reference type}
+ها همیشه \lr{\texttt{null}} است که در مباحث مربوط به \lr{OOP} راجع به
+آن‌ها مطالعه خواهید کرد.
 
 \textbf{تعریف آرایه با مقدار دهی اولیه:} در این حالت مقادیر آرایه همان
 موقع که تعریف می‌کنیم مشخص می‌شوند.
@@ -208,7 +208,11 @@ void main(String[] args) {
 
 \subsection{متدها و فیلدهای کاربردی مرتبط با آرایه}
 
-\paragraph{\texttt{length}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{length}}
+\end{itemize}
 
 متد \lr{\texttt{length}} طول آرایه را به شما نشان می‌دهد:
 
@@ -217,7 +221,11 @@ int[] numbers = {1, 2, 3};
 System.out.println("Array length: " + numbers.length); // Array length: 3
 \end{codebox}
 
-\paragraph{\texttt{System.arraycopy}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{System.arraycopy}}
+\end{itemize}
 
 برای کپی کردن آرایه‌ها می‌توانید از متد \lr{\texttt{System.arraycopy()}}
 استفاده کنید، می‌توانید با استفاده از کد زیر، که آرایهٔ‌
@@ -242,7 +250,11 @@ for (int i = 0; i < copiedArray.length; i++) {
 Copied array: 1 2 3
 \end{codebox}
 
-\paragraph{\texttt{Arrays.sort}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{Arrays.sort}}
+\end{itemize}
 
 با استفاده از متد \lr{\texttt{Arrays.sort}}، می‌توانید آرایه‌ها را سورت
 کنید. قبل از استفاده از آن، توجه کنید که حتماً پکیج \lr{(package)}
@@ -291,7 +303,7 @@ void main(String[] args) {
 
 \textbf{تعریف آرایه دو بعدی و چند بعدی بدون مقدار دهی اولیه:} مثل قبل،
 می‌توانید بدون مقداردهی اولیه آرایه تعریف کنید و باز هم خانه‌های آرایه‌ها
-با مقدار دیفالت typeشان پر می‌شوند.
+با مقدار دیفالت \lr{type} شان پر می‌شوند.
 
 \begin{codebox}{java}
 // 2D array with 3 rows and 4 columns
@@ -485,7 +497,11 @@ var numbers = new ArrayList<Integer>();
 
 \subsection{متدهای \lr{ArrayList}}
 
-\paragraph{\lr{add}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{add}}
+\end{itemize}
 
 برای اضافه کردن عناصر به \lr{\texttt{ArrayList}} از این متد استفاده
 می‌کنیم. می‌توانید به دو شکل زیر به یک \lr{\texttt{ArrayList}} عنصر اضافه
@@ -531,7 +547,11 @@ numbers.add(1, 15);
 System.out.println(numbers); // Output: [1, 15, 3000, 40]
 \end{codebox}
 
-\paragraph{\texttt{remove}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{remove}}
+\end{itemize}
 
 می‌توانیم با ورودی دادن \lr{index} عنصر دلخواهمان، آن را از آرایه پاک
 کنیم:
@@ -543,7 +563,11 @@ letters.remove(2); // Removes the third element of letters
 System.out.println(letters); // Output: [A, B, D, E, F]
 \end{codebox}
 
-\paragraph{\texttt{get}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{get}}
+\end{itemize}
 
 این متد برای دسترسی به یک عنصر بر اساس \lr{index} آن استفاده می‌شود و
 شبیه \lr{\texttt{arr[i]}}ای است که در \lr{Array} دیده بودیم:
@@ -555,7 +579,11 @@ var pi = specialNumbers.get(0);
 System.out.println(pi); // Output: 3.14
 \end{codebox}
 
-\paragraph{\texttt{size}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{size}}
+\end{itemize}
 
 این متد تعداد عناصر موجود در لیست را برمی‌گرداند.
 
@@ -567,7 +595,11 @@ for (int i = 0; i < names.size(); i++) {
 }
 \end{codebox}
 
-\paragraph{\texttt{set}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{set}}
+\end{itemize}
 
 برای تغییر مقدار یک عنصر در یک ایندکس خاص از این متد استفاده می‌شود.
 
@@ -596,7 +628,11 @@ void main(String[] args) {
 مهم از کلاس استرینگ گفته شده است. آن‌ها را بر روی رشته ی خود اجرا کنید و
 کاربردهای گوناگون آنها را ببینید.
 
-\paragraph{\texttt{charAt}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{charAt}}
+\end{itemize}
 
 فرض کنید می‌خواهیم به بخش‌های گوناگون یک رشته دسترسی یابیم. متد
 \lr{\texttt{charAt()}} برای انجام این کار به ما کمک می‌کند. این متد
@@ -607,7 +643,11 @@ String str = "write your string here";
 str.charAt(3); //returns t
 \end{codebox}
 
-\paragraph{\texttt{toCharArray}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{toCharArray}}
+\end{itemize}
 
 این متد در هنگامی استفاده می‌شود که نیاز داریم روی هر کارکتر یک رشته
 عملیات خاصی انجام دهیم. این متد یک رشته را به آرایه‌ای از کارکترها تبدیل
@@ -624,7 +664,11 @@ System.out.print(charArray[charArray.length-1]);
 
 خروجی این کد \lr{\texttt{H,e,l,l,o}} است.
 
-\paragraph{\texttt{concat}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{concat}}
+\end{itemize}
 
 به انتهای رشته، رشته‌ٔ مشخص شده را اضافه می‌کند.
 
@@ -645,7 +689,11 @@ System.out.println(result);
 
 خروجی این کد \lr{\texttt{Hello Paria}} است.
 
-\paragraph{\lr{contains}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{contains}}
+\end{itemize}
 
 خروجی این متد \lr{\texttt{Boolean}} است. بررسی می‌کند که آیا در درون
 رشته، رشته‌ٔ مشخص‌شده وجود دارد یا خیر. اگر وجود داشته باشد
@@ -656,7 +704,11 @@ String str = "Gharakhani’s house";
 str.contains("house");
 \end{codebox}
 
-\paragraph{\texttt{endsWith}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{endsWith}}
+\end{itemize}
 
 متد دیگری که بررسی می‌کنیم متد \lr{\texttt{endsWith()}} است. این متد
 بررسی می‌کند که آیا رشته با عبارت مشخص‌شده پایان یافته است یا خیر.
@@ -666,7 +718,11 @@ String str = "write your string here";
 str.endsWith("here");
 \end{codebox}
 
-\paragraph{\texttt{startsWith}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{startsWith}}
+\end{itemize}
 
 متد \lr{\texttt{startsWith()}} مشابه متد قبلی است. بررسی می‌کند که آیا
 رشته با عبارت مشخص‌شده شروع یافته است یا خیر.
@@ -675,7 +731,11 @@ str.endsWith("here");
 میتوانید با این متد بررسی کنید که شماره فرمت درستی دارد و با
 \lr{\texttt{091}} شروع شده است یا خیر.
 
-\paragraph{\texttt{equals}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{equals}}
+\end{itemize}
 
 دو رشته را باهم مقایسه می‌کند. اگر برابر بودند \lr{\texttt{true}} را
 برمی‌گرداند و در غیر این صورت \lr{\texttt{false}} را برمی‌گرداند.
@@ -687,7 +747,11 @@ str.equals(sample); //returns false
 str.equals("AmirKabir University"); //returns true
 \end{codebox}
 
-\paragraph{\texttt{indexOf}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{indexOf}}
+\end{itemize}
 
 اولین جایگاه کارکتر مشخص‌شده در رشته را برمی‌گرداند. اگر کارکتر در استرینگ
 وجود نداشت $-1$ برمی‌گرداند.
@@ -698,7 +762,11 @@ str.indexOf('t'); //returns 3
 str.indexOf('f'); //returns -1
 \end{codebox}
 
-\paragraph{\texttt{length}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{length}}
+\end{itemize}
 
 این متد بسیار کاربردی نیز، طول استرینگ داده شده را برمی‌گرداند.
 
@@ -707,7 +775,11 @@ String str = "write your string here";
 str.length(); //returns 22
 \end{codebox}
 
-\paragraph{\texttt{split}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{split}}
+\end{itemize}
 
 این متد رشته را با استفاده از کارکتر داده شده به بخش‌های جداگانه تقسیم
 می‌کند و نتیجه را به صورت یک آرایه بازمی‌گرداند.
@@ -731,7 +803,11 @@ System.out.println(arr[1]);
 
 خروجی این کد نیز \lr{\texttt{pasta}}است.
 
-\paragraph{\texttt{substring}}
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{substring}}
+\end{itemize}
 
 در پایان با یکی از کاربردی ترین متد های کلاس استرینگ آشنا می‌شویم. این
 متد از ایندکس اولیه‌ٔ داده شده (\lr{\texttt{begIndex}}) تا قبل از ایندکس
