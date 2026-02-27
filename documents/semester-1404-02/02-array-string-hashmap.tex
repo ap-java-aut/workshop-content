@@ -1032,30 +1032,125 @@ void main(String[] args) {
 
 \section{چه چیزی یاد گرفتیم؟}
 
-در این بخش آموختید که:
+در این داکیومنت با چند ساختمان داده پرکاربرد در جاوا آشنا شدیم که در
+اکثر تمرین‌ها و پروژه‌ها به کار می‌آیند:
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  آرایه‌ی ساده در جاوا چیست و چطور می‌توانیم از آن استفاده کنیم.
+  \lr{Array}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    آرایه برای ذخیره‌ی چند داده‌ی هم‌نوع استفاده می‌شود.
+  \item
+    اندازه‌ی آرایه ثابت است و بعد از ساخت قابل تغییر نیست.
+  \item
+    طول آرایه با \lr{\texttt{length}} به‌دست می‌آید.
+  \item
+    با حلقه‌ی \lr{\texttt{for}} یا \lr{enhanced for loop} می‌توان روی
+    اعضای آرایه پیمایش کرد.
+  \item
+    با \lr{\texttt{System.arraycopy}} برای کپی کردن و
+    \lr{\texttt{Arrays.sort}} برای مرتب‌سازی آرایه‌ها آشنا شدیم.
+  \item
+    آرایه‌های چندبعدی را مثل ماتریس/حجم دیدیم و نحوه‌ی تعریف، دسترسی و
+    پیمایش آن‌ها را یاد گرفتیم.
+  \end{itemize}
 \item
-  آرایه‌ی چندبعدی چیست و چه کاربردهایی دارد.
+  \lr{\texttt{ArrayList}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    شبیه آرایه است ولی اندازه‌ی آن می‌تواند با افزودن و حذف اعضا، زیاد و
+    یا کم شود. ‍ - فقط \lr{reference type} می‌گیرد، و آموختیم برای هر
+    \lr{primitive type} مثل \lr{\texttt{int}} و \lr{\texttt{float}} ، یک
+    \lr{reference type} مثل \lr{\texttt{Integer}} و \lr{\texttt{Float}}
+    وجود دارد.
+  \item
+    متدهای مهم \lr{\texttt{ArrayList}}:
+  \item
+    \lr{\texttt{add}} (اضافه کردن عنصر، هم آخر لیست هم در اندیس مشخص)
+  \item
+    \lr{\texttt{remove}} (حذف با اندیس یا حذف عنصر)
+  \item
+    \lr{\texttt{get}} (دسترسی به عنصر با اندیس)
+  \item
+    \lr{\texttt{set}} (تغییر مقدار در اندیس مشخص)
+  \item
+    \lr{\texttt{size}} (تعداد عناصر لیست)
+  \end{itemize}
 \item
-  کلاس \lr{\texttt{ArrayList}} در جاوا چیست، چه تفاوت‌هایی با آرایه‌ی ساده
-  دارد، و متدهای اصلیِ آن (مانند \lr{\texttt{add}} ، \lr{\texttt{remove}}
-  ، و\ldots) چیست.
+  \lr{\texttt{String}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    برای نگهداری متن استفاده می‌شود و با \lr{\texttt{""}} تعریف می‌شود.
+  \item
+    با متدهای پرکاربرد \lr{\texttt{String}} آشنا شدیم:
+  \item
+    \lr{\texttt{charAt}}, \lr{\texttt{toCharArray}}
+  \item
+    \lr{\texttt{concat}} و همچنین عملگر \lr{\texttt{+}}
+  \item
+    \lr{\texttt{contains}}, \lr{\texttt{startsWith}},
+    \lr{\texttt{endsWith}}
+  \item
+    \lr{\texttt{equals}}, \lr{\texttt{indexOf}}, \lr{\texttt{length}}
+  \item
+    \lr{\texttt{split}}, \lr{\texttt{substring}}
+  \end{itemize}
 \item
-  کلاس \lr{\texttt{String}} در جاوا برای ذخیره‌ی رشته‌ها چطور کار می‌کند و
-  برخی از متدهای آن مثل \lr{\texttt{charAt}} ، \lr{\texttt{equals}} ،
-  و\ldots{} چطور می‌توانند به ما کمک کنند.
+  \lr{\texttt{HashMap}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    باید بدانید که \lr{key} و \lr{value} در مقداردهی یک هش‌مپ چیست.
+  \item
+    کلیدها (یا \lr{key} ها) یکتا هستند و با کلید می‌توان سریع به مقدار
+    رسید.
+  \item
+    متدهای مهم \lr{\texttt{HashMap}}:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \lr{\texttt{put}} (اضافه/به‌روزرسانی)
+    \item
+      \lr{\texttt{get}} (گرفتن مقدار؛ اگر کلید وجود نداشته باشد
+      \lr{\texttt{null}})
+    \item
+      \lr{\texttt{containsKey}} (بررسی وجود کلید)
+    \end{itemize}
+  \item
+    کاربردهای رایج:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      دسترسی سریع به اطلاعات (مثل دفترچه تلفن)
+    \item
+      شمارش تکرارها
+    \item
+      نگهداری ارتباط بین دو مجموعه داده و گروه‌بندی
+    \end{itemize}
+  \end{itemize}
 \item
-  کلاس \lr{\texttt{HashMap}} در جاوا چیست، و \lr{key} و \lr{value} چه
-  معنایی دارند. همچنین باید با متدهای اصلی این کلاس مثل
-  \lr{\texttt{get}} و \lr{\texttt{put}} آشنا باشید.
-\item
-  حلقه‌های \lr{enhanced for} در جاوا چه کاربردی دارند و بتوانید از آن
-  برای پیمایش یک آرایه یا هش‌مپ استفاده کنید.
-\end{itemize}
+  \lr{enhanced for loop}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    وقتی فقط مقدار عناصر مهم است (نه اندیس)، و یا به هر دلیلی امکان
+    استفاده از اندیس برای ما مطلوب نیست، می‌توانیم از
+    \lr{enhanced for loop} استفاده کنیم.
+  \end{itemize}
+\end{enumerate}
 
 انتظار نمی‌رود که با این داکیومنت، از جزییات پیاده‌سازی کلاس‌های
 \lr{\texttt{ArrayList}} ، \lr{\texttt{String}} و \lr{\texttt{HashMap}} و
