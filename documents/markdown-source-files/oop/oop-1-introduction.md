@@ -749,13 +749,12 @@ public class Car {
 ![](images/oop-1-7.png)
 
 همونطور که می­بینید، پشت این متد از کلیدواژه `static` استفاده شده. این نشان میدهد که این متد، یک متد استاتیک است. حال که می­دانید متد­های استاتیک چگونه تعریف می­شوند، بیاید برای کلاس `Car` که تا الان داشتیم یک متد استاتیک تعریف کنیم:
-
- ```java
+```java
 public class Car {
 	public static final int SUV = 0;
 	public static final int SEDAN = 1;
 	public static final int HATCHBACK = 2;
-
+	
 	double x;
 	double y;
 	double gas;
