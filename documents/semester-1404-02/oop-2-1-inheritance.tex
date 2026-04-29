@@ -1,0 +1,803 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{شی‌گرایی (ارث‌بری)}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{سام قربانی، آرمان حسینی، محمدحسین هاشمی، کیانا
+پهلوان، کیانا رضوی، اریا فیض‌ بخش، مهدی جعفری، مارال مهاجر}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+ارث‌بری، از پایه‌ای‌ترین مفاهیم شی‌گرایی است که به کلاس‌های مشابه، این امکان
+را می‌دهد که متدها و فیلدهای یکسان را در یک \lr{class} جدید تعریف کنند.
+با استفاده از ارث‌بری، می‌توانیم به طراحی‌ای بهتر برای برنامه‌مان برسیم به
+طوری که کدهای تکراری کمی داشته باشیم و در نتیجه، برنامه
+\lr{maintainable} تر باشد.
+
+حتماً کدهای این داک رو اجرا کنید و هر سوالی که داشتید از تدریس‌یارها
+بپرسید، در موردش سرچ کنید و از \lr{ChatGPT} راجع بهش اطلاعات بخواید.
+ارث‌بری از مفاهیم مهم درس است که یادگیری آن اهمیت زیادی دارد و هسته‌ی اصلی
+شی گرایی را تشکیل می‌دهد.
+
+\section{ارث‌بری}
+
+\subsection{توصیف یک مشکل}
+
+در \lr{IntelliJ} یک پروژهٔ جدید ایجاد کنید و یک پکیج به اسم
+\lr{\texttt{vehicle}} درست کنید. در \lr{\texttt{vehicle}} دو فایل جدید
+به اسم \lr{\texttt{Car.java}} و \lr{\texttt{Bike.java}} درست کنید و داخل
+اون‌ها، کلاس‌های \lr{\texttt{Car}} و \lr{\texttt{Bike}} رو ایجاد کنید:
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class Bike {
+    public String brand;
+    public int speed;
+    public boolean hasCarrier;
+
+    public Bike(String brand, int speed, boolean hasCarrier) {
+        this.brand = brand;
+        this.speed = speed;
+        this.hasCarrier = hasCarrier;  
+    }
+
+    public void accelerate(int speed) {
+        this.speed += speed;  
+    }
+
+    public void showBikeInfo() {  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Has Carrier: " + hasCarrier);  
+    }  
+}
+\end{codebox}
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class Car {
+    public String brand;
+    public int speed;
+    public int doors;
+
+    public Car(String brand, int speed, int doors) {
+        this.brand = brand;
+        this.speed = speed;
+        this.doors = doors;  
+    }
+
+    public void accelerate(int speed) {
+        this.speed += speed;  
+    }
+
+    public void showCarInfo() {  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Doors: " + doors);  
+    }  
+}
+\end{codebox}
+
+بعد از این کار، کد \lr{\texttt{Main}} رو به کد زیر تغییر دهید و آن را
+اجرا کنید تا مطمئن شوید که همه چیز درست کار می‌کند:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    Car myCar = new Car("Toyota", 180, 4);
+    myCar.showCarInfo();
+
+    System.out.println();
+
+    Bike myBike = new Bike("Yamaha", 120, true);
+    myBike.showBikeInfo();
+}
+
+\end{codebox}
+
+بعد از اجرای کد، باید چنین چیزی ببینید:
+
+\begin{codebox}{text}
+Brand: Toyota, Speed: 180 km/h  
+Doors: 4  
+  
+Brand: Yamaha, Speed: 120 km/h  
+Has Carrier: true
+\end{codebox}
+
+حالا بیاید راجع به شباهت‌های این دو کلاس صحبت کنیم. ظاهر این کلاس‌ها خیلی
+شبیه به هم‌ هستند. هر دو فیلدهایی به اسم \lr{\texttt{brand}} و
+\lr{\texttt{speed}} دارند، با متدی به اسم \lr{\texttt{accelerate}} سرعت
+وسیلهٔ نقلیه را زیاد می‌کنند و همینطور متدهایی دارند که اطلاعات آن‌ها را
+نمایش می‌دهند. در واقع، اگر یک بار به کد نگاه کنید، می‌بینید کلاس‌های
+\lr{\texttt{Bike}} و \lr{\texttt{Car}} تفاوت چندانی ندارند! حالا بیاید
+یک کلاس جدید مثل \lr{\texttt{MotorCycle}} در فایل جدیدی به اسم
+\lr{\texttt{MotorCycle.java}} بنویسیم:
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class MotorCycle {
+    public String brand;
+    public int speed;
+    public boolean hasSidecar;
+
+    public MotorCycle(String brand, int speed, boolean hasSidecar) {
+        this.brand = brand;
+        this.speed = speed;
+        this.hasSidecar = hasSidecar;  
+    }
+
+    public void accelerate(int speed) {
+        this.speed += speed;  
+    }
+
+    public void showMotorCycleInfo() {  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+        System.out.println("Has Sidecar: " + hasSidecar);  
+    }  
+}
+\end{codebox}
+
+این کد را هم امتحان کنید:
+
+\begin{codebox}{java}
+MotorCycle myMotorCycle = new MotorCycle("Benz", 120, true);  
+myMotorCycle.showBikeInfo();
+\end{codebox}
+
+باید خروجی‌ای مثل زیر ببینید:
+
+\begin{codebox}{text}
+Brand: Benz, Speed: 120 km/h  
+Has Sidecar: true
+\end{codebox}
+
+کلاس جدیدی که ساختیم هم کار می‌کند، ولی باز هم شبیه‌ به دو کلاس قبلی است!
+همانطور که می‌بینید هر وسیلهٔ نقلیه‌ای که بخواهیم اضافه کنیم، باید کدهای
+کلاس‌های قبلی را تکرار کنیم. همانطور که در داک \lr{clean code} گفته شد،
+ما در برنامه‌نویسی، سعی می‌کنیم از کدهای تکراری دوری کنیم.
+
+\subsection{راه‌حل}
+
+راه حل این مشکل این است که \textbf{ویژگی‌های مشترک تمام این کلاس‌ها را،
+داخل کلاس جدیدی به اسم \lr{\texttt{Vehicle}} بنویسیم و بعد، با استفاده
+از ارث‌بری، آن ویژگی‌ها را به همه این کلاس‌ها منتقل کنیم}. حالا این‌ که
+«ویژگی‌های یک کلاس‌ را به کلاسی دیگر منتقل کنیم» یعنی چه؟ بیاید تا با کد
+زدن ببینیم. توی فایل \lr{\texttt{Vehicle.java}} ، کلاس
+\lr{\texttt{Vehicle}} رو ایجاد کنید. این کلاس، به جای این که نمایندهٔ
+ماشین و موتور و دوچرخه باشد، نمایندهٔ یک «وسیلهٔ نقلیه‌» است و ویژگی‌های
+مشترک تمام کلاس‌های قبل را داخل خود نگه می‌دارد:
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class Vehicle {
+    public String brand;
+    public int speed;
+
+    public Vehicle(String brand, int speed) {
+        this.brand = brand;
+        this.speed = speed;  
+    }
+
+    public void accelerate(int speed) {
+        this.speed += speed;  
+    }
+
+    public void showInfo() {  
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");  
+    }  
+}
+\end{codebox}
+
+می‌بینید که فیلدها و متدهای مشترک تمام وسایل نقلیه، یعنی
+\lr{\texttt{brand}} ، \lr{\texttt{speed}} ، \lr{\texttt{accelerate}} و
+غیره، همگی داخل این کلاس هستند. حالا بیاید کد کلاس \lr{\texttt{Car}} رو
+عوض کنیم:
+
+\begin{codebox}{java}
+public class Car extends Vehicle {
+    public int doors;
+
+    public Car(String brand, int speed, int doors) {
+        super(brand, speed);
+        this.doors = doors;  
+    }
+
+    public void showCarInfo() {  
+        showInfo();  
+        System.out.println("Doors: " + doors);  
+    }  
+}
+\end{codebox}
+
+در این کد، شما برای اولین بار با کلیدواژهٔ \lr{\texttt{extends}} آشنا
+می‌شوید. این کلیدواژه در جاوا برای تعیین ارث‌بری استفاده می‌شود. در کد بالا
+کلاس \lr{\texttt{Car}} ، تمام فیلدها و متدهای کلاس \lr{\texttt{Vehicle}}
+رو دارد. مثلا در خط اول متد \lr{\texttt{showCarInfo()}} ، می‌بینید که متد
+\lr{\texttt{showInfo()}} صدا زده شده اما \lr{\texttt{Car}} چنین متدی
+ندارد. در واقع، این متد در کلاس \lr{\texttt{Vehicle}} تعریف شده و چون
+\lr{\texttt{Car}} از \lr{\texttt{Vehicle}} ارث‌بری کرده، پس می‌تواند از
+متدها و فیلدهای آن استفاده بکند!
+
+حالا در \lr{\texttt{main}} کد زیر را اجرا کنید تا مطمئن شوید همه چیز
+درست کار می‌کند:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Toyota", 180, 4);  
+    myCar.showCarInfo();  
+  
+    System.out.println();  
+  
+    myCar.accelerate(5);  
+    myCar.showCarInfo();  
+}
+\end{codebox}
+
+بعد از اجرای این کد، باید خروجی زیر را ببینید:
+
+\begin{codebox}{text}
+Brand: Toyota, Speed: 180 km/h  
+Doors: 4  
+
+Brand: Toyota, Speed: 185 km/h  
+Doors: 4
+\end{codebox}
+
+می‌بینید که حتی توانستیم از متد \lr{\texttt{accelerate}} هم برای
+\lr{\texttt{myCar}} استفاده کنیم، در حالی که این متد اصلا در
+\lr{\texttt{Car}} وجود ندارد! این موضوع فقط به خاطر این است که
+\lr{\texttt{Car}} از \lr{\texttt{Vehicle}} ارث‌بری می‌کند، و به همین دلیل
+به تمام فیلدها و متدهای آن دسترسی دارد.
+
+حالا کد‌ کلاس‌های \lr{\texttt{Bike}} و \lr{\texttt{MotorCycle}} را به شکل
+زیر تغییر دهید تا آن‌ها هم از کلاس \lr{\texttt{Vehicle}} ارث‌بری کنند:
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class MotorCycle extends Vehicle {
+    boolean hasSidecar;
+
+    public MotorCycle(String brand, int speed, boolean hasSidecar) {
+        super(brand, speed);
+        this.hasSidecar = hasSidecar;  
+    }
+
+    public void showBikeInfo() {  
+        showInfo();  
+        System.out.println("Has Sidecar: " + hasSidecar);  
+    }  
+}
+\end{codebox}
+
+\begin{codebox}{java}
+package Vehicle;
+
+public class Bike extends Vehicle {
+    public boolean hasCarrier;
+
+    public Bike(String brand, int speed, boolean hasCarrier) {
+        super(brand, speed);
+        this.hasCarrier = hasCarrier;  
+    }
+
+    public void showMotorCycleInfo() {  
+        showInfo();  
+        System.out.println("Has Carrier: " + hasCarrier);  
+    }  
+}
+\end{codebox}
+
+می‌بینید که حجم کدهای تکراری خیلی کمتر شدند. با کد زیر، این کلاس‌های جدید
+را تست کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Bike myBike = new Bike("Yamaha", 120, true);  
+    myBike.showBikeInfo();  
+  
+    System.out.println();  
+      
+    myBike.accelerate(5);  
+    myBike.showBikeInfo();
+
+    System.out.println();  
+  
+    MotorCycle myMotorcycle = new MotorCycle("Harley-Davidson", 160, false);  
+    myMotorcycle.showMotorCycleInfo();  
+}
+\end{codebox}
+
+باید خروجی زیر را ببینید:
+
+\begin{codebox}{text}
+Brand: Yamaha, Speed: 120 km/h  
+Has Carrier: true  
+  
+Brand: Yamaha, Speed: 125 km/h  
+Has Carrier: true  
+  
+Brand: Harley-Davidson, Speed: 160 km/h  
+Has Sidecar: false
+\end{codebox}
+
+می‌بینید که همهٔ این کلاس‌ها، مثل کلاس \lr{Car} می‌توانند از فیلدهای
+\lr{\texttt{brand}} و \lr{\texttt{speed}} و متدهای
+\lr{\texttt{accelerate()}} و \lr{\texttt{showInfo()}} استفاده کنند.
+
+\subsection{\lr{subclass} ها و \lr{superclass} ها}
+
+در کد بالا، به کلاس \lr{\texttt{Vehicle}} که از آن ارث‌بری شده
+\lr{superclass} یا کلاس والد می‌گویند. همچنین به کلاس‌های
+\lr{\texttt{Car}} ، \lr{\texttt{Bike}} و \lr{\texttt{MotorCycle}} که از
+کلاس \lr{\texttt{Vehicle}} ارث‌بری کردند \lr{subclass} یا کلاس‌های فرزند
+می‌گویند. هر کلاس می‌تواند از حداکثر یک کلاس به صورت مستقیم ارث‌بری کند.
+یعنی هر کلاس حداکثر یک والد دارد.
+
+همینطور که می‌بینید در خط اول \lr{constructor} های \lr{subclass} ها، از
+عبارتی به اسم \lr{\texttt{super}} استفاده شده است:
+
+\begin{codebox}{java}
+public Bike(String brand, int speed, boolean hasCarrier) {
+    super(brand, speed);
+    this.hasCarrier = hasCarrier;  
+}
+\end{codebox}
+
+هر زمان از کلید واژه جدید \lr{super} استفاده می‌کنیم، یعنی قصد داریم از
+فیلدها، متدها یا کانستراکتورهای کلاس پدر استفاده کنیم. مثلا در این‌جا، با
+استفاده از کلیدواژهٔ \lr{\texttt{super}} ، نشان دادیم که می‌خواهیم
+کانستراکتور زیر از کلاس پدر را استفاده کنیم تا فیلدهای
+\lr{\texttt{brand}} و \lr{\texttt{speed}} برای آبجکت جدید مقداردهی شوند:
+
+\begin{codebox}{java}
+public Vehicle(String brand, int speed) {
+    this.brand = brand;
+    this.speed = speed;  
+}
+\end{codebox}
+
+یا مثلا، در متد \lr{\texttt{showBikeInfo()}} ، می‌توانیم با استفاده از
+\lr{\texttt{super}} ، دقیق‌تر مشخص کنیم که متد \lr{\texttt{showInfo}} ی
+کلاس \lr{\texttt{Vehicle}} صدا زده شود:
+
+\begin{codebox}{java}
+public void showBikeInfo() {
+    super.showInfo();  
+    System.out.println("Has Carrier: " + hasCarrier);  
+}
+\end{codebox}
+
+همچنین با استفاده از این کلیدواژه، شما می‌توانید به فیلدهای کلاس پدر هم
+دسترسی داشته باشید:
+
+\begin{codebox}{java}
+public void showBikeInfo() {
+    super.showInfo();  
+    System.out.println("Has Carrier: " + hasCarrier);  
+      
+    System.out.println("Speed: " + super.speed);  
+    System.out.println("Brand: " + super.brand);  
+}
+\end{codebox}
+
+البته نتیجه کپی کردن کد بالا به جای کد \lr{\texttt{ShowBikeInfo()}} این
+است که سرعت و برند دوچرخه‌ها دو بار چاپ می‌شوند! هدف از نشان دادن کد بالا
+این بود که ببینید با کلیدواژهٔ \lr{super} ، به تمام ویژگی‌های کلاس پدر
+دسترسی خواهید داشت. در ادامه این داک، متدهای کلاس پدر را \lr{Override}
+می‌کنید و بیشتر به اهمیت این موضوع پی می‌برید.
+
+\section{کلاس‌های \lr{Abstract}}
+
+فرض کنید می‌خواهید یک برنامه بنویسید تا حقوق کارمندان را حساب کند. سازمان
+شما دو نوع کارمند دارد:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{کارمندهای تمام‌وقت:} این کارمندها، ماهیانه مبلغ ثابتی حقوق
+  می‌گیرند. برای مثال ممکن است هر ماه ۳۰ میلیون تومان حقوق دریافت کنند.
+\item
+  \textbf{کارمندهای قراردادی:} این کارمندها، بر اساس ساعاتی که در ماه در
+  شرکت بودند حقوق می‌گیرند. برای مثال اگر ساعتی ۱ میلیون تومان دریافت
+  کنند ، اگر ۲۰ ساعت در شرکت باشند ۲۰ میلیون و اگر ۴۵ ساعت باشند، ۴۵
+  میلیون حقوق دریافت می کنند.
+\end{itemize}
+
+پکیج \lr{\texttt{company}} را برای درست کردن کلاس‌ها ایجاد کنید. دوتا
+کلاس \lr{\texttt{FullTimeEmployee}} و \lr{\texttt{Contractor}} را در این
+پکیج ایجاد کنید:
+
+\begin{codebox}{java}
+package company;
+
+public class Contractor {
+    public String name;
+    public int id;
+    public double hourlyRate;
+    public int hoursWorked;
+
+    public Contractor(String name, int id, double hourlyRate, int hoursWorked) {
+        this.name = name;
+        this.id = id;
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;  
+    }
+
+    public void showDetails() {  
+        System.out.println("ID: " + id + ", Name: " + name);  
+    }
+
+    public double calculateSalary() {
+        return hourlyRate * hoursWorked;  
+    }  
+}
+\end{codebox}
+
+\begin{codebox}{java}
+package company;
+
+public class FullTimeEmployee {
+    public String name;
+    public int id;
+    public double monthlySalary;
+
+    public FullTimeEmployee(String name, int id, double monthlySalary) {
+        this.name = name;
+        this.id = id;
+        this.monthlySalary = monthlySalary;  
+    }
+
+    public void showDetails() {  
+        System.out.println("ID: " + id + ", Name: " + name);  
+    }
+
+    public double calculateSalary() {
+        return monthlySalary;  
+    }  
+}
+\end{codebox}
+
+در این دو کلاس، موارد مشترک زیادی می‌شود دید. مثل فیلدهای
+\lr{\texttt{name}} و \lr{\texttt{id}} و متد \lr{\texttt{showDetails}} که
+کاملا یکسان هستند. این شباهت، این حس را ایجاد می کند که باید از
+\lr{inheritance} استفاده کنید. برای این کار، شما کلاس
+\lr{\texttt{Employee}} رو تعریف می‌کنید:
+
+\begin{codebox}{java}
+package company;
+
+public class Employee {
+    public String name;
+    public int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;  
+    }
+
+    public void showDetails() {  
+        System.out.println("ID: " + id + ", Name: " + name);  
+    }  
+}
+\end{codebox}
+
+و کدتون رو به شکلی تغییر دهید که کلاس‌های \lr{\texttt{FullTimeEmployee}}
+و \lr{\texttt{Contractor}} هر دو از آن ارث‌بری کند. کلاس‌های زیر را در
+پکیج \lr{company} ایجاد کنید یا تغییر بدهید:
+
+\begin{codebox}{java}
+package company;
+
+public class Contractor extends Employee {
+    public double hourlyRate;
+    public int hoursWorked;
+
+    public Contractor(String name, int id, double hourlyRate, int hoursWorked) {
+        super(name, id);
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;  
+    }
+
+    public double calculateSalary() {
+        return hourlyRate * hoursWorked;  
+    }  
+}
+\end{codebox}
+
+\begin{codebox}{java}
+package company;
+
+public class FullTimeEmployee extends Employee {
+    public double monthlySalary;
+
+    public FullTimeEmployee(String name, int id, double monthlySalary) {
+        super(name, id);
+        this.monthlySalary = monthlySalary;  
+    }
+
+    public double calculateSalary() {
+        return monthlySalary;  
+    }  
+}
+\end{codebox}
+
+می‌بینید که کد تمیزتری شد. حالا بیاید در متد \lr{\texttt{main}} ، یک سری
+کارمند تعریف کنیم و مجموع حقوقی که باید بدیم را حساب کنیم:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    FullTimeEmployee ali = new FullTimeEmployee("Ali", 1, 10_000);  
+    Contractor gholi = new Contractor("Gholi", 2, 1_000, 100);  
+    Contractor mamad = new Contractor("Mamad", 3, 1_000, 25);  
+  
+    ArrayList<FullTimeEmployee> fullTimeEmployees = new ArrayList<>();  
+    ArrayList<Contractor> contractors = new ArrayList<>();  
+  
+    fullTimeEmployees.add(ali);  
+    contractors.add(mamad);  
+    contractors.add(gholi);
+
+    double sumOfSalary = 0;
+    for (FullTimeEmployee employee : fullTimeEmployees) {  
+        sumOfSalary += employee.calculateSalary();  
+    }
+    for (Contractor contractor : contractors) {  
+        sumOfSalary += contractor.calculateSalary();  
+    }  
+      
+    System.out.println("Salary this month: " + sumOfSalary);  
+}
+\end{codebox}
+
+این کد را یکبار بخوانید تا بفهمید چه کاری انجام می‌دهد. آن را اجرا کنید
+تا نتیجه زیر را ببینید:
+
+\begin{codebox}{java}
+Salary this month: 135000.0
+\end{codebox}
+
+یک مشکل در این کد وجود دارد. فرض کنید رئیس می‌خواهد که نوع جدیدی از
+کارمند داشته باشیم. مثلا فرض کنید که می‌خواهیم حقوق مدیران به شکل متفاوتی
+محاسبه شود. کلاس \lr{\texttt{Manager}} را اضافه می‌کنیم و بعد از این کار،
+برای محاسبهٔ حقوق حلقهٔ زیر را به \lr{\texttt{main}} اضافه می‌کنیم:
+
+\begin{codebox}{java}
+for (Manager manager : managers) {  
+    sumOfSalary += manager.calculateSalary();  
+}
+\end{codebox}
+
+بعدتر تصمیم می گیرید که حقوق کله گنده‌ها به شکل متفاوتی محاسبه شود! شما
+کلاس \lr{\texttt{KaleGonde}} را برای آن‌ها درست می‌کنید و برای حساب کردن
+حقوق حلقهٔ زیر را اضافه می‌کنید:
+
+\begin{codebox}{java}
+for (KaleGonde kaleGonde : kaleGondeha) {  
+    sumOfSalary += kaleGonde.calculateSalary();  
+}
+\end{codebox}
+
+کد نهایی‌ چنین چیزی خواهد بود:
+
+\begin{codebox}{java}
+double sumOfSalary = 0;
+for (FullTimeEmployee employee : fullTimeEmployees) {  
+    sumOfSalary += employee.calculateSalary();  
+}
+for (Contractor contractor : contractors) {  
+    sumOfSalary += contractor.calculateSalary();  
+}
+for (Manager manager : managers) {  
+    sumOfSalary += manager.calculateSalary();  
+}
+for (KaleGonde kaleGonde : kaleGondeha) {  
+    sumOfSalary += kaleGonde.calculateSalary();  
+}
+\end{codebox}
+
+حدس بزنید مشکل این کد کجاست؟ بله دقیقا. این حلقه‌ها خیلی مشابه هستند و ما
+کدهای شبیه به هم را ترجیح نمی‌دهیم! یک راه حل خوب برای این موضوع، این هست
+که کلاس \lr{\texttt{Employee}} ، که پدر همهٔ کلاس‌های برنامه‌ است را
+\lr{abstract} کنیم. در ابتدا کد را ببینیم:
+
+\begin{codebox}{java}
+package company;
+
+public abstract class Employee {
+    public String name;
+    public int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;  
+    }
+
+    public void showDetails() {  
+        System.out.println("ID: " + id + ", Name: " + name);  
+    }
+
+    public abstract double calculateSalary();  
+}
+\end{codebox}
+
+با استفاده از کلیدواژهٔ \lr{abstract} در خط سوم این کد، کلاس
+\lr{\texttt{Employee}} را به یک \lr{Abstract Class} تبدیل کردیم. می‌بینید
+که در این کلاس، یک اتفاق عجیب افتاده. متد
+\lr{\texttt{calculateSalary()}} تعریف شده است، ولی هیچ چیزی در
+\lr{\texttt{\{\}}} برای پیاده‌سازی آن نیامده. این یعنی کلاس
+\lr{\texttt{Employee}} ، پیاده‌سازی این متد را به \lr{subclass} های خود
+واگذار کرده.
+
+در واقع، کلاس \lr{\texttt{Employee}} به شما می گوید «هر کارمند، یک متد
+به اسم \lr{\texttt{calculateSalary()}} دارد که هیچ چیزی ورودی نمی‌گیرد و
+خروجی آن، \lr{\texttt{double}} خواهد بود. پیاده‌سازی این متد بسته به نوع
+کارمند (\lr{\texttt{FullTime}} ، \lr{\texttt{Contractor}} ،
+\lr{\texttt{Manager}} یا \lr{\texttt{KaleGonde}} بودن) متفاوت است، ولی
+هر کلاس، قطعا این متد را دارد و شما می‌توانید آن را فراخوانی کنید.».
+
+شاید مقداری گیج کننده باشد ، بیاید تا کد \lr{\texttt{main}} را یک مقدار
+عوض کنیم تا این مطلب برایتان به خوبی مفهوم شود:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    FullTimeEmployee ali = new FullTimeEmployee("Ali", 1, 10_000);  
+    Contractor gholi = new Contractor("Gholi", 2, 1_000, 100);  
+    Contractor mamad = new Contractor("Mamad", 3, 1_000, 25);  
+  
+    ArrayList<Employee> allEmployees = new ArrayList<>();  
+  
+    allEmployees.add(ali);  
+    allEmployees.add(mamad);  
+    allEmployees.add(gholi);
+
+    double sumOfSalary = 0;
+    for (Employee employee : allEmployees) {  
+        sumOfSalary += employee.calculateSalary();  
+    }  
+  
+    System.out.println("Salary this month: " + sumOfSalary);  
+}
+\end{codebox}
+
+کد فعلی \lr{\texttt{main}} را نگاه کنید و تفاوت‌های آن را با کد قبلی
+ببینید. می‌بینید که آرایه‌ ما از جنس \lr{\texttt{Employee}}است، و آن را با
+\lr{\texttt{FullTimeEmployee}} ها و \lr{\texttt{Contractor}} ها پر
+کردیم. از اون‌جایی که می‌دانیم هر \lr{\texttt{Employee}} فارغ از نوع قطعا
+یک متد \lr{\texttt{calculateSalary()}} دارد، پس فقط یک حلقه کافیست که
+درآمد همهٔ کارکنان را جمع بزنیم. اگر این کد اجرا شود، خروجی قبل را
+می‌بینید:
+
+\begin{codebox}{java}
+Salary this month: 135000.0
+\end{codebox}
+
+کار \lr{abstract class} ها دقیقا همین چیزی است که این‌جا دیدید. وقتی در
+کلاس پدر، نمی‌دانیم که کلاس‌های فرزند یک متد را به چه شکل پیاده‌سازی
+می‌کنند، ولی می‌دانیم که حتماً آن را پیاده‌سازی می‌کنند، از
+\lr{abstract class} استفاده می‌کنیم.
+
+دقت کنید که دوتا نکته در \lr{abstract class} ها بسیار مهم است. اول این
+که کلاس‌های فرزند، حتما باید متدهای \lr{abstract} ای که کلاس پدر تعریف
+کرده پیاده‌سازی کنند، چرا که در غیر این صورت به خطا می‌خوریم. یک بار متد
+\lr{\texttt{calculateSalary}} را از \lr{\texttt{Contractor}} پاک کنید تا
+خطایش را ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-9.png}
+\end{figure}
+
+این خطا به شما می‌گوید که «کلاس \lr{\texttt{Contractor}} یا باید خودش
+\lr{abstract} باشد (و در نتیجه پیاده‌سازی متدهای \lr{abstract} را به
+فرزندانش بسپرد)، یا باید متد \lr{\texttt{calculateSalary}} را پیاده‌سازی
+کند».
+
+نکتهٔ دوم این است که چون کلاس‌های \lr{abstract} پیاده‌سازی کاملی ندارند،
+شما نمی‌توانید از این کلاس‌ها مستقیما \lr{\texttt{new}} کنید. کد زیر به
+خطا می‌خورد:
+
+\begin{codebox}{java}
+Employee javad = new Employee("Javad", 4);
+\end{codebox}
+
+کلاس‌های \lr{abstract} ، فقط ظرفی برای \lr{subclass} های خود هستند و
+نباید از آنها مستقیم آبجکت ساخته بشود. در عوض، چیزی مثل کد زیر کاملا
+درست است:
+
+\begin{codebox}{java}
+FullTimeEmployee ali = new FullTimeEmployee("Ali", 1, 10_000);  
+Employee ali2 = ali;
+\end{codebox}
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
