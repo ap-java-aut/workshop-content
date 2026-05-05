@@ -613,7 +613,7 @@ Doors: 4
 
 ### متدهای ناآشنا
 
-کد زیر را در main بنویسید:
+کد زیر را در `main` بنویسید:
 
 ```java
 public static void main(String[] args) {  
