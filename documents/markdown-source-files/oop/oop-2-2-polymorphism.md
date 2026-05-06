@@ -887,5 +887,5 @@ public static String valueOf(Object obj) {
 - آشنایی با انواع **polymorphism ها** و کاربرد آن‌ها
 - آشنایی با انواع و نحوۀ **casting** در **primitive type ها** و **refrence type ها** و خطرات احتمالی آن
 - اتفاقات درون حافظه هنگام **casting** در **refrences type ها**
-- کلاس object چیست
+- کلاس **object** چیست
 - متد های ناآشنا که توسط ما تعریف نشده اند اما قابل استفاده اند، چه ارتباطی با کلاس **Object** دارند
