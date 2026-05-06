@@ -1,0 +1,2130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{مقدمه‌ای بر شی‌گرایی}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{شهاب گریوانی، یونس کاظمی، آرمان حسینی، نگین موسی
+یی جو، نوا جغتایی}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+در این داکیومنت و داکیومنت‌های بعدی، با شی‌گرایی آشنا می‌شویم. شی‌گرایی یا
+\lr{object-oriented programming} (به اختصار \lr{OOP} )، طرز فکری است
+برای تقسیم یک برنامهٔ بزرگ، به واحدهای کوچک‌تر به اسم \lr{class .} خیلی از
+چیزهایی که قبلا بهتون گفته بودیم «در آینده برایتان توضیح می‌دهیم» را قرار
+است این‌جا یاد بگیرید!
+
+پیشنهاد می‌کنیم در طول مطالعه‌ی این داکیومنت با تدریس یارها در ارتباط
+باشید و اگر سوالی داشتید حتما از آن‌ها بپرسید، زیرا این یکی از مهم‌ترین
+داکیومنت‌های شماست و پایه‌ایست برای اکثر مطالبی که در ادامه‌ی ترم باهم مورد
+بحث قرار می‌دهیم مانند ارث‌بری، کپسوله‌سازی و مباحث مشابه .
+
+\section{تایپ‌ها در جاوا}
+
+تا به اینجا با بسیاری از \lr{type} ها مثل \lr{\texttt{int}} ،
+\lr{\texttt{float}} ، \lr{\texttt{String}} ، \lr{\texttt{JFrame}} ،
+\lr{\texttt{ArrayList}} و \ldots{} کار کرده‌اید و با آن‌ها آشنا شده‌اید؛ هر
+برنامه‌نویسی در جاوا، می‌تواند به راحتی تایپ‌های جدید برای خودش بسازد و به
+همین خاطر، احتمالا تا به حال میلیون‌ها تایپ در جاوا نوشته شده‌اند. شما نیز
+در این داک قرار است یاد بگیرید که چطور می‌توانید تایپ‌های جدید بسازید.
+
+همان‌طور که در جلسه‌ی صفر دیدید، تایپ‌های \lr{\texttt{int}} ،
+\lr{\texttt{float}} ، \lr{\texttt{double}} ، \lr{\texttt{long}} و
+\lr{\texttt{char}} ، به اسم «تایپ‌های اولیه» یا \lr{primitive types}
+شناخته می‌شوند. فهرست کامل آن‌ها به شکل زیر است:
+
+\begin{table}[H]
+\centering
+\setLTR
+\begin{tabular}{lll}
+\hline
+\textbf{\lr{Type}} & \textbf{\lr{Definition}} & \textbf{\lr{Approximate range or precision}} \\
+\hline
+\texttt{boolean} & \lr{Logical Value} & \texttt{true} \lr{or} \texttt{false} \\
+\texttt{char} & \(16\)\lr{-bit, Unicode character} & \(64k\) \lr{characters} \\
+\texttt{byte} & \(8\)\lr{-bit, signed integer} & \(-128\) \lr{to} \(127\) \\
+\texttt{short} & \(16\)\lr{-bit, signed integer} & \(-32, 768\) \lr{to} \(32,676\) \\
+\texttt{int} & \(32\)\lr{-bit, signed integer} & \(-2.1\mathrm{e}9\) \lr{to} \(2.1\mathrm{e}9\) \\
+\texttt{long} & \(64\)\lr{-bit, signed integer} & \(-9.2\mathrm{e}18\) \lr{to} \(9.2\mathrm{e}18\) \\
+\texttt{float} & \(32\)\lr{-bit, IEEE 754, floating-point value} & \(6-7\) \lr{significant decimal places} \\
+\texttt{double} & \(64\)\lr{-bit, IEEE} 754 & \(15\) \lr{significant decimal places} \\
+\hline
+\end{tabular}
+\end{table}
+
+این تایپ‌ها، مانند تیکه‌های کوچک لگو هستند که تایپ‌های پیچیده‌تر مانند
+\lr{\texttt{String}} ، \lr{\texttt{JFrame}} ، \lr{\texttt{ArrayList}} و
+هر تایپ دیگری را تشکیل می‌دهند. این تایپ‌های پیچیده‌تر، \lr{reference type}
+نام دارند. در ادامه یک مثال از آن‌ها را مورد بررسی قرار می‌دهیم. کد زیر را
+در \lr{IntelliJ} کپی کنید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        String str = "Hello World";  
+        System.out.println(str);  
+    }  
+}
+\end{codebox}
+
+موس را روی \lr{\texttt{String}} ببرید و کلیک راست کنید. از صفحه‌ای که باز
+می‌شود، منوی \lr{Go To} و بعد از آن، \lr{Declaration or Usages} را انتخاب
+کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-1.png}
+\end{figure}
+
+صفحه‌ی جدیدی برایتان باز می‌شود که شامل پیاده‌سازی تایپ
+\lr{\texttt{String}}است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-2.png}
+\end{figure}
+
+احتمالا شما هنوز این کد را کامل نمی‌فهمید، ولی در این کد نشان داده شده
+است که تایپ \lr{\texttt{String}} از کنار هم گذاشتن چه تایپ‌های دیگری درست
+شده است. مثلا در خط ۱۶۰ همین تصویر می‌بینید که \lr{\texttt{String}} در
+خودش یک آرایه از \lr{\texttt{byte}} ها دارد که اسمش \lr{\texttt{value}}
+است. پایین‌تر می‌بینید که در خودش، یک \lr{\texttt{int}} به نام
+\lr{\texttt{hash}} دارد. اگر دوست دارید، کمی این کد را بررسی کنید. با آن
+که تیکه‌هایی از آن برایتان غریبه هستند، بخش‌هایی هم برای شما آشنا به نظر
+می‌آیند.
+
+\section{کلاس‌ها}
+
+کلاس‌ها، به شما اجازه می‌دهند تا \lr{\texttt{type}} های جدیدی درست کنید.
+برای شروع، با هم یه کلاس جدید به اسم \lr{\texttt{Student}} درست می‌کنیم.
+کد زیر را در \lr{IntelliJ} بنویسید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        System.out.println("Hello World!");  
+    }  
+}
+
+class Student {
+    public int age; 
+    public String name;
+    public String studentID;  
+}
+\end{codebox}
+
+در این کد، ما یک \lr{\texttt{class}} جدید، به نام \lr{\texttt{Student}}
+تعریف کرده‌ایم. این کلاس، از چهار متغیر تشکیل شده است:
+
+\begin{itemize}
+\tightlist
+\item
+  متغیر \lr{\texttt{age}} : متغیری از جنس \lr{\texttt{int}} که سن دانشجو
+  را نشان می‌دهد.
+\item
+  متغیر \lr{\texttt{name}} : متغیرِ \lr{\texttt{String}} ای که اسم دانشجو
+  را نشان می‌دهد.
+\item
+  متغیر \lr{\texttt{studentID}} : متغیر \lr{\texttt{String}} ای که
+  شماره‌ی دانشجویی شخص را نشان می‌دهد.
+\end{itemize}
+
+متغیرهایی که یک کلاس را تشکیل می‌دهند، \lr{\texttt{field}} های آن کلاس
+نام دارند. نگران کلیدواژه‌ی \lr{\texttt{public}} نباشید، در جلسات آینده
+مفهوم آن را توضیح خواهیم داد. برای الان، لازم است که آن را پیش از همه‌ی
+\lr{\texttt{field}} های کلاس‌هایتان قرار دهید. حالا با کلیدواژهٔ
+\lr{\texttt{new}} ، یک دانشجوی جدید به اسم قلی بسازید و فیلدهای آن را
+مقداردهی کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Student gholi = new Student();  
+  
+    gholi.age = 20;  
+    gholi.name = "Gholi";  
+    gholi.studentID = "40413099";  
+}
+\end{codebox}
+
+سپس مشخصات این دانشجو را چاپ کنید:
+
+\begin{codebox}{java}
+System.out.println("New student:");  
+System.out.println("\t+ Name: " + gholi.name);  
+System.out.println("\t+ StudentID: " + gholi.studentID);  
+System.out.println("\t+ Age: " + gholi.age);
+\end{codebox}
+
+کد خود را اجرا کنید. خروجی زیر را می‌بینید:
+
+\begin{codebox}{text}
+New student:  
+    + Name: Gholi  
+    + StudentID: 40413099  
+    + Age: 20
+\end{codebox}
+
+می‌بینید که مشخصات قلی، به درستی روی صفحه چاپ می‌شود. تبریک! شما اولین
+\lr{type} خود را ساختید و یک متغیر از جنس آن درست کردید. می‌خواهیم به این
+\lr{type} جدید، چیزهای بیشتری اضافه کنیم. به \lr{\texttt{Student}} فیلدی
+به اسم \lr{\texttt{grades}} از جنس \lr{\texttt{ArrayList<Double>}} اضافه
+کنید. این فیلد، نمرات دانشجو در درس‌های مختلف را نشان می‌دهد:
+
+\begin{codebox}{java}
+public ArrayList<Double> grades;
+\end{codebox}
+
+حالا، وقتی دارین فیلدهای مختلف قلی رو توی \lr{\texttt{main}} مقداردهی
+می‌کنید، این آرایه هم با یک آرایهٔ خالی مقداردهی کنید:
+
+\begin{codebox}{java}
+gholi.age = 20;  
+gholi.name = "Gholi";  
+gholi.studentID = "40413099";  
+gholi.grades = new ArrayList<Double>();
+\end{codebox}
+
+بعد از این کار، چند نمره‌ی رندوم به قلی بدهید:
+
+\begin{codebox}{java}
+gholi.grades.add(20.0);  
+gholi.grades.add(17.0);  
+gholi.grades.add(18.0);  
+gholi.grades.add(0.0);
+\end{codebox}
+
+حالا، جایی که دارید مشخصات قلی را چاپ می‌کنید، نمرات را هم چاپ کنید:
+
+\begin{codebox}{java}
+System.out.println("New student:");  
+System.out.println("\t+ Name: " + gholi.name);  
+System.out.println("\t+ StudentID: " + gholi.studentID);  
+System.out.println("\t+ Age: " + gholi.age);  
+System.out.print("\t+ Grades: ");
+for (var grade: gholi.grades) {  
+    System.out.print(grade + ", ");  
+}
+\end{codebox}
+
+کدتان را اجرا کنید. خروجی شما باید به این شکل باشد:
+
+\begin{codebox}{text}
+New student:  
+    + Name: Gholi  
+    + StudentID: 40413099  
+    + Age: 20  
+    + Grades: 20.0, 17.0, 18.0, 0.0,
+\end{codebox}
+
+می‌خواهیم به \lr{\texttt{Student}} ، قابلیت محاسبه‌ی معدل هم بدهیم. برای
+این کار، متدی جدید به اسم \lr{\texttt{getAverageGrade}} در
+\lr{\texttt{Student}} تعریف می‌کنیم:
+
+\begin{codebox}{java}
+class Student {
+    public int age;
+    public String name;
+    public String studentID;
+    public ArrayList<Double> grades;
+
+    public double getAverageGrade() { 
+        if (grades.size() == 0) {
+            return 0;  
+        }
+
+        double gradeSum = 0;
+        for (double grade: grades) {  
+            gradeSum += grade;  
+        }
+
+        return gradeSum / grades.size();  
+    }  
+}
+\end{codebox}
+
+جایی از کدتان که در آن مشخصات \lr{\texttt{gholi}} را چاپ می‌کنید، خطوط
+زیر را اضافه کنید:
+
+\begin{codebox}{java}
+System.out.println();  
+System.out.println("\t+ Average Grade: " + gholi.getAverageGrade());
+\end{codebox}
+
+کدتان را دوباره اجرا کنید. خروجی‌ای مثل زیر می‌بینید:
+
+\begin{codebox}{text}
+New student:  
+    + Name: Gholi  
+    + StudentID: 40413099  
+    + Age: 20  
+    + Grades: 20.0, 17.0, 18.0, 0.0,   
+    + Average Grade: 13.75
+\end{codebox}
+
+لحظه‌ای به خود تابع \lr{\texttt{main}} توجه کنید. می‌بینید که خود آن نیز
+در کلاسی به اسم \lr{\texttt{Main}}‍است! شما در تمام این مدت داشتید کلاس
+\lr{\texttt{Main}} را تعریف می‌کردید، بدون آن که خبر داشته باشید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {
+        // Your code here
+    }  
+}
+\end{codebox}
+
+شما حتی می‌توانید از این کلاس هم یک متغیر درست کنید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        Main a = new Main();  
+    }  
+}
+\end{codebox}
+
+البته که متغیر ساختن از جنس \lr{\texttt{Main}} خیلی کار خوبی نیست! ولی
+جالب است که تا همین الآن هم شما از \lr{\texttt{class}} ها استفاده
+می‌کردید، بدون آن که بدانید. =)))
+
+در ادامه، کمی رسمی‌تر و قدم به قدم‌تر کلاس‌ها را بررسی می کنیم.
+
+\subsection{تعریف کلاس}
+
+تعریف کلاس، کار سختی نیست، فقط از کلیدواژهٔ \lr{\texttt{class}} استفاده
+کنید و اسم کلاستان را بنویسید:
+
+\begin{codebox}{java}
+class Student {
+    // Everything an student can do
+}
+\end{codebox}
+
+هر چیزی که بین دو براکت قرار گیرد، متعلق به آن کلاس است. کلاس‌ها، به شما
+اجازه می‌دهند که کدهای خیلی خیلی بزرگ را به تیکه‌های کوچیک‌تر تقسیم کنید و
+با این کار، برنامه‌های منظم‌تر و بهتری داشته باشید.
+
+یادآوری می‌کنیم که \lr{type} هایی که به وسیلهٔ \lr{\texttt{class}} ها
+تعریف می‌شوند، همگی از \lr{reference type} ها محسوب می‌شوند.
+
+\section{ایجاد \lr{Object}}
+
+به متغیرهایی که از جنس یک \lr{reference type} هستند، \lr{object} یا
+\lr{instance} می‌گویند.در کد زیر، قلی و ممد و سلطان همگی \lr{object} هایی
+از جنس \lr{\texttt{Student}} ان:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Student gholi;  
+    Student mamad;  
+    Student soltan;  
+}
+\end{codebox}
+
+تلاش کنید این کد را اجرا کنید. می‌بینید که طبیعتا بدون هیچ مشکلی اجرا
+می‌شود. شما توی این کد سه \lr{object} جدید تعریف کردید و هیچ‌جایی آن‌ها را
+مقداردهی نکردید و جایی هم از آن‌ها استفاده نشده است.
+
+برای این که آن‌ها را مقداردهی کنید، از کلید‌واژهٔ \lr{new} استفاده کنید:
+
+\begin{codebox}{java}
+Student gholi = new Student();  
+Student mamad = new Student();  
+Student soltan = new Student();
+\end{codebox}
+
+حالا فیلدهای ان‌ها را مقداردهی کنید:
+
+\begin{codebox}{java}
+gholi.age = 21;  
+gholi.name = "Gholi";  
+gholi.studentID = "40513089";  
+gholi.grades = new ArrayList<>();  
+  
+mamad.age = 25;  
+mamad.name = "Mamad";  
+mamad.studentID = "40513090";  
+mamad.grades = new ArrayList<>();  
+  
+soltan.age = 103;  
+soltan.name = "Soltan";  
+soltan.studentID = "40513091";  
+soltan.grades = new ArrayList<>();
+\end{codebox}
+
+همانطور که می‌بینید ما در این کد به اجبار کد های تکراری زیادی زده‌ایم. کدی
+که مربوط به بخش مقداردهی \lr{field} های یک \lr{object} است سه بار تکرار
+می‌شود پس بهتر است این کدها را به یک متد تبدیل کنیم.
+\lr{\texttt{Constructor}} ها، متدهایی هستند که دقیقا برای همین کار، به
+کمک ما می‌آیند.
+
+\subsection{\lr{Constructor} ها}
+
+به کلاس \lr{Student} ، متد زیر را اضافه کنید:
+
+\begin{codebox}{java}
+public Student(int newStudentAge, String newStudentName, String newStudentID) {
+    age = newStudentAge;
+    name = newStudentName;
+    studentID = newStudentID;
+
+    grades = new ArrayList<>();  
+}
+\end{codebox}
+
+می‌بینید که ظاهر این متد، کمی متفاوت است! نوع خروجی‌اش مشخص نشده و جایی از
+کلیدواژه‌ی \lr{\texttt{return}} استفاده نکرده است. به این متد،
+\lr{\texttt{Constructor}} می‌گویند و وظیفه‌ی آن، مقداردهی یک \lr{object}
+جدید از کلاس \lr{\texttt{Student}} ‍است. در \lr{constructor} بالا، ما
+برای ساخت یه \lr{\texttt{Student}} جدید، سن، اسم و شماره دانشجویی‌اش را
+ورودی گرفته‌ایم و با استفاده از آن‌ها فیلدهای \lr{\texttt{Student}} را
+برای \lr{object} جدیدمان مقداردهی کرده‌ایم.
+
+برای این که از این \lr{\texttt{constructor}} استفاده کنید، کد توی
+\lr{\texttt{main}} را با کد زیر جایگرین کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Student gholi = new Student(21, "Gholi", "40513089");  
+    Student mamad = new Student(25, "Mamad", "40513090");  
+    Student soltan = new Student(103, "Soltan", "40513091");  
+}
+\end{codebox}
+
+می‌بینید که با استفاده از یه \lr{\texttt{constructor}} خوب، چقدر کد
+\lr{\texttt{main}} کوتاه‌تر و تمیزتر شد! حالا متد زیر را به
+\lr{\texttt{Student}} اضافه کنید:
+
+\begin{codebox}{java}
+public void printInfo() {  
+    System.out.println("Student info:");  
+    System.out.println("\t+ Name: " + name);  
+    System.out.println("\t+ StudentID: " + studentID);  
+    System.out.println("\t+ Age: " + age);  
+    System.out.print("\t+ Grades: ");
+    for (var grade: grades) {  
+        System.out.print(grade + ", ");  
+    }  
+    System.out.println();  
+    System.out.println("\t+ Average Grade: " + getAverageGrade());  
+}
+\end{codebox}
+
+و توی \lr{\texttt{main}} ، این متد را صدا بزنید تا اطلاعات ممد و قلی و
+سلطان چاپ شود:
+
+\begin{codebox}{java}
+gholi.printInfo();  
+mamad.printInfo();  
+soltan.printInfo();
+\end{codebox}
+
+خروجی‌ای مثل زیر می‌بینید:
+
+\begin{codebox}{java}
+Student info:  
+    + Name: Gholi  
+    + StudentID: 40513089  
+    + Age: 21  
+    + Grades:   
+    + Average Grade: 0.0  
+Student info:  
+    + Name: Mamad  
+    + StudentID: 40513090  
+    + Age: 25  
+    + Grades:   
+    + Average Grade: 0.0  
+Student info:  
+    + Name: Soltan  
+    + StudentID: 40513091  
+    + Age: 103  
+    + Grades:   
+    + Average Grade: 0.0
+\end{codebox}
+
+می‌بینیم که \lr{constructor} ها کار کردند و کد ما هم، کوتاه و تمیز شد!
+
+\subsection{\lr{Default Constructor}}
+
+پیش از آن که ما برای کلاس \lr{\texttt{Student}} کانستراکتور تعریف کنیم،
+می‌توانستیم با استفاده از کلیدواژهٔ \lr{\texttt{new}} از آن \lr{object}
+بسازیم:
+
+\begin{codebox}{java}
+Student gholi = new Student();
+\end{codebox}
+
+خب، کمی بهش فکر کنید. چگونه این اتفاق افتاد؟ ما
+که\lr{\texttt{constructor}} ای برای \lr{\texttt{Student}} نداشتیم! با
+نوشتن این کد، دقیقا چه \lr{\texttt{constructor}} ای صدا زده می‌شود؟
+
+وقتی یک کلاس \lr{\texttt{constructor}} نداشته باشد، جاوا به طور پیش‌فرض
+یک \lr{\texttt{constructor}} خالی برایش می‌نویسد. این
+\lr{\texttt{constructor}} به شکل زیر است:
+
+\begin{codebox}{java}
+public Student() {}
+\end{codebox}
+
+در این کانستراکتور هیچ اتفاقی نمی‌افتد و هیچ \lr{field} ای مقداردهی
+نمی‌شود. صرفاً وجود دارد تا شما بتوانید به راحتی با استفاده از
+\lr{\texttt{new Student()}} ، آبجکت‌های جدیدی از این کلاس بسازید. به محض
+آن که شما اولین \lr{\texttt{constructor}} کلاس \lr{\texttt{Student}} را
+بنویسید، دیگر نمی‌توانید از \lr{default constructor} جاوا استفاده کنید.
+در کد \lr{main} فعلیتان این خط را بنویسید و آن را اجرا کنید:
+
+\begin{codebox}{java}
+Student pedram = new Student();
+\end{codebox}
+
+خطایی مانند زیر می‌گیرید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-3.png}
+\end{figure}
+
+از آن‌جایی که کلاس \lr{\texttt{student}} ، الآن یک
+\lr{\texttt{constructor}} دارد، جاوا برای شما کانستراکتور دیفالت را درست
+نمی‌کند.
+
+\subsection{کلاس‌ها با چند کانستراکتور}
+
+شما می‌توانید برای رفع مشکلی که بالاتر به آن برخورد کردید، خودتان یک
+کانستراکتور خالی برای \lr{\texttt{Student}} بنویسید:
+
+\begin{codebox}{java}
+public Student() {}
+\end{codebox}
+
+دقت کنید که لازم نیست کانستراکتور قبلی خود را پاک کنید! هر کلاس، می‌تواند
+چندین کانستراکتور داشته باشد. شما می‌توانید این دو کانستراکتور را در کنار
+هم بنویسید و کدتان همچنان کار می‌کند.
+
+\section{\lr{field} ها}
+
+متغیر های یک کلاس، یا \lr{field} ها، ویژگی‌های آن کلاس را نشان می‌دهند.
+شما تا الآن تعداد خوبی \lr{field} برای کلاس \lr{student} تعریف کردید و
+با آن‌ها آشنا شدید:
+
+\begin{codebox}{java}
+class Student {
+    public int age;
+    public String name;
+    public String studentID;
+    public ArrayList<Double> grades;
+
+    // Other things happening in the Student class
+
+}
+\end{codebox}
+
+شما حتی می‌توانید در یک کلاس، \lr{field} هایی از جنس همان کلاس تعریف
+کنید! مثلاً، می‌توانید فیلد \lr{friend} را برای \lr{\texttt{Student}} ، از
+جنس خود \lr{\texttt{Student}} تعریف کنید:
+
+\begin{codebox}{java}
+class Student {
+    // Other fields
+    
+    public Student friend;
+
+    // Other things happening in the Student class
+
+}
+\end{codebox}
+
+حالا، یک \lr{\texttt{student}} جدید به اسم شهرام توی کدتان تعریف کنید:
+
+\begin{codebox}{java}
+var shahram = new Student();
+\end{codebox}
+
+برای الآن، بدون این که فیلدهای شهرام را مقداردهی کنید، سعی کنید تا
+اطلاعات او را چاپ کنید:
+
+\begin{codebox}{java}
+System.out.println("Shahram: ");  
+System.out.println("\t+ Name: " + shahram.name);  
+System.out.println("\t+ Age: " + shahram.age);  
+System.out.println("\t+ StudentID: " + shahram.studentID);
+\end{codebox}
+
+کدتان را اجرا کنید، خروجی زیر را برای شهرام می‌بینید:
+
+\begin{codebox}{text}
+Shahram:  
+    + Name: null  
+    + Age: 0  
+    + StudentID: null
+\end{codebox}
+
+می‌بینید که علی رغم آن که شما به شهرام اسم و سن و شماره دانشجویی ندادید،
+خود جاوا یک سری مقدار به آن‌ها اختصاص داده است. مقدار دیفالت جاوا برای
+فیلدهایی که مقداردهی نشده‌اند، به این شکل است:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{متغیرهای عددی (مثل \lr{\texttt{int}} ، \lr{\texttt{float}} و
+  امثال اون‌ها):} مقدار \lr{\texttt{0}} را به خود می‌گیرند.
+\item
+  \textbf{متغیرهای \lr{\texttt{char}} :} مقدار
+  \lr{\texttt{'\textbackslash 0'}} را به خود می‌گیرند.
+\item
+  \textbf{متغیرهای \lr{\texttt{boolean}} :} مقدار \lr{\texttt{false}} به
+  خود می‌گیرند.
+\item
+  \textbf{متغیرهایی از جنس \lr{reference type} :} مقدار
+  \lr{\texttt{null}} به خود می‌گیرند.
+\end{itemize}
+
+کلیدواژه‌ی \lr{\texttt{null}} ، یکی از کلیدواژه‌های خاص جاواست که در واقع
+یک مقدار نیست، بلکه نشان‌دهنده‌ی آن است که یک متغیر از جنس
+\lr{reference type} ، هنوز مقداری به خودش نگرفته است. اگر توی کد
+قبلیمان، خط زیر را بنویسیم:
+
+\begin{codebox}{java}
+if (shahram.studentID == null) {  
+    System.out.println("Shahram does not have a studentID");  
+}
+\end{codebox}
+
+می‌بینید که پیام زیر چاپ می‌شود:
+
+\begin{codebox}{text}
+Shahram does not have a studentID
+\end{codebox}
+
+جلوتر، با این کلید‌واژه بهتر آشنا می‌شویم.
+
+\subsection{فیلدهای \lr{static}}
+
+بعضی فیلدها( ویژگی‌ها)، متعلق به هیچ \lr{object} ای نیستند، ولی بی‌ربط به
+خود \lr{\texttt{class}} هم نیستند. مثلا در کلاس \lr{\texttt{Student}}
+ویژگیِ «تعداد کل دانشجوها» متعلق به هیچ کدام از قلی، ممد یا سلطان نیست،
+ولی به کلاس \lr{\texttt{Student}} ربط دارد.
+
+به این ویژگی‌ها، ویژگی‌های \lr{\texttt{static}} گویند. آن‌ها به خود
+\lr{class} مرتبط هستند و بین تمام \lr{instance} های آن \lr{class}
+مشترکند. فیلد\lr{\texttt{static}} زیر را برای دانشجوها تعریف کنید:
+
+\begin{codebox}{java}
+class Student {
+    public static int totalNumberOfStudents = 0;
+
+    // other stuff
+
+}
+\end{codebox}
+
+سپس در همه‌ی \lr{constructor} هایی که برای \lr{\texttt{Student}}
+نوشته‌اید، به مقدار آن یکی اضافه کنید. با این کار، با ساخت هر دانشجو،
+تعداد کل دانشجوها یکی زیاد می‌شود:
+
+\begin{codebox}{java}
+public Student() {
+    totalNumberOfStudents++;  
+}
+
+public Student(int newStudentAge, String newStudentName, String newStudentID) {
+    age = newStudentAge;
+    name = newStudentName;
+    studentID = newStudentID;
+    grades = new ArrayList<>();
+    
+    totalNumberOfStudents++;  
+}
+\end{codebox}
+
+حالا، کد زیر را در \lr{main} بنویسید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    var gholi = new Student();  
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);
+
+    var mamad = new Student();  
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);
+
+    var javad = new Student();  
+    System.out.println("Current number of students: " + Student.totalNumberOfStudents);  
+}
+\end{codebox}
+
+همچین خروجی‌ای می‌بینید:
+
+\begin{codebox}{text}
+Current number of students: 1  
+Current number of students: 2  
+Current number of students: 3
+\end{codebox}
+
+می‌بینید که ما برای دسترسی به \lr{\texttt{totalNumberOfStudents}} ، از
+خود کلاس \lr{\texttt{Student}} استفاده کرده‌ایم. می‌توانستید با کد زیر، از
+هر کدام از \lr{instance} های \lr{\texttt{student}} نیز به آن دسترسی پیدا
+کنید، ولی کار چندان خوبی نیست:
+
+\begin{codebox}{java}
+System.out.println("Current number of students: " + gholi.totalNumberOfStudents);
+\end{codebox}
+
+\section{\lr{method} ها}
+
+تا اینجای کار، با کلاس‌های نسبتاً ساده‌ای سر و کار داشتید. اما جاهای مختلف
+به «رفتار کلاس» یا این ایده که کلاس ما کاری انجام بدهد اشاره کردیم،
+اینجاست که متدها وارد عمل می‌شوند: به طور کلی زمانی که بخواهید در کدتان
+تصمیمی بگیرید و یا عملیات منطقی یا به طور کلی کاری انجام بدهید، باید از
+متدها استفاده کنید. متدها آنقدر مهم هستند که حتی در اولین مواجه‌\-تان با
+جاوا از متد \lr{\texttt{main}} استفاده کردید و داخل آن کد خود را نوشتید!
+در این بخش قرار است دقیق‌\-تر و کامل‌\-تر با متدها آشنا بشوید. کد زیر، یک
+مثال ساده از یک متد است:
+
+\begin{codebox}{java}
+public class Refrigerator {
+    int numberOfBananas;
+
+    public void getBananas(int n) {
+        boolean enoughBananas = numberOfBananas >= n;
+        if (enoughBananas) {
+            numberOfBananas -= n;  
+            System.out.println(
+                    "You took " + n + " bananas out of your fridge!"
+            );  
+        } else {  
+            System.out.println(
+                    "You don't have that many bananas in your fridge!"
+            );  
+        }  
+    }  
+}
+\end{codebox}
+
+در این مثال، یک کلاس \lr{\texttt{Refrigerator}} داریم که یک فیلد از نوع
+\lr{\texttt{int}} به نام \lr{\texttt{numberOfBananas}} دارد. همچنین یک
+متد دارد که نوع خروجی‌اش \lr{\texttt{void}} است (خروجی ندارد) و یک ورودی
+( \lr{argument )} از نوع \lr{\texttt{int}} دارد. با استفاده از این متد
+می‌\-توانید از توی یخچالتان موز بردارید! حالا خودتان متدی اضافه کنید که
+با آن بتوانید توی یخچالتان موز بگذارید. متدتان احتمالاً چیزی شبیه به این
+می‌شود:
+
+\begin{codebox}{java}
+public void putBananas(int n) {    
+    numberOfBananas += n;  
+    System.out.println("You put " + n + " bananas in your fridge!");  
+}
+\end{codebox}
+
+اینجا، متدمان تعداد مشخص و ثابتی ورودی دارد ( یکی )؛ اما می‌\-توانید
+متدهایی تعریف کنید که تعداد ورودی\-‌هایشان ثابت نباشد. در این درس نیازی
+به یادگیری این کار ندارید اما در صورت علاقه می\-‌توانید کلمه‌ی ``varargs''
+را جستجو کنید یا از
+\href{https://www.geeksforgeeks.org/variable-arguments-varargs-in-java/}{این
+لینک} راجع به آن بخوانید.
+
+\subsection{متغیرهای محلی \lr{(local variables)}}
+
+متد \lr{\texttt{getBananas()}} که در مثال بخش قبل تعریف کردیم، قبل از هر
+چیزی چک می‌\-کند که توی یخچال به اندازه‌ی کافی موز وجود داشته باشد و این
+را در یک متغیر محلی به اسم \lr{\texttt{enoughBananas}} ذخیره می‌\-کند.
+متغیرهای محلی موقتی هستند و فقط توی همان متدی که تعریف شده‌اند قابل
+استفاده‌اند. این متغیرها وقتی متد صدا زده می‌شود ساخته می‌شوند و معمولاً بعد
+از تمام شدن متد از بین می‌روند. همچنین از بیرون متد نمی‌توانید به آنها
+دسترسی داشته باشید. برای آن که خودتان ببینید، در همین کلاس
+\lr{\texttt{Refrigerator}} سعی کنید در متد \lr{\texttt{putBananas}} از
+متغیر \lr{\texttt{enoughBananas}} استفاده کنید؛ برای مثال:
+
+\begin{codebox}{java}
+public void putBananas(int n) {  
+    System.out.println(enoughBananas);
+    numberOfBananas += n;  
+    System.out.println("You put " + n + " bananas in your fridge!");  
+}
+\end{codebox}
+
+احتمالاً می‌\-\-بینید که \lr{\texttt{enoughBananas}} قرمز شده است. موس را
+ببرید روی آن ؛ با همچین چیزی مواجه می‌\-شوید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-4.png}
+\end{figure}
+
+اینجا \lr{Intellij} دارد به شما می\-‌گوید که نمی‌\-تواند
+\lr{\texttt{enoughBananas}} را پیدا کند! دلیلش هم همانطور که گفتیم آن
+است که \lr{\texttt{enoughBananas}} داخل متد \lr{\texttt{getBananas}}
+تعریف شده و مربوط به همان متد است و داخل \lr{\texttt{putBananas}} همچین
+متغیری وجود ندارد! حالا یک متد \lr{\texttt{main}} خالی داخل کلاستان
+بنویسید و سعی کنید اجرایش کنید:
+
+\begin{codebox}{java}
+public class Refrigerator {
+    int numberOfBananas;
+    
+    public void getBananas(int n) {
+        boolean enoughBananas = numberOfBananas >= n;
+        if (enoughBananas) {
+            numberOfBananas -= n;
+            System.out.println(
+               "You took " + n + " bananas out of your fridge!"
+            );  
+            } else {
+            System.out.println(
+                "You don't have that many bananas in your fridge!"
+            );  
+        }  
+    }
+
+    public void putBananas(int n) {  
+        System.out.println(enoughBananas);
+        numberOfBananas += n;
+        System.out.println("You put " + n + " bananas in your fridge!");  
+    }
+    
+    public static void main(String[] args) {  
+    }  
+}
+\end{codebox}
+
+کدتان کامپایل نمی‌شود. با همچین چیزی مواجه می‌\-شوید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-5.png}
+\end{figure}
+
+اینجا جاوا نتوانسته کد شما را کامپایل کند و به شما می‌گوید که نمی‌\-تواند
+\lr{\texttt{enoughBananas}} را پیدا کند. باید هشدارهای \lr{Intellij} را
+جدی می\-‌گرفتید!
+
+ورودی‌های یک متد هم جزو متغیرهای محلی آن متد حساب می‌شوند، با این تفاوت که
+مقدار اولیه‌شان موقعی که متد صدا زده می‌شود از طرف کسی که متد را فراخوانی
+کرده است، مشخص می‌شود.
+
+\subsubsection{مقداردهی اولیه به متغیرهای محلی}
+
+بر خلاف فیلدهای آبجکت که اگر مقداردهیشان نکنید، جاوا برای آنها مقدار
+پیش‌\-فرضی قرار می‌دهد، متغیرهای محلی را باید قبل از استفاده کردن مقداردهی
+کنید وگرنه خطای کامپایل می\-‌گیرید:
+
+\begin{codebox}{java}
+public class SomeClass {
+    // instance variables always get default values if  
+    // you don't initialize them
+    int foo;
+
+    void myMethod() {
+    // local variables do not get default values
+        int bar;
+        foo += 1; // This is ok, foo has the value 0
+        bar += 1; // compile-time error, bar is uninitialized
+    }
+
+    public static void main(String[] args) {  
+        SomeClass something = new SomeClass();  
+        something.myMethod();  
+    }  
+}
+\end{codebox}
+
+سعی کنید کد بالا را اجرا کنید. می‌\-بینید که کدتان حتی کامپایل هم نمی‌شود!
+باید اول \lr{\texttt{bar}} را مقداردهی کنید:
+
+\begin{codebox}{java}
+bar = 99; // This is ok, we're setting bar's initial value  
+bar += 1; // Now this calculation is ok
+\end{codebox}
+
+البته دقت کنید که لازم نیست حتماً موقع تعریف کردن یک متغیر آن را مقداردهی
+کنید؛ بلکه قبل از آن که از آن استفاده کنید باید مقداردهی شده باشد. موضوع
+وقتی پیچیده\-تر می‌شود که مقداردهی را داخل یک شرط انجام بدهید:
+
+\begin{codebox}{java}
+void myMethod() {
+    int bar;
+    if (someCondition) {  
+        bar = 42;  
+    }  
+    bar += 1; // Still a compile-time error, bar may not be initialized
+}
+\end{codebox}
+
+در این مثال، \lr{\texttt{bar}} فقط در صورتی مقداردهی می‌شود که شرط
+\lr{\texttt{someCondition}} برقرار باشد. یعنی همچنان ممکن است که قبل از
+خط \lr{\texttt{bar += 1}} ، متغیر \lr{\texttt{bar}} مقداردهی نشده باشد.
+کامپایلر به شما اجازه نمی‌دهد همچین کاری بکنید و این کد هم خطای کامپایل
+می‌دهد.
+
+برای حل این مشکل، چند راه حل وجود دارد. می\-‌توانید متغیر را قبل از بلوک
+شرط مقداردهی کنید، یا استفاده‌ای که از متغیر می‌\-کنید را هم داخل بلوک شرط
+ببرید، یا می‌\-توانید با توجه به برنامه\-‌ای که دارید می‌\-نویسید، به نحوی
+مطمئن بشید که متغیر قبل از مقداردهی استفاده نمی‌شود. برای مثال، توی کد
+بالا می‌\-توانید \lr{\texttt{bar}} را هم در بلوک \lr{if} و هم در بلوک
+\lr{\texttt{else}} مقداردهی کنید یا در صورتی که
+\lr{\texttt{someCondition}} برقرار نبود، متد را تمام کنید و
+\lr{\texttt{return}} کنید:
+
+\begin{codebox}{java}
+void myMethod() {
+    int bar;
+    if (someCondition) {  
+        bar = 42;  
+    } else {
+        return;  
+    }  
+    bar += 1; // This is ok!
+}
+\end{codebox}
+
+در این کد، یا \lr{\texttt{bar}} مقداردهی می‌شود و بعد از آن استفاده
+می‌شود، یا کلا متد قطع می‌شود و \lr{\texttt{return}} می‌\-کند. جاوا این را
+ازتون می\-‌پذیره!
+
+حالا چرا اصلاً جاوا انقدر روی این موضوع حساس است؟ یکی از متداول‌ترین
+مشکلاتی که در زبان‌هایی مثل \lr{C} و \lr{C++} به وجود می‌آید آن است که
+یادتان می‌رود متغیری را مقداردهی کنید. توی این زبان‌\-ها، متغیرهای
+مقداردهی نشده، مقادیر ظاهراً رندومی اختیار می\-‌کنند و این می‌\-تواند
+دردسرساز شود و باعث سخت‌تر شدن پروسه‌ی دیباگ برنامه\-‌ها بشود. جاوا با
+مجبور کردن شما به مقداردهی به متغیرها، باعث جلوگیری از این مشکل می‌شود.
+
+\subsection{\lr{Shadowing}}
+
+وقتی که نام یک متغیر محلی یا یک ورودی متد با نام یکی از فیلد های کلاسمان
+یکی باشد، آن متغیر محلی، اصطلاحا روی آن فیلد ``سایه می‌\-اندازد'' و جلوی
+دسترسی ما به آن فیلد را می‌\-گیرد، زیرا در این حالت جاوا نمی‌داند که ما
+هنگام صدا زدن آن نام، قصد استفاده از متغیر محلی را داریم یا فیلد متد را،
+پس به طور پیش‌\-فرض استفاده از متغیر محلی را اولویت می‌دهد. شاید فکر کنید
+این مشکل به ندرت پیش می‌آید، ولی \lr{shadowing} اتفاق نسبتاً متداولی است،
+مخصوصا وقتی که متغیرهایمان اسم‌های متداولی داشته باشند. مثال زیر را
+ببینید:
+
+\begin{codebox}{java}
+public class Car {
+    double x;
+    double y;
+    
+    public void moveTo(double x, double y) {  
+        System.out.println("The car is moving to " + x + ", " + y);  
+    }  
+}
+\end{codebox}
+
+اینجا ما یک کلاس به نام \lr{\texttt{Car}} داریم که فعلاً فقط دو فیلد برای
+مختصات دارد ( \lr{\texttt{x}} و \lr{\texttt{y}} ). یک متد
+\lr{\texttt{moveTo}} برای آن تعریف کرده‌ایم که قرار است ماشین را برای ما
+حرکت دهد. همانگونه که می‌\-بینید، فعلاً متد \lr{\texttt{moveTo}} فقط دارد
+\lr{\texttt{x}} و \lr{\texttt{y}} را چاپ می‌\-کند. اما این
+\lr{\texttt{x}} و \lr{\texttt{y}} ، کدام \lr{\texttt{x}} و
+\lr{\texttt{y}} هستند؟ اگر مثلاً مختصات ماشین ما \lr{\texttt{(3,4)}} باشد
+و ما متد \lr{\texttt{moveTo}} را روی ماشین صدا بزنیم و به آن مقادیر
+\lr{\texttt{(6,7)}} را بدهیم، چه چیزی چاپ می‌شود؟ خودتان امتحان کنید! توی
+همین کلاس یک متد \lr{\texttt{main}} بنویسید، در آن یک آبجکت جدید از
+\lr{\texttt{Car}} بسازید، به آن \lr{\texttt{x}} و \lr{\texttt{y}} بدهید
+و متد \lr{\texttt{moveTo}} را رویش صدا بزنید.
+
+همانطور که می‌\-بینید، \lr{\texttt{moveTo}} همان مقادیری را چاپ می\-‌کند
+که به آن ورودی دادیم؛ اما اگر بخواهیم ماشین را حرکت بدهیم، باید بتوانیم
+مختصاتش را تغییر دهیم، ولی چطور می\-‌توانیم به فیلدهای \lr{\texttt{x}} و
+\lr{\texttt{y}} که مربوط به آبجکتمان هستند دسترسی پیدا کنیم؟
+
+\subsubsection{\lr{this}}
+
+هروقت نیاز دارید که صریحاً به آبجکتی که تویش هستیم یا یکی از اعضای آن
+اشاره کنید، می‌\-توانید از کلیدواژه‌ی \lr{\texttt{this}} استفاده کنید.
+بیاید دوباره با مثال \lr{\texttt{moveTo}} ببینیم:
+
+\begin{codebox}{java}
+public class Car {
+    double x;
+    double y;
+    double gas;
+    
+    public void moveTo(double x, double y) {
+        double distance = Math.sqrt(  
+            (this.x - x) * (this.x - x) + (this.y - y) * (this.y - y)  
+        );
+        if (5 * distance > gas) {  
+            System.out.println("Not enough gas!");  
+        } else {
+            this.x = x;
+            this.y = y;
+            gas -= 5 * distance;  
+            System.out.println("The car is moving to " + x + ", " + y);  
+        }  
+    }  
+}
+\end{codebox}
+
+اینجا، ابتدا فاصله‌ای که قرار است طی بشود را حساب کرده و توی متغیر محلی
+\lr{\texttt{distance}} ریختیم. همانطور که می\-‌بینید، برای دسترسی به
+\lr{\texttt{x}} و \lr{\texttt{y}} مربوط به آبجکت ( مختصات فعلی ماشین )،
+از \lr{\texttt{this.x}} و \lr{\texttt{this.y}} استفاده کردیم.
+\lr{\texttt{this}} در واقع به همان آبجکتی که تویش هستیم اشاره می\-‌کند.
+
+دقت کنید که یک فیلد \lr{\texttt{gas}} نیز به \lr{\texttt{Car}} اضافه
+کردیم که قرار است مقدار بنزین ماشین را نشان بدهد. در ادامه‌ی متد، ابتدا
+مطمئن می‌\-شویم که ماشین به اندازه‌ی کافی بنزین دارد و سپس ماشین را حرکت
+می\-‌دهیم. می‌\-بینید که برای دسترسی به \lr{\texttt{gas}} از
+\lr{\texttt{this}} استفاده نکردیم؛ چرا که اشاره به آبجکتی که در آن هستیم
+به طور ضمنی برقرار است و \lr{\texttt{gas}} و \lr{\texttt{this.gas}}
+اینجا یک چیز هستند.
+
+استفاده از \lr{\texttt{this}} برای دسترسی به فیلدهایی که روی آنها سایه
+افتاده، روش مرسومی است و باعث می\-‌شو بتوانیم از اسم\-‌های متداولی که برای
+متغیرهای مختلف وجود دارد ( مثلاً \lr{\texttt{x}} و \lr{\texttt{y}} برای
+مختصات ) استفاده کنیم و لازم نباشد هر بار دنبال اسمی جدید برای
+متغیرهایمان باشیم. علاوه بر این، هر جای دیگری که بخواهید به آبجکتی که
+داخلش هستید اشاره کنید، می‌توانید از \lr{\texttt{this}} استفاده کنید.
+مثلاً وقتی بخواهید خود آبجکت را به‌عنوان ورودی به یک متد بفرستید.
+
+\subsection{متدهای استاتیک}
+
+متدهای استاتیک \lr{(static methods)} ، مثل فیلدهای استاتیک، به خود کلاس
+تعلق دارند، نه به آبجکت‌های مستقلی که ما از روی آن کلاس می‌سازیم. اما این
+یعنی چه؟ اول از همه، متدهای استاتیک خارج از آبجکت‌ها وجود دارند و برای
+صدا زدنشان لازم نیست آبجکتی وجود داشته باشد؛ شما می‌توانید اسم کلاس را
+بنویسید و با عملگر نقطه متدهای استاتیک را صدا بزنید. قبلاً از متدهای
+استاتیک زیاد استفاده کرده‌اید، مثلاً برای مرتب کردن آرایه‌ها از
+\lr{\texttt{Arrays.sort()}} استفاده می‌کردید در حالی که آبجکتی از کلاس
+\lr{\texttt{Arrays}} نساخته بودید و مستقیماً متد \lr{\texttt{sort}} را
+روی کلاس \lr{\texttt{Arrays}} صدا می‌زدید؛ این کار قابل انجام است چون
+\lr{\texttt{sort}} یک متد استاتیک است.
+
+دوباره از \lr{\texttt{Arrays.sort()}} استفاده کنید یا جایی که آن را
+نوشته‌اید را بیاورید، بعد روی آن راست کلیک کنید و گزینه‌ی \lr{Go To} و بعد
+\lr{Declaration or Usages} را انتخاب کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-6.png}
+\end{figure}
+
+با همچین کدی مواجه می‌شوید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-7.png}
+\end{figure}
+
+همان‌طور که می‌بینید، پشت این متد از کلیدواژه‌ی \lr{\texttt{static}}
+استفاده شده. این نشان می‌دهد که این متد، یک متد استاتیک است. حال که
+می‌دانید متدهای استاتیک چگونه تعریف می‌شوند، بیایید برای کلاس
+\lr{\texttt{Car}} که تا الان داشتیم یک متد استاتیک تعریف کنیم:
+
+\begin{codebox}{java}
+public class Car {
+    public static final int SUV = 0;
+    public static final int SEDAN = 1;
+    public static final int HATCHBACK = 2;
+    
+    double x;
+    double y;
+    double gas;
+    int model;
+
+    public static String[] getCarModels() {
+        return new String[]{"SUV", "SEDAN", "HATCHBACK"};  
+    }
+    // ...
+
+\end{codebox}
+
+اینجا، اول از همه یک فیلد جدید به ماشین‌هایمان اضافه کردیم به اسم
+\lr{\texttt{model}} که مدل ماشین ما را نشان می‌دهد: ماشین ما می‌تواند
+شاسی‌بلند ( \lr{\texttt{model = 0}} ) ، سواری ( \lr{\texttt{model = 1}} )
+یا هاچ‌بک ( \lr{\texttt{model = 2}} ) باشد. برای راحتی، مدل‌های مختلف
+ماشین را به صورت فیلد‌های \lr{\texttt{static final}} تعریف کردیم. حالا
+فرض کنید به اسم این مدل‌ها به صورت \lr{\texttt{String}} نیاز داشته باشیم،
+می‌توانیم مثل بالا یک متد استاتیک تعریف کنیم که این اطلاعات را به ما
+بدهد. دقت کنید که مدل‌های مختلف ماشین‌ها هیچ ارتباطی به یک ماشین خاص یا یک
+آبجکت مشخص از نوع \lr{\texttt{Car}} ندارند و به‌طور کلی برای همه ماشین‌ها
+یکسان هستند. به همین خاطر، استفاده از فیلد‌ها و متد‌های استاتیک بهترین
+انتخاب است.
+
+اصلی‌ترین کاربرد متدهای استاتیک، برای تعریف متدهای کمکی است؛ متدهایی که
+یا مستقل از آبجکت‌ها کار می‌کنند، یا روی آبجکت‌هایی که از آن کلاس (یا حتی
+کلاس‌های دیگر) می‌سازیم، عملی انجام می‌دهند و منطقشان به یک \lr{instance}
+خاص تعلق ندارد.
+
+حالا بیاید یک متد استاتیک دیگر برای \lr{\texttt{Car}} بنویسیم:
+
+\begin{codebox}{java}
+public void printModelsCount(ArrayList<Car> list) {
+    int suvCount = 0;
+    int sedanCount = 0;
+    int hatchbackCount = 0;
+    for (Car car : list) {
+        switch (car.model) {
+            case 0:  
+                suvCount++;
+                break;
+            case 1:  
+                sedanCount++;
+                break;
+            case 2:
+                hatchbackCount++;
+                break;  
+        }  
+    }
+    System.out.println("SUV: " + suvCount);
+    System.out.println("SEDAN: " + sedanCount);
+    System.out.println("HATCHBACK: " + hatchbackCount);  
+}
+\end{codebox}
+
+این متد، یک \lr{ArrayList} از ماشین‌ها می‌گیرد، تعداد مدل‌های مختلف ماشین‌ها
+را می‌شمارد و چاپ می‌کند. همان‌طور که می‌بینید کارکرد این متد هیچ ربطی به یک
+\lr{instance} خاص از \lr{\texttt{Car}} ندارد و به همین دلیل استاتیک
+تعریف می‌شود.
+
+مثال خوب دیگری برای کاربرد متدهای استاتیک، کلاس \lr{\texttt{Math}} است.
+این کلاس قرار است مجموعه‌ای از عملیات‌های ریاضی باشد؛ به همین دلیل تمام
+متد‌های کلاس \lr{\texttt{Math}} استاتیک هستند. البته \lr{\texttt{Math}}
+یک مرحله فراتر می‌رود، شما نمی‌توانید اصلاً آبجکتی از \lr{\texttt{Math}}
+بسازید! اصلاً این که یک آبجکت از روی \lr{\texttt{Math}} بسازید، معنی
+ندارد و نیازی به آن نیست. این کلاس صرفاً قرار است که مجموعه‌ای از متدها و
+متغیرها برای انجام عملیات ریاضی باشد. شما چند ``ریاضی'' مختلف ندارید که
+بخواهید instance‌ های مختلفی از \lr{\texttt{Math}} بسازید!
+
+حالا سعی کنید در یکی از متدهای استاتیک \lr{\texttt{Car}} از یکی از
+فیلدها یا متدهای غیر استاتیک \lr{\texttt{Car}} استفاده کنید. مثلاً:
+
+\begin{codebox}{java}
+public static String[] getCarModels() {  
+    System.out.println(model);
+    return new String[]{"SUV", "SEDAN", "HATCHBACK"};  
+}
+\end{codebox}
+
+اگر موستان را ببرید روی \lr{\texttt{model}} یا سعی کنید کلاس
+\lr{\texttt{Car}} را کامپایل کنید و جایی از آن استفاده کنید، با همچین
+خطاهایی مواجه می‌\-شوید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-8.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-9.png}
+\end{figure}
+
+همونطور که می\-بینید، جاوا دارد به شما می‌گوید که نمی‌\-توانید یک فیلد غیر
+استاتیک مثل \lr{\texttt{model}} را در یک متد استاتیک استفاده کنید. شما
+می‌\-توانید متد \lr{\texttt{getCarModels}} را بدون داشتن هیچ آبجکتی صدا
+بزنید؛ پس فیلد \lr{\texttt{model}} ی که سعی دارید از آن استفاده کنید،
+مربوط به کدام آبجکت است؟ از آن‌جایی که متدهای استاتیک مربوط به کلاس هستند
+و از آبجکت‌\-ها جدا هستند، طبیعی است که نمی‌\-توانند به فیلدها و متدهای
+عادی که مربوط به هر آبجکت هستند دسترسی داشته باشند و فقط به متد ها و
+متغیر های استاتیک دسترسی دارند.
+
+\subsection{\lr{Method overloading}}
+
+قابلیت \lr{Method overloading} ، این قابلیت است که شما چند متد را با یک
+اسم، ولی با نوع و تعداد ورودی متفاوت در یک کلاس تعریف کنید؛ وقتی که متد
+را صدا می‌زنید، کامپایلر با توجه به نوع ورودی، متد درست را انتخاب می‌کند و
+اجرا می‌کند.
+
+قابلیت \lr{Method overloading} ، بسیار قدرتمند و پرکاربرد است. ایده اصلی
+این است که متدهایی درست کنیم که روی ورودی‌های مختلف، کارهای یکسانی انجام
+بدهند. با این کار می‌توانید این توهم را ایجاد کنید که یک متد می‌تواند روی
+انواع مختلفی از ورودی‌ها کار کند. متد \lr{\texttt{println()}} که از اولین
+جلسه با آن کار کردید، مثال خیلی خوبی از \lr{method overloading} است؛ شما
+می‌توانید به \lr{\texttt{println()}} هر ورودی دلخواهی بدهید و آن به نحوی
+یک نمایش متنی از آن ورودی را برای شما چاپ می‌کند. در زبان‌هایی که
+\lr{method overloading} ندارند، کار سخت‌تر می‌شود. مثلاً برای چاپ چیزهای
+مختلف باید متدهای مختلف با اسم‌های مختلف تعریف کنیم و در آن صورت، این
+مسئولیت روی دوش شما می‌افتد که متد درست را انتخاب کنید. بیایید یک مثال
+دیگر از \lr{method overloading} ببینیم:
+
+\begin{codebox}{java}
+public class Sum {
+    // Overloaded sum(). This sum takes two int parameters
+    public int sum(int x, int y) {
+        return (x + y);  
+    }
+
+    // Overloaded sum(). This sum takes three int parameters
+    public int sum(int x, int y, int z) {
+        return (x + y + z);  
+    }
+
+    // Overloaded sum(). This sum takes two double  
+    // parameters
+    public double sum(double x, double y) {
+        return (x + y);  
+    }
+
+    public static void main(String[] args) {  
+        Sum s = new Sum();  
+        System.out.println(s.sum(10, 20));  
+        System.out.println(s.sum(10, 20, 30));  
+        System.out.println(s.sum(10.5, 20.5));  
+    }  
+}
+\end{codebox}
+
+همان‌طور که می‌بینید، اینجا سه تا متد با نام یکسان \lr{\texttt{sum}}
+داریم، ولی ورودی‌های آن‌ها متفاوت است. هر سه‌تای این متدها دارند عمل جمع
+کردن را انجام می‌دهند، ولی یکی دو \lr{\texttt{double}} را، یکی دو‌
+\lr{\texttt{int}} را و یکی سه \lr{\texttt{int}} را جمع می‌کند! به غیر از
+نوع ورودی\-ها و تعدادشون، با تغییر دادن ترتیب ورودی\-ها هم میشود متدها
+را \lr{overload} کرد:
+
+\begin{codebox}{java}
+class Student {
+    // Method 1
+    public void getStudentInfo() {  
+        System.out.println("Name :" + name + " "
+                + "ID :" + roll_ studentID);  
+    }
+
+    // Method 2
+    public void getStudentInfo (String name) {
+        // Again printing name and id of person
+        System.out.println("ID :" + studentID + " "
+                + "Name :" + name);  
+    }  
+}
+\end{codebox}
+
+بعد از این که با مباحث مربوط به \lr{polymorphism} و متدهای \lr{override}
+شده آشنا شدید، دوباره به \lr{method overloading} برخواهیم گشت.
+
+\section{\lr{Reference type} ها}
+
+همان‌طور که تا الآن به خوبی می‌دانید، در جاوا، \lr{type} ها به دو دسته‌ی
+\lr{primitive type} و \lr{reference type} تقسیم‌بندی می‌شوند.
+\lr{primitive type} ها، تایپ‌های بسیار ساده‌ای مثل \lr{\texttt{int}} ،
+\lr{\texttt{char}} ، \lr{\texttt{boolean}} و امثال آن‌ها هستند. فهرست
+کامل آن‌ها در لیست زیر آمده است:
+
+\begin{table}[H]
+\centering
+\setLTR
+\begin{tabular}{lll}
+\hline
+\textbf{\lr{Type}} & \textbf{\lr{Definition}} & \textbf{\lr{Approximate range or precision}} \\
+\hline
+\texttt{boolean} & \lr{Logical Value} & \texttt{true} \lr{or} \texttt{false} \\
+\texttt{char} & \(16\)\lr{-bit, Unicode character} & \(64k\) \lr{characters} \\
+\texttt{byte} & \(8\)\lr{-bit, signed integer} & \(-128\) \lr{to} \(127\) \\
+\texttt{short} & \(16\)\lr{-bit, signed integer} & \(-32, 768\) \lr{to} \(32,676\) \\
+\texttt{int} & \(32\)\lr{-bit, signed integer} & \(-2.1\mathrm{e}9\) \lr{to} \(2.1\mathrm{e}9\) \\
+\texttt{long} & \(64\)\lr{-bit, signed integer} & \(-9.2\mathrm{e}18\) \lr{to} \(9.2\mathrm{e}18\) \\
+\texttt{float} & \(32\)\lr{-bit, IEEE 754, floating-point value} & \(6-7\) \lr{significant decimal places} \\
+\texttt{double} & \(64\)\lr{-bit, IEEE} 754 & \(15\) \lr{significant decimal places} \\
+\hline
+\end{tabular}
+\end{table}
+
+هر تایپ دیگری در جاوا، \lr{reference type} است . \lr{\texttt{String}} ،
+\lr{\texttt{JFrame}} ، \lr{\texttt{ArrayList}} و حتی تایپ‌هایی مثل
+\lr{\texttt{Car}} و \lr{\texttt{Student}} که تا این‌جای کار تعریف کردیم،
+همگی \lr{reference type} اند. هر \lr{reference type} ای با یک کلاس تعریف
+شده است.
+
+\subsection{تفاوت \lr{reference type} ها و \lr{primitive type} ها}
+
+همان‌طور که می‌دانید، تمام متغیرهای برنامه‌های شما، در حافظه‌ی خاصی به اسم
+\lr{RAM} ذخیره می‌شوند. سیستم عامل، متغیرهای شما را در دو بخش متفاوت از
+این حافظه، به اسم \lr{stack} و \lr{heap} نگه می‌دارد. با این دو در درس‌های
+ساختمان داده و سیستم عامل بیشتر آشنا می‌شوید، ولی فعلأ بدانید که حافظه‌ی
+\lr{stack} ، از \lr{heap} سریع‌تر است، ولی در مقابل کمی کم‌حجم‌تر است.
+\footnote{البته، در واقعیت ممکن است اینگونه نباشد. \lr{Stack} و
+  \lr{Heap} به خودی خود از دیگری سریع‌تر یا حجیم‌تر نیستند و ما در این‌جا
+  خیلی ساده‌سازی می‌کنیم. در درس‌های بعدی خود بهتر می‌فهمید که تفاوت این دو
+  با هم چیست. برای الآن، فرض کنید چیزی که گفتیم کاملاً درست است.}
+
+متغیرهایی که از جنس \lr{primitive type} تعریف می‌کنید، حجم کمی دارند و
+بین \lr{\texttt{1}} تا \lr{\texttt{8}} بایت از حافظه را اشغال می‌کنند. به
+همین خاطر، جاوا آن‌ها را در \lr{stack} نگه می‌دارد تا از سرعت بهتر
+\lr{stack} استفاده کند و همزمان، \lr{stack} سریع پر نشود. از طرفی، ممکن
+است object‌ هایی که در برنامه‌ي خود تعریف می‌کنید -و همیشه از جنس
+\lr{reference type} هستند-، حجم بسیار بیشتری داشته باشند. جاوا، اطلاعات
+این object‌ها را در \lr{heap} ذخیره می‌کند و در \lr{stack} ، صرفاً یک
+اشاره‌گر \lr{(pointer)} به آن‌ها نگه می‌دارد.
+
+مثلاً، برنامه‌ی زیر را در نظر بگیرید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {
+        int radius = 5;
+        double pi = 3.14;  
+        Student changiz = new Student(50, "Changiz", "112");  
+    }  
+}
+\end{codebox}
+
+اگر مموری را حین اجرای این برنامه ببینیم، همچین شکلی دارد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-10.png}
+\end{figure}
+
+اگر مقدار خود متغیر چنگیز را چاپ کنید:
+
+\begin{codebox}{java}
+System.out.println(changiz);
+\end{codebox}
+
+همچین خروجی‌ای می‌بینید:
+
+\begin{codebox}{text}
+Student@6acbcfc0
+\end{codebox}
+
+متغیر \lr{\texttt{changiz}} ، در واقع صرفا یک \lr{pointer} یا
+\lr{reference} به یک آبجکت از جنس \lr{Student} است و نه چیزی بیشتر. با
+استفاده از اپراتور نقطه \lr{\texttt{(.)}} ، می‌توانید به \lr{field} ها و
+\lr{method} های این آبجکت دسترسی داشته باشید.
+
+این اتفاق، یک ساید افکت جالب روی کدهای شما دارد. فرض کنید، یک دانشجوی
+دیگر به اسم بنگیز درست کردیم و ان را مساوی با چنگیز قرار دادیم:
+
+\begin{codebox}{java}
+Student bangiz = changiz;
+\end{codebox}
+
+حالا، بنگیز و چنگیز هر دو به یک نقطه از \lr{heap} اشاره می‌کنند:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-11.png}
+\end{figure}
+
+حالا اگر شما، شماره دانشجویی چنگیز را عوض کنید:
+
+\begin{codebox}{java}
+changiz.studentID = "40113";
+\end{codebox}
+
+و بعد، شماره دانشجویی چنگیز و بنگیز را چاپ کنید:
+
+\begin{codebox}{java}
+System.out.println("Changiz studentID: " + changiz.studentID);  
+System.out.println("Bangiz studentID: " + bangiz.studentID);
+\end{codebox}
+
+می‌بینید که شماره دانشجویی بنگیز هم عوض شده است!
+
+\begin{codebox}{java}
+Changiz studentID: 40113  
+Bangiz studentID: 40113
+\end{codebox}
+
+عجیب نیست؟ اگر به مموری نگاه کنید، بعد از عوض شدن شماره دانشجویی چنگیز،
+همچین وضعیتی دارد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-12.png}
+\end{figure}
+
+چنگیز، شماره دانشجویی آبجکتی که به ان اشاره می‌کرده را تغییر داده است.
+دست بر قضا، بنگیز هم به همین آبجکت اشاره می‌کرده و در نتیجه، شماره
+دانشجویی بنگیز هم واقعا عوض شده است.
+
+یک جای دیگر هم اتفاق مشابه‌ای می‌افتد. برای دیدن آن، متد زیر را به کدتان
+اضافه کنید:
+
+\begin{codebox}{java}
+public static void resetID(Student student) {  
+    student.studentID = "00000000";  
+}
+\end{codebox}
+
+این متد، یک \lr{\texttt{Student}} را ورودی می‌گیرد، و شماره دانشجویی‌ او
+را دستکاری می‌کند. حالا با استفاده از کد زیر، چنگیز را به این متد ورودی
+بدهید و بعد، شماره دانشجویی چنگیز و بنگیز را چاپ کنید:
+
+\begin{codebox}{java}
+resetID(changiz);  
+  
+System.out.println("Changiz studentID: " + changiz.studentID);  
+System.out.println("Bangiz studentID: " + bangiz.studentID);
+\end{codebox}
+
+خروجی، به این شکل است:
+
+\begin{codebox}{text}
+Changiz studentID: 00000000  
+Bangiz studentID: 00000000
+\end{codebox}
+
+شاید بتوانید حدس بزنید که این‌جا چه اتفاقی افتاد. با ورودی دادن چنگیز به
+\lr{\texttt{resetID}} ، در واقع شما اشاره‌گرتان به \lr{heap} را به این
+تابع ورودی دادید. پس متغیر \lr{\texttt{student}} در
+\lr{\texttt{resetID}} و \lr{\texttt{changiz}} و \lr{\texttt{bangiz}} ،
+هر سه به یک نقطه از \lr{heap} اشاره می‌کنند و مثل قبل، با تغییر فیلدهای
+یکی از آن‌ها، هر سه تغییر می‌کنند. به این نوع ورودی دادن به توابع، اصطلاحاً
+\lr{passing by reference} می‌گویند.
+
+مشابه هیچ کدام از این اتفاق‌ها، برای \lr{primitive} type‌ ها نمی‌افتد. چون
+همیشه در \lr{stack} نگه‌داری می‌شوند و پوینتری به \lr{heap} برای آن‌ها
+نگه‌داری نمی‌شود.
+
+\subsection{کلاس‌های \lr{wrapper} برای \lr{primitive} type‌ها}
+
+هر کدام از \lr{primitive} type‌ ها، تایپی مشابه از جنس
+\lr{reference type} هم دارند. این تایپ‌ها، در جدول زیر آمده‌اند:
+
+\begin{table}[H]
+\centering
+\setLTR
+\begin{tabular}{ll}
+\hline
+\textbf{\lr{Primitive}} & \textbf{\lr{Wrapper}} \\
+\hline
+\texttt{void} & \texttt{java.long.Void} \\
+\texttt{boolean} & \texttt{java.lang.Boolean} \\
+\texttt{char} & \texttt{java.lang.Character} \\
+\texttt{byte} & \texttt{java.lang.Byte} \\
+\texttt{short} & \texttt{java.lang.Short} \\
+\texttt{int} & \texttt{java.lang.Integer} \\
+\texttt{long} & \texttt{java.lang.Long} \\
+\texttt{float} & \texttt{java.lang.Float} \\
+\texttt{double} & \texttt{java.lang.Double} \\
+\hline
+\end{tabular}
+\end{table}
+
+نیازی نیست که خیلی درگیر این تایپ‌های جدید باشید، ولی بدانید که وجود
+دارند. وقتی که یک آرایه از \lr{int} ها تعریف می‌کنید، از آن‌ها استفاده
+می‌کنید:
+
+\begin{codebox}{java}
+var arr = new ArrayList<Integer>();
+\end{codebox}
+
+اگر دقت کنید، به جای این که بین دو براکت از \lr{\texttt{int}} استفاده
+کنید، از \lr{\texttt{Integer}} استفاده کردید. اگر روی آن کلیک راست کنید
+و از \lr{Go To} به \lr{Declaration and Usages} بروید، می‌توانید ببینید که
+پشت آن یک کلاس است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-13.png}
+\end{figure}
+
+این کلاس، معادل \lr{reference type} گونه‌ای برای \lr{\texttt{int}} است، و
+وقتی با کلاس‌ها سر و کار دارید از آن استفاده می‌شود. اگر خواستید بیشتر
+راجع به آن بدانید، به
+\href{https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html}{این
+داکیومنت} رجوع کنید.
+
+\section{\lr{Garbage Collection}}
+
+قبل از اینکه برویم سراغ \lr{Garbage Collection} ، بیایید اول مفهوم نشت
+حافظه \lr{(Memory Leak)} را بررسی کنیم.
+
+\subsection{آشنایی با \lr{Memory Leak}}
+
+در بعضی از زبان‌های برنامه‌نویسی (مثل \lr{C} و \lr{C++)} مسئولیت «آزاد
+کردن» حافظه بر عهده خود برنامه‌نویس است. این یعنی شما باید هر وقت که دیگر
+به یک شی نیاز نداشتید، خودتان آن حافظه‌ی را آزاد کنید. مثلاً اگر با
+استفاده از تابع \lr{\texttt{malloc}} مقداری از حافظه را تخصیص
+\lr{(allocate)} دادید، وقتی که دیگر به این حافظه نیاز نداشتید، باید
+خودتان با استفاده از تابع \lr{\texttt{free}} آن حافظه را آزاد کنید.
+بیایید یک مثال ببینیم:
+
+\begin{codebox}{c}
+#include <stdlib.h>
+
+int main() {
+    // Allocate memory dynamically
+    int *ptr = (int *)malloc(sizeof(int) * 5);  // Allocating memory for 5 integers  
+  
+    // Use the allocated memory
+    for (int i = 0; i < 5; i++) {  
+        ptr[i] = i + 1;  
+    }
+    /*  
+     * Doing some stuff with these numbers  
+     */  
+  
+    // Forgetting to free the allocated memory causes a Memory Leak  
+    // free(ptr); // If we uncomment this line, the Memory Leak will be avoided.
+
+    return 0;  
+}
+\end{codebox}
+
+در این برنامه که به زبان \lr{C (!)} نوشته شده، اول به اندازه
+\lr{\texttt{5}} متغیر \lr{\texttt{int}} حافظه اشغال می‌کنیم. اشاره‌گر
+\lr{\texttt{ptr}} به اولین خانه از این \lr{\texttt{20}} بایت \footnote{با
+  این فرض که هر متغیر از جنس \lr{\texttt{int}} ، حافظه‌ای به اندازه
+  \lr{\texttt{4}} بایت را اشغال کند.} اشاره می‌کند. حال می‌آییم
+\lr{\texttt{5}} تا عدد صحیح را در حافظه ذخیره می‌کنیم. فرض کنید با این
+اعداد کارهایی انجام دادیم و الان کارمان با آن‌ها تمام شده است اما فراموش
+کردیم که این \lr{\texttt{20}} بایت حافظه را آزاد کنیم! در حقیقت باید با
+صدا زدن تابع \lr{\texttt{free}} اعلام می‌کردیم که ما دیگر به این
+\lr{\texttt{20}} بایت نیازی نداریم تا این حافظه آزاد بشود.
+
+اگر آزادش نکنید چه می‌شود؟ در این صورت آن حافظه همچنان در اختیار برنامه
+قرار دارد و به اصطلاح \lr{Memory Leak} رخ می‌دهد. این یعنی حافظه‌ای که
+دیگر به کار نمی‌آید، همچنان در اختیار برنامه باقی می‌ماند و هیچ‌وقت آزاد
+نمی‌شود. این موضوع می‌تواند باعث شود که برنامه به مرور زمان حافظه‌ی زیادی
+مصرف کند و سیستم دچار مشکلاتی مثل کندی عملکرد یا حتی \lr{crash} بشود.
+
+\subsection{\lr{Garbage Collection:} یک راه‌حل خوب}
+
+زمانی که داریم راجع به \lr{Garbage Collection} در جاوا صحبت می‌کنیم، به
+زبان ساده یعنی جاوا خودش می‌رود و حافظه‌ای که دیگر به هیچ‌کار نمی‌آید را
+آزاد می‌کند. مثلاً وقتی که شما یک شی را در برنامه می‌سازید و دیگر به آن
+نیاز ندارید، جاوا خود به خود این شی را پاک می‌کند. شما اصلاً نیازی نیست که
+خودتان حافظه را آزاد کنید، همه چیز به صورت خودکار اتفاق می‌افتد!
+
+شاید بپرسید که چطور این کار انجام می‌شود؟ خب، جاوا از تعدادی الگوریتم
+برای این کار استفاده می‌کند. ولی ما آن‌ها را اینجا بررسی نمی‌کنیم. در این
+\href{https://youtu.be/Mlbyft_MFYM?si=jhAdnlq12houCo1F}{ویدیوی یوتیوب} و
+این
+\href{https://docs.oracle.com/en/java/javase/21/gctuning/introduction-garbage-collection-tuning.html}{داک
+اوراکل} می‌توانید مطالب بیشتری در رابطه با این موضوع ببینید.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[width=0.45\textwidth]{images/oop-1-14.png}}
+\caption{\textbf{\lr{Thumbnail:} \emph{Java's
+\lr{Garbage Collection Explained - How It Saves your Lazy Programmer Bu}}}}
+\end{figure}
+
+به طور کلی این ویژگی جاوا باعث می‌شود که شما تمرکز بیشتری روی منطق
+برنامه‌نویسی داشته باشید و دیگر نگران مدیریت دستی حافظه نباشید.
+
+حالا در کد زیر، می‌توانید رفتار \lr{Garbage Collector} را در ارتباط با
+آبجکت \lr{\texttt{cuteCat}} بگویید؟
+
+\begin{codebox}{java}
+Cat cuteCat = new Cat("Cat 1");  
+cuteCat = new Cat("Cat 2");
+\end{codebox}
+
+شکل زیر میتواند نمایش خوبی از اتفاقات باشد. در اینجا
+\lr{\texttt{cuteCat}} به جایی از حافظه اشاره \footnote{دقت کنید که لفظ
+  «اشاره کردن» در جاوا خیلی درست نیست. به خاطر این‌که ما در جاوا
+  \lr{\texttt{pointer}} نداریم و مدیریت حافظه را خود جاوا برایمان انجام
+  می‌دهد. در جاوا حتی دسترسی مستقیم به حافظه هم نداریم (برخلاف
+  \lr{\texttt{C}} ). اما برای مشابهت با زبان \lr{\texttt{C}} ، در اینجا
+  هم از لفظ اشاره کردن استفاده کردیم. در جاوا به متغیر هایی مثل
+  \lr{\texttt{cuteCat}} ، می گویند \lr{reference variable} .} می‌کند که
+در آن یک آبجکت از جنس \lr{\texttt{Cat}} (که فیلد اسمش \lr{\texttt{Cat1}}
+است) ذخیره شده. در خط بعدی \lr{\texttt{cuteCat}} به جایی از حافظه اشاره
+می‌کند که در آن یک آبجکت از جنس \lr{\texttt{Cat}} (که فیلد اسمش \lr{Cat2}
+است) ذخیره شده باشد. اما الان هیچ فلشی به \lr{\texttt{Cat1}} وارد
+نمی‌شود، پس \lr{Garbage Collector} آن را آزاد می‌کند.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-15.png}
+\end{figure}
+
+\subsection{\lr{Garbage Collector} حواسش هست!}
+
+\lr{Garbage Collector} آبجکت‌هایی که هنوز نیازشان داریم (بهشان رفرنس
+داریم) را پاک نمی‌کند. کد زیر را ببینیم:
+
+\begin{codebox}{java}
+class Duck {  
+    String name;  
+}
+
+public class Main {
+    public static void main(String[] args) {  
+        Duck duck = createDuck(); // a duck object will be created
+        System.out.println(duck.name);  
+    }
+
+
+    public static Duck createDuck() {  
+        Duck localDuck = new Duck();  
+        localDuck.name = "A White Duck";
+        return localDuck;  
+    }  
+}
+\end{codebox}
+
+در این کد ابتدا یک کلاس خیلی ساده به نام \lr{\texttt{Duck}} تعریف کردیم.
+متدی به نام \lr{\texttt{createDuck}} نیز تعریف کردیم که ابتدا یک آبجکت
+از جنس \lr{\texttt{Duck}} می‌سازد، سپس متغیر \lr{\texttt{name}} را در این
+آبجکت مقداردهی می‌کند و در نهایت این آبجکت را به عنوان خروجی متد
+برمی‌گرداند. بعد در متد \lr{\texttt{main}} ، سعی می‌کنیم به متغیر
+\lr{\texttt{name}} در این آبجکت دسترسی داشته باشیم.
+
+اما نکته کجاست؟ احتمالاً در درس‌های قبلیتان خواندید که \emph{«متغیر‌هایی که
+در یک تابع تعریف می‌شوند عمرشان به اندازه‌ی اجرای همان تابع است و بعد از
+اتمام اجرای تابع، آن متغیر هم از بین می‌رود.»} پس شاید انتظار داشته باشیم
+\lr{Garbage Collector} آبجکت \lr{\texttt{Duck}} را از بین ببرد! اما
+واقعیت آن است که \lr{Garbage Collector} \emph{حواسش است} که ما به کدام
+آبجکت‌ها هنوز نیاز داریم و نباید پاکشان کند. اینجا هم چون
+\lr{\texttt{Duck}} را به عنوان خروجی برگرداندیم، یعنی آن را نیاز داریم،
+پس پاکش نمی‌کند.
+
+خروجی کد بالا به صورت زیر است:
+
+\begin{codebox}{text}
+A White Duck
+\end{codebox}
+
+\subsection{یک نکته در مورد کلاس‌ها}
+
+در هر فایل جاوا (فایل با پسوند \lr{\texttt{.java}})، می‌توانیم حداکثر یک
+کلاس \lr{\texttt{public}} داشته باشیم، همچنین اسم این کلاس
+\lr{\texttt{public}} باید حتما با اسم فایل یکی باشد. مثال درست زیر را
+ببینید:
+
+\begin{codebox}{java}
+// MyClass.java
+public class MyClass {
+    public void sayHello() {  
+        System.out.println("Hello, Java!");  
+    }  
+}
+\end{codebox}
+
+کد‌های زیر نادرست هستند:
+
+\begin{codebox}{java}
+// MyFile.java
+public class MyClass { } // Error! The class name does not match the file name.
+\end{codebox}
+
+\begin{codebox}{java}
+// MyFile.java
+public class MyClass { }
+
+public class AnotherClass { } // Error! Only one public class is allowed.
+\end{codebox}
+
+\section{\lr{Packages}}
+
+\subsection{نیاز به منظم کردن فایل‌ها}
+
+در برنامه‌هایی که در جاوا می‌نویسیم، همیشه از کلاس ها یا اینترفیس ها
+\footnote{با اینترفیس‌ها بعداً آشنا می‌شوید. فعلاً کاری به آن‌ها نداریم.}
+استفاده می کنیم. برنامه‌ی ساده زیر که در کلاس \lr{Sample} نوشته شده را
+ببینید:
+
+\begin{codebox}{java}
+public class Sample {
+    public static void main(String[] args) {  
+        System.out.println("Hello World!");  
+    }  
+}
+\end{codebox}
+
+ولی برنامه‌های پیچیده‌تر ممکن است از صد‌ها کلاس تشکیل شده باشند. اگر همه‌ی
+این کلاس‌ها را بدون هیچ نظمی کنار هم قرار بدهیم باعث می‌شود برنامه‌مان
+ناخوانا باشد و خودمان هم گیج می‌شویم.
+
+احتمالاً یکی از اولین چیز‌هایی که برای منظم کردن فایل‌ها به ذهن ما می‌رسد
+استفاده از پوشه‌هاست. و این دقیقاً همان امکانی است که جاوا برای منظم کردن
+کلاس‌های برنامه‌مان برای ما فراهم کرده: ایجاد \lr{\texttt{package}}‌های
+مختلف.
+
+\subsection{پکیج چیست؟}
+
+پکیج‌ها در جاوا مثل پوشه‌هایی هستند که کدهای برنامه‌نویسی (شامل کلاس‌ها و
+اینترفیس‌ها) را در آن‌ها قرار می‌دهیم تا همه چیز منظم و مرتب باشد. وقتی که
+برنامه‌های پیچیده‌تر را می‌نویسیم، تعداد کلاس‌ها زیاد می‌شود و اینجاست که
+پکیج‌ها به کمکمان می‌آیند تا بتوانیم این کلاس‌ها را دسته‌بندی کنیم.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-16.png}
+\end{figure}
+
+\subsection{چطور یک پکیج ایجاد کنیم؟}
+
+اول یک پروژه به اسم \lr{\texttt{PackageDemo}} ایجاد کنید. حال روی پوشه‌ی
+\lr{\texttt{src}} راست کلیک کنید و از نوار \lr{New} ، گزینه‌ی
+\lr{Package} را انتخاب کنید.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-17.png}
+\end{figure}
+
+حالا اسم پکیج را وارد کنید. مثلا در اینجا \lr{\texttt{edu.ap.animals}} :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-18.png}
+\end{figure}
+
+به همین شکل پکیج \lr{\texttt{edu.ap.vehicles}} را هم بسازید.
+
+الآن باید چیزی شبیه به تصویر زیر را در پوشه‌ی \lr{\texttt{src}} داشته
+باشید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-19.png}
+\end{figure}
+
+حال می‌خواهیم چند کلاس به هر کدام از این پکیج‌ها اضافه کنیم. مثلأ کلاس‌های
+\lr{\texttt{Dog}} و \lr{\texttt{Cat}} را به پکیج \lr{\texttt{animals}} و
+کلاس‌های \lr{\texttt{Bike}} و \lr{\texttt{Car}} را به پکیج
+\lr{\texttt{vehicles}} اضافه کنیم. در نهایت باید چیزی شبیه به تصویر زیر
+را داشته باشید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-20.png}
+\end{figure}
+
+پکیج‌هایمان را ساختیم! حالا ببینیم واقعا چه فایل‌هایی ایجاد شده است. اگر
+از توی \lr{explorer} به محل ایجاد پروژه‌تان بروید و به ترتیب وارد پوشه‌های
+\lr{\texttt{src}} ، \lr{\texttt{edu}} ، \lr{\texttt{ap}} و
+\lr{\texttt{animals}} بشوید چیزی شبیه به این‌ها می‌بینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-21.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-22.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-23.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-24.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-25.png}
+\end{figure}
+
+پس دیدیم که وقتی ما داریم یک پکیج تعریف می‌کنیم، واقعا پوشه ایجاد می‌شود!
+
+نهایتأ پکیج \lr{\texttt{edu.ds}} شامل کلاس \lr{\texttt{Stack}} را درست
+کنید. در نهایت باید چیزی شبیه به این ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-26.png}
+\end{figure}
+
+الآن برویم کد \lr{Cat.java} را ببینیم:
+
+\begin{codebox}{java}
+package edu.ap.animals;
+
+public class Cat {  
+}
+\end{codebox}
+
+همان‌طور که می‌بینید، عبارت \lr{\texttt{package edu.ap.animals;}} به
+ابتدای این کد اضافه شده است. این خط را نباید پاک کنید، زیرا در آن صورت
+جاوا متوجه نمی‌شود \lr{\texttt{Cat}} متعلق به کدام پکیج است و خطای
+کامپایل دریافت خواهید کرد.
+
+\subsection{نام‌گذاری متداول پکیج‌ها \lr{(Naming Conventions)}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  پکیج‌ها همواره با حروف کوچک نام‌گذاری می‌شوند. مثلاً
+  \lr{\texttt{java.util}}
+\item
+  از کلمات رزرو شده‌ی جاوا استفاده نکنید. کلماتی مثل \lr{\texttt{class}}
+  ، \lr{\texttt{public}} ، \lr{\texttt{static}} و\ldots{}
+\item
+  از زیرخط یا \lr{underscore} \lr{\texttt{\_}} ، خط‌تیره یا \lr{dash}
+  \lr{\texttt{-}} ، فاصله یا ~space و کاراکترهای خاص (مثل
+  \lr{\texttt{@}} ، \lr{\texttt{\$}} ، \lr{\texttt{\&}}) استفاده نکنید.
+  در نام‌گذاری پکیج‌ها فقط مجازیم از \lr{dot (} نقطه \lr{\texttt{.}} )
+  استفاده کنیم.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    نادرست: \lr{\texttt{com.github.my-awesome-project}}
+  \item
+    درست: \lr{\texttt{com.github.myawesomeproject}}
+  \end{enumerate}
+\item
+  یک قاعده‌ی دیگر در نام‌گذاری پکیج‌ها، \lr{reverse domain name} است (برعکس
+  نوشتن نام دامنه). اگر یک پروژه‌ای متعلق به شرکت یا سازمانی است که دامنه
+  ( \lr{domain )} خودش را دارد، آن دامنه را به شکل برعکس می‌نویسیم. مثلاً
+  شرکت \lr{Mozilla} (که نام دامنه‌اش \lr{\texttt{mozilla.org}} است) چند
+  پکیج در جاوا دارد. یکی از این پکیج‌ها اسمش
+  \lr{\texttt{org.mozilla.javascript}} است (البته این قاعده در مورد
+  پکیج‌های استاندارد خود جاوا صدق نمی‌کند).
+\end{enumerate}
+
+\subsection{کلیدواژه‌ی \lr{Import}}
+
+\subsubsection{یک مثال عملی}
+
+بیایید در کلاس \lr{\texttt{Bike}} یک آبجکت از کلاس \lr{\texttt{Cat}}
+بسازیم (دقت کنید که این دو کلاس متعلق به دو پکیج متفاوت هستند):
+
+\begin{codebox}{java}
+package edu.ap.vehicles;
+
+public class Bike {
+    public static void main(String[] args) {  
+        Cat cat = new Cat();  
+    }  
+}
+\end{codebox}
+
+اگر سعی کنیم این کد را اجرا کنیم، موقع کامپایل به مشکل می‌خوریم:
+
+\begin{codebox}{bash}
+java: cannot find symbol  
+symbol:   class Cat  
+  location: class edu.ap.vehicles.Bike
+\end{codebox}
+
+مشکل چیست ؟ جاوا نمیتواند کلاسی به اسم \lr{\texttt{Cat}} را پیدا کند!
+دلیلش هم این است که جاوا فقط کلاس‌هایی را می‌بیند که توی همین پکیج هستند.
+
+پس باید به نحوی کلاس \lr{\texttt{Cat}} را به کدمان اضافه کنیم. کلیدواژه‌ی
+\lr{\texttt{import}} دقیقا برای همین کار است. با استفاده از این
+کلیدواژه، ما به جاوا اعلام می‌کنیم که می‌خواهیم این کلاس را به کدمان اضافه
+کنیم:
+
+\begin{codebox}{java}
+package edu.ap.vehicles;
+import edu.ap.animals.Cat;
+
+public class Bike {
+    public static void main(String[] args) {  
+        Cat cat = new Cat();  
+    }  
+}
+\end{codebox}
+
+اکنون دیگر کدمان کار می‌کند و می‌توانیم یک آبجکت از کلاس \lr{\texttt{Cat}}
+بسازیم.
+
+\subsection{در اهمیت پکیج‌ها}
+
+یکی از بزرگترین مزایای جاوا داشتن کتابخانه (library)‌ های بسیار متنوع و
+کاربردی است.
+
+می‌خواهید یک \lr{PDF} درست کنید؟ کتابخانه مربوط به آن را
+\lr{\texttt{import}} کنید. می‌خواهید با دیتابیس کار کنید؟ کتابخانه مربوط
+به آن را \lr{\texttt{import}} کنید \ldots{}
+
+مثلاً یکی از پکیج‌های مهم جاوا، \lr{\texttt{java.lang}} است. این پکیج شامل
+کلاس‌های پایه‌ای مثل \lr{\texttt{System}} ، \lr{\texttt{Integer}} ،
+\lr{\texttt{Math}} و \lr{\texttt{String}} است.
+
+در شکل زیر می‌توانید یک نمای کلی از پکیج‌های جاوا ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-27.png}
+\end{figure}
+
+\subsection{\lr{import} کردن کل پکیج}
+
+شما می‌توانید تمام کلاس‌های موجود در یک پکیج را یک‌جا \lr{\texttt{import}}
+کنید. این کار را با عبارت \lr{\texttt{*}} می‌توانید انجام بدهید. مثلاً کد
+زیر تمام کلاس‌های موجود در پکیج \lr{\texttt{edu.ap.animals}} را
+\lr{\texttt{import}} می‌کند.
+
+\begin{codebox}{java}
+import edu.ap.animals.*;
+\end{codebox}
+
+این قابلیت کار ما را خیلی اوقات آسان می‌کند. ولی انجام این کار همیشه هم
+مناسب نیست. \lr{\texttt{import}} کردن دقیق کلاس‌ها علاوه بر خوانایی بیشتر
+کدمان، کمی هم زمان کامپایلمان را کمتر می‌کند.
+
+دقت کنید که پکیج‌ها خودشان می‌توانند شامل پکیج باشند؛ همان‌طوری که پوشه‌ها
+می‌توانند داخل خود پوشه داشته باشند. اما عبارت \lr{\texttt{*}} فقط
+\_کلاس‌\_های متعلق به پکیج را \lr{\texttt{import}} می‌کند و
+\emph{sub-package‌} ها را نمی‌کند ( \lr{import} کردن \lr{recursive}
+نداریم).
+
+مثلاً در نظر بگیرید که پکیج \lr{\texttt{java.awt}} یک کتابخانه‌ی استاندارد
+جاوا است که شامل یک \lr{sub-package} مثل \lr{\texttt{java.awt.event}}
+است. کلاس \lr{\texttt{Color}} متعلق به پکیج \lr{\texttt{java.awt}} و
+کلاس \lr{\texttt{ActionEvent}} متعلق به زیرپکیج
+\lr{\texttt{java.awt.event}} است.
+
+حال شما اگر به هر دوی این کلاس‌ها نیاز دارید باید هر کدام را جدا
+\lr{\texttt{import}} کنید. کد زیر اشتباه است:
+
+\begin{codebox}{java}
+import java.awt.*;
+\end{codebox}
+
+دلیل اشتباه بودنش آن است که در نتیجه‌ی این کد کلاس \lr{\texttt{Color}} ،
+ایمپورت می‌شود ولی کلاس \lr{\texttt{ActionEvent}} نه.
+
+کد زیر درست است:
+
+\begin{codebox}{java}
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+\end{codebox}
+
+\subsubsection{دو مثال دیگر: مرور خاطرات}
+
+\paragraph{\texttt{java.util.Scanner}}
+
+احتمالا یکی از اولین برنامه‌هایی که در جاوا نوشتید گرفتن ورودی از کاربر
+بوده است. مثلأ کد ساده‌ی زیر را ببینید:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int x;  
+        Scanner scanner = new Scanner(System.in);  
+        x = scanner.nextInt();  
+    }  
+}
+\end{codebox}
+
+شاید قبلاً برایتان سوال شده باشد که آن \lr{\texttt{import}} در خط اول چه
+کار می‌کند. اکنون احتمالاً می‌توانیم به راحتی به این سوال جواب بدهیم. در
+واقع کلاس \lr{\texttt{Scanner}} متعلق به پکیج \lr{\texttt{java.util}}
+است و ما چون می‌خواهیم از این کلاس در کدمان استفاده کنیم، آن را
+\lr{\texttt{import}} کردیم.
+
+حتی اگر وارد سورس کد این کلاس شوید، عبارت زیر را در خطوط ابتدایی
+می‌بینید:
+
+\begin{codebox}{java}
+package java.util;
+\end{codebox}
+
+\paragraph{\texttt{javax.swing.JFrame}}
+
+در صورتی که با گرافیک کار کرده باشید، می‌دانید وقتی می‌خواستیم یک
+\lr{\texttt{frame}} ایجاد کنیم، از کد زیر استفاده می‌کردیم:
+
+\begin{codebox}{java}
+import javax.swing.JFrame;
+
+public class Main {
+    public static void main(String[] args) {  
+        JFrame jFrame = new JFrame();  
+    }  
+}
+\end{codebox}
+
+همان‌طور که می‌توانیم حدس بزنیم، کلاس \lr{\texttt{JFrame}} متعلق به پکیج
+\lr{\texttt{javax.swing}} است و چون ما می‌خواهیم از این کلاس در کدمان
+استفاده کنیم، آن را \lr{\texttt{import}} کردیم.
+
+می‌توانیم خیلی راحت این را بررسی کنیم. هر موقع خواستید کد یک کلاس را
+ببینید (سورس کد جاوا)، می‌توانید روی اسم آن کلاس راست کلیک کنید و از نوار
+\lr{Go To} قسمت \lr{Declaration or Usages} را انتخاب کنید. می‌بینید که به
+سورس کد آن کلاس منتقل خواهید شد.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-1-28.png}
+\end{figure}
+
+اگر این کار را انجام دهید، در فایل \lr{\texttt{JFrame.java}} که به آن
+منتقل شده‌اید در خطوط ابتدایی عبارت \lr{\texttt{package javax.swing;}} را
+می‌بینید.
+
+\subsection{چند نکته در مورد پکیج‌ها}
+
+\subsubsection{هر کلاس دقیقاً به یک پکیج تعلق دارد}
+
+هر کلاس دقیقاً به یک پکیج تعلق دارد. اگر کلاسی که نوشته‌اید را در یک پکیج
+قرار ندادید، به صورت پیش‌فرض این کلاس متعلق به \lr{default package} خواهد
+بود. مثلاً کلاس زیر را در نظر بگیرید:
+
+\begin{codebox}{java}
+public class Student {
+    private String name;
+    private int age;
+    
+    // Some other variables and methods
+}
+\end{codebox}
+
+دقت کنید که اکنون کلاس \lr{\texttt{Student}} را نمی‌شود در پروژه‌ها یا
+کلاس‌های دیگر \lr{\texttt{import}} و استفاده کرد؛ چون به پکیج نام‌گذاری
+شده‌ای تعلق ندارد ( \lr{default package} واقعاً اسم یک پکیج نیست).
+
+تعریف نکردن پکیج برای کلاس‌هایمان در پروژه‌های کوچک ایرادی ندارد؛ ولی در
+پروژه‌های بزرگ باید پکیج‌های مناسبی ایجاد کنیم.
+
+همچنین یک کلاس نمی‌تواند به بیش از یک پکیج تعلق داشته باشد (در غیر این
+صورت خطای کامپایل دریافت می‌کنیم).
+
+\subsubsection{استفاده از یک کلاس بدون \lr{import} کردن آن}
+
+گاهی اوقات که فقط یک بار می‌خواهید از یک کلاس در کدتان استفاده کنید،
+می‌توانید آن کلاس را به طور مستقیم \lr{import} نکنید و به جای آن به طور
+کامل به اسم پکیج در کد اشاره کنید. مثال زیر را ببینید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        javax.swing.JFrame jFrame = new javax.swing.JFrame();  
+    }  
+}
+\end{codebox}
+
+در اینجا ما بدون استفاده از عبارت
+\lr{\texttt{import javax.swing.JFrame;}} توانستیم از کلاس
+\lr{\texttt{JFrame}} استفاده کنیم. این‌گونه نوشتن شاید کمی طولانی به نظر
+بیاید، ولی در کلاس‌هایی که تعداد زیادی \lr{\texttt{import}} دارند و یا
+قرار باشد کلاس‌هایی با نام یکسان \lr{\texttt{import}} بشوند، به ما کمک
+می‌کند این مشکلات را حل کنیم.
+
+\section{چه چیزی یاد گرفتیم؟}
+
+در این داکیومنت، با مفاهیم پایه‌ای شی‌گرایی در جاوا آشنا شدیم و قدم اول
+برای نوشتن برنامه‌های ساخت‌یافته‌تر را برداشتیم. مهم‌ترین نکاتی که یاد
+گرفتیم:
+
+\begin{itemize}
+\tightlist
+\item
+  تفاوت بین \textbf{\lr{primitive type}} و \textbf{\lr{reference type}}
+  و نحوه‌ی نگه‌داری آن‌ها در حافظه
+\item
+  این که چگونه می‌توان با استفاده از \lr{\texttt{class}} ،
+  \textbf{\lr{type} های جدید} تعریف کرد
+\item
+  مفهوم \textbf{\lr{object (instance)}} و نحوهٔ ساخت آن با استفاده از
+  \lr{\texttt{new}}
+\item
+  آشنایی با \textbf{\lr{field}} ها و نقش آن‌ها در نگه‌داری وضعیت یک شی
+\item
+  تعریف و استفاده از \textbf{\lr{method}} ها برای پیاده‌سازی رفتار کلاس‌ها
+\item
+  نوشتن و استفاده از \textbf{\lr{constructor}} ها برای مقداردهی اولیه‌ی
+  \lr{object} ها
+\item
+  تفاوت بین \textbf{متغیرهای محلی} و \textbf{\lr{field} ها}
+\item
+  مفهوم \textbf{\lr{static}} و تفاوت اعضای استاتیک با اعضای معمولی
+\item
+  آشنایی با \textbf{\lr{this}} و کاربرد آن در جلوگیری از \lr{shadowing}
+\item
+  مفهوم \textbf{\lr{method overloading}} و استفاده از چند متد هم‌نام با
+  ورودی‌های متفاوت
+\item
+  درک بهتر از نحوه‌ی کار \textbf{\lr{reference} ها} و تاثیر آن‌ها در تغییر
+  داده‌ها
+\item
+  آشنایی مقدماتی با \textbf{\lr{Garbage Collection}} و مدیریت خودکار
+  حافظه در جاوا
+\item
+  اهمیت \textbf{\lr{package}}ها برای سازمان‌دهی کد و استفاده از
+  \lr{\texttt{import}}
+\end{itemize}
+
+در ادامه‌ی مسیر، روی همین مفاهیم پایه، مباحث مهم‌تری مثل
+\textbf{کپسوله‌سازی \lr{(Encapsulation)}} ، \textbf{وراثت
+\lr{(Inheritance)}} و \textbf{چندریختی \lr{(Polymorphism)}} را یاد
+خواهیم گرفت.
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
