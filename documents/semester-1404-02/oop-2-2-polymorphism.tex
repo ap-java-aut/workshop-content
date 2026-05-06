@@ -1,0 +1,1330 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{شی‌گرایی (چندریختی)}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{سام قربانی، آرمان حسینی، محمدحسین هاشمی، کیانا
+پهلوان، کیانا رضوی، پیام علی‌مرادپور، مهدی جعفری}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+در این داکیومنت به مفاهیم پیشرفته‌تری از شیءگرایی می‌پردازیم. چندریختی
+\lr{(Polymorphism)} یکی از این مفاهیم است که این امکان را می‌دهد که
+متدهایی با نام‌های یکسان را به شکل‌های متفاوت پیاده‌سازی کنیم. اینترفیس نیز
+به کلاس‌های متفاوت، این امکان را می‌دهد که متدهای مشترکی را بدون به اشتراک
+گذاشتن کد و جزئیات پیاده‌سازی، داشته باشند. اینترفیس ها به ما کمک می‌کنند
+برنامه ساختارمندتر و منعطف‌تری داشته باشیم.
+
+حتماً کدهای این داک را اجرا کنید و هر سوالی که داشتید از تدریس‌یارها
+بپرسید، در مورد آن سرچ کنید و از \lr{DeepSeek} راجع‌بهش اطلاعات بخواهید.
+
+\section{\lr{Polymorphism}}
+
+در دنیای واقعی وقتی اطرافتان را نگاه می‌کنید، می‌بینید که خیلی از کارهای
+یکسان در موجودات مختلف به شکل‌های متفاوتی انجام می‌شود. مثلاً راه رفتن را
+در نظر بگیرید؛ هم اسب، هم انسان هر دو راه می روند، اما میدانیم که در
+انجام ان بسیار متفاوت‌اند یا مثلاً غذا خوردن، حرف زدن و خصوصیات دیگری که
+در موجودات مشترک‌اند اما در جزئیات و عملکرد متفاوت‌اند.
+
+حال در دنیای برنامه‌نویسی شی‌گرا، اگه بخواهید یک متد، کلاس یا شیء در شرایط
+مختلف رفتارهای متفاوتی داشته باشد، از قابلیتی به اسم \lr{Polymorphism}
+استفاده می‌کنید. این ویژگی باعث می‌شود کد شما منعطف‌تر، خواناتر و نگهداری
+آن راحت‌تر شود.
+
+جاوا دارای دو نوع پلی مورفیسم است:
+
+\begin{itemize}
+\item
+  \textbf{\lr{Compile-time Polymorphism (Method Overloading)}}:
+
+  در این حالت چند متد با یک اسم ولی با ورودی‌های متفاوت در یک کلاس تعریف
+  می‌کنید. این کار به شما اجازه می‌دهد که یک کار مشابه را با ورودی‌های
+  مختلف انجام بدهید.
+\item
+  \textbf{\lr{Run-time Polymorphism (Method Overriding)}}:
+\end{itemize}
+
+این یعنی یک متد در کلاس والد تعریف شده است و بعد در کلاس فرزند با همان
+اسم ولی پیاده‌سازی متفاوت بازنویسی می‌شود. این کار به شما اجازه می‌ده رفتار
+یه متد را در کلاس‌های فرزند تغییر بدهید.
+
+ایده اصلی این است که متدهایی با اسم یکسان می‌توانند رفتارهای متفاوتی
+داشته باشند و همین باعث می‌شود کد شما هم تمیزتر و هم راحت‌تر قابل استفاده
+مجدد باشد.
+
+\subsection{\lr{Compile-time Polymorphism (Method Overloading)}}
+
+گاهی وقت ها پیش میاید که چند متد با یک اسم در یک کلاس تعریف می‌کنیم، اما
+امضای (تعداد یا نوع پارامترهای) متدها با هم متفاوت اند. این کار باعث
+می‌شود وقتی متد را صدا می‌زنیم، کامپایلر بفهمد کدام متد باید اجرا شود. به
+این روش \lr{Method Overloading} می‌گویند.
+
+ویژگی‌های این نوع polymorphism، به شکل زیر است:
+
+\begin{itemize}
+\tightlist
+\item
+  در یک کلاس انجام می‌شود.
+\item
+  تفاوت در تعداد یا نوع پارامترها وجود دارد.
+\item
+  در زمان کامپایل مشخص می‌شود.
+\end{itemize}
+
+مثلا در کد زیر، چند متد \lr{\texttt{add}} داریم که هر کدام، ورودی‌های
+متفاوتی می‌گیرند و خروجی متفاوتی می‌دهند:
+
+\begin{codebox}{java}
+class MathOperations {  
+    int add(int a, int b) {  
+        return a + b;  
+    }  
+
+    double add(double a, double b) {  
+        return a + b;  
+    }  
+
+    int add(int a, int b, int c) {  
+        return a + b + c;  
+    }  
+}
+
+public class Main {  
+    public static void main(String[] args) {  
+        MathOperations math = new MathOperations();  
+        System.out.println(math.add(5, 10)); // Output: 15  
+        System.out.println(math.add(5.5, 2.2)); // Output: 7.7  
+        System.out.println(math.add(1, 2, 3)); // Output: 6  
+    }
+}
+\end{codebox}
+
+\subsection{\lr{Run-time Polymorphism (Method Overriding)}}
+
+اینجا ایده این است که یک متد توی کلاس \lr{Parent} داریم و یه کلاس
+\lr{Child} که می‌خواهد آن متد را به شکل خودش پیاده‌سازی کند. این کار را با
+\lr{Method Overriding} انجام می‌دهیم.
+
+ویژگی‌های این نوع polymorphism، به شکل زیر است:
+
+\begin{itemize}
+\tightlist
+\item
+  بین کلاس \lr{Parent} و \lr{Child} اتفاق می‌افتد.
+\item
+  امضای متد (شامل اسم آن، جنس ورودی‌ها و خروجی‌ها) تغییری نمی‌کند.
+\item
+  در زمان اجرای برنامه‌، بسته به تایپ متغیر تصمیم گرفته می‌شود کدام متد
+  اجرا شود.
+\end{itemize}
+
+مثلا در کد زیر، متد \lr{\texttt{makeSound}} در \lr{\texttt{Dog}} دوباره
+تعریف شده است. لازم است که وقتی متدی را \lr{override} می‌کنید، حتما بالای
+آن از \lr{\texttt{@Override}} استفاده کنید، وگرنه \lr{IntelliJ} به شما
+هشدار می‌دهد.
+
+\begin{codebox}{java}
+class Animal {
+    void makeSound() {  
+        System.out.println("An animal makes a sound");
+    }  
+}  
+  
+class Dog extends Animal {
+    @Override
+    void makeSound() {  
+        System.out.println("Dog barks");
+    }  
+}  
+  
+public class Main {
+    public static void main(String[] args) {  
+        Animal myAnimal = new Animal();
+        myAnimal.makeSound();  // Output: An animal makes a sound
+        
+        Animal myDog = new Dog();
+        myDog.makeSound();  // Output: Dog barks    }  
+}
+\end{codebox}
+
+\section{\lr{interface}}
+
+ارث‌ بری و وراثت ابزار بسیار کاربردیه که به شما اجازه میدهد از
+\lr{polymorphism} (چند ریختی) استفاده کنید ولی خب اگر توجه کرده باشید،
+محدودیتی هم جلوی شما قرار می دهد. جاوا از ارث بری یگانه
+\lr{(single inheritance)} استفاده میکند، به این معنا که یک کلاس میتواند
+فقط یک \lr{superclass} را \lr{extend} کند. این محدودیت، اجازه نمیدهد که
+از ارث بری برای کلاس‌هایی استفاده کنیم که نیاز دارند شاخصه‌های متفاوت
+موجود در سوپر کلاس‌های مختلف را همزمان داشته باشند. امتحان کنید و ببینید
+که اگه بخواهید همزمان چند تا \lr{superclass} را \lr{extend} کنید، به
+کامپایل ارور بر میخورید.
+
+همچنین، در بعضی موقعیت‌ها، ممکن است نخواهید که جزییات پیاده‌سازی و کد را
+به اشتراک بگذارید. اینجاست که با مفهوم جدیدی به اسم \lr{interface} آشنا
+میشویم تا محدودیت‌های قبلی را کنار بگذاریم.
+
+\subsection{اینترفیس چیست و چطور از آن استفاده کنیم؟}
+
+اینترفیس مثل کلاس‌های عادی است، صرفا یکسری تفاوت‌ها و محدودیت‌ها دارد.
+\lr{Interface} متشکل شده از یکسری تعریف اولیه از متدها است. متدهایی که
+بدنه ندارند و جزییات پیاده سازی آنها نوشته نشده است.
+
+کلاس‌ها، سوپرکلاس‌های عادی یا \lr{abstract} را \lr{extend} میکردند و
+ویژگی‌های آنها را به ارث میبردند، ولی \lr{interface} ها را \lr{implement}
+(پیاده‌سازی) میکنند. \lr{Implement} کردن یک اینترفیس به این معناست که
+کلاسی که میخواهد \lr{interface} مورد نظر را پیاده‌سازی کند، قول میدهد که
+بدنه همه متدهای تعریف شده در اینترفیس را پیاده‌سازی کند (در غیر این صورت
+به کامپایل ارور میخورد).
+
+به عنوان مثال، میخواهیم یک اینترفیس به نام \lr{\texttt{shape}} بسازیم.
+تصور کنید که میخواهیم کلاس‌هایی را بسازیم که هر کدام نماینده یک شکل
+متفاوت باشند (مثلا مستطیل و دایره). ارث‌بری ایده خوبیست چون که هر دوی این
+اشکال رفتار مشابهی دارند (مثل مساحت و محیط) ولی نحوه محاسبه این مساحت و
+محیط (پیاده‌سازی متدها)، متفاوت و مرتبط با نوع شکل است.به این شکل، سلسه
+مراتب پولی‌مورفیسمی از کلاس‌های \lr{\texttt{shape}} داریم بدون اینکه کدی و
+پیاده‌سازی‌ای بین آن ها به اشتراک گذاشته شده باشد.
+
+برای نوشتن یک اینترفیس، از کلمه کلیدی \lr{\texttt{interface}} استفاده
+میکنیم:
+
+\begin{codebox}{java}
+public interface Shape {  
+}
+\end{codebox}
+
+در داخل بدنه interface، تعریف متدها را مینویسیم ولی بجای اینکه از
+\lr{\texttt{\{\}}} استفاده کنیم و داخل \lr{braces} پیاده‌سازی متد را
+بنویسیم، به یک \lr{\texttt{;}} اکتفا میکنیم:
+
+\begin{codebox}{java}
+public interface Shape {  
+    public double getArea();  
+    public double getPerimeter();  
+}
+\end{codebox}
+
+خب ما الان اولین اینترفیسمون را ساختیم. توجه کنید که \textbf{هم اینترفیس
+هم \lr{class abstract} قابلیت این رو ندارند که از آنها آبجکت ساخته شود}.
+علت این موضوع، وجود \lr{abstract methods} در هر دوی آنها است. پس اول
+باید یک کلاس، کلاس \lr{abstract} را به ارث ببرد و یا اینترفیس را پیاده
+سازی کند تا بعد به صورت غیر مستقیم، بتواند از کلاس ثانویه آبجکت ایجاد
+کند.
+
+حالا میخواهیم دو کلاس \lr{\texttt{Rectangle}} و \lr{\texttt{Circle}} را
+بسازیم که اینترفیس \lr{\texttt{shape}} را \lr{implement} کنند. هنگام
+تعریف این کلاس‌ها، باید از کلمه کلیدی \lr{implements} استفاده کنیم. دقت
+کنید که این دو کلاس را باید در دو فایل جدا تعریف کنید:
+
+\begin{codebox}{java}
+public class Rectangle implements Shape {
+
+}
+
+  
+public class Circle implements Shape {  
+
+}
+\end{codebox}
+
+وقتی که در تعریف این دو کلاس، اینترفیس \lr{\texttt{shape}} را
+\lr{implement} کردیم، تضمین کردیم که متدهای \lr{\texttt{getArea()}} و
+\lr{\texttt{getPerimeter()}} را پیاده سازی کنیم و تا زمانی که این کار را
+نکنیم، با کامپایل ارور روبه‌رو میشویم. کلاس‌ها را به صورت زیر گسترش
+میدهیم:
+
+\begin{codebox}{java}
+public class Rectangle implements Shape{
+    private double width;
+    private double height;
+    public Rectangle(double width, double height){ 
+        this.width = width;
+        this.height = height;  
+    } 
+
+    @Override
+    public double getArea() {
+        return width * height;  
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2.0 * (height + width);  
+    }  
+}
+
+public class Circle implements Shape{
+    private double radius;
+
+    public Circle(double radius){
+        this.radius = radius;  
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;  
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2.0 * Math.PI * radius;  
+    }  
+}
+\end{codebox}
+
+الان کلاس‌های ما کامل شدند و میتوانیم ازشون استفاده کنیم و از روی آن ها
+آبجکت بسازیم. به مثال زیر دقت کنید:
+
+\begin{codebox}{java}
+public class ShapeMain {
+    public static void main(String[] args){  
+        Shape circle = new Circle(5);  
+        Shape rectangle = new Rectangle(3, 6);  
+        System.out.println("rectangle's area = " + rectangle.getArea());  
+        System.out.println("rectangle's perimeter = " + rectangle.getPerimeter());  
+        System.out.println("circle's area = " + circle.getArea());  
+        System.out.println("circle's perimeter = " + circle.getPerimeter());  
+    }  
+}
+\end{codebox}
+
+خروجی کد بالا:
+
+\begin{codebox}{text}
+rectangle's area = 18.0
+rectangle's perimeter = 18.0
+circle's area = 78.53981633974483
+circle's perimeter = 31.41592653589793
+\end{codebox}
+
+در این مثال، یک آبجکت از کلاس \lr{\texttt{Rectangle}} و یک آبجکت از کلاس
+\lr{\texttt{Circle}} ساختیم که هر دو اینترفیس \lr{\texttt{Shape}} را
+\lr{implement} میکردند و پیاده سازی مخصوص به خود برای متد های این
+اینترفیس را داشتن. به سینتکس دقت کنید.
+
+کلاس‌هایی که اینترفیس یکسانی را \lr{implement} میکنند، سلسله مراتبی شبیه
+به کلاس‌های فرزندی که یک کلاس پدر را به ارث میبرند، دارند. مثلا برای مثال
+بالا، میتوانیم چنین ارتباطی را در نظر بگیریم:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-10.png}
+\end{figure}
+
+حال که میدانیم \lr{interface} چیست. به بررسی کاربرد آن و اینکه از آن در
+چه جاهایی استفاده می شود میرسیم.
+
+\subsection{کاربردهای \lr{interface}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  اینترفیس مثل یک قرارداد یا پروتکل عمل می‌کند. در واقع یک ساختار و
+  پروتوتایپ ارائه می‌دهد که کلاس‌های مرتبط با آن باید آن‌ها را داشته باشند.
+  با این حال، هر کدام می‌توانند پیاده‌سازی مخصوص خودشان را ارائه دهند. به
+  همین دلیل دسترسی بسیار مناسبی برای \lr{polymorphism} فراهم می‌کند، چون
+  هر کلاسی که اینترفیس را پیاده‌سازی می‌کند می‌تواند پیاده‌سازی منحصر‌به‌فرد
+  خودش را برای متدهای آن اینترفیس داشته باشد. همچنین این ویژگی امکان
+  انعطاف‌پذیری بیشتری را در طراحی سیستم‌ها فراهم می‌کند.
+\item
+  با تعریف یک interface، جزئیات پیاده‌سازی و کد ارائه نمی‌شود و صرفاً یک
+  قالب در اختیار قرار می‌گیرد.
+\item
+  مهم‌تر از همه، \textbf{چندگانه بودن وراثت \lr{(multiple inheritance)}}
+  در استفاده از اینترفیس‌ها است. اینترفیس‌ها این امکان را فراهم می‌کنند که
+  یک کلاس بتواند همزمان از چندین اینترفیس پیروی کرده و آن‌ها را
+  \lr{implement} کند، اما در عین حال فقط می‌تواند یک کلاس را \lr{extend}
+  کند.
+\item
+  همچنین استفاده از اینترفیس‌ها باعث کاهش وابستگی بین کلاس‌ها می‌شود، زیرا
+  دیگر کلاس‌ها به جزئیات پیاده‌سازی یکدیگر وابسته نیستند. این موضوع
+  می‌تواند منجر به کدهای تمیزتر و قابل نگهداری تر شود.
+\item
+  اینترفیس‌ها معمولاً برای جداسازی مسئولیت‌ها استفاده می‌شوند. به جای اینکه
+  یک کلاس تمام رفتارها و ویژگی‌ها را در خود داشته باشد، اینترفیس‌ها امکان
+  تقسیم مسئولیت‌ها را فراهم می‌کنند و این موضوع باعث می‌شود کدها قابل تست‌تر
+  و نگهداری آن‌ها آسان‌تر شود.
+\end{enumerate}
+
+حالا یک سوالی که پیش می آید این است که خب چرا اصلاً \lr{Abstract Class}
+وجود دارد وقتی که اینترفیس می‌تواند تقریباً همان کار را انجام بدهد؟ چرا
+فقط یکی از این دو را نداریم؟ برای جواب دادن به این سوال، باید تفاوت‌ها را
+بررسی کنیم. چون که این دو، برای اهداف متفاوتی طراحی شدند و نمیتوانند
+کاملا جایگزین همدیگه بشوند.
+
+\section{مقایسه \lr{interfaces} و \lr{abstract classes}}
+
+کلاس \lr{abstract} برای ساختارهای سلسله‌مراتبی \lr{(Hierarchy)} که
+اشتراکات زیادی دارند، مناسب است. در مقابل، اینترفیس برای قراردادهای
+عمومی بین کلاس‌های نامرتبط استفاده می‌شود.
+
+\begin{table}[H]
+	\centering
+	\small 
+	\setLTR
+	\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+		\hline
+		\textbf{\lr{Interface}} & \textbf{\lr{Abstract Class}} \\
+		\hline
+		\lr{Interface can have only \textbf{abstract methods}.}
+		&
+		\lr{Abstract class can have \textbf{abstract and non-abstract methods}.} \\
+		\hline
+		\lr{Interface \textbf{supports multiple inheritance}.}
+		&
+		\lr{Abstract class \textbf{doesn't support multiple inheritance}.} \\
+		\hline
+		\lr{Interface has \textbf{only static and final variables}.}
+		&
+		\lr{Abstract class can have \textbf{final, non-final, static, and non-static variables}.} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+همونطور که در جدول بالا میبینید، اینترفیس‌ها و کلاس‌های \lr{abstract}
+تفاوت‌های ملموسی دارند.
+
+به جز تفاوت در نحوه وراثت و ارث‌بری، اینترفیس‌ها برخلاف کلاس‌های abstract،
+فقط میتوانند فیلدهای \lr{static} و \lr{final} داشته باشند. یعنی
+اینترفیس‌ها، متغیر نمونه \lr{(instance variable)} ندارند و فقط درصورتی
+میتوانند فیلد داشته باشند که مقدارش ثابت و \lr{static} باشد.
+
+یک فیلد مثل سن در یک اینترفیس‌ فقط میتواند به قالب زیر تعریف بشود:
+
+\begin{codebox}{java}
+public static final int age = 20;
+\end{codebox}
+
+این محدودیت به دلایل زیر به وجود آمده است:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{اینترفیس‌ها برای «تعریف رفتار» ساخته شدند، نه ``نگه‌داری
+  وضعیت'':}
+\end{itemize}
+
+اینترفیس‌ها یک قرارداد \lr{(Contract)} برای کلاس‌های پیاده‌سازشون ارائه
+می‌کنند و نباید شامل وضعیت \lr{(State)} یا داده‌های متغیر باشند. در
+اینترفیس‌ها، تمرکز بر روی متدهاست، نه متغیرهای نمونه . اگر اینترفیس‌ها
+اجازه‌ی داشتن متغیرهای نمونه رو داشتند، در عمل شبیه به کلاس‌های
+\lr{abstract} می‌شدند که خلاف فلسفه‌ی اینترفیس است.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{اینترفیس‌ها نباید وابستگی به مقدارهای متغیر داشته باشند:}
+\end{itemize}
+
+اگر اینترفیس‌ها میتوانستند متغیر نمونه داشته باشند، هر کلاس پیاده‌سازی
+آنها باید این مقدار رو مدیریت می‌کرد که باعث نقض استقلال اینترفیس می‌شد.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{جلوگیری از مشکل «وراثت چندگانه» و «داده‌ی متناقض»:}
+\end{itemize}
+
+اگر اینترفیس‌ها متغیرهای نمونه داشتند، مشکل تناقض داده‌ها به وجود می‌آمد.
+مثالی رو در نظر بگیرید که در آن، یه کلاس دو اینترفیس را پیاده‌سازی میکند
+که هر کدام دارای یه فیلد با نام یکسان هستند ولی مقادیر متفاوتی دارند.
+
+یک نکته قابل توجه دیگر، این است که اینترفیس بر خلاف \lr{class abstract}
+کانستراکتور ندارد.
+
+\textbf{حال که میدانیم این دو متفاوت اند و اینکه علت تفاوت چیست،
+میخواهیم ببینیم که کجا و چرا باید از کدام ساختار استفاده کنیم.}
+
+\begin{table}[H]
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+		\hline
+		\textbf{\lr{Abstract class}} & \textbf{\lr{Interface}} \\
+		\hline
+		اگر فقط به یک لایه وراثت نیاز دارید و مشخص است که کلاس‌های فرزند شباهت‌های زیادی در پیاده‌سازی بین خودشون دارن، یک کلاس ابسترکت می‌تواند مناسب‌تر باشد. &
+		اگر نیاز دارید یک کلاس از چند منبع مختلف ویژگی‌هایی دریافت کند، اینترفیس‌ها گزینه بهتری هستند. \\
+		\hline
+		اگر برخی متدها باید در همه‌ی کلاس‌های فرزند یکسان باشند و نمی‌خواهید کد تکراری بنویسید، کلاس ابسترکت بهتر است. &
+		اگر فقط می‌خواهید یک قرارداد تعیین کنید که همه‌ی کلاس‌ها موظف باشند متدهایی را پیاده‌سازی کنند و لزوما این پیاده‌سازی‌ها شبیه هم نیستن، اینترفیس گزینه‌ی بهتری است. \\
+		\hline
+		اگر کلاس باید مقادیر پیش‌فرض یا داده‌ای را در خود نگه دارد، کلاس ابسترکت بهتر است. مزیت کلاس‌های ابسترکت این است که میتوانیم هم متغیرهای مشترک و هم متدهای مشترک با سوپرکلاس را تعریف کنیم و در صورت نیاز به تغییر پیاده‌سازی در یک کلاس فرزند، \lr{override} کنیم. &
+		اگر فقط متدهای مورد نیاز را تعریف می‌کنید و هیچ داده‌ و فیلدی در کلاس پایه نیاز ندارید (نیاز به متغیرهای نمونه ندارید) اینترفیس بهترین انتخاب است. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\subsection{\lr{Multiple inheritance by Interfaces}}
+
+حالا میخواهیم یک مثال را بررسی کنیم که یک کلاس، چند تا اینترفیس مختلف را
+\lr{implement} میکند:
+
+تصور کنید یک شرکت فناوری قصد دارد یک ربات چندمنظوره بسازد که بتواند:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  پرواز کند (مثل یک پهپاد)
+\item
+  شنا کند (مثل یک زیردریایی)
+\item
+  صحبت کند و ارتباط برقرار کند (مانند یک دستیار هوشمند)
+\end{enumerate}
+
+هر یک از این قابلیت‌ها شامل چندین رفتار است. ما این قابلیت‌ها را به‌عنوان
+اینترفیس‌ها تعریف می‌کنیم تا ربات بتواند از اونا به‌صورت ارث‌بری چندگانه
+استفاده کند:
+
+\begin{codebox}{java}
+// interface for flying feature
+interface Flyable {
+    void fly();         // start flyting
+    void adjustAltitude(int height); // adjusting height if flying
+    void land();        // start landing
+}
+
+// interface for swim feature
+interface Swimmable {
+    void swim();        // start swimming
+    void adjustDepth(int depth); // adjusting depth of swim
+    void stopSwimming(); // stopping the swimming process
+}
+
+// interface for speaking feature
+interface Speakable {
+    void speak(String message); // speaking
+    void setLanguage(String language); // changing the language
+    void processCommand(String command); // processing voice commands
+}
+
+package Robot;
+import java.lang.String;
+
+// The class which implements 3 interfaces
+class SmartRobot implements Flyable, Swimmable, Speakable {
+
+    private int altitude;
+    private int depth;
+    private String language;
+    public SmartRobot(int altitude, int depth, String language){
+        this.depth = depth;
+        this.altitude = altitude;
+        this.language = language;  
+    }
+
+    //implementing fly methods
+    @Override
+    public void fly() {  
+        System.out.println("Robot is flying ...");  
+    }
+
+    @Override
+    public void adjustAltitude(int height) {
+        this.altitude = height;  
+        System.out.println("Height has been set to " + height + " meters.");  
+    }
+
+    @Override
+    public void land() {
+        this.altitude = 0;  
+        System.out.println("Robot has landed successfully");  
+    }
+
+    // implementing swim methods
+    @Override
+    public void swim() {  
+        System.out.println("Robot is swimming");  
+    }
+
+    @Override
+    public void adjustDepth(int depth) {
+        this.depth = depth;  
+        System.out.println("Depth has been set to" + depth + " meters");  
+    }
+
+    @Override
+    public void stopSwimming() {  
+        System.out.println("Robot stopped swimming successfully");  
+    }
+
+    // implementing speak methods
+    @Override
+    public void speak(String message) {  
+        System.out.println("Robot says: " + message);  
+    }
+
+    @Override
+    public void setLanguage(String language) {
+        this.language = language;  
+        System.out.println("Language has been change into " + language);  
+    }
+
+    @Override
+    public void processCommand(String command) {  
+        System.out.println("Processing the command: " + command);  
+    }  
+}
+\end{codebox}
+
+تو این مثال من همه بخش هارو پشت هم نوشتم ولی در اصل بهتره هر اینترفیس و
+کلاس رو تو یه فایل جداگانه تعریف کنید.
+
+\subsection{بعضی اینترفیس‌های مهم در جاوا}
+
+خیلی از کلاس‌های موجود در لایبرری‌های جاوا، همزمان یک سوپرکلاس را
+\lr{extend} کرده و یک یا بعضا چند اینترفیس را \lr{implement} میکنند.
+برای مثال می توان به کلاس \lr{\texttt{PrintStream}} اشاره کرد ( کلاسی که
+\lr{\texttt{system.out}} یک نمونه \lr{(instance)} از آن است). این کلاس
+به این صورت تعریف می شود:
+
+\begin{codebox}{java}
+public class PrintStream extends FilterOutputStream implements Appendable, closeable {
+
+}
+\end{codebox}
+
+یک دسته اینترفیس مهم دیگه هم که جاوا در اختیارتون میگذاره، اینترفیس‌های
+\lr{\texttt{List}}، \lr{\texttt{Map}} و \lr{\texttt{set}} هستند که توسط
+پکیج \lr{\texttt{java.util}} ارائه می شوند و با \lr{implement} کردن آنها
+میتوانید ساختمان داده‌هایی را توصیف کنید که به کمک آنها مجموعه‌ای از
+آبجکت‌ها را ذخیره کنید.
+
+\section{\lr{Casting} در جاوا}
+
+قبل از ادامهٔ ارث‌بری، مقداری در مورد \lr{cast} کردن صحبت می‌کنیم. اصطلاح
+\lr{cast} کردن، برای تغییر تایپ متغیرها استفاده می‌شود. مثلا این کد را
+ببینید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    int a = 10;
+    long b = a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+در این کد، متغیر \lr{\texttt{a}} با تایپ \lr{\texttt{int}} به متغیری از
+جنس \lr{\texttt{long}} به اسم \lr{\texttt{b}} تبدیل شده است. این تبدیل
+بدون هیچ مشکلی انجام شده چون بازهٔ اعدادی که متغیرهای \lr{\texttt{long}}
+پوشش می‌دهند بسیار بزرگتر از اعداد \lr{\texttt{int}} است. به خاطر درستی
+این cast، خروجی این کد هم به شکل زیر است:
+
+\begin{codebox}{text}
+a: 10  
+b: 10
+\end{codebox}
+
+حالا اگر متغیر \lr{\texttt{long}} را به یک متغیر \lr{\texttt{int}}، کست
+کنیم چه اتفاقی می‌افتد؟ کد زیر را ببینیند:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    long a = 10_000_000_000L;
+    int b = a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+تلاش کنید این کد را اجرا کنید. به خطای زیر می‌خورید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-1.png}
+\end{figure}
+
+متن خطا می‌گوید:
+
+\begin{codebox}{text}
+java: incompatible types: possible lossy conversion from long to int
+\end{codebox}
+
+جاوا با این خطا به شما می‌گوید که تبدیل متغیرهای \lr{\texttt{long}} به
+\lr{\texttt{int}}، خطرناک است و می‌تواند منجر به خطاهای \lr{overflow}
+شود. مثلاً در همین مثال، عدد \lr{\texttt{10000000000}} به قدری بزرگ است
+که در یک متغیر \lr{\texttt{int}} جا نمی‌شود و به همین خاطر تبدیل آن به یک
+\lr{\texttt{int}} مشکلاتی برای شما به همراه دارد.
+
+حالا اگر یک \lr{\texttt{int}} قبل از \lr{\texttt{a}} قرار دهیم به جاوا
+می‌گوییم که از \lr{cast} کردن مطمئنیم و می‌دانیم که هیچ مشکلی ایجاد
+نمی‌کند:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    long a = 10_000_000_000L;
+    int b = (int)a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+خروجی این کد به شکل زیر است:
+
+\begin{codebox}{text}
+a: 10000000000  
+b: 1410065408
+\end{codebox}
+
+حالا به مقدار عجیب \lr{\texttt{b}} نگاه کنید! مشکلی که می‌بینید، مشکل
+بسیار معروفی به اسم ``\lr{overflow}'' یا ``سرریزی'' است. زمانی که شما،
+عدد خیلی بزرگی را داخل یک متغیر که فضای کافی ندارد ذخیره می‌کنید، به خطای
+\lr{overflow} می‌خورید. خوب است بدانید مقدار چاپ شدهٔ
+\lr{\texttt{1410065408}} دقیقاً برابر \lr{\texttt{31}} بیت سمت راست
+\lr{\texttt{10000000000}} می‌باشد. (یادآوری: \lr{\texttt{int}} معمولاً
+\lr{\texttt{32}} بیت در حافظه اشغال می‌کند؛ \lr{\texttt{1}} بیت علامت و
+\lr{\texttt{31}} بیت برای مقدار)
+
+حالا اگر مقدار \lr{\texttt{a}} کوچکتر بود به این خطا نمی‌خوردید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    long a = 100;
+    int b = (int)a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+خروجی این کد به شکل زیر است:
+
+\begin{codebox}{text}
+a: 100  
+b: 100
+\end{codebox}
+
+علت این که \lr{cast} بالا به درستی انجام شد این است که مقدار
+\lr{\texttt{100}} به راحتی در یک متغیر \lr{\texttt{int}} جا می‌شود.
+
+اتفاق مشابهی در \lr{cast} کردن بین متغیرهای \lr{\texttt{int}} و
+\lr{\texttt{double}} هم رخ می‌دهد. \lr{Cast} زیر به درستی انجام می‌شود:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    int a = 100;
+    double b = a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+خروجی این کد به صورت زیر است:
+
+\begin{codebox}{text}
+a: 100  
+b: 100.0
+\end{codebox}
+
+ممیز خط دوم نشان می‌دهد که متغیر \lr{\texttt{b}} از جنس
+\lr{\texttt{double}} است.
+
+ولی اگر تلاش کنید عددی اعشاری را به عددی صحیح تبدیل کنید، باز هم خطا
+می‌گیرید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    double a = 3.14;
+    int b = a;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+}
+\end{codebox}
+
+دوباره با همان خطای قبلی روبه‌رو شدیم:
+
+\begin{codebox}{text}
+java: incompatible types: possible lossy conversion from double to int
+\end{codebox}
+
+این خطا به خاطر این است که در این cast، بخش اعشاری متغیر \lr{\texttt{a}}
+از دست می‌رود. اگر شما این \lr{cast} را با استفاده از \lr{\texttt{int}}
+به صورت زیر انجام دهید:
+
+\begin{codebox}{java}
+int b = (int)a;
+\end{codebox}
+
+می‌بینید که فقط بخش صحیحِ متغیر \lr{\texttt{a}}، در \lr{\texttt{b}} ذخیره
+می‌شود:
+
+\begin{codebox}{text}
+a: 3.14  
+b: 3
+\end{codebox}
+
+حتی اگر دوباره متغیر \lr{\texttt{b}} را به \lr{\texttt{double}} تبدیل
+کنید، می‌بینید که بخش اعشاری‌ برنمی‌گردد:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    double a = 3.14;
+    int b = (int)a;
+    double c = b;  
+  
+    System.out.println("a: " + a);  
+    System.out.println("b: " + b);  
+    System.out.println("c: " + c);  
+}
+\end{codebox}
+
+خروجی این کد به شکل زیر است:
+
+\begin{codebox}{text}
+a: 3.14  
+b: 3  
+c: 3.0
+\end{codebox}
+
+این cast، خطرناک محسوب می‌شود چون در اون، بخشی از داده‌ها از دست رفته‌اند.
+
+\subsection{انواع \lr{casting}}
+
+دیدید که \lr{cast} کردن، می‌تواند خطرناک باشد. جاوا می‌داند که چه
+\lr{cast} هایی می‌توانند مشکل‌زا باشند. اگر مثل مثال اول، یک متغیر
+\lr{\texttt{int}} را به \lr{\texttt{long}} تبدیل کنیم، جاوا با اطمینان
+از موفق و بی‌خطر بودن این \lr{cast} ، آن را بدون هیچ خطا و اخطاری اجرا
+می‌کند. اما در مثال دوم، که \lr{cast} کردن می‌توانست مشکل‌زا باشد، جاوا به
+ما خطا داد و مجبور شدیم با استفاده از \lr{\texttt{(int)}} به او بگوییم
+که ما نسبت به این مشکلات آگاهیم و همچنان می‌خواهیم این \lr{cast} را انجام
+دهیم. به طور کلی \lr{cast} هایی که ممکن است برای برنامهٔ شما با از دست
+دادن اطلاعات، \lr{overflow} یا هر خطای دیگری مواجه شوند، \lr{cast} های
+خطرناکی محسوب می‌شوند.
+
+بر همین اساس، \lr{cast} ها را به دو دسته تقسیم می‌کنیم:
+
+\subsubsection{کست‌های \lr{implicit}}
+
+واژهٔ ``\lr{implicit}'' یعنی چیزی که بدون اشارهٔ مستقیم فهمیده می‌شود. مثل
+وقتی که شما لازم نیست با گذاشتن \lr{\texttt{(int)}} مستقیما به جاوا بگید
+که از خطرات \lr{cast} آگاهید. \lr{cast} هایی که مشکلی برای برنامهٔ شما
+ایجاد نمی‌کنند، به \lr{cast} های \lr{implicit} معروف هستند. \lr{cast}
+کردن متغیر \lr{\texttt{int}} به \lr{\texttt{long}} از همین نوع است.
+
+\subsubsection{کست‌های \lr{explicit}}
+
+واژهٔ ``\lr{explicit}'' به معنای چیزی است که باید مستقیماً و به شکل دقیق
+بیان شود. کست‌های \lr{explicit} ، کست‌هایی هستند که ممکن است مشکل‌زا باشند
+و لازم است که در کدتان حتما اعلام کنید که از انجام آن \lr{cast} آگاهید و
+در جریان مشکلات احتمالی هستید. تبدیل کردن متغیر \lr{\texttt{long}} به
+\lr{\texttt{int}} از این جنس است.
+
+\subsection{کست کردن در \lr{reference type} ها}
+
+حالا به ارث‌بری برگردیم. اگر به خاطر داشته باشید، به شما گفته بودیم
+\lr{class} ها، ابزاری هستند که به وسیلهٔ آن‌ها می‌توانید برای خودتان
+\lr{type} های جدید تعریف کنید. ولی خب، آیا این \lr{type} ها هم قابل
+\lr{cast} کردن هستند؟ جواب طبیعتاً بله‌ست.
+
+بیایید با یک مثال \lr{cast} کردن در این \lr{type} ها را ببینیم. کد زیر
+را در تابع \lr{\texttt{main}} بنویسید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Iran-Khodro", 180, 4);  
+    myCar.showCarInfo();  
+}
+\end{codebox}
+
+آن را اجرا کنید تا مطمئن باشید همه‌چیز درست کار می‌کند:
+
+\begin{codebox}{text}
+Brand: Iran-Khodro, Speed: 180 km/h  
+Doors: 4
+\end{codebox}
+
+حالا، بیاید یک \lr{cast} عجیب بین \lr{\texttt{Car}} و
+\lr{\texttt{Vehicle}} انجام بدیم:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Iran-Khodro", 180, 4);  
+    myCar.showCarInfo();  
+  
+    System.out.println();  
+  
+    Vehicle myVehicle = myCar; // Casting from Car to Vehicle
+    myVehicle.showInfo();  
+}
+\end{codebox}
+
+خروجی این کد، به شکل زیر است:
+
+\begin{codebox}{text}
+Brand: Iran-Khodro, Speed: 180 km/h  
+Doors: 4  
+
+Brand: Iran-Khodro, Speed: 180 km/h
+\end{codebox}
+
+اگر دقت کنید، وقتی که \lr{\texttt{Car}} از \lr{\texttt{Vehicle}} ارث‌بری
+می‌کند، تمام فیلدها و متدهای \lr{\texttt{Vehicle}} متعلق به
+\lr{\texttt{Car}} نیز هستند. یعنی هر آبجکتی از جنس \lr{\texttt{Car}} ،
+تمام فیلدهای یک \lr{\texttt{Vehicle}} را در خودش دارد، پس ما همه چیز
+برای \lr{cast} کردن \lr{\texttt{Car}} به \lr{\texttt{Vehicle}} را داریم
+و می‌توانیم آن را انجام دهیم. همان‌طور که می‌بینید، برند
+\lr{\texttt{myVehicle}} ایران خودرو و سرعتش \lr{\texttt{180 km/h}} است.
+دقیقا مثل \lr{\texttt{myCar}} .
+
+حتی می‌توانیم \lr{\texttt{myVehicle}} را با یک دوچرخه هم جایگزین کنیم:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Iran-Khodro", 180, 4);  
+    myCar.showCarInfo();  
+  
+    System.out.println();  
+  
+    Vehicle myVehicle = myCar; // Casting from Car to Vehicle
+    myVehicle.showInfo();  
+  
+    System.out.println();  
+  
+    Bike myBike = new Bike("Scott", 10, false);  
+    myBike.showBikeInfo();  
+  
+    System.out.println();  
+  
+    myVehicle = myBike; // Casting, again!
+    myVehicle.showInfo();  
+}
+\end{codebox}
+
+می‌بینید که \lr{\texttt{myVehicle}} از یک ماشین به یک دوچرخه تبدیل می‌شود.
+
+بیاید یک لحظه به اتفاق خیلی خوبی که الآن دیدیم بیشتر فکر کنیم. دیدیم که
+متغیرهایی با جنس \lr{\texttt{Vehicle}} ، می‌توانند با آبجکت‌های
+\lr{\texttt{Car}} ، \lr{\texttt{Bike}} و \lr{\texttt{MotorCycle}} پر
+شوند. اتفاقی که بدون ارث‌بری ممکن نبود. فرض کنید بدون ارث‌بری، می‌خواستید
+متدی بنویسید که با توجه به سرعت یک وسیلهٔ نقلیه، بگوید یک مسافت مشخص در
+چند ثانیه طی می‌شود. اگر ارث‌بری نبود، مجبور بودید به شکل زیر، برای هر یک
+از وسایل نقلیه‌ متدی جدا تعریف کنید:
+
+\begin{codebox}{java}
+public static double calculateTimeForCar(double distance, Car car) {
+    return distance / car.speed;  
+}
+
+public static double calculateTimeForBike(double distance, Bike bike) {
+    return distance / bike.speed;  
+}
+
+public static double calculateTimeForMotorCycle(double distance, MotorCycle motorCycle) {
+    return distance / motorCycle.speed;  
+}
+\end{codebox}
+
+می‌بینید که مقدار زیادی کد تکراری داریم و مجبور شدیم برای هر وسیلهٔ نقلیه،
+یک متد جدا بنویسیم. شرایط زمانی بدتر می‌شود که بخواهیم کلاس تریلی را هم
+اضافه کنیم، اما یادمان برود که متد محاسبه زمان بر حسب مسافت را برای آن
+بنویسیم.
+
+ارث‌بری کار ما را خیلی راحت می‌کند چون زمانی که همهٔ کلاس‌ها از
+\lr{\texttt{vehicle}} ارث‌بری کنند، می‌توانیم فقط یک متد برای محاسبهٔ زمان
+داشته باشیم:
+
+\begin{codebox}{java}
+public static double calculateTime(double distance, Vehicle vehicle) {
+    return distance / vehicle.speed;  
+}
+\end{codebox}
+
+و این متد، توسط تمام آبجکت‌هایی که از جنس \lr{\texttt{Vehicle}} هستند،
+قابل استفاده‌ است. این موضوع شامل آبجکت‌های \lr{\texttt{Car}} ،
+\lr{\texttt{Bike}} ، \lr{\texttt{MotorCycle}} و حتی تریلی‌های آینده هم
+می‌شود!
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        Vehicle myVehicle = new Vehicle("Benz", 200);  
+        Car myCar = new Car("Iran-Khodro", 180, 4);  
+        Bike myBike = new Bike("Scott", 10, false);  
+        MotorCycle myMotorCycle = new MotorCycle("Yamaha", 100, false);  
+  
+        System.out.println("time taken by myVehicle to move 10 km: " + calculateTime(10, myVehicle));  
+        System.out.println("time taken by myCar to move 10 km: " + calculateTime(10, myCar));  
+        System.out.println("time taken by myBike to move 10 km: " + calculateTime(10, myBike));  
+        System.out.println("time taken by myMotorCycle to move 10 km: " + calculateTime(10, myMotorCycle));  
+    }
+
+    public static double calculateTime(double distance, Vehicle vehicle) {
+        return distance / vehicle.speed;  
+    }  
+}
+\end{codebox}
+
+این کد، خروجی زیر را می‌دهد:
+
+\begin{codebox}{text}
+time taken by myVehicle to move 10 km: 0.05  
+time taken by myCar to move 10 km: 0.05555555555555555  
+time taken by myBike to move 10 km: 1.0  
+time taken by myMotorCycle to move 10 km: 0.1
+\end{codebox}
+
+\subsubsection{\lr{explicit cast} در \lr{reference type} ها}
+
+اگر دقت کنید، در \lr{cast} های بالا، لازم نبود که داخل پرانتز،
+\lr{explicitly} مشخص کنیم تا جاوا بداند ما از مشکلات \lr{cast} آگاهیم،
+چون \lr{cast} هایی که انجام دادیم اصلاً مشکلی به وجود نمی‌آوردند! ولی
+همیشه این‌طور نیست. مثلاً اگر بخواهیم که یک \lr{\texttt{Vehicle}} را به یک
+\lr{\texttt{Car}} تبدیل کنیم چه می‌شود؟
+
+کد زیر را ببینید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Iran-Khodro", 180, 4);  
+    myCar.showCarInfo();  
+      
+    System.out.println();  
+      
+    Vehicle myVehicle = myCar;  
+    myVehicle.showInfo();  
+      
+    System.out.println();  
+      
+    Car theSameCar = myVehicle;  
+    theSameCar.showCarInfo();  
+}
+\end{codebox}
+
+تلاش کنید آن را اجرا کنید. به همان خطای همیشگی می‌خورید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-2.png}
+\end{figure}
+
+چرا شما باید بتونید \lr{\texttt{Vehicle}} رو به \lr{\texttt{Car}} تبدیل
+کنید؟! ممکن است \lr{\texttt{Car}} فیلدهای اضافه نسبت به
+\lr{\texttt{Vehicle}} داشته باشد. اما راه‌هایی برای انجام این \lr{cast}
+وجود دارد. برای این که بفهمیم چرا و چطور باید نگاهی به مموری بکنیم. اگر
+از بخش «reference \lr{type} ها»ی داک قبلی به خاطر داشته باشید، بعد از
+درست شدن متغیر \lr{\texttt{myCar}} و مقدار‌دهی‌اش، مموری چنین شکلی دارد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-3.png}
+\end{figure}
+
+بعد از این که \lr{\texttt{myVehicle}} هم ساخته شود، مموری به شکل زیر در
+می‌آید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-4.png}
+\end{figure}
+
+می‌توانید این موضوع را با تکه کد زیر تایید کنید. این‌جا می‌بینید که تغییر
+سرعت \lr{\texttt{myVehicle}} ، باعث تغییر سرعت \lr{\texttt{myCar}} هم
+می‌شود:
+
+\begin{codebox}{java}
+myVehicle.accelerate(100);  
+  
+System.out.println("myVehicle speed: " + myVehicle.speed);  
+System.out.println("myCar speed: " + myCar.speed);
+\end{codebox}
+
+خروجی این کد به شکل زیر است:
+
+\begin{codebox}{text}
+myVehicle speed: 280  
+myCar speed: 280
+\end{codebox}
+
+می‌بینید که سرعت هر دو دستگاه از \lr{\texttt{180}} به \lr{\texttt{280}}
+رسیده. حالا سراغ \lr{cast} کردن می‌رویم:
+
+\begin{codebox}{java}
+Car theSameCar = myVehicle;
+\end{codebox}
+
+با این که جاوا اخطار مشکل‌زا بودن این \lr{cast} را می‌دهد، ولی اگر باز هم
+به مموری نگاه کنیم، می‌بینیم که \lr{\texttt{myVehicle}} هم به آبجکتی از
+جنس \lr{\texttt{Car}} اشاره می‌کند! آبجکت \lr{\texttt{car}} ای که
+\lr{\texttt{myVehicle}} به آن اشاره می‌کند، همچنان فیلدی به اسم
+\lr{\texttt{doors}} در مموری دارد و به همین خاطر، اگر به جاوا
+\lr{explicitly} اطمینان دهیم که می‌دانیم چه کار می‌کنیم، این \lr{cast}
+انجام می‌شود:
+
+\begin{codebox}{java}
+Car theSameCar = (Car)myVehicle;
+
+theSameCar.showCarInfo();
+\end{codebox}
+
+اگر این کد را اجرا کنید، به خطایی نمی‌خورید و می‌بینید که
+\lr{\texttt{theSameCar}} هم مثل \lr{\texttt{myCar}} چهار در دارد:
+
+\begin{codebox}{text}
+Brand: Iran-Khodro, Speed: 280 km/h  
+Doors: 4
+\end{codebox}
+
+در نهایت مموری به شکل زیر خواهد بود:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-5.png}
+\end{figure}
+
+همان‌طور که می‌بینید، هر سه متغیری که در این برنامه تعریف کردید، دقیقاً به
+یک‌جا اشاره می‌کنند.
+
+\section{کلاس \lr{Object}}
+
+\subsection{متدهای ناآشنا}
+
+کد زیر را در \lr{\texttt{main}} بنویسید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    Car myCar = new Car("Iran-Khodro", 180, 4);  
+    myCar.showCarInfo();  
+  
+    System.out.println("Hash code: " + myCar.hashCode());  
+}
+\end{codebox}
+
+متد \lr{\texttt{hashCode()}} در خط آخر را کجا تعریف کردیم؟! چطور بدون
+هیچ اخطار قبلی‌ای، از آن استفاده کردیم؟ خروجی این کد به شکل زیر است:
+
+\begin{codebox}{text}
+Brand: Iran-Khodro, Speed: 180 km/h  
+Doors: 4  
+Hash code: 500977346
+\end{codebox}
+
+همه چیز عجیب‌تر هم می‌شود! \lr{\texttt{myCar}} ، چندین متد دیگر هم دارد که
+ما هیچ‌جا آن‌ها را تعریف نکردیم! حتی \lr{IntelliJ} هم به ما پیشنهاد می‌دهد
+که از آن‌ها استفاده کنیم:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-6.png}
+\end{figure}
+
+روی همین متد \lr{\texttt{hashCode()}} برید و کلیک راست کنید، از منوی
+\lr{Go To} ، گزینهٔ \lr{Declaration or Usages} را انتخاب کنید تا
+پیاده‌سازی این متد را ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-7.png}
+\end{figure}
+
+اگر مقداری این صفحه را اسکرول کنید، می‌بینید که این متد، جزئی از کلاسی به
+اسم \lr{Object} است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/oop-2-8.png}
+\end{figure}
+
+\subsection{تعریف کلاس \lr{Object}}
+
+حالا کلاس \lr{\texttt{Object}} چی هست؟ \lr{\texttt{Object}} کلاسی‌ست که
+همهٔ کلاس‌های دیگر از آن به صورت مستقیم یا غیرمستقیم ارث‌بری می‌کنند. در کد
+شما، \lr{\texttt{Vehicle}} از \lr{\texttt{Object}} ارث‌بری می‌کند و
+\lr{\texttt{Car}} هم از \lr{\texttt{Vehicle}} ، پس \lr{\texttt{Car}} به
+شکلی غیرمستقیم از \lr{\texttt{Object}} ارث‌بری می‌کند و به همین خاطر، به
+متدهای آن مثل \lr{\texttt{hashCode()}} ، \lr{\texttt{toString()}} یا
+\lr{\texttt{equals(Object obj)}} دسترسی دارد (دقت کنید که کلاس
+\lr{\texttt{Car}} همچنان فقط یک پدر دارد و کلاس \lr{\texttt{Object}} در
+واقع پدربزرگ این کلاس است).
+
+شما تا الآن بدون این که خبر داشته باشید از این متدها استفاده می‌کردید.
+مثلا وقتی کد زیر را بزنید:
+
+\begin{codebox}{java}
+System.out.println(myCar);
+\end{codebox}
+
+خروجی زیر را می‌بینید:
+
+\begin{codebox}{text}
+Vehicle.Car@1ddc4ec2
+\end{codebox}
+
+این \lr{output} عجیب و غریب، در واقع خروجی متد
+\lr{\texttt{myCar.toString()}} است. اگر کد زیر را اجرا کنید:
+
+\begin{codebox}{java}
+System.out.println(myCar.toString());
+\end{codebox}
+
+می‌بینید که خروجی هیچ تفاوتی ندارد:
+
+\begin{codebox}{text}
+Vehicle.Car@1ddc4ec2
+\end{codebox}
+
+حتی می‌توانید این موضوع را در پیاده‌سازی متد
+\lr{\texttt{println(Object obj)}} هم ببینید. این متد به شکل زیر
+پیاده‌سازی شده است:
+
+\begin{codebox}{java}
+public void println(Object x) {  
+    String s = String.valueOf(x);
+    if (getClass() == PrintStream.class) {
+        // need to apply String.valueOf again since first invocation  
+        // might return null
+        writeln(String.valueOf(s));  
+    } else {
+        synchronized (this) {  
+            print(s);  
+            newLine();  
+        }  
+    }  
+}
+\end{codebox}
+
+به جزئیات پیاده‌سازی این کد کاری نداریم فقط باید بدانیم که متد
+\lr{\texttt{writeln}} در این کد \lr{output} را برای شما چاپ می‌کند.
+می‌بینید که در این کد، \lr{\texttt{String.valueOf(x)}} صدا زده شده. این
+متد هم پیاده‌سازی سادهٔ زیر را دارد:
+
+\begin{codebox}{java}
+public static String valueOf(Object obj) {
+    return (obj == null) ? "null" : obj.toString();  
+}
+\end{codebox}
+
+این متد، با ورودی گرفتن یک \lr{Object} ، اگر \lr{\texttt{null}} باشد،
+رشتهٔ \lr{\texttt{null}} و در غیر این صورت \lr{\texttt{obj.toString()}}
+را برمی‌گرداند.
+
+این‌جا هم می‌توانید کمکی که \lr{inheritance} به ما می‌کند را ببینید. از
+آن‌جایی که متد \lr{\texttt{println}} یک \lr{Object} ورودی می‌گیرد، شما
+می‌توانید هر \lr{reference type} دیگری مثل \lr{\texttt{Vehicle}} ،
+\lr{\texttt{Car}} و هر کلاس دیگری را به آن ورودی بدهید. فرض کنید مجبور
+بودیم به خاطر عدم وجود \lr{inheritance} برای هر کلاس یک بار
+\lr{\texttt{println}} را پیاده‌سازی کنیم!
+
+\section{چه چیزی یاد گرفتیم؟}
+
+مهم‌ترین نکاتی که یاد گرفتیم:
+
+\begin{itemize}
+\tightlist
+\item
+  این‌که \textbf{\lr{interface}} چیست و برای چه به آن نیاز داریم
+\item
+  مقایسۀ \textbf{\lr{interface} ها} و \textbf{\lr{abstract class} ها} و
+  اینکه چرا نمی‌توان به‌صورت مستقیم از آنها شیء ساخت
+\item
+  خاصیت ارث‌بری چندگانه از اینترفیس‌ها
+\item
+  آشنایی با انواع \textbf{\lr{polymorphism} ها} و کاربرد آن‌ها
+\item
+  آشنایی با انواع و نحوۀ \textbf{\lr{casting}} در
+  \textbf{\lr{primitive type} ها} و \textbf{\lr{refrence type} ها} و
+  خطرات احتمالی آن
+\item
+  اتفاقات درون حافظه هنگام \textbf{\lr{casting}} در
+  \textbf{\lr{refrences type} ها}
+\item
+  کلاس \textbf{\lr{object}} چیست
+\item
+  متدهای ناآشنایی که توسط ما تعریف نشده اند اما قابل استفاده اند، چه
+  ارتباطی با کلاس \textbf{\lr{Object}} دارند
+\end{itemize}
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
