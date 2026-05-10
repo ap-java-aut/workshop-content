@@ -1,0 +1,873 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{شی‌گرایی: مدیریت استثنا \lr{(Exception Handling)}}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{آرمان حسینی، پریا شایان فر، پریا اصحابی}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+یکی از مفاهیم مهم در زبان جاوا، مفهوم \lr{Exception Handling} است. «
+\lr{Exception} » در زبان انگلیسی به معنای «استثناء» است و شرایط استثنایی
+در جاوا، شرایطی است که برنامه‌ی شما به خطا می خورد. در زبان جاوا،
+\lr{Exception} (استثنا) رویدادی است که در حین اجرای برنامه
+\lr{(Runtime)} رخ می‌دهد و جریان عادی اجرای دستورات را متوقف می‌کند ولی
+جاوا به شما این امکان را می‌ دهد که به جای \lr{crash} کردن برنامه موقع به
+وجود اومدن خطا، خودتون به شکلی دیگر با خطای به وجود آمده برخورد کنید.
+
+خطاها همیشه نباید به \lr{crash} منجر شوند .فرض کنید برنامه‌نویس
+\lr{Google} هستید؛ قاعدتاً نمی‌خواهید به محض این که یکی از کاربرها در
+\lr{refresh} کردن \lr{gmail} خود به خطا خورد، تمام سرورهای \lr{gmail}
+برای همه‌ی کاربرها \lr{crash} کند. این‌جاست که مدیریت خطاهای سیستم و
+\lr{Exception Handling} بسیار مهم می شوند.
+
+\section{\lr{Exception} ها}
+
+در ادامه میخواهیم موقعیت‌هایی را بررسی کنیم که برنامه‌ی شما مممکن است با
+یک \lr{Exception} مواجه شود. برنامه‌ی زیر رو توی جاوا اجرا کنید:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {  
+        Scanner scanner = new Scanner(System.in);
+
+        int[] arr = {21, 11, 2, 5, 98};
+
+        while (true) {  
+            System.out.print("Enter the index of your number (between 0 and 4): ");
+            var idx = scanner.nextInt();  
+  
+            System.out.println("Number at that idx: " + arr[idx]);  
+        }  
+    }  
+}
+\end{codebox}
+
+این برنامه، یه عدد به اسم ‍ از کاربر می‌گیرد و \lr{\texttt{arr[idx]}} را
+خروجی می‌دهد. مثلاً، یه نمونه از اجرای این برنامه به شکل زیر است:
+
+\begin{codebox}{text}
+Enter the index of your number (between 0 and 4): 0  
+Number at that idx: 21  
+Enter the index of your number (between 0 and 4): 2  
+Number at that idx: 2
+\end{codebox}
+
+چه اتفاقی می افتد اگر کاربر عددی خارج از بازه‌ی ۰ تا ۴ را وارد کند؟
+همون‌طور که خودتان می‌دانید، به یک خطا می‌خوریم:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-1.png}
+\end{figure}
+
+به متن این خطا توجه کنید:
+
+\begin{codebox}{text}
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index -2 out of bounds for length 5
+\end{codebox}
+
+جاوا به شما می‌گوید که یک \lr{Exception} توی \lr{thread} ای به اسم
+\lr{\texttt{main}} رخ داده است. ما هنوز با مفهوم \lr{thread} آشنا
+نیستیم، صرفا بدونید که برنامه‌های شما همیشه توی \lr{thread} ای به اسم
+\lr{\texttt{main}} اجرا می‌شوند. این خطا همچنین به شما می‌گوید که
+\lr{Exception} به وجود امده، از جنس
+\lr{\texttt{ArrayIndexOutOfBoundException}} است که اسم خیلی دقیقی برای
+خطای شماست! در ادامه هم یک توضیح برای علت این خطا امده، این که «ایندکس
+-2، خارج از بازه‌ی ایندکس‌های معقول یک آرایه‌ی ۵تایی است».
+
+در ادامه، حتی گفته شده که این خطا توی دقیقا چه تابعی رخ داده:
+
+\begin{codebox}{text}
+at Main.main(Main.java:13)
+\end{codebox}
+
+شما می‌توانید بفهمید که این خطا، توی متد \lr{\texttt{Main.main}} ، در خط
+۱۳ام فایل \lr{\texttt{Main.java}} رخ داده است. چند نمونه مختلف از
+\lr{exception} هایی که ممکن است با آن مواجه شوید عبارتند از :
+
+\begin{itemize}
+\tightlist
+\item
+  \lr{\texttt{IndexOutOfBoundsException}} برای زمانی که مشکلی در ایندکس
+  داده شده برای لیست یا آرایه مورد نظر وجود دارد.
+\item
+  \lr{\texttt{NullPointerException}} به طور کل وقتی روی یک متغیر که
+  \lr{null} است متدی را صدا میزنیم.
+\item
+  \lr{\texttt{ArithmeticException}} برای خطاهای محاسباتی مثل تقسیم بر
+  صفر.
+\end{itemize}
+
+\subsection{بلوک \lr{try-catch}}
+
+همون‌طور که توی مقدمه گفتیم، \lr{Exception} به معنای اینه که برنامه‌ی شما
+به خطا خورده است. ولی خطاها، بخشی طبیعی از برنامه‌ی شما هستند. ما
+نمی‌خواهیم هر بار که کاربر، بر حسب اشتباه عددی خارج از بازه‌ی ۰ تا ۴ وارد
+کرد برنامه با یک خطا \lr{crash} کند و خارج شود، در عوض می‌خواهیم که به
+کاربر یک پیام مناسب نشان داده شود تا عدد درستی وارد کند. پیامی مثل این:
+
+\begin{codebox}{text}
+Please enter a valid index. this index should be between 0 and 4.
+\end{codebox}
+
+برای کنترل و مدیریت خطایی که با ان مواجه شده ایم از بلوک \lr{try-catch}
+استفاده میکنیم. این بلوک راه حل اصلی جاوا (و بسیاری از زبان‌های
+برنامه‌نویسی دیگر) برای «مدیریت استثناها» \lr{(Exception Handling )} است
+و هدف اصلی آن، جلوگیری از \lr{Crash} کردن برنامه در هنگام بروز خطا است.
+این کار، با کلیدواژه‌های جدیدی به اسم \lr{\texttt{try}} و
+\lr{\texttt{catch}} ممکن می شود:
+
+\begin{codebox}{java}
+try {  
+    System.out.print("Enter the index of your number (between 0 and 4): ");
+    var idx = scanner.nextInt();  
+  
+    System.out.println("Number at that idx: " + arr[idx]);  
+} catch (ArrayIndexOutOfBoundsException e) {  
+    System.out.println("Please enter a valid number. this number should be between 0 and 4.");  
+}
+\end{codebox}
+
+کلیدواژه‌ی \lr{\texttt{try}} ، به معنای تلاش کردن است. در این کد، شما به
+جاوا می‌گویید که «تلاش کن خطوط بخش \lr{\texttt{try}} را اجرا کنی، و اگر
+حین اجرای این خطوط، به \lr{\texttt{Exception}} ای از جنس
+\lr{\texttt{ArrayIndexOutOfBoundsException}} برخورد کردی، به جای این که
+\lr{crash} کنی و از برنامه خارج شوی، به بخش \lr{\texttt{catch}} برو و
+کدهای اون بخش رو اجرا کن.» دقت کنید که در پرانتز جلوی
+\lr{\texttt{catch}} ، ما نوع \lr{Exception} ای که می‌خواهیم هندل کنیم را،
+مثل یک تابع، توی پرانتز آورده‌ایم.
+
+خروجی برنامه‌ی جدید شما به شکل زیر است :
+
+\begin{codebox}{text}
+Enter the index of your number (between 0 and 4): 4  
+Number at that idx: 98  
+Enter the index of your number (between 0 and 4): -2  
+Please enter a valid number. this number should be between 0 and 4.  
+Enter the index of your number (between 0 and 4): 7  
+Please enter a valid number. this number should be between 0 and 4.
+\end{codebox}
+
+\subsection{\lr{catch} های متوالی}
+
+کاربر حین اجرای برنامه‌ی شما، خطای دیگری هم میتواند ایجاد کند، این که به
+جای عدد، چیزهای نامربوطی مثل اسم و رشته ورودی بدهد. برنامه را اجرا کنید
+و به جای عدد، \lr{\texttt{"ali"}} را ورودی دهید تا ببینید چه اتفاقی
+می‌افتد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-2.png}
+\end{figure}
+
+برنامه‌ی شما، یک \lr{exception} جدید داد. این بار می‌توانید ببینید که این
+\lr{Exception} ، از جنس \lr{\texttt{InputMismatchException}} است. شما
+می‌توانید با اضافه کردن یک \lr{\texttt{catch}} جدید به کدتان، این خطا را
+هم بهتر مدیریت کنید:
+
+\begin{codebox}{java}
+try {  
+    System.out.print("Enter the index of your number (between 0 and 4): ");
+    var idx = scanner.nextInt();  
+  
+    System.out.println("Number at that idx: " + arr[idx]);  
+} catch (ArrayIndexOutOfBoundsException e) {  
+    System.out.println("Please enter a valid number. this number should be between 0 and 4.");  
+} catch (InputMismatchException e) {  
+    System.out.println("Please enter a valid number.");  
+    scanner.nextLine();  
+}
+\end{codebox}
+
+توی کد بالا، جاوا وقتی به خطایی برخورد میکند، اول چک می‌کند که «آیا این
+خطا، از نوع \lr{\texttt{ArrayIndexOutOfBoundsException}} که توی
+\lr{catch} اول امده هست یا نه؟» و اگر بود، خطوط داخل \lr{catch} اول رو
+اجرا می‌کند. اما اگر نبود، به سراغ \lr{\texttt{catch}} بعدی می رود و
+دوباره چک می کند که «آیا این خطا از جنس
+\lr{\texttt{InputMismatchException}} هست یا نه؟» و اگر بود، خطوط
+\lr{\texttt{catch}} بعدی را اجرا می‌کند.
+
+در واقع شما ممکن است چندین \lr{\texttt{catch}} پشت سر هم داشته باشید. در
+این صورت با به وجود اومدن خطا جاوا به همین ترتیب، از اول تا آخر انها را
+چک می‌کند و به دستوراتِ داخل اولین \lr{\texttt{catch}} مناسب می‌رود.
+
+خروجی برنامه‌ی جدید شما، به شکل زیر است:
+
+\begin{codebox}{text}
+Enter the index of your number (between 0 and 4): 2  
+Number at that idx: 2  
+Enter the index of your number (between 0 and 4): ali  
+Please enter a valid number.  
+Enter the index of your number (between 0 and 4): -1  
+Please enter a valid number. this number should be between 0 and 4.
+\end{codebox}
+
+\section{کلاس \lr{Exception}}
+
+کلاس \lr{\texttt{Exception}} در واقع کلاس پایه برای
+\lr{Checked Exception} ها است. اگر دقت کنید، توی هر کدوم از
+\lr{\texttt{catch}} ها، ما چیزی شبیه به آرگومان‌های تابع توی پرانتز ورودی
+می‌گرفتیم:
+
+\begin{codebox}{java}
+catch (ArrayIndexOutOfBoundsException e) {
+    // Your Code
+}
+\end{codebox}
+
+چرا؟ مگر \lr{\texttt{ArrayIndexOutOfBoundsException}} کلاس است؟ آیا این
+یعنی \lr{\texttt{e}} آبجکت است؟ بله!
+
+روی \lr{\texttt{ArrayIndexOutOfBoundsException}} برید، کلیک راست کنید و
+با \lr{Go To} و سپس \lr{Declaration and Usages} ، به تعریف این کلاس
+برید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-3.png}
+\end{figure}
+
+می‌بینید که این کلاس، یک کلاس خیلی معمولی با سه‌تا کانستراکتور و یک فیلد
+است که از کلاسی به اسم \lr{\texttt{IndexOutOfBoundsException}} ارث‌بری
+کرده است!
+
+توی جاوا، کلاسی به اسم کلاس \lr{\texttt{Exception}} داریم، که تمامی
+کلاس‌های \lr{Exception} مختلفی که توی جاوا می‌بینید از ان ارث‌بری می‌کنند.
+این کلاس، یک متد به اسم \lr{\texttt{()getMessage}} دارد \footnote{البته،
+  اگر سورس کد کلاس \lr{\texttt{Exception}} را بخوانید، می‌بینید که این
+  متد متعلق به کلاس ابسترکتی به اسم \lr{\texttt{Throwable}} هستند. اگر
+  خواستید، راجع به \lr{\texttt{Throwable}} تحقیق کنید و بیشتر بخونید.}
+که متن خطا مرتبط با \lr{Exception} فعلی‌مان را خروجی می‌دهد. در واقع زمانی
+که خطایی رخ می‌دهد، جاوا یک شیء ( \lr{Object )} از نوع آن خطا می‌سازد و آن
+را پرتاب ( \lr{Throw )} می‌کند. (با \lr{\texttt{throw}} کمی جلوتر آشنا
+خواهید شد.)
+
+ما می‌توانیم از این کلاس توی \lr{\texttt{catch}} هایمان استفاده کنیم. کد
+روی صفحه را به کد زیر تغییر دهید:
+
+\begin{codebox}{java}
+try {  
+    System.out.print("Enter the index of your number (between 0 and 4): ");
+    var idx = scanner.nextInt();  
+  
+    System.out.println("Number at that idx: " + arr[idx]);  
+} catch (Exception e) {  
+    System.out.println(e.getMessage());  
+}
+\end{codebox}
+
+در جاوا، بخش ( \lr{\texttt{Exception e}} ) که داخل پرانتز جلوی
+\lr{\texttt{catch}} نوشته می‌شود، تعیین می‌کند که کدام نوع استثنا
+\lr{(Exception)} قرار است توسط آن بلوک \lr{\texttt{catch}} مدیریت شود و
+همچنین نام متغیری که استثنا به آن اختصاص می‌یابد. در اینجا اگر خطایی توی
+بلوک \lr{\texttt{try}} اتفاق افتاد، جاوا به اولین \lr{\texttt{catch}}
+تان نگاه می‌کند و مثل قبل از خودش می‌پرسد «آیا خطا از جنس
+\lr{\texttt{Exception}} است؟» و از اون‌جایی که همه‌ی خطاها از
+\lr{\texttt{Exception}} ارث‌بری کرده اند، جواب همیشه مثبت است\footnote{درواقع
+  جواب همیشه‌ی همیشه مثبت نیست. نوع دیگری از خطاها وجود دارند که کلاس
+  پدرشان به جای \lr{\texttt{Exception}} ، کلاس کاملا متفاوتی به اسم
+  \lr{\texttt{Error}} است. ما در این‌جا به آن‌ها نمی‌پردازیم ولی اگر
+  خواستید، خودتان راجع بهشون بخوانید.} و کد داخل این \lr{\texttt{catch}}
+اجرا می‌شود.
+
+توی این \lr{\texttt{catch}} ، جاوا صرفا \lr{\texttt{e.getMessage()}} ،
+که متن خطایمان هست را چاپ می‌کند. می‌تونید یک بار این کد را اجرا کنید تا
+خروجی ان را ببینید:
+
+\begin{codebox}{text}
+Enter the index of your number (between 0 and 4): 1  
+Number at that idx: 11  
+Enter the index of your number (between 0 and 4): -1  
+Index -1 out of bounds for length 5  
+Enter the index of your number (between 0 and 4): 7  
+Index 7 out of bounds for length 5
+\end{codebox}
+
+می‌بینید که متن خطایی که قبلا دیده بودیم، یعنی
+\lr{\texttt{"Index -1 out of bounds for length 5"}} ، الآن روی صفحه چاپ
+می شود و برنامه \lr{crash} نمی کند. هر خطای دیگه‌ای هم رخ بدهد، دقیقا به
+همین \lr{\texttt{catch}} می‌رسد و متن خطایش چاپ می‌شود.
+
+\section{\lr{throw}}
+
+استفاده از \lr{\texttt{throw}} در جاوا معمولاً در موقعیت‌هایی است که
+می‌خواهیم به صورت دستی یک \lr{Exception} ایجاد و پرتاب کنیم تا خطایی را
+که در شرایط خاصی رخ می‌دهد به شکل قابل مدیریت اطلاع دهیم. در واقع با
+استفاده از این کلید واژه خطا را تولید و می‌گوییم «اگر فلان اتفاق افتاد
+این خطا را با پیام مشخصی که خودمان تعیین میکنیم نمایش بده». به تفاوت
+بلوک \lr{try-catch} و \lr{throw} دقت کنید. وقتی کدی داریم که ممکن است
+خطا بدهد، آن را داخل \lr{\texttt{try}} می‌گذاریم.اگر خطا رخ بدهد، کنترل
+برنامه به \lr{\texttt{catch}} منتقل می‌شود تا جلوگیری از \lr{crash} شدن
+برنامه جلوگیری شده و با مدیریت خطا و نمایش پیام مناسب خطا رفع شود. ولی
+\lr{\texttt{throw}} برای این است که خودمان یک \lr{exception} را پرتاب
+کنیم.اینجا \lr{exception} را سیستم تولید نکرده، بلکه خود برنامه‌نویس با
+\lr{\texttt{throw}} آن را ایجاد کرده است.
+
+کلاس زیر را، پایین کلاس \lr{\texttt{Main}} ایجاد کنید:
+
+\begin{codebox}{java}
+class Human {
+    private int age;
+    
+    public int getAge() {
+        return age;  
+    }
+    
+    public void setAge(int age) {
+        this.age = age;  
+    }  
+}
+\end{codebox}
+
+سپس، کد متد \lr{\texttt{main}} را به کد زیر تغییر بدهید:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {  
+        Human ali = new Human();  
+        ali.setAge(10);  
+          
+        System.out.println("Ali's age: " + ali.getAge());  
+    }  
+}
+\end{codebox}
+
+کد خیلی ساده‌ای است و خروجی‌ ان هم به صورت زیر می باشد:
+
+\begin{codebox}{text}
+ali's age: 10
+\end{codebox}
+
+ولی خب، کد زیر را نگاه کنید. توی این کد، به علی سنِ -3 را داده ایم. آیا
+این کار معقول است؟
+
+\begin{codebox}{java}
+Human ali = new Human();  
+ali.setAge(-3);
+\end{codebox}
+
+ما می‌خواهیم که اگر برنامه‌نویس دیگری، از کلاس \lr{\texttt{Human}} استفاده
+کرد و تلاش کرد سنِ کسی را منفی کند، \lr{\texttt{Exception}} ای دریافت کند
+که جلویش را بگیرد. برای این کار، متد \lr{\texttt{setAge(int age)}} کلاس
+\lr{\texttt{Human}} را به شکل زیر تغییر بدید:
+
+\begin{codebox}{java}
+public void setAge(int age) {
+    if (age < 0) {
+        var exception = new IllegalArgumentException("Age cannot be negative");
+        throw exception;  
+    }
+
+    this.age = age;  
+}
+\end{codebox}
+
+توی این کد، در ابتدای متد \lr{\texttt{setAge}} چک می‌کنیم که آیا سن ورودی
+داده شده منفی است یا نه. اگر بود، یک \lr{\texttt{Exception}} جدید از جنس
+\lr{\texttt{IllegalArgumentException}} ایجاد می‌کنیم، متن آن را با
+استفاده از کانستراکتورش \lr{\texttt{"Age cannot be negative"}} می‌گذاریم
+و نهایتاً آن را \lr{\texttt{throw}} می‌کنیم. با این کار، همزمان با رسیدن
+به این خطا از متد خارج هم می‌شویم. حالا تلاش کنید سن \lr{\texttt{ali}} را
+منفی کنید. به خطای زیر می‌خورید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-4.png}
+\end{figure}
+
+متن خطایی که گرفتید را بخوانید. جاوا به شما می‌گوید که توی \lr{thread} ای
+به اسم \lr{\texttt{main}} ، خطایی از جنس
+\lr{\texttt{IllegalArgumentException}} گرفته است که متنش،
+\lr{\texttt{"Age cannot be negative"}} است. همچنین به شما می‌گوید که این
+خطا، توی متد \lr{\texttt{Human.setAge}} رخ داده که خط ۲۲ ام فایل
+\lr{\texttt{Main.java}} است (این خط، خطی است که توش
+\lr{\texttt{exception}} مان را \lr{\texttt{throw}} کرده بودیم).
+
+حالا این خطا را \lr{\texttt{catch}} کنید(درواقع بعد از رسیدن به بخش
+\lr{\texttt{throw}} به جای ادامه اجرای عادی خط های بعدی به بخش مدیریت
+خطا میرویم):
+
+\begin{codebox}{java}
+try {  
+    ali.setAge(-3);  
+} catch (IllegalArgumentException e) {  
+    System.out.println(e.getMessage());  
+}
+\end{codebox}
+
+برنامه را اجرا کنید و خروجی جدید را ببینید:
+
+\begin{codebox}{text}
+Age cannot be negative  
+ali's age: 0
+\end{codebox}
+
+می‌بینید که به جای یک خطای عجیب غریب که باعث \lr{crash} برنامه‌تان می‌شد،
+فقط متن خطا روی صفحه چاپ شده و بعد از ان، سن علی روی صفحه چاپ شده است
+(چرا سن علی صفر است؟). آبجکت \lr{\texttt{e}} ، که یک جورایی شبیه ورودی
+\lr{\texttt{catch}} تان است، دقیقا همان آبجکت \lr{\texttt{exception}} ای
+که توی متد \lr{\texttt{setAge}} ساختید و ان را \lr{\texttt{throw}}
+کردید:
+
+\begin{codebox}{java}
+if (age < 0) {
+    var exception = new IllegalArgumentException("Age cannot be negative");
+    throw exception;  
+}
+\end{codebox}
+
+البته که شما می توانستیدا کدی معادل کد بالا به شکلی کوتاه‌تر بنویسید:
+
+\begin{codebox}{java}
+if (age < 0) {
+    throw new IllegalArgumentException("Age cannot be negative");  
+}
+\end{codebox}
+
+این مدل دوم کد‌نویسی، استانداردتر است. از دومی در کدهای خودتان استفاده
+کنید، ما اولی را نوشتیم تا توجه‌تان را به این جلب کنیم که
+\lr{\texttt{Exception}} ها، در واقع همگی \lr{object} هایی معمولی‌اند.
+
+\subsection{انواع \lr{exception} ها و کلیدواژه‌ی \texttt{throws}}
+
+حالا که کلی با \lr{Exception} ها کار کردید، لازم است بدانید که خود
+\lr{Exception} ها، دو دسته دارند: \#\#\#\# \lr{Checked Exceptions}
+
+دسته‌ی اول از \lr{exception} ها، \lr{checked exception} ها هستند. این
+خطاها انقدر مهم هستند که نمی‌توانید نادیده‌شان بگیرید! این نوع
+\lr{Exception} ها در زمان کامپایل بررسی می‌شوند.یعنی کامپایلر مجبور می‌کند
+که برنامه‌نویس آن‌ها را مدیریت کند. اگر مدیریت نشوند، برنامه کامپایل
+نمی‌شود. اگر یک متد ممکن است همچین خطایی ایجاد کند، باید حتماً توی تعریفش
+این موضوع را مشخص کنید تا بقیه‌ی برنامه‌نویس‌هایی که قرار است از آن استفاده
+کنند، بدانند ممکن است همچین خطای مهمی بگیرند. از طرفی، وقتی دارید از
+متدی که \lr{checked exception} دارد استفاده می‌کنید، حتماً باید توی
+\lr{try-catch} ان خطا را هندل کنید که برنامه‌تان \lr{crash} نکند!
+
+یک مثال از این \lr{exception} ها، \lr{\texttt{IOException}}است. عبارت
+\lr{IO} مخفف \lr{input/output} است و این خطا وقتی رخ می‌دهد که در ورودی
+گرفتن و خروجی دادن چیزی به مشکل بخورید. مثلا اگر بخواهید فایلی را بخونید
+و آن فایل وجود نداشته باشد، احتمالاً این \lr{\texttt{Exception}} را
+می‌گیرید. توی کد زیر، متد \lr{\texttt{readFile}} (که صرفا جنبه‌ی آموزشی
+دارد!)، این \lr{\texttt{exception}} را \lr{\texttt{throw}} می‌کند:
+
+\begin{codebox}{java}
+public class Main {
+    public static void main(String[] args) {}
+
+    public static void readFile(boolean fileExists) {
+        if (!fileExists) {
+            throw new IOException("File does not exist");  
+        }  
+    }  
+}
+\end{codebox}
+
+این کد را توی \lr{IntelliJ} کپی کنید. می‌بینید که کدتان کامپایل نمی‌شود و
+به خطای زیر می‌خورید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-5.png}
+\end{figure}
+
+علت این خطا، این است که متد \lr{\texttt{readFile}} با این که
+\lr{\texttt{exception}} مهمی از نوع \lr{checked exception} را
+\lr{\texttt{throw}} می‌کند، ولی هیچ‌جایی در تعریف خود متد نگفته که ممکن
+است این \lr{exception} را بدهد. شما باید حتماً توی تعریف این‌جور متدها،
+\lr{checked exception} هایشان را مشخص کنید:
+
+\begin{codebox}{java}
+public static void readFile(boolean fileExists) throws IOException {
+    if (!fileExists) {
+        throw new IOException("File does not exist");  
+    }  
+}
+\end{codebox}
+
+توی این کد جدید، کنار تعریف متد \lr{\texttt{readFile}} ، با کلیدواژه‌ی
+\lr{\texttt{throws}} مشخص کردیم که این متد ممکن است خطایی از جنس
+\lr{\texttt{IOException}} بدهد. حالا کدتان کامپایل می‌شود.
+
+سعی کنید از متد \lr{\texttt{readFile}} توی متد \lr{\texttt{main}}
+استفاده کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {  
+    readFile(false);  
+}
+\end{codebox}
+
+باز هم خطای کامپایل می‌گیرید! این‌ بار، علت این است که شما از متد
+\lr{\texttt{readFile}} استفاده کردید، و این متد ممکن است خطای مهمی بدهد،
+ولی شما این خطا را در یک \lr{\texttt{try-catch}} هندل نکردید. شما دوتا
+راه‌حل دارید که بسته به شرایط، باید یکی از ان‌ها را انتخاب کنید:
+
+\textbf{راه حل اول}: این که در یک \lr{\texttt{try-catch}} ، خطای احتمالی
+متد \lr{\texttt{readFile}} را مدیریت کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) {
+    try {  
+        readFile(false);  
+    } catch (IOException e) {  
+        System.out.println(e.getMessage());  
+    }  
+}
+\end{codebox}
+
+با این کار، جاوا مطمئن می‌شود که این خطا توسط شما مدیریت شده و دیگر بهتان
+گیر نمی‌دهد.
+
+\textbf{راه حل دوم}: بپذیرید که متدتان نمی‌تواند این خطا را مدیریت کند و
+آن را به تعریف متد \lr{\texttt{main}} هم اضافه کنید:
+
+\begin{codebox}{java}
+public static void main(String[] args) throws IOException {  
+    readFile(false);  
+}
+\end{codebox}
+
+حالا اگر برنامه‌نویسی از متد \lr{\texttt{main}} استفاده کرد او هم باید
+مثل شما تلاش کند تا این \lr{\texttt{IOException}} را برطرف کند!
+
+\subsubsection{\lr{Unchecked Exceptions}}
+
+این \lr{exception} ها،در زمان \lr{Runtime} رخ می‌دهند و بر خلاف دسته‌ی
+قبل، به قدری مهم نیستند که مدیریت آن‌ها اجباری باشد.
+
+توی مثال اول، شما دیدید که متد \lr{\texttt{scanner.nextInt()}} می‌تواند
+خطایی از جنس \lr{\texttt{InputMismatchException}} بدهد، و این خطا وقتی
+اتفاق می‌افتاد که کاربر به جای \lr{\texttt{int}} ، تایپ‌های دیگری مثل
+\lr{\texttt{string}} یا \lr{\texttt{float}} ورودی بدهد. ولی شما تا قبل
+از خواندن این داک، از جلسه‌ی اول کارگاه از متد
+\lr{\texttt{scanner.nextInt()}} استفاده می‌کردید، بدون این که حتی بدانید
+خطای \lr{\texttt{InputMismatchException}} چیست! چه برسد به این که توی
+\lr{\texttt{try-catch}} ان را مدیریت کنید یا با \lr{\texttt{throws}} آن
+را به تعریف متدتان اضافه کنید!
+
+می‌بینید که جاوا شما را مجبور به مدیریت این \lr{exception} ها نمی‌کند.
+خطاهایی مثل \lr{\texttt{ArrayIndexOutOfBoundsException}} ،
+\lr{\texttt{ArithmeticException}} و کلی خطای دیگر که تا الآن صفحه‌هایتان
+را قرمز می‌کردند و نمی‌دانستید چی‌ هستند، همگی از این جنس هستند.
+
+این \lr{Exception} ها، به جای این که مستقیما از کلاس
+\lr{\texttt{Exception}} ارث‌بری کنند، از کلاس دیگری به اسم
+\lr{\texttt{RuntimeException}} ارث‌بری کردند:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-6.png}
+\end{figure}
+
+می‌بینید که خود این کلاس‌ هم، از \lr{\texttt{Exception}} ارث‌بری می‌کند.
+
+\section{ساخت \lr{Exception} های جدید}
+
+دیدید که کدهای کلاس‌هایی مثل \lr{\texttt{ArrayIndexOutOfBoundsException}}
+، \lr{\texttt{RuntimeException}} و امثال ان‌ها، کدهای نسبتا ساده‌ای‌ هستند.
+عموماً فقط یک سری \lr{constructor} دارند که با استفاده از آن‌ها، بتوانید
+آبجکت‌های جدیدی از آن‌ها درست کنید و آن‌ها را \lr{\texttt{throw}} کنید.
+مثلاً اگر کامنت‌های کلاس \lr{\texttt{RuntimeException}} را کنار بذاریم،
+فقط همچین چیزی از کد باقی می‌ماند:
+
+\begin{codebox}{java}
+public class RuntimeException extends Exception {
+    @java.io.Serial
+    static final long serialVersionUID = -7034897190745766939L;
+    
+    public RuntimeException() {
+        super();  
+    }
+    
+    public RuntimeException(String message) {
+        super(message);  
+    }
+    
+    public RuntimeException(String message, Throwable cause) {
+        super(message, cause);  
+    }
+    
+    public RuntimeException(Throwable cause) {
+        super(cause);  
+    }
+    
+    protected RuntimeException(String message, Throwable cause,
+                               boolean enableSuppression,
+                               boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);  
+    }  
+}
+\end{codebox}
+
+پس میتوانیم به راحتی کلاس های \lr{\texttt{Exception}} خودمان را بسازیم.
+برای ساختن یک \lr{\texttt{Exception}} سفارشی \lr{(Custom Exception)} در
+\lr{Java} باید یک کلاس جدید بسازید که از یکی از کلاس‌های
+\lr{\texttt{Exception}} ارث‌بری کند و بسته به اینکه بخواهید
+\lr{Exception} شما \lr{Checked} باشد یا \lr{Unchecked} ، از کلاس متفاوتی
+ارث می‌برید.
+
+مثال قبل‌تر، که در آن به یک انسان سنِ منفی می‌دادیم را در نظر بگیرید:
+
+\begin{codebox}{java}
+class Human {
+    private int age;
+
+    public int getAge() {
+        return age;  
+    }
+
+    public void setAge(int age) {
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");  
+        }
+
+        this.age = age;  
+    }  
+}
+\end{codebox}
+
+فرض کنید می‌خواهیم این‌جا، به جای \lr{\texttt{IllegalArgumentException}} ،
+از \lr{\texttt{Exception}} جدیدِ خودمون یعنی
+\lr{\texttt{InvalidAgeException}} استفاده کنیم. طبق رسم‌های قراردادی
+جاوا، اسم تمام کلاس‌هایی که نشان‌دهنده‌ی یک \lr{\texttt{Exception}} هستند،
+باید به عبارت \lr{\texttt{Exception}} ختم شوند.
+
+کلاس زیر را، زیر کلاس \lr{\texttt{Human}} ایجاد کنید:
+
+\begin{codebox}{java}
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);  
+    }
+    
+    public InvalidAgeException(int age) {
+        super("Invalid age: " + age);  
+    }  
+}
+\end{codebox}
+
+برای ساخت یک \lr{\texttt{Exception}} جدید، شما باید مثل تمامی
+\lr{\texttt{Exception}} های دیگر، به شکلی مستقیم یا غیر مستقیم از کلاس
+\lr{\texttt{Exception}} ارث‌بری کرده باشید. توی
+\lr{\texttt{InvalidAgeException}} ، ما دوتا \lr{constructor} نوشتیم که
+کار برنامه‌نویس‌های دیگر را راحت کند. هر دوی این \lr{constructor} ها، صرفا
+\lr{constructor} کلاس \lr{\texttt{Exception}} را با متن خطای خاص خودشان
+صدا می‌زنند. توی کانستراکتور اول، این متن خطا ورودی خود کانستراکتور است و
+توی کانستراکتور دوم، صرفاً با ورودی گرفتن سنِ نامعتبر، متن خطای پیش‌فرضی که
+نوشتیم به کانستراکتور کلاسِ \lr{\texttt{Exception}} داده شده است. شما
+همیشه باید با صدا زدن کانستراکتورهای خود کلاس \lr{\texttt{Exception}}
+متن خطا را تنظیم کنید.
+
+بیاین تا این \lr{\texttt{Exception}} رو توی متد
+\lr{\texttt{setAge(int age)}} استفاده کنیم:
+
+\begin{codebox}{java}
+class Human {
+    private int age;
+
+    public int getAge() {
+        return age;  
+    }
+
+    public void setAge(int age) {
+        if (age < 0) {
+            throw new InvalidAgeException(age);  
+        }
+
+        this.age = age;  
+    }  
+}
+\end{codebox}
+
+توی متد \lr{\texttt{setAge}} ، این بار به جای
+\lr{\texttt{IllegalArgumentException}} از \lr{\texttt{Exception}}
+اختصاصی خودمان استفاده کردیم. اما یک خطای کوچک داریم:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-7.png}
+\end{figure}
+
+این خطا، شبیه همان خطایی‌‍ است که توی بخش \lr{checked exception} ها بهش
+برخوردیم. \lr{Exception} جدیدی که شما نوشتید، از جنس
+\lr{checked exception} است. برای این که این‌طور نباشد، کافیست مثل
+\lr{unchecked exception} ها از \lr{\texttt{RuntimeException}} ارث‌بری
+کنید:
+
+\begin{codebox}{java}
+class InvalidAgeException extends RuntimeException {
+    // CODE CODE CODE
+}
+\end{codebox}
+
+با این کار، خطای خود را برطرف و کدتان کامپایل می‌شود. کد زیر را برای
+\lr{\texttt{catch}} کردن این خطا توی متد \lr{\texttt{main}} بنویسید:
+
+\begin{codebox}{java}
+var ali = new Human();
+
+try {  
+    ali.setAge(-7);  
+} catch (InvalidAgeException e) {  
+    System.out.println("Exception: " + e.getMessage());  
+}
+\end{codebox}
+
+حالا کدتان را اجرا کنید:
+
+\begin{codebox}{text}
+Exception: Invalid age: -7
+\end{codebox}
+
+شما \lr{\texttt{exception}} جدید خود را ساختید! بیاید به طور خلاصه به
+مراحلی که برای ساخت \lr{exception} جدید خود طی کردید نگاهی بیندازیم :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  یک کلاس جدید ساختید.
+\item
+  از \lr{\texttt{Exception}} یا \lr{\texttt{RuntimeException}} ارث‌بری
+  کردید. ( \lr{checked} یا \lr{unchecked} بودن خطای خود را با توجه به
+  نوع ارث‌بری تعیین کردید.)
+\item
+  یک \lr{constructor} تعریف کرید تا بتوانید پیام خطا و علت خطا را منتقل
+  کنید.
+\item
+  با \lr{\texttt{throw}} آن را پرتاب کردید.
+\item
+  اگر \lr{Checked} بود، با \lr{try-catch} یا \lr{throws} مدیریت کردید.
+\end{enumerate}
+
+\section{چه چیزی یاد گرفتیم}
+
+توی این داک فهمیدیم که:
+
+\begin{itemize}
+\tightlist
+\item
+  بلوک‌های \lr{\texttt{try-catch}} دقیقا چه چیزی هستند و چطور می‌شود از
+  آن‌ها استفاده کرد.
+\item
+  خود \lr{exception} چیست؟ انواع مختلف آن چه هستند و کلاس
+  \lr{\texttt{Exception}} چه چیزهایی توی خودش نگه داشته است.
+\item
+  چطور می‌شود \lr{exception} های جدید خودمان را درست کنیم و از آن‌ها
+  استفاده کنیم.
+\item
+  کلیدواژه‌ی \lr{\texttt{throw}} چیست و چطور می‌توانیم در یک برنامه به
+  برنامه‌‌نویس‌های دیگر خطا بدهیم.
+\end{itemize}
+
+\section{منابع بیشتر}
+
+اگر دوست داشتید، میتوانید
+\href{https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html}{داک
+رسمی \lr{Oracle} برای \lr{Exception} ها} را مطالعه کنید. این داک‌ها
+پیشرفته بوده و میتوانید کلی مطالب جدید از انها یاد بگیرید.
+
+همچنین، راجع به چیزهایی مثل \lr{\texttt{Error}} و
+\lr{\texttt{Throwable}} توی جاوا تحقیق کنید. هر دوی اون‌ها مباحثی پیشرفته‌
+هستند که یادگیری شما رو تکمیل می‌کنند. برای مطالعه‌ی اون‌ها، علاوه بر
+اینترنت می‌توانید از فصل «Error Handling» کتاب «
+\lr{Learning Java - An Introduction to Real-World Programming with}
+Java» هم استفاده کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/exception-handling-8.png}
+\end{figure}
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
