@@ -1,0 +1,1521 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{گرافیک}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{سام قربانی، نسترن افسری، نوا جغتائی}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+برای کاربردی‌تر کردن برنامه‌های جاوایتان، نیاز است با \lr{GUI} آشنا بشوید.
+\lr{GUI} که مخفف \lr{Graphical User Interface} (رابط گرافیکی کاربر) است،
+در واقع همان پنجره‌ها و عناصر گرافیکی‌ است که توی سیستم عامل‌های مختلف برای
+راحت‌تر شدن کار با برنامه‌ها استفاده می‌شود. چیزهایی مثل دکمه‌ها، برچسب‌ها،
+جدول‌ها، فرم‌ها، فیلدهای ورودی، تصاویر و کلی عناصر دیگر که باعث راحت‌تر شدن
+تعامل با برنامه می‌شوند.
+
+با استفاده از \lr{GUI} در برنامه‌تان، کاربر می‌تواند بدون نیاز به نوشتن کد
+یا وارد کردن دستی اطلاعات، فقط با یک کلیک، عملیات مورد نظرش را انجام
+بدهد.
+
+جاوا برای ساخت برنامه‌های گرافیکی، اول پکیج \lr{\texttt{AWT}} و بعد پکیج
+\lr{\texttt{Swing}} را معرفی کرد. این دو، کلی شباهت و مقداری تفاوت با هم
+دارند. در ادامه، اول نگاه کوتاهی به مفاهیم اشیا و کلاس‌ها می‌اندازیم و سپس
+هم بخش‌های مهم \lr{\texttt{Swing}} و \lr{\texttt{AWT}} را با هم یاد
+می‌گیریم.
+
+\section{اولین برنامه گرافیکی خود را بنویسید}
+
+کد زیر را در تابع \lr{main} قرار دهید. فعلا نگران جزئیات کد نباشید و
+خودتان را گیج نکنید. به زودی قسمت‌به‌قسمت آن را توضیح خواهیم داد. :)
+
+\begin{codebox}{java}
+public class Main{    
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Hello, java");  
+      frame.setSize(300, 150);  
+      JLabel label = new JLabel("Hello, Java!", JLabel.CENTER);  
+      frame.add(label);  
+      frame.setVisible(true);
+   }
+\end{codebox}
+
+کد بالا را ران کنید. با همچین خروجی‌ای مواجه خواهید شد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-hello-world.png}
+\end{figure}
+
+\subsection{کلاس‌ها و آبجکت‌های برنامه \lr{Hello Java}}
+
+حالا می‌خواهیم کدی که زده‌ایم را بررسی کنیم:
+
+\begin{codebox}{java}
+JFrame frame = new JFrame("Hello, java");
+\end{codebox}
+
+در اینجا از \lr{\texttt{JFrame}} استفاده کردیم که کلاسی از پکیج سویینگ
+است که یک پنجره گرافیکی را نشان می‌دهد که بقیه‌ی عناصر گرافیکی روی آن سوار
+می‌شوند. اینجا یک کلاس از این آبجکت ساختیم و اسم آن را \lr{frame}
+گذاشتیم. ورودی (استرینگِ \lr{\texttt{"Hello, Java"}} ) مشخص می‌کند که چه
+عنوانی برای پنجره‌ی ما قرار بگیرد. خودتان امتحان کنید و ببینید که وقتی به
+این بخش ورودی ندهید، پنجره‌تان نیز تایتل ندارد.
+
+\begin{codebox}{java}
+frame.setSize(300, 150);
+\end{codebox}
+
+متد \lr{\texttt{setSize()}} توی کلاس \lr{\texttt{JFrame}} تعریف شده است
+و برای هر آبجکتی که آن را فراخوانی می‌کند، بسته به ورودی‌ای که به آن داده
+می‌شود، ابعاد فریم (همان پنجره) را مشخص می‌کند. (ورودی‌ها به ترتیب از چپ،
+طول و عرض را بر حسب پیکسل مشخص می‌کنند).
+
+\begin{codebox}{java}
+JLabel label = new JLabel("Hello, Java!", JLabel.CENTER);
+\end{codebox}
+
+کلاس \lr{\texttt{JLabel}} مثل یک برچسب فیزیکی می‌ماند. آبجکت ساخته‌شده از
+این کلاس، متن مورد نظرمان را در بخش مشخصی از فریم (در این مثال، به خاطر
+استفاده از \lr{\texttt{CENTER}} ، در مرکز) قرار می‌دهد. در اینجا از یک
+مفهوم کاملا شی‌گرا استفاده کردیم، چون از یک آبجکت برای قرار دادن متنمان
+استفاده کردیم به جای اینکه خیلی ساده، یک متد را روی آبجکت \lr{frame}
+فراخوانی کنیم تا متن را بنویسد. به این ترتیب یک ماهیت جداگانه به متنمان
+دادیم تا بتواند ویژگی‌های مستقل خود را داشته باشد. بعد با فراخوانی متد
+\lr{\texttt{add()}} روی آبجکت \lr{\texttt{frame}}، لیبل خود را به فریم
+اضافه کردیم:
+
+\begin{codebox}{java}
+frame.add(label);
+\end{codebox}
+
+در مرحله آخر هم، فریممان و اجزای داخلش که کامل شده‌اند را نمایش دادیم:
+
+\begin{codebox}{java}
+frame.setVisible(true);
+\end{codebox}
+
+\section{آشنایی با \lr{AWT} و \lr{Swing}}
+
+کلاس‌های \lr{\texttt{AWT}} امکانات زیادی را در اختیار برنامه‌نویس‌ها قرار
+می‌دهند، اما یک نقطه‌ضعف بزرگ دارند؛ و آن این است که ظاهر برنامه‌هایی که با
+\lr{\texttt{AWT}} طراحی می‌شوند، روی پلتفرم‌ها یا سیستم‌عامل‌های مختلف
+می‌تواند تا حدی متفاوت باشد. علاوه بر این، نحوه‌ی تعامل کاربر با
+برنامه‌هایی که با \lr{\texttt{AWT}} ساخته می‌شوند، در سیستم‌عامل‌های مختلف
+ممکن است تفاوت کند. در واقع، وقتی یک برنامه را با \lr{\texttt{AWT}}
+طراحی می‌کنید، این برنامه در هر سیستم‌عاملی که اجرا شود، از همان ابزارهای
+گرافیکی پیش‌فرض آن سیستم‌عامل برای نمایش رابط کاربری استفاده می‌کند. این
+موضوع باعث می‌شود که برنامه شما در هر سیستم‌عامل، یک ظاهر متفاوت داشته
+باشد. برای حل این مشکل، شرکت اوراکل \lr{\texttt{Swing}} را به زبان جاوا
+اضافه کرد.
+
+کتابخانه \lr{\texttt{Swing}} در جاوا یک مجموعه از کلاس‌های از پیش تعریف
+شده است که امکانات زیادی برای ساخت \lr{GUI} در اختیار شما می‌گذارد.
+کلاس‌های \lr{\texttt{Swing}} نسبت به \lr{\texttt{AWT}} انعطاف‌پذیری بیشتری
+دارند و ویژگی‌هایشان نیز پیشرفته‌تر است. مثلا جدول، فرم، لیست، اسکرول و
+بسیاری المان دیگر را در \lr{\texttt{Swing}} می‌توانید راحت‌تر و با کنترل
+بیشتری طراحی کنید.
+
+قبل از اینکه وارد جزئیات \lr{\texttt{Swing}} شویم، یک یادآوری کوتاه از
+شی‌گرایی لازم داریم؛ چون تقریبا تمام چیزی که در \lr{GUI} جاوا می‌سازیم،
+دقیقا با همین مفاهیم جلو می‌رود. در برنامه‌‌های گرافیکی، هر چیزی که روی
+صفحه می‌بینید (مثل دکمه، برچسب، پنل و حتی خود پنجره) یک آبجکت از یک کلاس
+مشخص است؛ یعنی به جای اینکه «مستقیم روی صفحه نقاشی کنیم»، داریم مجموعه‌ای
+از اشیاء می‌سازیم، به آن‌ها ویژگی می‌دهیم (مثل اندازه، رنگ، متن و موقعیت) و
+بعد آن‌ها را کنار هم قرار می‌دهیم. پس همان مفاهیمی که در شی‌گرایی گفتیم مثل
+ساختن آبجکت با \lr{\texttt{new}}، صدا زدن متدها روی آبجکت، و جدا کردن
+مسئولیت‌ها بین کلاس‌های مختلف، اینجا کاملا عملی و ملموس می‌شوند. از طرفی،
+خود کلاس‌های \lr{GUI} جاوا هم با همان منطق شی‌گرایی طراحی شده‌اند: یعنی
+داخل یک سلسله‌مراتب قرار دارند و از هم ارث‌بری می‌کنند.
+
+ارتباط \lr{\texttt{AWT}} و \lr{\texttt{Swing}} و ساختار سلسله‌مراتبی
+آن‌ها:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-hierarchy.png}
+\end{figure}
+
+طبق نمودار، سلسله‌مراتب از\lr{\texttt{Object}} شروع می‌شود و به
+\lr{\texttt{Component}} می‌رسد. \lr{\texttt{Component}} یک کلاس در
+\lr{\texttt{AWT}} است و هر چیزی که قرار است روی صفحه نمایش داده شود، در
+نهایت از این کلاس ارث می‌برد. بعد از \lr{\texttt{Component}}، دو شاخه‌ی
+مهم می‌بینیم: شاخه‌ی \lr{\texttt{Container}} و شاخه‌ی
+\lr{\texttt{JComponent}}. کلاس \lr{\texttt{Container}} (مثل
+\lr{\texttt{Window}} و \lr{\texttt{Panel}}) خودش یک
+\lr{\texttt{Component}} است، با این تفاوت که نقش ظرف را دارد؛ یعنی
+می‌تواند چند \lr{\texttt{Component}} دیگر را داخل خودش نگه دارد و به همین
+خاطر برای ساختاردهی صفحه (مثل پنجره‌ها و پنل‌های پایه در \lr{AWT)} خیلی
+کاربردی است. در سمت دیگر، \lr{\texttt{JComponent}} هم زیرکلاس
+\lr{\texttt{Component}} است، اما بیشتر به دنیای \lr{\texttt{Swing}}
+مربوط می‌شود و پایه‌ی اکثر ویجت‌های \lr{Swing} به حساب می‌آید؛ یعنی کلاس‌هایی
+مثل \lr{\texttt{JLabel}}، \lr{\texttt{JList}}، \lr{\texttt{JTable}} و
+\lr{\texttt{JButton}} از آن مشتق می‌شوند. پس می‌توان گفت که هر دو شاخه در
+نهایت \lr{component} بودن را به ارث می‌برند، اما \lr{\texttt{Container}}
+بیشتر برای نگه‌داری و سازماندهی اجزا است و \lr{\texttt{JComponent}} بیشتر
+برای ساختن ویجت‌های آماده‌ی \lr{Swing .} در ادامه، بخش‌‌های
+\lr{\texttt{Window}} ،\lr{\texttt{Panel}} و \lr{\texttt{JComponent}} را
+به همراه زیرکلاس‌های هر بخش بررسی می‌کنیم.
+
+\subsection{\lr{Window}}
+
+پنجره‌ای است که هنگام اجرای برنامه باز می‌شود و می‌تواند به دو حالت باشد:
+\lr{\texttt{dialog}} (حالت پاپ‌آپی که در برنامه‌ها می‌بینید) و
+\lr{\texttt{Frame}} (قابی که پنجره هر برنامه با اجرا شدن خودش، باز
+می‌کند). بنابراین برای ایجاد یک رابط گرافیکی، به یک \lr{\texttt{Frame}}
+نیاز داریم و \lr{\texttt{JFrame}} در جاوا این کار را برای ما انجام
+می‌دهد. \lr{\texttt{JFrame}} یک \lr{Container} یا ظرف است که این قابلیت
+را دارد که Component‌ هایی مثل \lr{\texttt{JButton}} ،
+\lr{\texttt{JTextArea}} ، \lr{\texttt{JPanel}} و \ldots{} را در خودش جای
+دهد.
+
+در ابتدا باید کتابخانه \lr{\texttt{swing}} را برای ایجاد رابط گرافیکی به
+عنوان پیشنیاز کد ایمپورت کنیم. سپس یک آبجکت از کلاس ‍‍\lr{\texttt{JFrame}}
+می‌‌سازیم (اینجا مانند ابتدای اکیومنت نام آن را \lr{\texttt{frame}}
+گذاشتیم). بعد از آن که آبجکت را ساختیم، برای نمایش آن باید مقدار
+\lr{\texttt{visibility}} را \lr{\texttt{true}} قرار بدهیم. نمونه کد و
+نتیجه‌ی اجرای آن را در ادامه می‌بینید. سام و نسترن قصد دارند برای تیم
+تدریسیاری، رابط کاربریِ فرمی را طراحی کنند که دانشجویانی که این ترم درس
+\lr{AP} دارند، بتوانند اطلاعاتشان را توسط آن ثبت کنند. بنابراین، نام
+پنجره ایجاد شده را \lr{Student Registration Form} می‌گذاریم.
+
+\begin{codebox}{java}
+import javax.swing.*;  
+public class Main{    
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      frame.setVisible(true);  
+   }
+\end{codebox}
+
+خروجی کد :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-1.png}
+\end{figure}
+
+همانطور که می‌بینید، خروجی فقط یک پنجره‌ی خالی است. هیچ چیزی داخلش نیست و
+عنوانش هم دیده نمی‌شود. وقتی اندازه‌ی پنجره را دستی تغییر بدهید، می‌بینید
+که قاب باز شده به این شکل نشان داده می‌شود:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-2.png}
+\end{figure}
+
+حالا می‌توانیم ببینیم که پنجره داده شده عنوان دارد ولی هنوز محتوایی
+ندارد. در واقع، یک آبجکت از کلاس \lr{\texttt{JFrame}} مثل یک قاب یا
+تابلوی نقاشی است که هنوز چیزی روی آن کشیده نشده. قبل از اینکه اجزای
+دیگری به آن اضافه کنیم، بیایید کمی با همین قاب خالی کار کنیم.
+
+مثلا می‌خواهیم اندازه‌ی پنجره‌ی باز شده بعد از اجرا را کمی بزرگتر کنیم. اول
+باید ابعاد مورد نظر را بسازیم، اما برای این کار نیاز به اضافه کردن یک
+کتابخانه دیگر هم داریم که باید آن را هم به ابتدای کد اضافه کنیم:
+
+\begin{codebox}{java}
+import java.awt.*;
+\end{codebox}
+
+سپس، ابعاد را به این صورت می‌سازیم:
+
+\begin{codebox}{java}
+Dimension frameSize = new Dimension(1024,720);
+
+// Create a Dimension object to set the window size (width:1024, height:720)
+\end{codebox}
+
+سپس این ابعاد را به \lr{\texttt{frame}} می‌دهیم تا روی آن اعمال شود. این
+کار را به صورت زیر انجام می‌دهیم:
+
+\begin{codebox}{java}
+frame.setSize(frameSize);
+\end{codebox}
+
+کد آن به صورت زیر است:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+public class Main{
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      Dimension frameSize = new Dimension(1024,720);  
+      frame.setSize(frameSize);  
+      frame.setVisible(true);
+   }
+}
+\end{codebox}
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-3.png}
+\end{figure}
+
+دقت کنید که وقتی پنجره را می‌بندید، کد شما همچنان ادامه پیدا می‌کند و
+متوقف نمی‌شود. برای این که این رفتار را تغییر دهید، می‌توانید حالت عملیات
+بستن پنجره را با کد زیر تغییر دهید. (گزینه‌ای که در کد زیر تحت عنوان
+\lr{\texttt{EXIT\_ON\_CLOSE}} استفاده شده باعث می‌شود کد به طور کامل با
+بسته شدن پنجره متوقف شود. حالت‌های دیگری هم علاوه بر
+\lr{\texttt{EXIT\_ON\_CLOSE}} هست که می‌توانید از آن‌ها استفاده کنید.)
+
+\begin{codebox}{java}
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+\end{codebox}
+
+کد نهایی ما به صورت زیر است:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+public class Main{
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      Dimension frameSize = new Dimension(1024,720);  
+      frame.setSize(frameSize);  
+      frame.setVisible(true);  
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+   }  
+}
+\end{codebox}
+
+توجه کنید که برای مشخص کردن ابعاد پنجره‌تان، می‌توانید از کد زیر هم
+استفاده کنید:
+
+\begin{codebox}{java}
+frame.setSize(500, 500);
+\end{codebox}
+
+در ادامه، به اجزای مختلفی مي‌پردازیم که مي‌توانید به این قاب اضافه کنید.
+
+\subsection{\lr{Panel}}
+
+\lr{JPanel} ساده‌ترین کلاس در بین اجزای گرافیکی در جاواست.
+\lr{\texttt{JPanel}} فضایی را در برنامه ایجاد می‌کند که می‌توانید هر جزء
+گرافیکی را به آن اضافه کنید. می‌توانید \lr{\texttt{JPanel}} را مثل بوم
+نقاشی تصور کنید که اجزای گرافیکی شما مثل اجزای نقاشی روی آن قرار
+می‌گیرند.
+
+حالا ممکن است این سؤال پیش بیاید که آیا \lr{\texttt{JFrame}} و
+\lr{\texttt{JPanel}} مثل هم نیستند؟ چون در \lr{\texttt{JFrame}} هم اجزای
+گرافیکی را به آن اضافه می‌کردیم. باید بگویم که \lr{\texttt{JFrame}} فقط
+یک پنجره معمولی است که در برنامه‌های کاربردی از آن استفاده می‌کنیم. اما
+\lr{\texttt{JPanel}} با امکاناتی که دارد برای سازماندهی اجزای گرافیکی در
+جاوا خیلی بهتر و مناسب‌تر است. در واقع، \lr{\texttt{JPanel}} جزئی است که
+روی این قاب ( \lr{\texttt{JFrame}} ) قرار می‌گیرد و تقریبا خودش می‌تواند
+مثل یک \lr{mini frame} برای اجزای دیگر مثل دکمه‌ها، لیبل‌ها و\ldots{}
+باشد.
+
+معمولا در یک برنامه، از یک فریم اصلی استفاده می‌شود و پنل‌ها روی این فریم
+قرار می‌گیرند. طی تعامل کاربر با برنامه (مثلا از طریق دکمه‌ها)، این پنل‌ها
+می‌توانند جابجا شوند. مثلا وقتی یک دکمه را می‌زنید، از یک صفحه به صفحه
+دیگر می‌روید. جلوتر برای این مورد مثال خواهیم زد.
+
+در ادامه می‌خواهیم پنلی به رنگ آبی روی قسمتی از پنجره‌ی خود ایجاد کنیم.
+اما برای آن که بتوانید پنل‌ها را آزادانه روی قاب قرار بدهید، ابتدا باید
+برای قاب خود چیدمانی خالی تعیین کنید، در غیر این صورت ممکن است چیدمان‌های
+پیش‌فرض جاوا جلوی شما را بگیرند (یک چیدمان‌ یا \lr{\texttt{Layout}}
+مجموعه‌ای از قواعد یا به اصطلاح استایل قرار گرفتن اجزای گرافیکی در یک
+پنجره است. در ادامه به طور مختصر به انواع چیدمان‌‌ها می‌پردازیم). برای این
+کار، ورودی متد زیر را \lr{\texttt{null}} قرار می‌دهیم. توجه کنید که در کد
+زیر، \lr{\texttt{null}} یعنی هیچ‌گونه \lr{\texttt{Layout Manager}} برای
+فریم تنظیم نشده. یعنی شما باید خودتان موقعیت و ابعاد اجزای رابط کاربری
+را به صورت دستی مشخص کنید. در واقع، در اینجا وقتی از \lr{\texttt{null}}
+استفاده می‌کنید، ترتیب قرارگیری اجزا و اندازه‌های آن‌ها به شما واگذار می‌شود
+و دیگر \lr{\texttt{Java}} به طور خودکار آن‌ها را بر اساس یک طرح‌بندی خاص
+تنظیم نمی‌کند.
+
+\begin{codebox}{java}
+frame.setLayout(null);
+\end{codebox}
+
+سپس یک آبجکت جدید از روی این کلاس \lr{JPanel} ایجاد می‌کنیم:
+
+\begin{codebox}{java}
+JPanel mainPanel = new JPanel();
+\end{codebox}
+
+به کمک کد زیر می‌توانیم اندازه و موقعیت پنلمان را مشخص کنیم. (اندازه‌ی پنل
+می‌تواند با اندازه‌ی پنجره هم یکسان باشد.):
+
+\begin{codebox}{java}
+mainPanel.setBounds(40, 35, 400, 400);
+\end{codebox}
+
+نکته‌ای که اهمیت دارد این است که در تنظیم مرزهای پنل، مقداردهی‌های داده
+شده به صورت زیر تحلیل می‌شوند:
+
+دو مولفه اول (35, 40) به ترتیب طول و عرض نقطه‌ای \lr{(x, y)} هستند که پنل
+ما از آن نقطه شروع می‌شود. مولفه‌های سوم و چهارم نیز به ترتیب عرض و ارتفاع
+پنل هستند. به مثال زیر در این راستا توجه کنید:
+
+\begin{codebox}{java}
+panel.setBounds(0, 0, 512, 720);
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{مولفه‌ی اول و دوم}: مقدار \lr{\texttt{0}} سمت چپ مکان شروع پنل
+  روی بردار \lr{\texttt{x}}‌ها است و مقدار \lr{\texttt{0}} سمت راست مکان
+  شروع پنل روی محور \lr{\texttt{y}}‌ها است (به شکل زیر دقت کنید. محورها
+  روی قاب به این شکل هستند).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-4.png}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  مولفه سوم و چهارم :مقادیر \lr{\texttt{512}} و \lr{\texttt{720}} به
+  ترتیب عرض و ارتفاع پنل هستند.
+\item
+  از متد \lr{\texttt{setBounds()}} زمانی که \lr{\texttt{layout}}ای
+  نداریم (آن را \lr{\texttt{null}} گذاشته‌ایم) استفاده می‌کنیم.
+\end{itemize}
+
+برای تنظیم رنگ پنل، کلاس \lr{Color} چند رنگ پیش‌فرض دارد (با نوشتن
+\lr{\texttt{Color.}} می‌توانید آن‌ها را ببینید)، اما راستش را بخواهید،
+معمولا رنگ‌های جذابی نیستند. راه بهتر این است که یک شی جدید از \lr{Color}
+بسازید و کد هگزادسیمال رنگ دلخواه را به آن بدهید؛ مثلا من از کد رنگ
+\lr{baby blue} استفاده کرده‌ام.
+
+کد این رنگ \lr{\texttt{\#89CFF0}} است، اما اگر از مبانی برنامه‌نویسی
+یادتان باشد، به جای \lr{\texttt{\#}} ، با \lr{\texttt{0x}} در ابتدای عدد
+مشخص می‌کنیم که عدد ما هگزادسیمال است (\lr{\texttt{0x89CFF0}}). در کد زیر
+رنگ پنل را مشخص کردیم. از این فرایند برای تعیین رنگ هر کامپوننت دیگری
+نیز می‌توانید استفاده کنید.
+
+\begin{codebox}{java}
+mainPanel.setBackground(new Color(0x89CFF0));
+\end{codebox}
+
+در انتها باید به صورت زیر پنلمان را به \lr{\texttt{frame}} اضافه کنیم:
+
+\begin{codebox}{java}
+frame.add(mainPanel);
+\end{codebox}
+
+کد نهایی ما به صورت زیر خواهد بود:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+
+public class Main{
+   public static void main(String[] args) {  
+  
+      JFrame frame = new JFrame("Student Registration Form");  
+      frame.setSize(500, 500);  
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+      frame.setLayout(null);  
+  
+      JPanel mainPanel = new JPanel();  
+      mainPanel.setBounds(40, 35, 400, 400);   
+      mainPanel.setBackground(new Color(0x89CFF0));
+
+      frame.add(mainPanel);  
+      frame.setVisible(true);  
+   }  
+}
+\end{codebox}
+
+خروجی کد فوق:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-5.png}
+\end{figure}
+
+\subsection{\lr{Labels}}
+
+برچسب \lr{(Label)} یک آبجکت از کلاس \lr{\texttt{JLabel}} است که برای
+نمایش متن یا عکس در فضای رابط کاربری استفاده می‌شود و فقط برای خواندن
+قابل دسترس است (یعنی کاربر نمی‌تواند مستقیما آن را تغییر دهد). به طور
+کلی، از کلاس \lr{\texttt{JLabel}} برای نمایش متن یا تصویر در برنامه‌های
+گرافیکی استفاده می‌کنیم.
+
+باز هم مثل قبل، برای استفاده از کلاس \lr{JLabel} باید ابتدا یک آبجکت
+جدید از این کلاس بسازیم و یک نام برای آن انتخاب کنیم. از این به بعد
+می‌توانیم با استفاده از نام این آبجکت، متدهای کلاس \lr{\texttt{JLabel}}
+را فراخوانی کنیم.
+
+در کد زیر، متن دلخواه را با استفاده از \lr{\texttt{JLabel}} نمایش می‌دهیم
+و با استفاده از \lr{\texttt{setBounds}} موقعیت و اندازه برچسب‌ها را مشخص
+می‌کنیم:
+
+\begin{codebox}{java}
+JLabel nameLabel = new JLabel("Student name:");  
+nameLabel.setBounds(10, 10, 300, 50);  
+JLabel numberLabel = new JLabel("Student number:");  
+numberLabel.setBounds(10, 90, 300, 50);  
+JLabel emailLabel = new JLabel("Email:");  
+emailLabel.setBounds(10, 170, 300, 50);
+\end{codebox}
+
+در نهایت با کد زیر برچسب‌هایمان را به پنل اضافه می کنیم:
+
+\begin{codebox}{java}
+mainPanel.add(nameLabel);  
+mainPanel.add(numberLabel);  
+mainPanel.add(emailLabel);
+\end{codebox}
+
+کد نهایی به صورت زیر است:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+
+public class Main{
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      frame.setSize(500, 500);  
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setLayout(null);  
+          
+      JPanel mainPanel = new JPanel();  
+      mainPanel.setBounds(40, 35, 400, 400);  
+      mainPanel.setBackground(new Color(0x89CFF0));  
+      mainPanel.setLayout(null);   
+          
+      JLabel nameLabel = new JLabel("Student name:");  
+      nameLabel.setBounds(10, 10, 300, 50);  
+      JLabel numberLabel = new JLabel("Student number:");  
+      numberLabel.setBounds(10, 90, 300, 50);  
+      JLabel emailLabel = new JLabel("Email:");  
+      emailLabel.setBounds(10, 170, 300, 50);  
+          
+      mainPanel.add(nameLabel);  
+      mainPanel.add(numberLabel);  
+      mainPanel.add(emailLabel);  
+          
+      frame.add(mainPanel);  
+      frame.setVisible(true);  
+   }  
+}
+\end{codebox}
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-6.png}
+\end{figure}
+
+\subsection{\lr{TextField}}
+
+کلاس ‍\lr{\texttt{JTextField}} شامل اجزای گرافیکی «متنی» است که وقتی از
+آن آبجکتی بسازید، به شما این امکان را می‌دهد که یک خط متن را ویرایش کنید.
+برای اینکه بهتر متوجه شوید، می‌توانید برنامه \lr{Notepad} را باز کنید و
+از منوی \lr{Edit} گزینه \lr{Find} را انتخاب کنید.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-7.png}
+\end{figure}
+
+در تصویر بالا، ما قصد داریم کلمه‌ی «جاوا» را در میان متن موجود در برنامه
+\lr{Notepad} پیدا کنیم. فیلدی که در بخش \lr{Find} برای وارد کردن کلمه‌ی
+مورد نظر استفاده می‌کنیم، همون جزء گرافیکی \lr{\texttt{JTextField}} است
+که با رنگ قرمز مشخص کردیم. احتمالا با این نوع اجزای گرافیکی زیاد برخورد
+کرده‌اید، مثلا وقتی که در فرم‌های ثبت‌نام، اطلاعات کاربری را وارد می‌کنید.
+متنی که در این اجزای گرافیکی وارد می‌کنیم ویژگی‌های زیر را دارد:
+
+\begin{itemize}
+\tightlist
+\item
+  به صورت یک خط یا سطر است.
+\item
+  بر خلاف \lr{\texttt{JLabel}} که فقط برای نمایش متن استفاده می‌شود، این
+  فیلدها توسط کاربر نیز قابل ویرایش هستند، یعنی شما می‌توانید متن قبلی را
+  با متن جدید عوض کنید.
+\end{itemize}
+
+حالا می‌خواهیم سه \lr{\texttt{TextField}} برای سه لیبلی که قبلا ساختیم،
+ایجاد کنیم:
+
+\begin{codebox}{java}
+JTextField nameTextField = new JTextField();  
+nameTextField.setBounds(170, 10, 200, 40);  
+JTextField numberTextField = new JTextField();  
+numberTextField.setBounds(170, 90, 200, 40);  
+JTextField emailTextField = new JTextField();  
+emailTextField.setBounds(170, 170, 200, 40);
+\end{codebox}
+
+در انتها با کد زیر، \lr{\texttt{TextField}}‌هایمان را به پنل اضافه
+می‌کنیم:
+
+\begin{codebox}{java}
+mainPanel.add(nameTextField);  
+mainPanel.add(numberTextField);  
+mainPanel.add(emailTextField);
+\end{codebox}
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-8.png}
+\end{figure}
+
+دقت شود که ما متن پیش‌فرضی برای \lr{\texttt{textfield}}‌هایمان نگذاشته
+بودیم و متن موجود در فیلدهای مثال بالا، مثلا توسط کاربر وارد شده‌اند.
+
+\subsection{نمایش تصویر با استفاده از کلاس \texttt{JLabel}}
+
+همانطور که قبلا گفتیم، در جاوا می‌توانیم برای نمایش تصاویر از کلاس
+\lr{\texttt{JLabel}} استفاده کنیم. این کلاس به ما این امکان را می‌دهد که
+تصاویر را در صفحه نمایش برنامه نشان دهیم.
+
+برای شروع، باید یک شی از کلاس \lr{\texttt{JLabel}} بسازیم و تصویر مورد
+نظر را به آن اختصاص دهیم. برای این کار می‌توانیم از کلاس
+\lr{\texttt{ImageIcon}} استفاده کنیم تا تصویر را بخوانیم و بعد آن را به
+آبجکت ساخته شده از کلاس \lr{\texttt{JLabel}} اختصاص دهیم.
+\lr{\texttt{ImageIcon}}، یک کلاس در سویینگ است که به ما کمک می‌کند تصاویر
+را روی کامپوننت‌هایی مثل \lr{\texttt{JLabel}} و \lr{\texttt{JButton}}
+بارگذاری کنیم و نمایش دهیم. مثلا برای نمایش تصویر با نام
+\lr{\texttt{"imagee.png"}} که در پوشه \lr{\texttt{src}} برنامه قرار
+دارد، به صورت زیر عمل می‌کنیم:
+
+\begin{codebox}{java}
+ImageIcon imageIcon = new ImageIcon("src/imagee.png");
+\end{codebox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-9.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-10.png}
+\end{figure}
+
+مسیر دقیق فایل را به صورت بالا در کدمان مشخص می‌کنیم و با استفاده از کلاس
+\lr{\texttt{ImageIcon}} تصویر \lr{\texttt{"imagee.png"}} را می‌خوانیم. در
+ادامه برای تغییر اندازه تصویر \lr{(scaling)} از کد زیر استفاده می‌کنیم:
+
+\begin{codebox}{java}
+Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{getImage()}} از کلاس \lr{\texttt{ImageIcon}} تصویر خام
+  \lr{(Image)} را که داخل آبجکت \lr{\texttt{ImageIcon}} است، برمی‌گرداند.
+  می‌توانید از این متد برای کارهای گرافیکی یا تغییر اندازه‌ی تصویر استفاده
+  کنید.
+\item
+  متد \lr{\texttt{getScaledInstance()}} از کلاس \lr{\texttt{Image}} برای
+  تغییر اندازه‌ی تصویر به کار می‌رود. این متد سه تا ورودی می‌گیرد:
+\item
+  عرض تصویر (\lr{\texttt{width}}): مقدار عددی عرض جدید تصویر که در اینجا
+  \lr{\texttt{150}} پیکسل تعیین می کنیم.
+\item
+  ارتفاع تصویر (\lr{\texttt{height}}): مقدار عددی ارتفاع جدید تصویر که
+  اینجا هم \lr{\texttt{150}} پیکسل تعیین می‌کنیم.
+\item
+  راهنماهای مقیاس‌دهی (\lr{\texttt{hints}}): روشی که می‌خواهیم برای تغییر
+  اندازه‌ی تصویر استفاده کنیم. این آرگومان الگوریتم مقیاس‌دهی را مشخص
+  می‌کند. در اینجا از \lr{\texttt{Image.SCALE\_SMOOTH}} استفاده کردیم.
+\end{itemize}
+
+مقدار \lr{\texttt{Image.SCALE\_SMOOTH}} یک ثابت از کلاس
+\lr{\texttt{Image}} است که الگوریتمی برای مقیاس‌دهی تصویر ارائه می‌دهد.
+این روش باعث می‌شود کیفیت تصویر موقع تغییر اندازه حفظ شود. سرعتش شاید کمی
+پایین‌تر باشد، اما نتیجه‌ی نهایی کیفیت بالاتری دارد. بعضی مقادیر دیگر برای
+\lr{\texttt{hints}} عبارتند از:
+
+\begin{itemize}
+\tightlist
+\item
+  \lr{\texttt{Image.SCALE\_FAST}} : سرعت بالاتر با کیفیت پایین‌تر.
+\item
+  \lr{\texttt{Image.SCALE\_DEFAULT}} : استفاده از تنظیمات پیش‌فرض سیستم.
+\item
+  \lr{\texttt{Image.SCALE\_REPLICATE}} : مقیاس‌دهی ساده که ممکن است کیفیت
+  خوبی نداشته باشد.
+\end{itemize}
+
+مثالی برای اینکه این موضوع را بهتر متوجه شوید: فرض کنید تصویری دارید که
+اندازه‌اش \lr{\texttt{750*500}} پیکسل است و می‌خواهید آن را کوچک کنید تا
+در فضای \lr{\texttt{150*100}} پیکسلی جا شود. این خط دقیقا این کار را
+انجام می‌دهد، بدون اینکه کیفیت تصویر خیلی افت کند.
+
+حالا تصویر را به شی \lr{\texttt{JLabel}} اختصاص می‌دهیم:
+
+\begin{codebox}{java}
+JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+\end{codebox}
+
+سپس به کمک \lr{\texttt{setBounds}} موقعیت تصویر را در صفحه مشخص می کنیم:
+
+\begin{codebox}{java}
+imageLabel.setBounds(30, 230, 100, 150);
+\end{codebox}
+
+و در انتها، تصویر را به پنلمان اضافه می کنیم:
+
+\begin{codebox}{java}
+mainPanel.add(imageLabel);
+\end{codebox}
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-11.png}
+\end{figure}
+
+\subsection{\lr{Button}}
+
+همانطور که قبلا گفتیم، یکی از روش‌هایی که کاربر می‌تواند با برنامه تعامل
+داشته باشد، کلیک کردن روی دکمه‌هاست. پس هر کدام از دکمه‌ها می‌توانند یک کار
+خاصی را انجام دهند. اشیاء ساخته شده از کلاس \lr{\texttt{JButton}}
+دکمه‌هایی هستند که وقتی کاربر روی آن‌ها کلیک می‌کند، یک کار مشخص را انجام
+می‌دهند.
+
+در کد زیر که دو دکمه تعریف کردیم، می‌توانید متن دلخواه را روی دکمه
+بگذارید و با استفاده از \lr{\texttt{setBounds}} نیز موقعیت و اندازه‌ی
+دکمه را مشخص کنید.
+
+\begin{codebox}{java}
+JButton submitButton = new JButton("Submit");  
+submitButton.setBounds(10, 10, 300, 50);
+
+JButton okButton = new JButton("OK");  
+okButton.setBounds(150, 330, 100, 50);
+\end{codebox}
+
+بعد از اینکه دکمه را تعریف کردید، می‌توانید با استفاده از روش زیر آن را
+فعال کنید. در این برنامه می‌خواهیم وقتی دکمه زده شد، پیامی مبتنی بر ثبت
+شدن اطلاعات را نشان دهد. برای این کار دو حالت مختلف را با دو مثال بررسی
+می‌کنیم.
+
+اولا نیاز داریم که در ابتدای کدمان، پکیج زیر را ایمپورت کنیم:
+
+\begin{codebox}{java}
+Import java.awt.event.*;
+\end{codebox}
+
+حالا، کد زیر را به برنامه اضافه می‌کنیم:
+
+\begin{codebox}{java}
+submitButton.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {  
+      // Button functionality
+   }
+});
+\end{codebox}
+
+در این قطعه کد، برای دکمه، یک \lr{\texttt{ActionListener}} تعریف می‌کنیم
+تا هر زمان کاربری روی دکمه کلیک کرد، متد \lr{\texttt{actionPerformed}}
+اجرا شود. از جلسه‌ی شی‌ءگرایی احتمالا به یاد دارید که خیلی وقت‌ها ما با نوع
+کلی کار می‌کنیم، نه با نوع دقیق. اینجا هم دقیقا به همین صورت است: متد
+\lr{\texttt{addActionListener}} از ما یک ورودی از نوع
+\lr{\texttt{ActionListener}} می‌خواهد اما برایش مهم نیست دقیقا چه کلاسی
+باشد؛ فقط کافی است اینترفیس \lr{\texttt{ActionListener}} را پیاده‌سازی
+کرده باشد (پیاده‌سازی متد \lr{\texttt{actionPerformed}} را داشته باشد).
+به عبارت دیگر، ما یک «شنونده» می‌دهیم، ولی این شنونده می‌تواند هر
+پیاده‌سازی‌ای داشته باشد و هر بار که کلیک اتفاق می‌افتد، همان نسخه‌ای که ما
+نوشته‌ایم اجرا می‌شود. در قسمت کامنت‌ شده، کد مربوط به کارهایی را می‌نویسیم
+که می‌خواهیم بعد از فشردن دکمه اجرا شود (متد
+\lr{\texttt{actionPerformed}} را \lr{override} می‌کنیم). پس شکل فعال‌سازی
+دکمه معمولا ثابت است، اما کاری که انجام می‌شود می‌تواند خیلی متنوع باشد و
+بسته به نیازمان عوض شود که دقیقا یک نمونه کاربردی از \lr{Polymorphism}
+است.
+
+برای اضافه کردن شنونده به دکمه‌ها معمولا همین رویکرد بالا را استفاده
+می‌کنیم: به‌جای اینکه یک کلاس جداگانه بسازیم که
+\lr{\texttt{ActionListener}} را پیاده‌سازی کرده باشد، همان‌جا
+\lr{(inline)} یک نمونه‌ی ناشناس می‌سازیم و متد
+\lr{\texttt{actionPerformed}} را \lr{override} می‌کنیم تا رفتار دکمه را
+مشخص کنیم. دلیلش هم روشن است: خیلی وقت‌ها دکمه‌های مختلف قرار نیست دقیقا
+یک کار یکسان انجام دهند؛ اگر برای هر دکمه یک کلاس جدا می‌ساختیم، تعداد
+کلاس‌های \lr{\texttt{ActionListener}} خیلی زیاد و مدیریت کد سخت می‌شد.
+البته اگر واقعا تعداد زیادی دکمه با رفتار کاملا مشابه داشته باشیم، آن‌وقت
+ساختن یک کلاس جداگانه و استفاده‌ی مجدد از آن می‌تواند انتخاب بهتری باشد.
+
+همانطور که گفتیم، می‌خواهیم با فشردن دکمه، یک پیغام نشان دهیم که
+نشان‌دهنده ثبت شدن اطلاعات باشد.
+
+\textbf{مثال یک}
+
+یک پنل جدید می‌سازیم و به آن یک لیبل جدید و دکمه اختصاص می‌دهیم. هدف این
+است که با زدن دکمه، پنل‌ها روی فریم جایگزین شوند. برای پنل دوم، از یکی از
+رنگ‌های پیش‌فرض کلاس \lr{Color} استفاده می‌کنیم:
+
+\begin{codebox}{java}
+JPanel successPanel = new JPanel();  
+successPanel.setBounds(40, 35, 400, 400);   
+successPanel.setBackground(Color.lightGray);  
+successPanel.setLayout(null);
+
+JLabel infoLabel = new JLabel("Information Submitted successfully");  
+infoLabel.setBounds(100, 170, 350, 50);
+
+successPanel.add(infoLabel);
+\end{codebox}
+
+دکمه‌ی \lr{\texttt{submitButton}} را به پنل اول و دکمه‌ی
+\lr{\texttt{okButton}} را به پنل دوم اضافه می‌کنیم:
+
+\begin{codebox}{java}
+mainPanel.add(submitButton);  
+successPanel.add(okButton);
+\end{codebox}
+
+حالا، \lr{\texttt{actionListener}} را برای هر دو دکمه پیاده سازی می‌کنیم،
+به طوری که با زدن دکمه‌ها‌، بین پنل‌ها جابه‌جا شویم:
+
+\begin{codebox}{java}
+submitButton.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+      frame.getContentPane().removeAll();
+
+      frame.add(successPanel);
+
+      frame.revalidate();
+
+      frame.repaint();
+
+   }
+});
+
+okButton.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+      frame.getContentPane().removeAll();
+
+      frame.add(mainPanel);
+
+      frame.revalidate();
+
+      frame.repaint();
+
+   }
+});
+\end{codebox}
+
+متد \lr{\texttt{getContentPane().removeAll()}} تمام اجزا و کامپوننت‌های
+داخل فریم را حذف می‌کند. این کار باعث جلوگیری از باقی ماندن اجزای قبلی
+هنگام تغییر پنل می‌شود. متد \lr{\texttt{revalidate()}} چیدمان
+(\lr{\texttt{layout}}) را به‌روزرسانی می‌کند و متد \lr{\texttt{repaint()}}
+کل فریم را دوباره رسم می‌کند تا تغییرات به درستی نشان داده شوند.
+
+خروجی کد بعد از کلیک بر روی دکمه \lr{\texttt{Submit}}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-12.png}
+\end{figure}
+
+با کلیک بر روی دکمه \lr{OK} ، به صفحه‌ی اصلی برمی‌گردیم.
+
+کد نهایی برنامه‌ی مثال یک به صورت زیر است:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+‌
+public class Main{
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      frame.setSize(500, 500);  
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+      frame.setLayout(null);  
+  
+      JPanel mainPanel = new JPanel();  
+      mainPanel.setBounds(40, 35, 400, 400);  
+      mainPanel.setBackground(new Color(0x89CFF0));
+      mainPanel.setLayout(null);  
+      JPanel successPanel = new JPanel();  
+      successPanel.setBounds(40, 35, 400, 400);  
+      successPanel.setBackground(Color.lightGray);
+      successPanel.setLayout(null);
+
+      //labels of mainPanel  
+      JLabel nameLabel = new JLabel("Student name:");  
+      nameLabel.setBounds(10, 10, 150, 50);  
+      JLabel numberLabel = new JLabel("Student number:");  
+      numberLabel.setBounds(10, 90, 150, 50);  
+      JLabel emailLabel = new JLabel("Email:");  
+      emailLabel.setBounds(10, 170, 150, 50);
+
+      //label of successPanel  
+      JLabel infoLabel = new JLabel("Information Submitted successfully");  
+      infoLabel.setBounds(100, 170, 350, 50);  
+
+
+      JTextField nameTextField = new JTextField();  
+      nameTextField.setBounds(170, 10, 200, 40);  
+      JTextField numberTextField = new JTextField();  
+      numberTextField.setBounds(170, 90, 200, 40);  
+      JTextField emailTextField = new JTextField();  
+      emailTextField.setBounds(170, 170, 200, 40);  
+
+      ImageIcon imageIcon = new ImageIcon("src/imagee.png");  
+      Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);  
+      JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));  
+      imageLabel.setBounds(30, 230, 150, 150);  
+  
+      JButton submitButton = new JButton("Submit"); //for mainPanel  
+      submitButton.setBounds(270, 330, 100, 50);   
+      JButton okButton = new JButton("OK"); //for successPanel  
+      okButton.setBounds(150, 330, 100, 50);
+
+
+      submitButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e){
+            frame.getContentPane().removeAll();
+            frame.add(successPanel);
+            frame.revalidate();
+            frame.repaint();  
+         }  
+      });  
+      okButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e){
+            frame.getContentPane().removeAll();
+            frame.add(mainPanel);
+            frame.revalidate();
+            frame.repaint();  
+         }  
+      });  
+
+      mainPanel.add(imageLabel);  
+      mainPanel.add(nameLabel);  
+      mainPanel.add(numberLabel);  
+      mainPanel.add(emailLabel);  
+      mainPanel.add(nameTextField);  
+      mainPanel.add(numberTextField);  
+      mainPanel.add(emailTextField);  
+      mainPanel.add(submitButton);
+
+      successPanel.add(infoLabel);
+
+      successPanel.add(okButton);  
+
+      frame.add(mainPanel);  
+      frame.setVisible(true);  
+   }  
+}
+\end{codebox}
+
+\textbf{مثال دو}
+
+از \lr{\texttt{JOptionPane}} برای نمایش پاپ آپی (\lr{\texttt{dialog}})
+استفاده می‌کنیم.
+
+به کد زیر که در آن از این کلاس استفاده کردیم، دقت کنید:
+
+\begin{codebox}{java}
+submitButton.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {  
+      JOptionPane.showMessageDialog(frame, “Information submitted successfully”);
+   }
+});
+\end{codebox}
+
+خروجی کد بعد از کلیک روی دکمه‌ی \lr{\texttt{Submit}}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graphics-swing-13.png}
+\end{figure}
+
+\textbf{مثال سه}
+
+در این مثال، از متدهای \lr{\texttt{setText}} و \lr{\texttt{getText}} نیز
+استفاده خواهیم کرد:
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{setText(String text)}}: این متد برای تنظیم کردن متن
+  داخل یک کامپوننت گرافیکی به کار می‌آید. یعنی وقتی بخواهید یک متن خاص را
+  در \lr{\texttt{JTextField}} به عنوان متن پیش‌فرض یا راهنمای متن ورودی
+  نمایش دهید، می‌توانید از این متد استفاده کنید.
+\item
+  متد \lr{\texttt{getText()}}: این متد نیز برای دریافت متن از داخل یک
+  کامپوننت گرافیکی است. مثلا اگر بخواهید بفهمید کاربر چه چیزی وارد کرده،
+  می‌توانید از این متد استفاده کنید.
+\end{itemize}
+
+حالا می‌خواهیم در یک نمونه‌ی ساده‌تر از برنامه‌ی قبلی خود، از این دو متد
+استفاده کنیم، به طوری که کاربر اطلاعات خود را وارد می‌کند و با زدن دکمه
+\lr{\texttt{Submit}}، اطلاعات در یک \lr{\texttt{TextField}} دیگر نمایش
+داده می‌شود. برای این کار، ابتدا یک \lr{\texttt{TextField}} دیگر می‌سازیم
+که بعد از فشردن دکمه \lr{\texttt{Submit}}، فقط اطلاعات را نشان دهد و
+دیگر نتواند ویرایش شود. به همین دلیل، ویژگی
+\lr{\texttt{setEditable(false)}} را برای آن تنظیم می‌کنیم که این فیلد فقط
+برای نمایش استفاده شود. در ادامه دکمه \lr{\texttt{Submit}} را نیز تعریف
+می‌کنیم. کد مربوطه به شکل زیر خواهد بود:
+
+\begin{codebox}{java}
+JButton submitButton = new JButton("Submit");  
+submitButton.setBounds(150, 160, 100, 30);
+
+JTextField outputTextField = new JTextField();  
+outputTextField.setBounds(10, 210, 360, 30);  
+outputTextField.setEditable(false);
+\end{codebox}
+
+چون عملیات ``دریافت ورودی'' و ``نمایش خروجی'' باید بعد از کلیک روی دکمه
+\lr{\texttt{Submit}} انجام شود، این عملیات‌ها را داخل متد
+\lr{\texttt{actionPerformed()}} قرار می‌دهیم. این متد فقط زمانی اجرا
+می‌شود که کاربر روی دکمه کلیک کند. (کدهای مربوط به فعال کردن دکمه قبلا
+توضیح داده شده) حالا به کد زیر و کامنت‌های داخل آن دقت کنید:
+
+\begin{codebox}{java}
+submitButton.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+
+      // Receive input from the name field  
+      String name = nameTextField.getText();
+
+      // Receive input from the student number field  
+      String number = numberTextField.getText();
+
+      // Receive input from the email field  
+      String email = emailTextField.getText();
+
+      // Combine the information and display it in the output field
+      outputTextField.setText("Name: " + name + " | Number: " + number + " | Email: " + email);  
+   }  
+});
+\end{codebox}
+
+در کد بالا ما یک \lr{\texttt{ActionListener}} به دکمه اضافه کردیم که با
+هر بار کلیک کردن، متد \lr{\texttt{()actionPerformed}} را اجرا کند. حالا
+باید دکمه‌ی \lr{\texttt{Submit}} و \lr{\texttt{outputTextField}} را به
+پنل اضافه کنیم تا همه چیز به درستی نمایش داده شود. کد مربوط به اضافه
+کردن دکمه و \lr{\texttt{outputTextField}} به پنل به صورت زیر است:
+
+\begin{codebox}{java}
+mainPanel.add(submitButton);  
+mainPanel.add(outputTextField);
+\end{codebox}
+
+کد نهایی به صورت زیر هست:
+
+\begin{codebox}{java}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main {
+   public static void main(String[] args) {  
+      JFrame frame = new JFrame("Student Registration Form");  
+      frame.setSize(500, 500);  
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+      frame.setLayout(null);  
+  
+      JPanel mainPanel = new JPanel();  
+      mainPanel.setBounds(40, 35, 400, 400);  
+      mainPanel.setBackground(new Color(0x89CFF0));  
+      mainPanel.setLayout(null);  
+  
+      JLabel namelabel = new JLabel("Student name:");  
+      namelabel.setBounds(10, 10, 150, 30);  
+      JLabel numberlabel = new JLabel("Student number:");  
+      numberlabel.setBounds(10, 60, 150, 30);  
+      JLabel emaillabel = new JLabel("Email:");  
+      emaillabel.setBounds(10, 110, 150, 30);  
+  
+      JTextField nametextField = new JTextField();  
+      nametextField.setBounds(170, 10, 200, 30);  
+      JTextField numbertextField = new JTextField();  
+      numbertextField.setBounds(170, 60, 200, 30);  
+      JTextField emailtextField = new JTextField();  
+      emailtextField.setBounds(170, 110, 200, 30);  
+  
+      JButton submitButton = new JButton("Submit");  
+      submitButton.setBounds(150, 160, 100, 30);  
+  
+      JTextField outputTextField = new JTextField();  
+      outputTextField.setBounds(10, 210, 360, 30);  
+      outputTextField.setEditable(false); 
+
+      submitButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {  
+            String name = nametextField.getText();  
+            String number = numbertextField.getText();  
+            String email = emailtextField.getText();
+
+            outputTextField.setText("Name: " + name + " | Number: " + number + " | Email: " + email);  
+         }  
+      });  
+  
+      mainPanel.add(nametextField);  
+      mainPanel.add(numbertextField);  
+      mainPanel.add(emailtextField);  
+      mainPanel.add(namelabel);  
+      mainPanel.add(numberlabel);  
+      mainPanel.add(emaillabel);  
+      mainPanel.add(submitButton);  
+      mainPanel.add(outputTextField);  
+
+      frame.add(mainPanel);  
+      frame.setVisible(true);  
+   }  
+}
+\end{codebox}
+
+خروجی کد بعد از کلیک کردن بر روی دکمه:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-14.png}
+\end{figure}
+
+\subsection{\lr{Layouts} (چیدمان‌ها)}
+
+چیدمان کامپوننت‌ها در صفحه، یکی از بخش‌های مهم برای ساخت رابط کاربری به
+قولی \lr{user friendly} تر است. همانطور که در کد نمونه‌ی اول دیدید:
+
+\begin{codebox}{java}
+frame.setLayout(null);
+\end{codebox}
+
+این خط کد یک صفحه‌ی خالی برای ما ایجاد کرد و این امکان را داد که با مشخص
+کردن موقعیت و اندازه‌ی اجزا، چیدمان صفحه را به سلیقه‌ی خودمان تنظیم کنیم.
+اما یک مشکل اساسی دارد! همانطور که احتمالا خودتان هم متوجه شدید، وقتی
+اندازه‌ی صفحه تغییر می‌کند، عناصر صفحه به‌صورت خودکار تنظیم نمی‌شوند و همان
+جا که بودند، ثابت می‌مانند. این موضوع می‌تواند باعث به‌هم‌ریختگی رابط کاربری
+شود.
+
+برای حل این مشکل، می‌توانیم از چیدمان‌های آماده (\lr{\texttt{Layouts}})
+برای \lr{\texttt{Frame}} یا سایر اجزای صفحه استفاده کنیم. در ادامه، چند
+تا از این ابزارهای آماده‌ی مدیریت چیدمان را بررسی می‌کنیم.
+
+مزیت استفاده از \lr{\texttt{layout}}‌ها این است که برخلاف روش دستی، وقتی
+اندازه‌ی پنجره تغییر می‌کند، موقعیت و اندازه‌ی اجزا نیز به‌طور خودکار تنظیم
+می‌شوند و تجربه‌ی کاربری بهتری رقم می‌خورد.
+
+چیدمان‌ها تعیین می‌کنند که عناصر اضافه‌شده به \lr{\texttt{panel}} یا
+\lr{\texttt{frame}} چگونه کنار هم قرار بگیرند. در اینجا ما با
+\lr{\texttt{panel}} کار می‌کنیم، ولی معمولا چیدمان‌ها روی
+\lr{\texttt{frame}} پیاده‌سازی می‌شوند. شما نیز بسته به نیاز و خلاقیت
+خودتان، می‌توانید هر کدام از این روش‌ها را امتحان کنید.
+
+\subsection{\lr{Border Layout}}
+
+حالت پیش‌فرض جاوا برای چیدمان پنل‌هاست که از 5 ناحیه تشکیل شده و شکل کلی
+آن به صورت زیر است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-18.png}
+\end{figure}
+
+الان برای استفاده از این چیدمان، باید برخلاف کاری که در برنامه‌ای که با
+هم ساختیم انجام دادیم، ورودی متد \lr{\texttt{setLayout()}} را به جای
+\lr{\texttt{null}}، شی‌ای جدید از کلاس \lr{\texttt{BorderLayout}}
+بگذاریم:
+
+\begin{codebox}{java}
+mainPanel.setLayout(new BorderLayout);
+\end{codebox}
+
+برای هر کدام از اجزایی که به پنل اضافه می‌کنیم، باید اشاره کنیم که در
+کدام ناحیه قرار می‌گیرد که به این منظور به شکل زیر عمل می‌کنیم:
+
+\begin{codebox}{java}
+// add a new JButton with name "NORTH" and it is on top of the container JButton northButton = new JButton("NORTH"); 
+
+mainPanel.add(northButton, BorderLayout.NORTH);
+\end{codebox}
+
+\href{https://www.youtube.com/watch?v=PD6pd6AMoOI}{این ویدئو} را برای
+درک بهتر این چیدمان بررسی کنید.
+
+\subsection{\lr{Box Layout}}
+
+توی این چیدمان، اجزا می‌توانند به دو شکل مرتب شوند:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \lr{\texttt{Page Axis}} ( از بالا به پایین، مثل یک ستون)
+\item
+  \lr{\texttt{Line Axis}} ( از چپ به راست، مثل یک سطر)
+\end{enumerate}
+
+به بیان ساده، شما این امکان را دارید که کامپوننت‌های خود را یا زیر هم یا
+کنار هم قرار دهید.
+
+هنگام ساخت یک آبجکت از کلاس \lr{\texttt{BoxLayout}} ، باید دو تا ورودی
+برای آن مشخص کنید:
+
+اولین ورودی فریم (\lr{\texttt{JFrame}}) یا پنلی (\lr{\texttt{JPanel}})
+که می‌خواهید این چیدمان روی آن اعمال شود.
+
+دومین ورودی یک مقدار ثابت است که مشخص می‌کند چیدمان به‌صورت ستونی
+(\lr{\texttt{PAGE\_AXIS}}) یا سطری (\lr{\texttt{LINE\_AXIS}}) باشد.
+
+علاوه بر این، \lr{\texttt{BoxLayout}} این امکان را به شما می‌دهد که بین
+اجزا فضای خالی ایجاد کنید تا چیدمان مرتب‌تر شود.
+
+مثال زیر نحوه‌ی استفاده از \lr{\texttt{Page Axis}} را نشان می‌دهد:
+
+\begin{codebox}{java}
+mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+\end{codebox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-19.png}
+\end{figure}
+
+به عنوان مثال، اکنون پنل اول برنامه خودمان که چیدمانش \lr{\texttt{null}}
+بود را با \lr{\texttt{BoxLayout}} و \lr{\texttt{PAGE\_AXIS}} پیاده‌سازی
+می‌کنیم:
+
+\begin{codebox}{java}
+mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+\end{codebox}
+
+خروجی این چیدمان برای برنامه‌ای که ساختیم به این صورت خواهد بود:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-20.png}
+\end{figure}
+
+دقت شود که وقتی از \lr{\texttt{Layouts}} استفاده می‌کنیم (بر خلاف وقتی که
+چیدمان را \lr{\texttt{null}} می‌گذاشتیم)، ترتیب اضافه شدن ‌کامپوننت‌ها به
+پنل حائز اهمیت می‌شود. مثلا برای خروجی بالا، ترتیب بدین صورت است:
+
+\begin{codebox}{java}
+mainPanel.add(nameLabel);  
+mainPanel.add(nameTextField);  
+mainPanel.add(numberLabel);  
+mainPanel.add(numberTextField);  
+mainPanel.add(emailLabel);  
+mainPanel.add(emailTextField);  
+mainPanel.add(imageLabel);  
+mainPanel.add(submitButton);
+\end{codebox}
+
+\href{https://www.youtube.com/watch?v=hBe2eBorQuw}{این ویدئو}، برای درک
+بهتر این \lr{\texttt{Layout}} پیشنهاد می‌شود.
+
+\subsection{\lr{Flow Layout}}
+
+چیدمان \lr{\texttt{FlowLayout}} به شما این امکان را می‌دهد تا اجزا را به
+صورت پشت سر هم در یک خط یا چند خط مرتب کنید. وقتی صفحه‌تان پر شود، اجزا
+به صورت خودکار به خط بعدی منتقل می‌شوند.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-21.png}
+\end{figure}
+
+برای درک شهودی بهتر از پیاده‌سازی این \lr{\texttt{layout}}، به
+\href{https://www.youtube.com/watch?v=pDqjHozkMBs}{این ویدیو} مراجعه
+کنید.
+
+\subsection{\lr{Grid Layout}}
+
+این نوع چیدمان به شما اجازه می‌دهد اجزا را داخل یک شبکه مرتب کنید، طوری
+که هر کدام بتوانند یک یا چند سلول را اشغال کنند. شما همچنین کنترل کاملی
+روی ترتیب و فضای بین این اجزا دارید.
+
+در این روش، کامپوننت‌ها داخل یک شبکه شطرنجی قرار می‌گیرند و هر کدام، تمام
+فضای سلول خودشان را پر می‌کنند. هنگام تنظیم این چیدمان، می‌توانید تعداد
+سطرها، ستون‌ها و فاصله‌ی بینشان را مشخص کنید تا دقیقا همان چیزی که
+می‌خواهید، پیاده‌سازی شود. همچنین می‌توانید این کارها را به ترتیب با متدهای
+زیر انجام دهید:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \lr{\texttt{setRows(int rows)}} : تنظیم تعداد سطرها
+\item
+  \lr{\texttt{setColumns(int coumns)}} : تنظیم تعداد ‌ستون‌ها
+\item
+  \lr{\texttt{setHgap(int hgap)}} : تنظیم فاصله افقی بین سلول‌ها
+\item
+  \lr{\texttt{setVgap(int vgap)}} : تنظیم فاصله عمودی بین سلول‌ها
+\end{enumerate}
+
+برای نمونه، در کد زیر، بر روی یک پنل با چیدمان \lr{\texttt{Grid Layout}}
+شش دکمه با فاصله‌های مشخص از هم قرار می‌دهیم:
+
+\begin{codebox}{java}
+import javax.swing.*;  
+import java.awt.*;  
+  
+public class Grid {
+   public static void main(String args[]){  
+      JFrame frame = new JFrame();  
+      frame.setSize(500, 500);  
+      frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  
+
+      JPanel panel = new JPanel();
+      GridLayout gridLayout = new GridLayout(2, 3, 10, 10);  
+      panel.setLayout(gridLayout);  
+
+      JButton button1 = new JButton("1");  
+      JButton button2 = new JButton("2");  
+      JButton button3 = new JButton("3");  
+      JButton button4 = new JButton("4");  
+      JButton button5 = new JButton("5");  
+      JButton button6 = new JButton("6");  
+  
+      panel.add(button1);  
+      panel.add(button2);  
+      panel.add(button3);  
+      panel.add(button4);  
+      panel.add(button5);  
+      panel.add(button6);  
+  
+      frame.add(panel);  
+      frame.setVisible(true);  
+
+   }
+\end{codebox}
+
+در کد بالا، یک آبجکت از کلاس \lr{\texttt{GridLayout}} ساختیم و ورودی‌ها
+به ترتیب از چپ، 2 سطر، 3 ستون و فاصله‌های افقی و عمودی 10 پیکسلی بین هر
+دکمه را مشخص می‌کنند.
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-15.png}
+\end{figure}
+
+حال، با فراخوانی چهار متد زیر، تعداد سطر و ستون‌ها را برعکس کرده و
+فاصله‌های عمودی و افقی را به 50 افزایش می‌دهیم:
+
+\begin{codebox}{java}
+gridLayout.setRows(3);  
+gridLayout.setColumns(2);  
+gridLayout.setHgap(50);  
+gridLayout.setVgap(50);
+\end{codebox}
+
+خروجی کد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-16.png}
+\end{figure}
+
+برای مثال، در پیاده‌سازی این برنامه نیز از \lr{grid layout} استفاده شده:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-17.png}
+\end{figure}
+
+\href{https://www.youtube.com/watch?v=ohNqQagkDDY}{این ویدئو} را برای
+بررسی دقیق‌تر این \lr{\texttt{Layout}} نگاه کنید.
+
+\section{برخی از متدهای پرکاربرد برای کلاس‌های کاربردی \lr{Swing}}
+
+\subsection{کلاس \texttt{JFrame}}
+
+\begin{itemize}
+\item
+  \lr{\texttt{setText(String title)}} : این متد، همان تایتل فریم را
+  تغییر میدهد.
+\item
+  \lr{\texttt{setSize(int width, int height)}} : ابعاد فریم را مشخص
+  می‌کند.
+\item
+  \lr{\texttt{setVisible(boolean state)}} : وضعیت نمایش فریم را مشخص
+  می‌کند.
+\item
+  \lr{\texttt{setResizable(boolean state)}} : اگر ورودی را \lr{false}
+  قرار دهیم، ابعاد فریم ثابت باقی مانده و کاربر نمی‌تواند آن را تغییر
+  دهد.
+\item
+  \lr{\texttt{setLayout()}} : چیدمان فریم را مشخص می‌کند.
+\item
+  \lr{\texttt{setDefaultCloseOperation(int operation)}} : بسته به نوع
+  ورودی، وضعیت برنامه بعد از بستن فریم را مشخص می‌کند. شما می‌توانید
+  \lr{\texttt{operation}} را به جای \lr{\texttt{int}}، با
+  \lr{\texttt{constant}}‌های از پیش تعریف شده‌ای مثل
+  \lr{\texttt{JFrame.EXIT\_ON\_CLOSE}} پر کنید.
+\item
+  \lr{\texttt{setLocationRelativeTo(Component c)}} : با
+  \lr{\texttt{null}} قرار دادن ورودی این متد، هنگام ران کردن برنامه،
+  فریم در وسط صفحه‌ی مانیتور باز می‌شود.
+\end{itemize}
+
+\subsection{کلاس \lr{JLabel}}
+
+\begin{itemize}
+\item
+  \lr{\texttt{setText(String text)}} : متن لیبل را مشخص می‌کند.
+\item
+  \lr{\texttt{setIcon()}} : مثلا برای اضافه کردن \lr{\texttt{imageIcon}}
+  همانطور که بالاتر گفتیم.
+\item
+  \lr{\texttt{setForeGround()}} : تعیین رنگ متن لیبل به کمک کلاس
+  \lr{\texttt{Color}} که بالاتر استفاده ازش را توضیح دادیم.
+\item
+  \lr{\texttt{setFont()}} : فونت متن لیبل را مشخص می‌کند. ورودی آن یک
+  آبجکت از کلاس فونت است که به صورت زیر ساخته می‌شود:
+\end{itemize}
+
+\begin{codebox}{java}
+Font font = new Font("font's name", Font.type, int size);
+\end{codebox}
+
+قسمت \lr{\texttt{type}} میتواند ثابت‌های مختلفی مثل \lr{\texttt{PLAIN}} و
+یا \lr{\texttt{BOLD}} باشد.
+
+\begin{itemize}
+\tightlist
+\item
+  \lr{\texttt{setBorder()}}
+\end{itemize}
+
+یک مرز و قاب به دور برچسب ایجاد می‌کند. ورودی آن یک آبجکت از کلاس
+\lr{\texttt{Border}} است.
+
+برای استفاده از متد \lr{\texttt{setBorder}} مثل زیر عمل می‌کنیم:
+
+ورودی دوم ضخامت مرز را مشخص می‌کند.
+
+\begin{codebox}{java}
+Border border = BorderFactory.createLineBorder(Color.RED, 10);  
+namelabel.setBorder(border);
+\end{codebox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/graphics-swing-22.png}
+\end{figure}
+
+\subsection{کلاس \lr{JButton}}
+
+\begin{itemize}
+\item
+  \lr{\texttt{setText(String text)}} : مثل \lr{\texttt{JLable}} کار
+  می‌کند.
+\item
+  \lr{\texttt{setBackGround()}} : مثل متد \lr{\texttt{setForeGround()}}
+  که برای کلاس \lr{\texttt{JLable}} بود، این متد هم رنگ پس زمینه‌ی دکمه
+  را با اسفاده از کلاس \lr{\texttt{Color}} مشخص می‌کند.
+\item
+  \lr{\texttt{setFocusable(boolean state)}} : باعث فعالسازی و یا عدم
+  فعالسازی مرز کمرنگ دور نوشته‌ی درون دکمه می‌شود.
+\item
+  \lr{\texttt{setBorder()}} : مثل \lr{\texttt{JLabel}} کار می‌کند.
+\item
+  \lr{\texttt{setActionListener()}} : توی مثال‌ها توضیح داده شده است.
+\end{itemize}
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
