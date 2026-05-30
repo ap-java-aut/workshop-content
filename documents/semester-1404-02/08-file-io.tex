@@ -1,0 +1,771 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{کار با فایل}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{پیام دیوسالار، آرمان حسینی، مهدی جعفری}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+میدونید یا قراره بدونید که توی خیلی از برنامه‌ها با داده‌هایی سر و کار
+دارین که الزاماً ورودی همون لحظه ترمینال نیستن و نیاز دارید از داده‌هایی
+که قبلاً داریم استفاده کنید، یا ممکنه بخواین ورودی‌هاتون رو از هر رابط
+کاربری‌ای که می‌گیرید در یک جای جداگانه ذخیره کنید. حتی ممکنه لازم باشه
+چیزی خارج از کدهاتون توی برنامه اصلی استفاده بشه، مثلاً اگه یادتون باشه
+برای پروژه منوی کافه باید یه سری عکس از خارج برنامه لود می‌کردین و با
+دادن آدرسش به کدتون اون‌ها رو استفاده می‌کردین.
+
+به همه دلایل بالا و خیلی از دلایل دیگه ما نیاز داریم که دیتاهامون رو با
+یه روشی ذخیره کنیم و بعداً بازخوانیشون کنیم تا به یه دردی بخورن. برای این
+کار ما نیاز داریم بتونیم با این فایل‌ها کار کنیم و از اون‌ها چیزایی رو
+بخونیم یا توی اون فایل‌ها تغییراتی ایجاد کنیم و اطلاعات رو توشون بنویسیم.
+
+همون‌طور که می‌دونید مفاهیم خوندن و نوشتن چه در جاوا چه در هر زبان یا
+برنامه‌ای که با کامپیوتر سر و کار داره به مفهوم ورودی و خروجی یا به طور
+مختصر \lr{I/O} گره خورده. توی جاوا یعنی هرجایی که بخوای اطلاعاتی وارد
+برنامه‌ات کنی (مثل خوندن از یه فایل)، یا از برنامه‌ات بریزی بیرون (مثل
+نوشتن توی فایل). برای این کار ما از یه پکیج توی جاوا استفاده می‌کنیم به
+اسم \lr{\texttt{java.io}}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{کلاس فایل \lr{(File Class)} و آدرس‌دهی}
+
+قبل از اینکه بریم سراغ خوندن و نوشتن از فایل‌ها، نیاز داریم که بتونیم
+بهشون توی سیستم‌عامل اشاره کنیم. کلاس \lr{\texttt{File}} توی پکیج
+\lr{\texttt{java.io}} قرار داره و دقیقاً برای کار با فایل‌ها و پوشه‌ها
+(دایرکتوری‌ها) استفاده می‌شه.
+
+حالا آیا با کلاس \lr{\texttt{File}} می‌تونیم بخونیم یا بنویسیم توی فایل؟
+نه! این کلاس خودش مستقیماً برای خوندن و نوشتن استفاده نمی‌شه. فقط برای
+نمایش، ایجاد، حذف، تغییر نام و بررسی ویژگی‌های فایل و پوشه استفاده می‌شه.
+
+ساختن یک شی از کلاس \lr{\texttt{File}}:
+
+\begin{codebox}{java}
+File myFile = new File("path/to/file.txt");
+\end{codebox}
+
+پس نیاز داریم آدرس بدیم (که احتمالاً خیلیاتون از چالش‌هاش خبر دارید).
+
+\subsection{آدرس‌دهی فایل‌ها در جاوا \lr{(File Paths)}}
+
+وقتی می‌خوایم یه فایل رو توی جاوا باز کنیم، باید یه مسیر \lr{(Path)} بهش
+بدیم. این مسیر می‌تونه مطلق \lr{(Absolute Path)} یا نسبی
+\lr{(Relative Path)} باشه. بیایم دونه دونه بررسی کنیم.
+
+\subsubsection{آدرس مطلق \lr{(Absolute Path)}}
+
+آدرس کامل از ریشه‌ی سیستم‌عامل تا خود فایل یا پوشه. ویندوز:
+
+\begin{codebox}{java}
+File file = new File("C:\\Users\\Mahdi\\Documents\\file.txt");
+\end{codebox}
+
+لینوکس/مک:
+
+\begin{codebox}{java}
+File file = new File("/home/mahdi/documents/file.txt");
+\end{codebox}
+
+نکته: توی ویندوز چون \lr{\texttt{\textbackslash }} کاراکتر خاص
+\lr{(escape character)} هست، باید دوتا بذاری
+\lr{\texttt{\textbackslash \textbackslash }} همچنین آدرس مطلق همیشه
+یکیه، فرقی نمی‌کنه پروژه‌ت کجا اجرا شه. ولی ممکنه روی سیستم‌های مختلف جواب
+نده. (مثلاً آدرس ویندوز روی مک نمی‌خونه یا روی سیستم ویندوزی که آدرس‌هاش
+فرق داره جواب نمیده.)
+
+\subsubsection{آدرس نسبی \lr{(Relative Path)}}
+
+نسبت به مکانی که برنامه‌ت از اون اجرا می‌شه سنجیده می‌شه. این‌جوری قابل
+حمل‌تره.
+
+مثلاً فرض کن یه فایل به اسم \lr{\texttt{data.txt}} توی پوشه‌ی پروژه‌ت داری.
+اون‌وقت این‌جوری می‌نویسی: (توجه کنین که منظور از پوشه پروژه \lr{root}
+دایرکتوریه که بسته به \lr{IDE} سیستم یا نوع باز کردن پروژه‌تون می‌تونه
+متفاوت باشه)
+
+\begin{codebox}{java}
+File file = new File("data.txt");
+\end{codebox}
+
+یا اگه فایل توی یه زیرپوشه‌ی خاص باشه:
+
+\begin{codebox}{java}
+File file = new File("resources/data.txt");
+\end{codebox}
+
+به طور دقیق‌تر این مسیر نسبت به دایرکتوری اجرایی \lr{(working directory)}
+سنجیده می‌شه، معمولاً جایی که فایل \lr{\texttt{.class}} یا
+\lr{\texttt{jar}} اجرا می‌شه.
+
+\subsubsection{ترکیب مسیرها با \texttt{File.separator}}
+
+اگه بخوای مسیر رو طوری بسازی که روی همه‌ی سیستم‌عامل‌ها کار کنه، بهتره از
+\lr{\texttt{File.separator}} استفاده کنی: توی ویندوز
+\lr{\texttt{File.separator}} می‌شه: \lr{\texttt{\textbackslash }} توی
+لینوکس و مک میشه: \lr{\texttt{/}}
+
+همچنین برای گرفتن مسیر فایل‌ها می‌تونیم از روش‌های زیر استفاده کنیم: گرفتن
+مسیر کامل فایل:
+
+\begin{codebox}{java}
+System.out.println(file.getAbsolutePath());
+\end{codebox}
+
+گرفتن مسیر والد (پوشه‌ی بالا):
+
+\begin{codebox}{java}
+System.out.println(file.getParent());
+\end{codebox}
+
+گرفتن مسیر اجرایی فعلی:
+
+\begin{codebox}{java}
+System.out.println(System.getProperty("user.dir"));
+\end{codebox}
+
+\textbf{جمع‌بندی آدرس‌دهی}
+
+\begin{table}[H]
+\centering
+\setLTR
+\begin{tabular}{lll}
+\hline
+\textbf{نوع آدرس} & \textbf{مزیت} & \textbf{معایب} \\
+\hline
+مطلق & دقیق و قطعی & قابل‌حمل نیست بین سیستم‌ها \\
+نسبی & قابل‌حمل، ساده & ممکنه به دایرکتوری اجرای برنامه وابسته باشه \\
+با \texttt{File.separator} & قابل حمل، امن‌تر & کمی پیچیده‌تر در نوشتن \\
+\hline
+\end{tabular}
+\end{table}
+
+خب بیایم برگردیم به کلاس فایلمون. آبجکت کلاسمون رو ساختیم، بیایم و
+ببینیم این آبجکت چه متدهایی داره که به دردمون می‌خوره:
+
+\subsection{متدهای کاربردی کلاس \lr{File}}
+
+\begin{itemize}
+\tightlist
+\item
+  متد \lr{\texttt{createNewFile()}} : ساخت فایل جدید. این متد ممکنه
+  \lr{\texttt{IOException}} بندازه، پس باید توی \lr{\texttt{try-catch}}
+  بذاریش.
+\item
+  متدهای \lr{\texttt{mkdir()}} و \lr{\texttt{mkdirs()}} : ساخت پوشه
+  (دومی فولدرهای تو در تو می‌سازه).
+\item
+  متد \lr{\texttt{exists()}} : بررسی وجود فایل یا پوشه.
+\item
+  متد \lr{\texttt{delete()}} : حذف فایل یا پوشه.
+\item
+  متدهای \lr{\texttt{getName()}} و \lr{\texttt{getPath()}} و
+  \lr{\texttt{getAbsolutePath()}} : گرفتن نام و مسیر فایل.
+\item
+  متد \lr{\texttt{length()}} : گرفتن سایز فایل به بایت.
+\item
+  متدهای \lr{\texttt{list()}} و \lr{\texttt{listFiles()}} : لیست کردن
+  محتویات پوشه.
+\item
+  متد \lr{\texttt{renameTo(File newName)}} : تغییر نام یا انتقال.
+\end{itemize}
+
+پس با همه چیزایی که یاد گرفتیم یه مثال کامل برای ساخت فایل، بررسی وجود و
+حذف رو می‌بینیم:
+
+\begin{codebox}{java}
+import java.io.File;
+import java.io.IOException;
+
+public class FileExample {
+    public static void main(String[] args) {
+        try {
+            File myFile = new File("example.txt");
+            if (myFile.createNewFile()) {
+                System.out.println("فایل ساخته شد: " + myFile.getName());
+            } else {
+                System.out.println("فایل از قبل وجود داره");
+            }
+            
+            System.out.println("آیا فایل وجود داره؟ " + myFile.exists());
+            System.out.println("مسیر کامل: " + myFile.getAbsolutePath());
+            
+            if (myFile.delete()) {
+                System.out.println("فایل حذف شد");
+            } else {
+                System.out.println("فایل حذف نشد");
+            }
+        } catch (IOException e) {
+            System.out.println("یه خطایی پیش اومده");
+            e.printStackTrace();
+        }
+    }
+}
+\end{codebox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{جریان داده‌ها \lr{Stream}}
+
+تا حالا به این فکر کردین که وقتی یه فایل رو با کلاس \lr{\texttt{File}}
+پیدا کردیم، برنامه‌ چطوری اون اطلاعاتو می‌خونه؟ این‌جاست که بحث \lr{Stream}
+یا همون جریان داده‌ها میاد وسط. در واقع یه استریم رو می‌شه مثل یه رودخونه
+یا آبراهه از داده‌ها در نظر گرفت که اطلاعات مثل آب توی اون جاری‌ان و از یه
+منبع شروع به حرکت می‌کنن و وارد برنامه می‌شن یا برعکس از برنامه ریخته می‌شن
+به یه مقصدی.
+
+اگه بخوایم یه تعریف شسته‌رفته‌تر و رسمی‌تر از \lr{stream} داشته باشیم می‌شه
+گفت که \lr{stream} نشون‌دهنده‌ی جریانی از داده‌هاست که یه طرف اون‌ها یه
+نویسنده یا \lr{writer} و توی سر دیگه‌ش یه خواننده یا \lr{reader} داریم.
+
+استریم‌ها تو جاوا دو نوع اصلی دارن: \textbf{\lr{Byte stream}} و
+\textbf{\lr{Character stream}}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\lr{Byte stream}}
+
+برای وقتی هست که داده‌هات متنی نیستن، یعنی قراره با فایل‌های باینری مثل
+عکس، ویدیو، فایل‌های \lr{PDF} ، موسیقی، یا هر چیزی که ساختار عددی یا خاص
+داره کار کنی. که شامل کلاس‌های اصلی زیر می‌باشد:
+
+\subsection{\lr{Input stream} و \lr{Output stream}}
+
+کلاس‌های ابسترکتی برای خوندن و نوشتن داده‌های باینری هستن که تمام کلاس‌های
+کار با داده‌های باینری ازشون مشتق می‌شن. وظیفه‌شون اینه که یه سری متد پایه
+مثل \lr{\texttt{read}} یا \lr{\texttt{write}} برای کار با بایت‌ها بدن و
+بقیه‌ی کلاس‌ها بیان و اونا رو پیاده‌سازی کنن. متدهای مهمشون شامل
+\lr{\texttt{read()}}, \lr{\texttt{write()}}, \lr{\texttt{flush()}} و
+\lr{\texttt{close()}} هست.
+
+وقتی می‌خوایم داده‌های باینری رو بخونیم یا بنویسیم این دوتا کلاس ابسترکت
+به تنهایی کافی نیستن و در عمل به زیرکلاس‌های تخصصی‌تری نیاز داریم. از این
+زیرکلاس‌ها به \lr{\texttt{FileInputStream}} و
+\lr{\texttt{FileOutputStream}} اشاره می‌کنیم.
+
+\subsubsection{\texttt{FileInputStream}}
+
+این کلاس برای وقتیه که بخوای داده‌های خام از یه فایل بخونی. مثلاً بخوای یه
+تصویر، یه فایل صوتی یا هر فایل غیرمتنی رو بخونی.
+
+\textbf{نکته بسیار مهم: مدیریت منابع با \lr{Try-With-Resources}}
+
+در گذشته برای کار با فایل‌ها، برنامه‌نویس‌ها مجبور بودن در انتهای کد متد
+\lr{\texttt{close()}} رو دستی صدا بزنن. اما این کار یک ایراد بزرگ داشت:
+اگر قبل از رسیدن به خط \lr{\texttt{close}} اروری رخ می‌داد، برنامه وارد
+\lr{\texttt{catch}} می‌شد و فایل برای همیشه در حافظه سیستم‌عامل باز
+می‌موند! ( \lr{Resource Leak} ).
+
+در جاوای مدرن (از جاوا ۷ به بعد) ما از ساختار \lr{Try-With-Resources}
+استفاده می‌کنیم. هر فایلی که داخل پرانتز جلوی \lr{\texttt{try}} باز بشه،
+در انتهای بلوک به طور کاملاً خودکار بسته می‌شه، حتی اگه ارور بده! ما در
+تمام مثال‌های این داکیومنت از این استاندارد استفاده می‌کنیم.
+
+فرض کن می‌خوای یه فایل تصویری رو بخونی و اندازه‌اش رو در خروجی نشون بدی
+(با شمارش تعداد بایت‌ها):
+
+\begin{codebox}{java}
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        // باز کردن استریم داخل پرانتز try (بسته شدن خودکار)
+        try (FileInputStream fis = new FileInputStream("image.jpg")) {
+            int count = 0;
+            while (fis.read() != -1) {
+                count++;
+            }
+            System.out.println("File size in bytes: " + count);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+\end{codebox}
+
+\textbf{متدهای مهم \lr{\texttt{FileInputStream}}:}
+
+\begin{itemize}
+\item
+  \lr{\texttt{int read()}} : یه بایت از فایل می‌خونه و به‌صورت عدد بین
+  \lr{\texttt{0}} تا \lr{\texttt{255}} برمی‌گردونه. اگه به انتهای فایل
+  برسه، -1 برمی‌گردونه. مثلاً اگه خروجی این متد \lr{\texttt{65}} باشه یعنی
+  کد ما \lr{\texttt{A}} رو خونده که کد اسکی اون \lr{\texttt{65}} ‍ه.
+\item
+  \lr{\texttt{int read(byte[] b)}} : این یکی به‌جای یه بایت، یه آرایه
+  بایت رو پر می‌کنه. تعداد بایت‌های خونده شده رو برمی‌گردونه. (سرعتش خیلی
+  بیشتره).
+\item
+  \lr{\texttt{int read(byte[] b, int off, int len)}} : این متد یه بخش
+  مشخص از آرایه رو با داده پر می‌کنه، از \lr{\texttt{off}} شروع می‌کنه و
+  \lr{\texttt{len}} بایت سعی می‌کنه بخونه.
+\item
+  \lr{\texttt{long skip(long n)}} : این متد به‌جای اینکه داده رو بخونه،
+  می‌پره جلو. مثلاً اگه فایل \lr{\texttt{100}} بایت باشه و
+  \lr{\texttt{skip(10)}} بزنی، می‌پره روی بایت یازدهم.
+\item
+  \lr{\texttt{int available()}} : می‌گه چقدر از فایل هنوز قابل خوندنه،
+  یعنی چند بایت مونده تا آخر.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\lr{Character Stream}}
+
+حالا اگه با متن طرفی، یعنی مثلاً فایل‌هایی مثل \lr{\texttt{.txt}}، کدهای
+منبع، یا هر چیز قابل‌خوندن (به هر زبانی که باشه)، باید بری سراغ
+\lr{Character Stream} .
+
+فرض کنید قصد نوشتن یه برنامه برای دریافت اطلاعات اشخاص و ثبتشون توی یه
+فایل متنی داریم. اول از همه نیاز داریم یه ساختاری داشته باشیم که حین
+اجرای برنامه یه ساختار برای پردازش اطلاعات ورودی داشته باشیم که بعدش اون
+رو توی فایل خروجی ذخیره کنیم. پس کلاس زیر رو با رعایت کپسوله‌سازی تعریف
+می‌کنیم:
+
+\begin{codebox}{java}
+public class Student {
+    private String firstName;
+    private String familyName;
+    private int age;
+    private int entryYear;
+    private double gpa;    
+    
+    public Student(String firstName, String familyName, int age, int entryYear, double gpa) {
+        this.firstName = firstName;
+        this.familyName = familyName;
+        this.age = age;
+        this.entryYear = entryYear;
+        this.gpa = gpa;
+    }
+
+    public String getFirstName() { return firstName; }
+    public String getFamilyName() { return familyName; }
+    public int getAge() { return age; }
+    public int getEntryYear() { return entryYear; }
+    public double getGpa() { return gpa; }
+}
+\end{codebox}
+
+(نکته: در پروژه‌های واقعی اگر قصد دارید کل آبجکت \lr{\texttt{Student}} رو
+به همین شکل در یک فایل ذخیره کنید تا بعداً دقیقاً به شکل یک آبجکت بازیابیش
+کنید، نیازی نیست اون رو به متن تبدیل کنید! می‌تونید از مبحثی به نام
+\lr{\texttt{Serialization}} و کلاس \lr{\texttt{ObjectOutputStream}}
+استفاده کنید که یکی از مباحث جذاب جاوای پیشرفته است.)
+
+اما اینجا می‌خوایم اطلاعات رو به صورت یک فایل متنی خوانا ثبت کنیم.
+کلاس‌های پایه‌ی \lr{Character Streams} شامل \lr{\texttt{Reader}} و
+\lr{\texttt{Writer}} هستن. زیرکلاس‌های مهم اون‌ها شامل
+\lr{\texttt{FileReader}} و \lr{\texttt{FileWriter}} می‌شن.
+
+\subsection{\texttt{FileReader}}
+
+برای خواندن فایل‌های متنی استفاده می‌شه. پشت‌صحنه از رمزگذاری پیش‌فرض سیستم
+برای تبدیل بایت‌ها به کاراکتر استفاده می‌کنه.
+
+\begin{codebox}{java}
+// استفاده از try-with-resources برای اطمینان از بسته شدن فایل
+try (FileReader fr = new FileReader("text.txt")) {
+    int c;
+    while ((c = fr.read()) != -1) {
+        System.out.print((char) c);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+\end{codebox}
+
+\subsection{\texttt{FileWriter}}
+
+برای نوشتن متن به فایل استفاده می‌شه. اگه فایل وجود نداشته باشه، خودش
+می‌سازه؛ اگه هم باشه، پیش‌فرض پاک می‌کنه و از نو می‌نویسه. همچنین
+کانستراکتورش یه پارامتر \lr{\texttt{true}} (برای \lr{append mode )} هم
+می‌گیره که باعث می‌شه داده‌های جدید به آخر فایل اضافه بشن.
+
+نکته مهم برای فارسی‌نویسی (انکودینگ): برای کار با فایل‌های فارسی یا
+کاراکترهای خاص (مثلاً ایموجی)، اگر از تنظیمات پیش‌فرض استفاده کنید ممکنه
+متن‌ها به هم بریزه (علامت سوال بشه). در جاوای مدرن (جاوا 11 به بعد) نیازی
+به کدهای پیچیده برای انکودینگ نیست؛ کافیه
+\lr{\texttt{StandardCharsets.UTF\_8}} رو مستقیماً به سازنده پاس بدید!
+
+حالا کدمون رو برای ذخیره اطلاعات دانشجو می‌نویسیم:
+
+\begin{codebox}{java}
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("Ali", "Rezaei", 20, 1400, 3.7);
+        
+        try (FileWriter writer = new FileWriter("student.txt", StandardCharsets.UTF_8)) {
+            
+            writer.write(student.getFirstName() + ',' + 
+                         student.getFamilyName() + ',' +
+                         student.getAge() + ',' + 
+                         student.getEntryYear() + ',' + 
+                         student.getGpa());
+                         
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+\end{codebox}
+
+\subsection{معجزه \texttt{Buffer} و \texttt{BufferedWriter}}
+
+حالا بعضی اوقات لازم داریم که کلی چیز توی فایلمون بنویسیم مثلاً توی یه
+لوپ باشیم و می‌خوایم هربار یچیزی به ته فایل اضافه کنیم. در این حالت اگه
+از \lr{\texttt{FileWriter}} خالی استفاده کنیم، با هر بار
+\lr{\texttt{write()}} یه درخواست نوشتن مستقیم به هارد دیسک می‌فرسته که از
+نظر زمان و منابع خیلی خیلی گرونه و سیستم رو کند می‌کنه.
+
+قبل از رفتن سراغ راه‌حل بیاید خیلی کوتاه ببینیم بافر چیه؟ واژه‌ی «
+\lr{Buffer} » توی برنامه‌نویسی یعنی یه فضای موقتی توی حافظه \lr{(RAM)} که
+داده‌ها قبل از اینکه خونده یا نوشته بشن، می‌رن اونجا. فرض کن داری یه بطری
+رو از شیر آب پر می‌کنی، ولی سطلی که قراره بریزی توش یه‌کم اون‌طرف‌تره. تو
+نمی‌تونی مستقیماً آب رو از شیر بریزی داخل سطل. پس اول با یه پارچ آب رو
+می‌گیری، بعد می‌ریزی توی سطل. اون پارچ همون بافره.
+
+اینجاست که \lr{\texttt{BufferedReader}} و \lr{\texttt{BufferedWriter}}
+وارد می‌شن. اینا در واقع لایه‌هایی باهوش‌تر و سریع‌تر هستن که روی کلاس‌های
+قبلی سوار می‌شن.
+
+\begin{codebox}{java}
+// استفاده ترکیبی از Buffer و Try-With-Resources
+try (BufferedWriter bw = new BufferedWriter(new FileWriter("log.txt", true))) {
+    for (int i = 0; i < 1000; i++) {
+        bw.write("Log " + i);
+        bw.newLine(); // می‌ره خط بعد (متد اختصاصی کلاس BufferedWriter)
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+\end{codebox}
+
+حالا فقط چند بار می‌ره سراغ دیسک (نه 1000 بار). نتیجه: سرعت بیشتر، فشار
+کمتر روی سیستم.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{خواندن از فایل با کلاس \texttt{Scanner}}
+
+تا این‌جای کار با نحوه کار استریم‌ها آشنا شدید. حالا می‌خوایم یاد بگیریم که
+چطور می‌شه محتوای یک فایل رو خیلی راحت‌تر خوند و پردازش کرد.
+
+یه پروژهٔ جدید ایجاد کنید. توی دایرکتوری خود پروژه (خارج از دایرکتوری
+\lr{\texttt{src}} )، فایل \lr{\texttt{employee-info.txt}} رو ایجاد کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/file-1.png}
+\end{figure}
+
+توی این فایل اطلاعات زیر رو بنویسید:
+
+\begin{codebox}{text}
+Name: Raees - JobTitle: Riasat  
+Name: Gholi - JobTitle: Developer  
+Name: Mamad - JobTitle: Developer
+\end{codebox}
+
+برای خوندن این فایل، از کلاس \lr{\texttt{Scanner}} استفاده می‌کنیم. همون
+\lr{\texttt{Scanner}} ای که برای ورودی گرفتن از کاربر توی ترمینال
+(\lr{\texttt{System.in}}) هم ازش استفاده می‌کردیم. این کلاس، یک
+کانستراکتورِ \lr{overload} شده داره که \lr{\texttt{File}} ورودی می‌گیره.
+
+\begin{codebox}{java}
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        File file = new File("employee-info.txt");  
+
+        try (Scanner scn = new Scanner(file)) {
+            
+            // تا زمانی که خط جدیدی در فایل وجود داره
+            while (scn.hasNextLine()) {  
+                String employee = scn.nextLine();  
+                System.out.println("Employee info: \n\t" + employee);  
+            }
+            
+        } catch (FileNotFoundException e) {  
+            System.err.println("file \"" + file.getAbsolutePath() + "\" does not exist");
+        }
+    }  
+}
+\end{codebox}
+
+اگر این کد رو اجرا کنید، خروجی زیر رو می‌بینید:
+
+\begin{codebox}{text}
+Employee info:   
+    Name: Raees - JobTitle: Riasat  
+Employee info:   
+    Name: Gholi - JobTitle: Developer  
+Employee info:   
+    Name: Mamad - JobTitle: Developer
+\end{codebox}
+
+هر کاری که قبلاً با \lr{\texttt{Scanner}} می‌کردین، این‌جا هم می‌تونید
+بکنید. مثلاً اگر فایلی از یک سری عدد تشکیل شده باشه می‌تونید با استفاده از
+متدهای \lr{\texttt{nextInt()}} و \lr{\texttt{hasNextInt()}} اون‌ها رو
+بخونین.
+
+\subsection{کلاس \texttt{Scanner} با \texttt{String}}
+
+کلاس \lr{\texttt{Scanner}} یک کانستراکتور هم داره که ازتون
+\lr{\texttt{String}} ورودی می‌گیره:
+
+\begin{codebox}{java}
+Scanner scn = new Scanner("10 20 30 40 50");
+\end{codebox}
+
+توی این کد \lr{\texttt{Scanner}} به جای خوندن از فایل یا ورودی کاربر،
+رشتهٔ ورودی خودش رو تکه‌تکه \lr{(Parse)} می‌کنه.
+
+\begin{codebox}{java}
+while (scn.hasNextInt()) {
+    int num = scn.nextInt();  
+    System.out.println("Num: " + num);  
+}
+\end{codebox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{نوشتن به فایل با کلاس \texttt{PrintStream}}
+
+برای نوشتن به فایل‌ها، از کلاس \lr{\texttt{PrintStream}} هم استفاده
+می‌کنیم که امکاناتی شبیه به چاپ در ترمینال رو بهمون میده. برای این کار،
+اول فایل \lr{\texttt{output.txt}} رو توی دایرکتوری پروژه‌تون ایجاد کنید و
+به شکل زیر عمل کنید:
+
+\begin{codebox}{java}
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
+public class Main {
+    public static void main(String[] args)  {
+        File file = new File("output.txt");  
+
+        try (PrintStream output = new PrintStream(file)) {
+            output.println("Hello World!");  
+            output.print("This is the last line");
+        } catch (FileNotFoundException e) {  
+            System.out.println("cannot find \"" + file.getAbsolutePath() + "\"");
+        }
+    }
+}
+\end{codebox}
+
+شباهت آبجکت \lr{\texttt{PrintStream}} ای که درست کردین و
+\lr{\texttt{System.out}} یک علتی داره، بیاید نگاهی به کد کلاس
+\lr{\texttt{System}} بندازیم تا بفهمیم چرا.
+
+\subsection{ورودی و خروجی در کلاس \texttt{System}}
+
+اگر توی کد سورس جاوا کلاس \lr{\texttt{System}} رو باز کنید و کامنت‌های
+فیلدهای اون رو بخونین، می‌تونید تعریف این فیلدها رو ببینید:
+
+\begin{codebox}{java}
+public final class System {
+    // Code Here...
+    public static final InputStream in = null;
+    public static final PrintStream out = null;
+    public static final PrintStream err = null;
+    // Code Here...
+}
+\end{codebox}
+
+می‌بینید که \lr{\texttt{in}}، صرفاً فیلدی از جنس \lr{\texttt{InputStream}}
+‍ه، و کلاس \lr{\texttt{out}} هم دقیقاً نوعی \lr{\texttt{PrintStream}} ‍ه!
+هر کاری که با \lr{\texttt{System.out}} می‌کردین، با متغیر
+\lr{\texttt{output}} کد خودتون هم می‌تونید بکنید تا توی یک فایل چاپ کنید.
+
+علاوه بر این دو فیلد، فیلدی مشابه \lr{\texttt{out}} به اسم
+\lr{\texttt{err}} داریم. از این فیلد می‌تونید برای خروجی دادن پیغام
+خطاهاتون (معمولاً با رنگ قرمز در ترمینال) استفاده کنید. مثلاً:
+
+\begin{codebox}{java}
+try {
+    // Something can throw an exception here
+} catch (Exception e) {  
+    System.err.println(e.getMessage());  
+}
+\end{codebox}
+
+خوبه که به عنوان یک برنامه‌نویس حرفه‌ای، همیشه خطاهاتون رو به جای
+\lr{\texttt{System.out}} به \lr{\texttt{System.err}} بفرستید.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{روش مدرن کار با فایل‌ها \lr{(NIO.2)}}
+
+تمام کلاس‌هایی که در پکیج \lr{\texttt{java.io}} یاد گرفتید (مثل
+\lr{\texttt{File}}، \lr{\texttt{FileReader}} و \ldots) کلاس‌های پایه و
+قدیمی جاوا هستن. در بازار کار امروز و از جاوا ۷ به بعد، پکیج قدرتمندی به
+نام \lr{\texttt{java.nio.file}} (یا همون \lr{NIO.2 )} معرفی شد که کار با
+فایل‌ها رو بی‌نهایت راحت‌تر می‌کنه.
+
+توی این روش جدید، به جای کلاس \lr{\texttt{File}} از کلاس مدرن
+\lr{\texttt{Path}}، و برای انجام عملیات‌های پیچیده از کلاس جامع
+\lr{\texttt{Files}} استفاده می‌شه. با این روش خیلی از کدهای طولانی رو
+می‌تونید فقط در یک خط بنویسید:
+
+\begin{codebox}{java}
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.io.IOException;
+
+public class ModernFileHandling {
+    public static void main(String[] args) {
+        try {
+            // نوشتن کل یک متن داخل فایل با یک خط کد! (جاوا ۱۱ به بعد)
+            Files.writeString(Path.of("modern.txt"), "سلام دنیای مدرن جاوا!");
+            
+            // خواندن تمام خطوط یک فایل و ریختن داخل یک لیست با یک خط کد!
+            List<String> lines = Files.readAllLines(Path.of("modern.txt"));
+            System.out.println(lines.get(0));
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+\end{codebox}
+
+توصیه می‌کنیم برای پروژه‌های جدیدتون، حتماً مطالعه‌ای روی متدهای کلاس
+\lr{\texttt{Files}} داشته باشید.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{چیزی که یاد گرفتیم}
+
+توی این داک، ما مقدمات و استانداردهای کار با فایل توی جاوا رو یاد
+گرفتیم. فهمیدیم که:
+
+\begin{itemize}
+\tightlist
+\item
+  کلاس \lr{\texttt{File}} چیه، چه کاربردی داره و آدرس‌دهی چطوری کار
+  می‌کنه.
+\item
+  استریم‌ها ( \lr{\texttt{Byte}} و \lr{\texttt{Character}} ) چه تفاوتی
+  باهم دارن.
+\item
+  چطور با استاندارد سعیِ ایمن ( \lr{Try-with-resources} ) کد بنویسیم تا
+  منابع سیستم هدر نره.
+\item
+  بافر چیه و چرا برای حفظ سرعت و کارایی سیستم حیاتیه.
+\item
+  چطور از کلاس‌های \lr{\texttt{Scanner}} و \lr{\texttt{PrintStream}} برای
+  فایل‌ها استفاده کنیم.
+\item
+  و با روش‌های مدرن \lr{\texttt{java.nio}} آشنا شدیم.
+\end{itemize}
+
+\section{منابع بیشتر}
+
+چیزی که ما توی این داک یاد گرفتیم، مبانی کلی برای کار با فایل‌ها و
+ورودی/خروجی \lr{(I/O)} توی جاوا بود. جاوا امکانات خیلی گسترده‌‌تری برای
+مدیریت انواع ورودی و خروجی ارائه می‌ده (مثل
+\lr{\texttt{ObjectOutputStream}} برای ذخیره مستقیم آبجکت‌ها و \lr{NIO}
+برای برنامه‌نویسی شبکه‌ای پرسرعت). اگر دوست دارین بیشتر یاد بگیرین،
+می‌تونین به فصل دهم کتاب \lr{Learning Java} ، یعنی «
+\lr{File Input and Output} » نگاهی بندازین.
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
