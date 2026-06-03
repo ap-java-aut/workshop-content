@@ -1,0 +1,2836 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (01) Input Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (02) DOCUMENT INFORMATION - FROM YAML METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DocTitle}{گیت}
+
+\newcommand{\CourseTitle}{برنامه‌سازی پیشرفته و کارگاه}
+
+\newcommand{\Semester}{بهار ۱۴۰۵}
+
+\newcommand{\FirstProfessor}{دکتر روح‌الله احمدیان}
+
+\newcommand{\SecondProfessor}{}
+
+\newcommand{\Writers}{آرمان حسینی، سانیا عزتی، صالح ملازاده، محمدرضا
+شیخ‌الاسلامی، سام قربانی، مارال مهاجر، پریا قره خانی}
+
+\newcommand{\Faculty}{دانشکده ریاضی و علوم کامپیوتر}
+
+\newcommand{\University}{دانشگاه صنعتی امیرکبیر}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TITLE PAGE ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	
+	%— Smaller logo (20% of text width)
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.20\textwidth]{images/logo-fa.png}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	{\fontsize{18}{28}\selectfont \textbf{\CourseTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{22}{28}\selectfont \textbf{\DocTitle} }
+	
+	\vspace{3cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{نگارش:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \Writers } }
+
+	
+	\vspace{1cm}
+	
+	{\fontsize{14}{22}\selectfont \rl{استاد درس:}}\\
+	\vspace{0.5cm}
+	{\fontsize{16}{22}\selectfont \textbf{ \FirstProfessor } }
+	
+	
+	\vfill
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Faculty} }\\
+	\vspace{0.5cm}
+	{\fontsize{14}{18}\selectfont \textbf{\University} }
+	\vspace{0.5cm}
+	
+	\par
+	
+	{\fontsize{14}{18}\selectfont \textbf{\Semester} }
+	
+\end{titlepage}
+
+%— Switch to our fancy header/footer from this page onward
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === TABLE OF CONTENTS ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+\pagestyle{aftertitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% === MAIN CONTENT ===
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocTitle}
+\section{مقدمه}
+
+شما روی یک پروژه کار می‌کنید، ساعت‌ها روی آن وقت می‌گذارید و نهایتا به یک
+فایل \lr{\texttt{final}} می‌رسید. بعد از یک مدت می‌فهمید که «داخل
+\lr{\texttt{final}} یک تایپو وجود دارد»، تایپو را برطرف می‌کنید و به
+\lr{\texttt{final(2)}} می‌رسید. یک هفته بعد متوجه می‌شوید که
+\lr{\texttt{final(2)}} یک قسمت غلط دارد، حالا آن قسمت
+\lr{\texttt{final(2)}} را درست می‌کنید تا به \lr{\texttt{final final(2)}}
+برسید. بعد از یک مدت هم‌تیمی‌ شما که تازه به یاد آورده که پروژه‌ای وجود
+دارد وقتی می‌خواهد اسم خود را اول پروژه بنویسد، اشتباهی روی
+\lr{\texttt{final(2)}} می‌نویسد و به \lr{\texttt{final(3)}} می‌رسد، که با
+\lr{\texttt{final final(2)}} فرق می‌کند و مشکلی که شما متوجه آن شده بودید
+در آن حل نشده.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-1.png}
+\end{figure}
+
+همین مشکلات داخل دنیای برنامه‌نویسی هم وجود دارند، و برای حلشان ابزارهای
+\lr{Version Control} به وجود آمدند که معروف‌ترینشان \lr{Git} می‌باشد. این
+ابزارها کمک می‌کنند یک تیم چند ده، چند صد یا حتی چند هزار نفره از
+برنامه‌نویس‌ها بتوانند سال‌ها روی یک پروژه کار کنند، بدون این‌که مجبور شوند
+فایلی به اسم
+\lr{\texttt{finalfinalfinalv20iSwearToGodThisIsTheFinalOneFinal}} درست
+کنند! حتی تدریس‌یارهای خودتان هم از \lr{Git} برای مدیریت محتوای کلاستان
+استفاده می‌کنند.
+
+در این داکیومنت، ما می‌خواهیم با گیت آشنا شویم. گیت، ابزاری بسیار معروف،
+بسیار گسترده و اگر راستش را بخواهید، گاهی بسیار اذیت‌کننده است که داخل
+حدوداً همه‌ی شرکت‌های برنامه‌نویسی استفاده می‌شود. احتمالاً بعد از خواندن این
+داک، کمی زمان می‌برد تا به \lr{Git} عادت کنید، ولی نگران نباشید، کم‌کم راه
+می‌افتید. نگذارید طولانی بودن این داک شما را دلسرد کند، چون بیشتر آن
+اسکرین‌شات و خروجی‌ کدهاست.
+
+یادگیری \lr{Git} اوایل کمی سخت و پردست‌انداز است، و احتمالاً به یک سری
+خطای عجیب و غریب برمی‌خورید ولی نگران نباشید. در این مسیر، حتماً از
+تدریس‌یارها کمک بگیرید، داخل گوگل سرچ کنید و از \lr{ChatGPT} درباره‌ی
+مشکلاتی که به آنها برمی‌خورید سؤال بپرسید. در نهایت، \lr{Git} برای همه‌ی
+دردسرهایتان یک راه‌حل دارد، پس با خیال راحت جلو بروید. در انتها، باید
+بگوییم که \textbf{شما در پروژه‌های آینده‌ی این درس، لازم است که خیلی جاها
+از گیت استفاده کنید، پس مهم است که آن را کامل همین‌جا یاد بگیرید.}
+
+حواستان باشد که پیش‌فرض ما این است که شما، از داک \lr{tools} که در جلسه‌ی
+صفر به شما داده شده، ابزارهای لازم برای \lr{git} را نصب کردید و یک اکانت
+\lr{github} ساختید. اگر نکردید، لطفا برگردید و این کارها را انجام دهید.
+
+\section{اطمینان از نصب صحیح گیت}
+
+اول از همه، باید مطمئن شوید که \lr{Git} روی سیستم شما نصب شده و درست کار
+می‌کند. اگر از مک یا لینوکس استفاده می‌کنید، ترمینال \lr{(Terminal)} و اگر
+ویندوزی هستید، پاورشل \lr{(PowerShell)} را اجرا کنید. به این صفحه‌ای که
+می‌بینید، \lr{shell} می‌گویند.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-2.png}
+\end{figure}
+
+در این صفحه، دستور زیر را بزنید (حواستون باشه که \$ را نزنید!):
+
+\begin{codebox}{bash}
+$ git --version
+\end{codebox}
+
+اگر خروجی‌تون شبیه به خروجی زیر نبود، احتمالا گیت به درستی روی سیستم شما
+نصب نشده پس به داک \lr{tools} از جلسه‌ی صفر برگردید یا از تدریسیارها کمک
+بگیرید:
+
+\begin{codebox}{bash}
+git version 2.39.5 (Apple Git-154)
+\end{codebox}
+
+در غیر این صورت، \lr{shell} را باز نگه دارید. در ادامه این داک به آن
+نیاز داریم.
+
+\section{آشنایی اولیه با \lr{shell}}
+
+اول باید با \lr{shell} آشنا بشویم. شل لینوکس و \lr{macOS} خیلی به هم
+شبیه هستند اما شل ویندوز مقداری تفاوت دارد.
+
+\subsection{ویندوز}
+
+صفحه‌ی فعلی \lr{powershell} برای شما به شکل زیر است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-3.png}
+\end{figure}
+
+می‌بینید که چنین چیزی روی صفحه هست ولی بسته به اسم یوزر لپ‌تاپتون، بخش
+\lr{pc} اسم متفاوتی دارد:
+
+\begin{codebox}{bash}
+PS C:\Users\{your_username} >
+\end{codebox}
+
+این یعنی \lr{powershell} آماده‌ی گرفتن دستورات شماست و آن‌ها را در مسیر
+\lr{\texttt{C:\textbackslash Users\textbackslash \{your\_username\}}}
+اجرا می‌کند. به این مسیر، اصطلاحاً \lr{home directory} می‌گویند. حالا در
+همین دایرکتوری، دستور زیر را اجرا کنید:
+
+\begin{codebox}{bash}
+$ ls
+\end{codebox}
+
+خروجی‌ای مثل خروجی زیر می‌بینید:
+
+\begin{codebox}{bash}
+    Directory: C:\Users\pc  
+  
+Mode                 LastWriteTime         Length Name  
+----                 -------------         ------ ----  
+d-r--          12/18/2024  6:27 PM                Contacts  
+d-r--           2/13/2025  9:31 PM                Desktop  
+d-r--          12/18/2024  6:27 PM                Documents  
+d-r--           2/13/2025  7:23 PM                Downloads  
+d-r--          12/18/2024  6:27 PM                Favorites  
+d-r--          12/18/2024  6:27 PM                Links  
+d-r--          12/18/2024  6:27 PM                Music  
+d-r--           6/14/2022  8:11 AM                OneDrive  
+d-r--          12/18/2024  6:27 PM                Pictures  
+d-r--          12/18/2024  6:27 PM                Saved Games  
+d-r--          12/18/2024  6:27 PM                Searches  
+d----          10/19/2024  8:00 PM                Tracing  
+d-r--          12/18/2024  6:27 PM                Videos
+\end{codebox}
+
+اگر به این خروجی توجه کنید، می‌بینید که دستور \lr{\texttt{ls}} (که مخفف
+\lr{list} هست) تمام دایرکتوری‌ها و فایل‌هایی که در
+\lr{\texttt{C:\textbackslash Users\textbackslash \{your\_username\}}}
+بود را نمایش داد. حالا دستور زیر را اجرا کنید:
+
+\begin{codebox}{bash}
+$ cd Documents
+\end{codebox}
+
+دستور cd، که مخفف \lr{change directory} هست که شما را به دایرکتوری
+\lr{\texttt{C:\textbackslash Users\textbackslash \{your\_username\}\textbackslash Documents}}
+منتقل می‌کند. می‌بینید که خط بعدی به شکل زیر تغییر کرده:
+
+\begin{codebox}{bash}
+PS C:\\Users\\{your_username}\\Documents >
+\end{codebox}
+
+و اگر الآن دوباره \lr{\texttt{ls}} بگیرید، این بار محتوای پوشه‌ی
+\lr{Documents} را می‌بینید. حالا می‌توانید با دستور زیر، به دایرکتوری قبلی‌
+برگردید:
+
+\begin{codebox}{bash}
+$ cd ..
+\end{codebox}
+
+\subsection{لینوکس و \lr{macOS}}
+
+در لینوکس یا macOS، شما چنین صفحه‌ای می‌بینید (احتمالا مقداری تفاوت وجود
+دارد):
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-4.png}
+\end{figure}
+
+این صفحه هنوز محتویات خاصی ندارد. بالای صفحه یک \lr{\texttt{~}} می‌بینید
+که نماد نشان‌دهنده‌ی \lr{home directory} شماست. همان جایی که پوشه‌هایی مثل
+Desktop، Documents، Videos، \lr{Downloads} و بقیکٔ چیزهایی که همیشه ازشون
+استفائه می‌کنید، قرار دارند. یعنی \lr{home} شما اینجاست:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-5.png}
+\end{figure}
+
+حالا \lr{shell} آماده‌ی گرفتن دستورات شما و اجرای آن‌ها در دایرکتوری
+\lr{home} است. دستور زیر را در آن اجرا کنید:
+
+\begin{codebox}{bash}
+$ ls
+\end{codebox}
+
+خروجی‌ای مثل خروجی زیر می‌بینید:
+
+\begin{codebox}{bash}
+Applications         IdeaSnapshots        Projects  
+Creative Cloud Files Library              Public  
+Desktop              Movies               Qt  
+Documents            Music                go  
+Downloads            Pictures             iso  
+Icons                Postman              keys
+\end{codebox}
+
+می‌بینید که دستور ls، لیستی از تمام دایرکتوری‌ها و فایل‌هایی که دذ
+\lr{home} بود را به شما نشان داد. حالا با استفاده از دستور زیر، وارد
+دایرکتوری \lr{Documents} بشید:
+
+\begin{codebox}{bash}
+$ cd Documents
+\end{codebox}
+
+می‌بینید که علامت \lr{\texttt{~}} جای خودش را به \lr{Documents} می‌دهد و
+این یعنی شما، با موفقیت وارد پوشه‌ی \lr{Documents} شدید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-6.png}
+\end{figure}
+
+اگر این‌جا هم \lr{\texttt{ls}} بزنید، این‌بار لیستی از دایرکتوری‌ها و
+فایل‌های داخل \lr{Documents} می‌بینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-7.png}
+\end{figure}
+
+با استفاده از دستور زیر، به \lr{home} برگردید:
+
+\begin{codebox}{bash}
+$ cd ..
+\end{codebox}
+
+\section{\lr{configure} کردن \lr{git}}
+
+قبل از استفاده از git، باید بعضی از تنظیمات آن را عوض کنید.
+
+اول از همه، با دستور زیر ایمیل خودتون را تنظیم کنید. بهتر است این ایمیل
+همان ایمیلی باشد که با آن اکانت گیت‌هاب ساختید:
+
+\begin{codebox}{bash}
+git config --global user.email "molioo1298@gmail.com"
+\end{codebox}
+
+سپس یک اسم برای خودوتن مشخص کنید:
+
+\begin{codebox}{bash}
+git config --global user.name "Jesper"
+\end{codebox}
+
+نهایتا، باید \lr{editor} ای که \lr{git} از آن استفاده می‌کند را تنظیم
+کنید. این ادیتور به شکل دیفالت روی \lr{vim} تنظیم شده که ممکن است در
+دفعات اول استفاده با آن راحت نباشید. اگر از ویندوز استفاده می‌کنید آن را
+روی \lr{Notepad} تنظیم کنید:
+
+\begin{codebox}{bash}
+$ git config --global core.editor "notepad.exe"
+\end{codebox}
+
+و اگر از \lr{macOS} استفاده می‌کنید، آن را روی \lr{textEdit} تنظیم کنید:
+
+\begin{codebox}{bash}
+$ git config --global core.editor "open -W -n -a TextEdit"
+\end{codebox}
+
+همچنین اگر از لینوکس استفاده می‌کنید، می‌توانید بسته به توزیع لینوکس آن را
+تنظیم کنید، ولی وقتی لینوکس دارید بهتره که \lr{vim} یاد بگیرید.
+
+\section{ایجاد ریپوی گیت}
+
+اول از همه، باید یک دایرکتوری جدید بسازیم تا پروژه را داخل آن قرار بدیم.
+در بخش اول، یاد گرفتیم که شل چطور کار می‌کند و دوتا از دستورهای مهم آن،
+یعنی \lr{\texttt{ls}} و \lr{\texttt{cd}} را هم یاد گرفتیم. حالا قبل از
+هر چیزی، مطمئن شوید که شل شما در \lr{home directory} تنظیم شده و نه
+دایرکتوری دیگری.
+
+بعد از آن، دستور زیر را وارد کنید. \lr{\texttt{mkdir}}، که مخفف
+\lr{make directory} است، در مسیر فعلی شل یک دایرکتوری به اسم
+\lr{\texttt{learn-git}} ایجاد می‌کند:
+
+\begin{codebox}{bash}
+$ mkdir "learn-git"
+\end{codebox}
+
+شما بعد از اجرای این دستور، می‌توانید این دایرکتوری را در \lr{home}
+ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-8.png}
+\end{figure}
+
+با استفاده از دستور cd، به این دایرکتوری برید:
+
+\begin{codebox}{bash}
+$ cd learn-git
+\end{codebox}
+
+اگر الآن \lr{\texttt{ls}} بزنید، می‌بینید که هیچ چیز در این دایرکتوری
+نیست.
+
+حالا بیاید اولین دستور گیت‌ را اجرا کنیم (فقط بخش \lr{\texttt{git init}}
+را بنویسید):
+
+\begin{codebox}{bash}
+$ git init  
+
+Initialized empty Git repository in /Users/armaho/learn-git/.git/
+\end{codebox}
+
+باید یک خروجی مشابه آن چیزی که بالا نوشته شده، ببینید. با استفاده از این
+دستور، ما دایرکتوری \lr{\texttt{learn-git}} را به یک \lr{repository}
+تبدیل کردیم. \lr{Repository} یا به اختصار repo، به پروژه‌ای گفته می‌شود که
+با استفاده از \lr{Git} به‌روزرسانی می‌شود. شما می‌توانید در هر \lr{repo}
+تمامی دستورات \lr{Git} را اجرا کنید.\\
+اگر الآن دستور زیر را اجرا کنید:
+
+\begin{codebox}{bash}
+$ ls -a
+
+. .. .git
+\end{codebox}
+
+الان می‌بینید که یک دایرکتوری به اسم \lr{\texttt{.git}} در
+\lr{\texttt{learn-git}} ایجاد شده. دلیل این که از \lr{\texttt{-a}} با
+دستور \lr{\texttt{ls}} استفاده کردیم این است که دایرکتوری
+\lr{\texttt{.git}} یک دایرکتوری مخفی است و با \lr{\texttt{ls}} عادی
+نمایش داده نمی‌شود. این دایرکتوری شامل همه چیزهایی هست که \lr{Git} برای
+مدیریت پروژه‌ به آن نیاز دارد. ما کار زیادی با این دایرکتوری نداریم و
+نباید به آن دست بزنیم، ولی هر وقت جایی \lr{\texttt{.git}} دیدید، بدونید
+که با یک ریپوی گیت رو‌به‌رو هستید.
+
+حالا، دستور زیر را اجرا کنید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+
+No commits yet  
+
+nothing to commit (create/copy files and use "git add" to track)
+\end{codebox}
+
+دستور \lr{\texttt{git status}} به شما وضعیت فعلی ریپو را نشان می‌دهد. چون
+هنوز هیچ فایل جدیدی اضافه نکردید، بنابراین وضعیت خاصی برای گزارش دادن
+نیست. اولین خط به شما می‌گوید که روی برنچ \lr{\texttt{main}} هستید (بعداً
+در این داک با برنچ‌ها آشنا می‌شوید). خط دوم به شما می‌گوید که تا الآن هیچ
+کامیتی نداشتید (با کامیت هم در ادامه این داک آشنا می‌شوید). و خط سوم هم
+می‌گوید که هیچ فایلی برای کامیت وجود ندارد.
+
+داخل \lr{\texttt{learn-git}}، یک فایل مثل \lr{\texttt{hello.txt}} ایجاد
+کنید و داخل آن بنویسید \lr{\texttt{"Hello, Git!"}}. بعد دوباره
+\lr{\texttt{git status}} بزنید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main
+
+No commits yet
+
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        hello.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+می‌بینید که \lr{\texttt{hello.txt}} در \lr{Untracked files} ظاهر می‌شود.
+این فایل‌ها، فایل‌هایی‌ هستند که گیت تغییراتشان را دنبال نمی‌کند. در بخش
+بعد، می‌خواهیم این فایل را \lr{\texttt{stage}} کنیم.
+
+\section{\lr{stage} کردن تغییرات در گیت}
+
+هر فایلی که در گیت تغییر می‌دهیم، نهایتاً با یک کامیت در گیت ثبت می‌شود. به
+همین دلیل قبل از انجام کامیت، باید تغییرات را با دقت بررسی کنیم. در گیت،
+\lr{Staging Area} به شما این امکان را می‌دهد که دقیقاً همین کار را انجام
+دهید. این فضا جاییست که فایل‌های انتخاب‌شده برای کامیت بعدی در آن قرار
+می‌گیرند. می‌توانید به آن به عنوان یک فضای موقت نگاه کنید که تغییرات
+آماده‌ی کامیت شدن را برای شما نگه می‌دارد.
+
+برای \lr{stage} کردن \lr{\texttt{hello.txt}}، از دستور زیر استفاده کنید:
+
+\begin{codebox}{bash}
+$ git add hello.txt
+\end{codebox}
+
+حالا اگر دوباره \lr{\texttt{git status}} بزنید، با خروجی زیر مواجه
+می‌شوید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   hello.txt
+\end{codebox}
+
+می‌بینید که فایل \lr{\texttt{hello.txt}}، به جای این که در
+\lr{Untracked files} باشد، در Changes~to~be~committed قرار دارد. این
+بخش، مختص به تغییراتی است که قرار است \lr{commit} شوند. به خروجی
+\lr{git} در این بخش دقت کنید:
+
+\begin{codebox}{bash}
+(use "git rm --cached <file>..." to unstage)
+\end{codebox}
+
+گیت می‌خواهد به شما یاد دهد که برای خراج این فایل از \lr{Staging Area}
+(یا به عبارتی، \lr{unstage} کردن فایل) می‌توانید از دستور زیر استفاده
+کنید:
+
+\begin{codebox}{bash}
+$ git rm --cached hello.txt
+\end{codebox}
+
+اگر بعد از این دستور، \lr{git status} بزنید، می‌بینید که این فایل مثل
+قبل، \lr{stage} نشده‌ست:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main
+
+No commits yet
+
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        hello.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+همچنین، با استفاده از دستور زیر، می‌توانید تمام تغییرات \lr{stage} نشده‌ی
+تمام فایل‌های ریپو را، \lr{stage} کنید بدون این‌که لازم باشد اسم همه آن
+فایل‌ها را بنویسید:
+
+\begin{codebox}{bash}
+$ git add -A
+\end{codebox}
+
+حالا که فایل \lr{\texttt{hello.txt}} را \lr{stage} کردید، دوباره در آن
+تغییراتی ایجاد کنید. این بار داخلش به جای \texttt{"Hello, Git"}، بنویسید
+\lr{\texttt{"Hello there, Git!"}}. سپس دوباره \lr{\texttt{git status}}
+بزنید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   hello.txt  
+  
+Changes not staged for commit:   
+  (use "git add <file>..." to update what will be committed)  
+  (use "git restore <file>..." to discard changes in working directory)  
+        modified:   hello.txt
+\end{codebox}
+
+می‌بینید که فایل \lr{\texttt{hello.txt}} هم یک بار به عنوان یک فایل جدید
+در بخش \lr{Changes to be committed} آمده، و هم یک بار دیگه به عنوان
+فایلی که تغییر کرده در \lr{Changes not staged for commit.} در واقع،
+نسخه‌ای از \lr{\texttt{hello.txt}} که شما \lr{stage} کردید، همان نسخه‌ای
+است که داخلش نوشتید \lr{\texttt{"Hello, Git"}} و نه نسخه‌ای که تغییرش
+دادید. برای این که نسخه‌ی جدیدتر را \lr{stage} کنید، لازمه که دوباره
+دستور زیر را اجرا کنید:
+
+\begin{codebox}{bash}
+$ git add hello.txt
+\end{codebox}
+
+خروجی‌هایی که گیت به شما نشان می‌دهد خیلی به یادگیری دستورات جدید گیت کمک
+می‌کند؛ به آن‌ها توجه کنید. مثلا در خروجی قبلی، شما یک دستور جدید می‌بینید:
+
+\begin{codebox}{bash}
+(use "git restore <file>..." to discard changes in working directory)
+\end{codebox}
+
+که گیت برای توصیف این دستور می‌گه
+\lr{\texttt{"to discard changes in working directory"}}. یعنی اگر شما
+دستور زیر را قبل از \lr{\texttt{add}} کردن تغییرات می‌زدید:
+
+\begin{codebox}{bash}
+$ git restore hello.txt
+\end{codebox}
+
+تغییرات \lr{stage} نشده‌ی‌ \lr{\texttt{hello.txt}} از بین می‌رفتند و داخلش
+دوباره \lr{\texttt{"Hello, Git"}} نوشته می‌شد.
+
+خروجی‌های \lr{Git} بین ابزارهای برنامه‌نویسی بسیار دقیق و مفید هستند و
+معمولاً پیشنهادهای کارآمدی می‌دهد. حتی وقتی که به یک خطا برخوردید،
+\lr{Git} دستوراتی برای رفع خطا پیشنهاد می‌کند که می‌توانید از آن‌ها استفاده
+کنید. علاوه بر این، در مواقعی که با خطا مواجه می‌شوید، \lr{ChatGPT} و
+گوگل هم کمک‌کننده‌های خوبی هستند.
+
+\section{\lr{commit} کردن تغییرات}
+
+بعد از \lr{stage} کردن تغییرات، برای این که آن‌ها در حافظه‌ی گیت ماندگار
+شوند باید آن‌ها را \lr{commit} کنیم. برای این کار، اول از همه یک
+\lr{\texttt{git status}} بگیرید تا مطمئن باشید همه‌ی تغییرات \lr{stage}
+شدند:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   hello.txt
+\end{codebox}
+
+حالا که می‌بینیم همه‌ی تغییرات \lr{stage} شدند، آن‌ها را \lr{commit}
+می‌کنیم:
+
+\begin{codebox}{bash}
+$ git commit -m "add a simple hello.txt file"  
+
+[main (root-commit) 499871f] add a simple hello.txt file  
+ 1 file changed, 1 insertion(+)  
+ create mode 100644 hello.txt
+\end{codebox}
+
+همینطور که می‌بینید جلوی \lr{\texttt{git commit}} نوشتیم:
+\lr{\texttt{-m "add a simple hello.txt file"}}. به این توضیحات،
+\lr{commit message} می‌گویند. این توضیحات خیلی مهم هستند و باید خلاصه و
+دقیق باشند تا کاری که در آن کامیت انجام شده را به خوبی توصیف کنند. شما
+می‌توانید هر جمله‌ای جای
+\lr{\texttt{"add a simple hello.txt file"}}بنویسید تا مسیج کامیت شما
+باشد، ولی این مسیج باید به‌طور واضح توضیح دهد که چه چیزی در آن کامیت
+تغییر کرده است.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-9.png}
+\end{figure}
+
+حالا اگر با \lr{\texttt{git log}}، تاریخچه‌ی \lr{repo} را بررسی کنیم،
+می‌توانیم commit‌مان را ببینیم:
+
+\begin{codebox}{bash}
+$ git log
+
+commit 499871fd2f48ce02c862569993804a18f11229db (HEAD -> main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Fri Feb 14 00:06:05 2025 +0330  
+  
+    add a simple hello.txt file
+\end{codebox}
+
+در این log، می‌توانید ببینید که از اسم و ایمیلی که در بخش «configure کردن
+git» نوشتید استفاده شده و امضای شما، زیر این کامیت ثبت شده!
+
+اگر بعد از زدن \lr{\texttt{git log}}، شل‌تون یک صفحه‌ی جدید باز کرد و
+نتونستید دستور جدیدی بزنید، با زدن دکمه‌ی \lr{Q} از آن صفحه خارج شوید.
+
+یک فایل \lr{C} در \lr{\texttt{learn-git}} به اسم \lr{\texttt{main.c}}
+درست کنید و محتواش را مثل کد زیر بنویسید:
+
+\begin{codebox}{c}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {  
+    puts("Hello from our git repo!");
+
+    return EXIT_SUCCESS;  
+}
+\end{codebox}
+
+همچنین، یک فایل \lr{\texttt{goodbye.txt}} هم درست کنید و داخلش بنویسید:
+
+\begin{codebox}{text}
+Goodbye, Git :(
+\end{codebox}
+
+حالا، اگر \lr{\texttt{git status}} بگیرید، با دو فایلِ \lr{stage} نشده را
+به را می‌شوید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+Untracked files:  
+  (use "git add <file>..." to include in what will be committed)  
+        goodbye.txt  
+        main.c  
+  
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+هر دوی آن‌ها را \lr{stage} کنید:
+
+\begin{codebox}{bash}
+$ git add -A
+
+$ git status
+
+On branch main
+
+Changes to be committed:
+
+  (use "git restore --staged <file>..." to unstage)
+
+        new file:   goodbye.txt
+
+        new file:   main.c
+\end{codebox}
+
+حالا یک \lr{commit} جدید برای تغییراتتون بزنید. این بار از
+\lr{\texttt{-m}} استفاده نکنید:
+
+\begin{codebox}{bash}
+$ git commit
+
+hint: Waiting for your editor to close the file...
+\end{codebox}
+
+اینجا، \lr{Git} از ادیتوری که در مرحله‌ی «configure کردن git» مشخص کردید
+استفاده می‌کند تا \lr{commit message} را از شما بگیرد. شما می‌توانید چند
+خط پیام به گیت بدید. خط اول به عنوان تیتر پیام در نظر گرفته می‌شود و باقی
+خطوط به عنوان بدنه‌ی پیام. همچنین، خطوطی که با \lr{\texttt{\#}} شروع
+می‌شوند برای گیت مهم نیستند و می‌توانید آن‌ها را نادیده بگیرید. من پیام زیر
+را برای کامیت خودم مشخص کردم:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-10.png}
+\end{figure}
+
+بعد از این که پیام کامیت را نوشتید، با بستن صفحه‌ی ادیتور، گیت کامیت شما
+را نهایی می‌کند (اگر از \lr{macOS} استفاده می‌کنید، حتما با استفاده از
+\lr{\texttt{Command + Q}}، یا دکمه‌ی \lr{Quit} از taskbar، به شکل کامل
+\lr{\texttt{textEdit}} را ببندید). بعد از این کار، \lr{commit} شما انجام
+شده و می‌توانید با \lr{\texttt{git log}} آن را ببینید:
+
+\begin{codebox}{bash}
+$ git log
+
+commit fb32626f45903dbd77a68aebb949c22ddb6de36b (HEAD -> main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Fri Feb 14 00:40:08 2025 +0330  
+  
+    add main.c and goodbye.txt  
+     
+    goodbye.txt is just another text file and main.c is a simple c program.  
+  
+commit 499871fd2f48ce02c862569993804a18f11229db  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Fri Feb 14 00:06:05 2025 +0330  
+  
+    add a simple hello.txt file
+\end{codebox}
+
+دقت کنید که با هر کامیت، صرفا فایل‌هایی که در \lr{Staging Area} بودند
+کامیت می‌شوند و باقی فایل‌ها در این کامیت نخواهند بود. پس شما می‌توانید
+تعدادی از فایل‌ها را در یک کامیت و بقیک فایل‌ها را در کامیت دیگری عوض
+کنید.
+
+\subsection{قواعد commitها}
+
+\subsubsection{کامنت‌گذاری درست}
+
+همان‌طور که قبلاً گفتیم، یکی از مهم‌ترین اصول یک کامیت خوب این است که پیام
+خیلی واضح و خوبی داشته باشد که دقیقا توضیح دهد چه کاری در آن کامیت انجام
+شده. خیلی وقت‌ها ممکن کامیت نوشتن تبدیل به یک کار خیلی طولانی شود.
+
+در پیام کامیت، حتماً از ساده‌ترین فرم افعال استفاده کنید. مثلاً اگر فایل
+\lr{\texttt{hello.txt}} را اضافه کردید، کامنت‌هایی مثل
+\lr{\texttt{"adding hello.txt"}} یا \lr{\texttt{"added hello.txt"}}
+مناسب نیستند. بهتره از خود فعل به شکل ساده، یعنی
+\lr{\texttt{"add hello.txt"}} استفاده کنید. البته این مورد می‌تواند بسته
+به جایی که کار می‌کنید و conventionهای آن، متفاوت باشد.
+
+\subsubsection{تغییرات مرتبط در یک کامیت}
+
+هر کامیت باید شامل تغییرات مرتبط با یک کار و فقط یک کار باشد. مثلاً
+کامیتی که همزمان هم \lr{\texttt{main.c}} و هم \lr{\texttt{goodbye.txt}}
+را به ریپو اضافه کردیم، چندان کامیت خوبی نبود، چون که همزمان دو تغییر
+نامربوط به هم را پوشش می‌داد. بهتر بود که این تغییرات در قالب دو کامیت
+مختلف انجام می‌شد.
+
+\subsubsection{تست و چک کردن تغییرات قبل از کامیت}
+
+کدها را قبل از کامیت، تست کنید و مطمئن بشید که کار می‌کنند. همچنین
+تغییراتی که \lr{stage} شدند را قبل از انجام کامیت بررسی کنید.
+
+\section{تاریخچه‌ی ریپو}
+
+همون‌طور که قبل‌تر فهمیدید، شما می‌توانید با دستور \lr{\texttt{git log}}،
+تاریخچه‌ی \lr{commit} های ریپو را ببینید:
+
+\begin{codebox}{bash}
+$ git log
+
+commit fb32626f45903dbd77a68aebb949c22ddb6de36b (HEAD -> main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Fri Feb 14 00:40:08 2025 +0330  
+  
+    add main.c and goodbye.txt  
+      
+    goodbye.txt is just another text file and main.c is a simple c program.  
+  
+commit 499871fd2f48ce02c862569993804a18f11229db  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Fri Feb 14 00:06:05 2025 +0330  
+  
+    add a simple hello.txt file
+\end{codebox}
+
+کنار هر commit، یک کد عجیب طولانی می‌بینید. مثلا کد کامیت آخر ما در این
+مثال، \lr{\texttt{fb32626f45903dbd77a68aebb949c22ddb6de36b}} هست. این کد
+در کل جهان مختص به همین کامیت است. این کد آنقدر اختصاصی است که فقط ۷ حرف
+اولش هم برای تمایز دادن این کامیت از سایر کامیت‌ها کافیست و شما خیلی
+وقت‌ها به جای کد کامل این کامیت، فقط چند حرف اول را نیاز دارید.
+
+علاوه بر این، می‌توانید با استفاده از فلگ \lr{\texttt{--oneline}}، حالت
+خلاصه‌تری از \lr{\texttt{git log}} ببینید:
+
+\begin{codebox}{bash}
+$ git log --oneline
+
+fb32626 (HEAD -> main) add main.c and goodbye.txt  
+499871f add a simple hello.txt file
+\end{codebox}
+
+\section{فایل \texttt{.gitignore}}
+
+یک فایل جدید به اسم \lr{\texttt{ignored.txt}} اضافه کنید و داخلش بنویسید
+\texttt{"This file will be ignored."}. حالا \lr{\texttt{git status}}
+بزنید تا آن را ببینید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+Untracked files:  
+  (use "git add <file>..." to include in what will be committed)  
+    ignored.txt  
+  
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+حالا یک فایل به اسم \lr{\texttt{.gitignore}} به ریپو اضافه کنید، و در خط
+اول آن بنویسید \lr{\texttt{"ignored.txt"}} و ذخیره‌ش کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-11.png}
+\end{figure}
+
+دوباره \lr{git status} بگیرید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main
+
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        .gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+اگر توجه کنید، فایل \lr{\texttt{ignored.txt}} را نمی‌بینید! انگار که گیت،
+تغییرات آن را دنبال نمی‌کند و برایش مهم نیست.
+
+فایل \lr{\texttt{.gitignore}}، یک فایل خاص است. با استفاده از آن،
+می‌توانید به گیت بگید که فایل‌ها یا دایرکتوری‌های مختلف را ایگنور کند و
+تغییراتشان را دنبال نکند. تغییرات جدید را \lr{\texttt{add}} و
+\lr{\texttt{commit}} کنید:
+
+\begin{codebox}{bash}
+$ git add -A  
+  
+$ git commit -m "add .gitignore"
+
+[main 4e0eff9] add .gitignore
+
+ 1 file changed, 1 insertion(+)
+
+ create mode 100644 .gitignore
+\end{codebox}
+
+حالا، دایرکتوری‌ای به اسم \lr{\texttt{gholi}} در ریپو درست کنید، و در آن
+دو فایل \lr{\texttt{1.txt}} و \lr{\texttt{2.txt}} را ایجاد کنید. بعد از
+این کار، اگر \lr{\texttt{git status}} بزنید با خروجی زیر مواجه می‌شوید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main
+
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        gholi/
+
+nothing added to commit but untracked files present (use "git add" to track)
+\end{codebox}
+
+حالا، به \lr{\texttt{.gitignore}} خط زیر را اضافه کنید. با اضافه کردن
+این خط، به \lr{git} می‌گید که کل دایرکتوری \lr{\texttt{gholi}} را ایگنور
+کند:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-12.png}
+\end{figure}
+
+اگر دوباره \lr{\texttt{git status}} بزنید، می‌بینید که \lr{\texttt{git}}
+تغییرات دایرکتوری \lr{\texttt{gholi}} را دنبال نمی‌کند:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main
+
+Changes not staged for commit:
+
+  (use "git add <file>..." to update what will be committed)
+
+  (use "git restore <file>..." to discard changes in working directory)
+
+        modified:   .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+\end{codebox}
+
+تغییرات جدید را \lr{\texttt{add}} و \lr{\texttt{commit}} کنید:
+
+\begin{codebox}{bash}
+$ git add -A  
+  
+$ git commit -m "update .gitignore"
+
+[main 8bf25ec] update .gitignore
+
+ 1 file changed, 1 insertion(+)
+\end{codebox}
+
+\section{برنچ‌ها}
+
+حالا که با بعضی از دستورات و مفاهیم \lr{Git} آشنا شدیم، می‌توانیم راجع به
+شاخه‌ها \lr{(branches)} در آن صحبت کنیم. \lr{Branch} یکی از مهم‌ترین
+ویژگی‌های \lr{Git} است که باعث می‌شود ده‌ها، صدها یا حتی هزاران برنامه‌نویس
+همزمان روی پروژه‌های مشترکی مثل Linux، \lr{Mozilla} و خیلی از پروژه‌های
+دیگر کار کنند.
+
+برنچ‌ها به یک تیم از برنامه‌نویس‌ها اجازه می‌دهند تا بدون تاثیرگذاری روی کار
+یکدیگر، همزمان یک \lr{code base} را تغییر دهند، فیچر جدید اضافه کنند،
+خطاها را رفع کنند، یا هر کار دیگری انجام دهند. هر برنامه‌نویس قبل از شروع
+کدنویسی، یک برنچ از \lr{\texttt{main}} می‌گیرد، کارش را روی برنچ جدید
+انجام می‌دهد، و در نهایت هم با \lr{\texttt{merge}} کردن، تغییراتش را روی
+برنچ \lr{\texttt{main}} منتقل می‌کند. اگر این جمله گیجتون کرد، بیاید از
+اول با برنچ‌ها آشنا بشویم.
+
+\subsection{شروع به کار}
+
+برای شروع به کار، اول یک پروژه‌ی جدید در \lr{IntelliJ} به اسم
+\lr{\texttt{learning-git}} ایجاد کنید. تیک \lr{Create Git repository} را
+هم بزنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-13.png}
+\end{figure}
+
+با زدن این تیک، خود \lr{IntelliJ} برای پروژه‌ یک ریپوی \lr{git} درست
+می‌کند، یک فایل \lr{\texttt{.gitignore}} ایجاد می‌کند و کارهای اولیه را
+انجام می‌دهد، تا شما بتوانید راحت‌تر با \lr{git} کار کنید. مثلا اگر به
+فایل \lr{\texttt{.gitignore}} که ساخته شده نگاه کنید، می‌بینید که خیلی از
+دایرکتوری‌هایی که IDEهای مختلف برای خودشان درست می‌کنند و ربطی به پروژه‌
+شما ندارد، آن‌جا هست:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-14.png}
+\end{figure}
+
+لطفا به انتهای فایل \lr{\texttt{.gitignore}}، خط زیر را اضافه کنید تا
+فایل‌های \lr{\texttt{.iml}} هم ایگنور شوند، وگرنه در ادامه‌ی داک مقداری
+اذیت می‌شید:
+
+\begin{codebox}{bash}
+*.iml
+\end{codebox}
+
+کد زیر، که در آن مجموع ارقام عدد ورودی را به دست میاوریم، یک کد نمونه‌ست
+برای این که \lr{branch} ها را یاد بگیریم. این کد را در
+\lr{\texttt{Main.java}} کپی و اجرا کنید تا مطمئن شوید درست کار می‌کند:
+
+\begin{codebox}{bash}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        var scn = new Scanner(System.in);
+        var input = scn.nextInt();  
+  
+        System.out.printf("Sum of digits: %d", sumOfDigits(input));  
+    }
+
+    public static int sumOfDigits(int number) {
+        var sum = 0;
+        while (number > 0) {  
+            sum += number % 10;  
+            number /= 10;  
+        }
+
+        return sum;  
+    }  
+}
+\end{codebox}
+
+حال باید اولین \lr{commit} را انجام بدیم. اول از همه، با دستور \lr{cd}
+به دایرکتوری پروژه‌ برید و بعد، \lr{git status} بزنید:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   .gitignore  
+        new file:   learning-git.iml  
+        new file:   src/Main.java  
+  
+Changes not staged for commit:  
+  (use "git add <file>..." to update what will be committed)  
+  (use "git restore <file>..." to discard changes in working directory)
+
+        modified:   .gitignore  
+        modified:   src/Main.java
+\end{codebox}
+
+یک فیچر خوب \lr{IntelliJ} این است که داخل خودش \lr{shell} دارد تا کار
+شما راحت‌تر باشد. با زدن دکمه‌ی terminal، می‌توانید به آن دسترسی پیدا کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-15.png}
+\end{figure}
+
+بعد از زدن این دکمه، صفحه‌ی \lr{shell} زیر \lr{IntelliJ} باز می‌شود.
+همانطور که می‌بینید این \lr{shell} شبیه چیزی است که قبلا با آن کار کردید؛
+در اصل هیچ تفاوتی ندارد و همان است! اگر این‌جا \lr{\texttt{git status}}
+بزنید می‌بینید که خروجی‌ای شبیه به خروجی قبل نشان می‌دهد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-16.png}
+\end{figure}
+
+برای راحتی کار، در ادامه‌ی داک و داخل پروژه‌هاتون می‌تونید از این شل
+استفاده کنید.
+
+در خروجی \lr{\texttt{git status}} می‌بینید که تغییرات فایل
+\lr{\texttt{Main.java}} و \lr{\texttt{.gitignore}} هنوز \lr{stage}
+نشدند. برای این که همه‌ی تغییرات \lr{stage} شوند، از دستور زیر استفاده
+می‌کنیم:
+
+\begin{codebox}{bash}
+$ git add -A
+\end{codebox}
+
+در \lr{\texttt{git status}} بعدی، می‌بینید که همه‌ی تغییرات \lr{stage}
+شدند:
+
+\begin{codebox}{bash}
+$ git status
+
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   .gitignore  
+        new file:   learning-git.iml  
+        new file:   src/Main.java
+\end{codebox}
+
+لطفا با استفاده از دستور زیر، فایل \lr{\texttt{learning-git.iml}} را
+\lr{unstage} کنید تا گیت برای همیشه آن را ایگنور کند:
+
+\begin{codebox}{bash}
+$ git rm --cached learning-git.iml
+\end{codebox}
+
+اگر دوباره \lr{git status} بزنید، خروجی زیر را می‌بینید:
+
+\begin{codebox}{bash}
+On branch main  
+  
+No commits yet  
+  
+Changes to be committed:  
+  (use "git rm --cached <file>..." to unstage)  
+        new file:   .gitignore  
+        new file:   src/Main.java
+\end{codebox}
+
+حالا تغییرات را \lr{commit} کنید:
+
+\begin{codebox}{bash}
+$ git commit -m "initial commit"
+\end{codebox}
+
+حالا باید با زدن \lr{git} status، خروجی زیر را ببینید تا مطمئن شوید که
+همه چیز \lr{commit} شده:
+
+\begin{codebox}{bash}
+On branch main  
+nothing to commit, working tree clean
+\end{codebox}
+
+بهترین راه یادگیری برنچ‌ها کار کردن با آن‌هاست. پس حالا اولین branch‌ها را
+می‌سازیم.
+
+\subsection{ساخت برنچ}
+
+در ابتدا، دستور زیر را در دایرکتوری پروژه‌ اجرا کنید:
+
+\begin{codebox}{bash}
+$ git branch
+\end{codebox}
+
+این دستور، تمامی branch‌های فعلی این \lr{repo} را نشون می‌دهد. طبیعتا، شما
+باید فقط یک برنچ به اسم \lr{\texttt{main}} یا \lr{\texttt{master}}
+ببینید:
+
+\begin{codebox}{bash}
+* main
+\end{codebox}
+
+اگر \lr{terminal} در یک صفحه‌ی جدید، مثل صفحه‌ی زیر، برنچ‌ها را نشان داد،
+می‌توانید با زدن \lr{Q} از این صفحه خارج بشید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-17.png}
+\end{figure}
+
+حالا می‌خواهیم یک برنچ جدید به اسم \lr{\texttt{support-long}} ایجاد کنیم.
+توی این برنچ، می‌خواهیم یک سری تغییر داخل کد بدیم تا تابع
+\lr{\texttt{sumOfDigits}} از ورودی‌های \lr{\texttt{long}} پشتیبانی کند.
+برای ایجاد برنچ جدید، از دستور زیر استفاده می‌کنیم:
+
+\begin{codebox}{bash}
+$ git branch support-long
+\end{codebox}
+
+حالا اگر دستور \lr{\texttt{git branch}} را بزنید:
+
+\begin{codebox}{bash}
+$ git branch
+\end{codebox}
+
+با خروجی زیر مواجه می‌شوید:
+
+\begin{codebox}{bash}
+* main  
+support-long
+\end{codebox}
+
+همان‌طور که می‌بینید، ما با موفقیت \lr{branch} جدیدی از روی \lr{main}
+ساختیم و الآن می‌توانیم در لیست branch‌ها آن را ببینیم ولی هنوز داخل این
+\lr{branch} نیستیم. برای این که وارد این \lr{branch} بشویم، از دستور
+\lr{\texttt{checkout}} استفاده می‌کنیم:
+
+\begin{codebox}{bash}
+$ git checkout support-long
+\end{codebox}
+
+حالا اگر \lr{\texttt{git branch}} بزنید، خروجی زیر را می‌بینید:
+
+\begin{codebox}{bash}
+main  
+* support-long
+\end{codebox}
+
+می‌بینید که ستاره‌ی کوچکی که قبلا کنار \lr{\texttt{main}} بود، الآن روی
+\lr{\texttt{support-long}} است. این یعنی ما با موفقیت، branchمان را
+تغییر دادیم.
+
+کدی که داخل این برنچ قرار دارد، دقیقا شبیه کد \lr{\texttt{main}} است. در
+واقع، این برنچ، کپی کاملی از برنچ \lr{main} است، چون وقتی آن را ساختیم،
+در \lr{\texttt{main}} بودیم. همیشه اگر در برنچ \lr{\texttt{a}} باشیم و
+برنچ \lr{\texttt{b}} را درست کنیم، برنچ \lr{\texttt{b}} کپی برنچ
+\lr{\texttt{a}} خواهد بود. حالا کدی که در \lr{\texttt{Main.java}} بود
+را، به کد جدید زیر تغییر دهید:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        var scn = new Scanner(System.in);
+        var input = scn.nextLong();  
+  
+        System.out.printf("Sum of digits: %d", sumOfDigits(input));  
+    }
+
+    public static int sumOfDigits(long number) {
+        var sum = 0;
+        while (number > 0) {  
+            sum += (int)(number % 10);  
+            number /= 10;  
+        }
+
+        return sum;  
+    }  
+}
+\end{codebox}
+
+تفاوت این کد با کد قبلی، صرفا در این است که این کد به جای
+\lr{\texttt{int}}، قابلیت این را دارد که یک \lr{\texttt{long}} ورودی
+بگیرد. حالا به ترتیب \lr{\texttt{git status}} بزنید تا مطمئن باشید که
+تغییراتمان در گیت دیده می‌شود. خروجی زیر را می‌بینید:
+
+\begin{codebox}{bash}
+On branch support-long  
+Changes not staged for commit:  
+  (use "git add <file>..." to update what will be committed)  
+  (use "git restore <file>..." to discard changes in working directory)  
+        modified:   src/Main.java  
+  
+no changes added to commit (use "git add" and/or "git commit -a")
+\end{codebox}
+
+سپس \lr{\texttt{git add}} بزنید و دوباره \lr{\texttt{git status}} بزنید
+تا مطمئن باشید که تغییرات \lr{stage} شدند:
+
+\begin{codebox}{bash}
+On branch support-long  
+Changes to be committed:  
+  (use "git restore --staged <file>..." to unstage)  
+        modified:   src/Main.java
+\end{codebox}
+
+نهایتا هم، تغییرات را کامیت کنید:
+
+\begin{codebox}{bash}
+$ git commit -m "add support for long numbers"  
+  
+[support-long 3f48bc3] add support for long numbers  
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+\end{codebox}
+
+اگر الآن \lr{\texttt{git log}} بزنید، با چنین خروجی‌ای مواجه می‌شوید و
+می‌فهمید که تغییرات اعمال شدند:
+
+\begin{codebox}{bash}
+commit 3f48bc3d5c29522283dd4a8c811a72fc78feb4e8 (HEAD -> support-long)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 10:07:51 2025 +0330  
+  
+    add support for long numbers  
+  
+commit 97ea957914201c480912c24718e352abe42f8e72 (main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Mon Feb 10 12:30:17 2025 +0330  
+  
+    initial commit
+\end{codebox}
+
+حالا، بیاید یک نگاه به برنچ \lr{\texttt{main}} بندازیم. این \lr{branch}
+را \lr{\texttt{checkout}} کنید:
+
+\begin{codebox}{bash}
+$ git checkout main
+
+Switched to branch 'main'
+\end{codebox}
+
+فایل \lr{\texttt{Main.java}} را نگاه کنید. می‌بینید که این فایل، هیچ
+تغییری نکرده و هنوز هم فقط اعداد \lr{\texttt{int}} را پشتیبانی می‌کند! با
+زدن \lr{\texttt{git log}}، می‌توانید ببینید که \lr{commit} مرتبط با این
+تغییر هم وجود ندارد و فقط \lr{commit} اولی‌ را می‌بینید:
+
+\begin{codebox}{bash}
+commit 97ea957914201c480912c24718e352abe42f8e72 (HEAD -> main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Mon Feb 10 12:30:17 2025 +0330  
+  
+    initial commit
+\end{codebox}
+
+این که شما می‌توانید کد یک \lr{branch} را عوض کنید، بدون این‌که کد
+\lr{branch} های دیگر تغییر کند، از قابلیت‌های اصلی‌ \lr{git} است! با
+\lr{checkout} کردن دوباره‌ی \lr{\texttt{support-long}}، می‌بینید که
+تغییرات شما برمی‌گردند. شما در ادامه‌ی داک، با استفاده از دستور
+\lr{\texttt{git merge}}، تغییرات برنچ \lr{\texttt{support-long}} را به
+\lr{\texttt{main}} منتقل می‌کنید.
+
+\subsection{چرا برنچ‌ها}
+
+احتمالا این سوال پیش آمده که چرا اصلا باید از branch‌ها استفاده کنیم.
+ارزش این قابلیت وقتی مشخص می‌شود که با یک اپلیکیشن واقعی‌تر رو‌به‌رو باشیم.
+در هر دوی سناریوهایی که در ادامه توضیح می‌دیم، می‌توانید کاربردهایی واقعی
+از branch‌ها را ببینید. واقعیت این است که بدون برنچ‌ها، کار کردن در یک تیم
+برنامه‌نویسی خیلی سخت‌تر از چیزی می‌شد که فکر می‌کنید.
+
+\subsubsection{سناریوی ۱}
+
+فرض کنید قلی در یک تیم برنامه‌نویسی در شرکت تپسی کار می‌کند. یک روز رئیسش
+به او می‌گوید که قابلیت گرفتن تاکسی دو مقصده را به سیستم اضافه کند. قلی
+هم شروع می‌کند به کد زدن و تمام روز مشغول کار بر روی این ویژگی جدید می‌شود
+تا بتواند خیلی زود این امکان را برای مشتری‌ها فراهم کند. اما قلی به
+برنچ‌های \lr{Git} اعتقادی ندارد و همه کارهایش را روی برنچ
+\lr{\texttt{main}} انجام می‌دهد.
+
+انتهای روز، رئیس دوباره به قلی می‌گوید که سیستم به خطا خورده و هیچ‌کس
+نمی‌تواند تاکسی بگیرد! حالا قلی باید سریع باگ را برطرف کند، ولی کدی که تا
+الان برای تاکسی دو مقصده زده چه می‌شود؟ آیا باید آنقدر
+\lr{\texttt{Ctrl + Z}} بزند تا همه‌ی کدها پاک شده و به کد اولیه برسد که
+خطا را برطرف کند؟ از طرفی، قلی باید خیلی سریع باگ فعلی سیستم را حل کند و
+از طرف دیگر هم کل روز کد زده و نمی‌تواند از کدهایش دل بکند!
+
+قلی می‌توانست در ابتدا، به جای این که کارش را روی \lr{\texttt{main}}
+انجام بدهد، یک \lr{branch} جدید مثل \lr{\texttt{do-maghsadeh}} ایجاد کند
+و کارهایش را آنجا انجام دهد و وقتی با باگ رو‌به‌رو شد، خیلی سریع برنچ
+\lr{\texttt{main}} (که دست نخورده باقی مانده) را \lr{checkout} کند تا
+بتواند خطای مشتری‌ها را برطرف کرده و همزمان، تغییراتش در برنچ
+\lr{\texttt{do-maghsadeh}} هم حفظ کند. در شکل زیر، می‌توانید تصویری از
+این حالت ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-18.png}
+\end{figure}
+
+در این visualization، که در دنیای گیت خیلی معروف است، می‌توانید ببینید که
+وقتی قلی کارش را شروع کرده، برنچ \lr{\texttt{do-maghsadeh}} از برنچ
+\lr{\texttt{main}} جدا شده است.
+
+\subsubsection{سناریوی ۲}
+
+قلی و گلی که هر دو در شرکت تپسی مشغول به کار هستند، به تازگی درگیر
+پیاده‌سازی فیچرهای جدیدی شدند که رئیس خواسته. قلی چند روز است که که روی
+فیچر «تاکسی دو مقصده» کار می‌کند و امروز، رئیس به گلی گفته که روی فیچر
+جدیدی به نام «هم‌سفر» کار کند. اما متاسفانه، هر دو هنوز به مفهوم برنچ‌ها
+در \lr{Git} اعتقادی ندارند و تصمیم گرفتند پیاده‌سازی را مستقیماً روی برنچ
+\lr{\texttt{main}} پیش ببرند.
+
+قلی کارش را به چند قسمت معنادار تقسیم کرده و با پایان هر قسمت، تغییراتش
+را کامیت می‌کند. اما مشکل اینجاست که وقتی گلی کارش را شروع می‌کند، تغییرات
+قلی را روی کدهای برنچ \lr{\texttt{main}} می‌بیند. این تغییرات هنوز به
+درستی کار نمی‌کنند و باعث می‌شوند که اپ تپسی به کلی از کار بیفتد.
+بنابراین، گلی نمی‌تواند هیچ کاری را شروع کند.
+
+گلی که از وضعیت ناامید شده، از قلی می‌خواهد که هر چه سریع‌تر کدهایش را
+درست کند تا بتواند به موقع فیچر هم‌سفر را تحویل دهد. اما قلی که هنوز تحت
+استرس رفع خطاهای گذشته است، حالش خوب نیست و با گلی بحث می‌کند و می‌گوید که
+نمی‌تواند کدش را درست کند.
+
+اگر قلی، از ابتدا کارش را روی برنچ جدیدی به اسم
+\lr{\texttt{do-maghsadeh}} انجام می‌داد، تغییراتش در \lr{\texttt{main}}
+دیده نمی‌شد و گلی می‌توانست از \lr{\texttt{main}}، برنچ جدیدی مثل
+\lr{\texttt{hamsafar}} بگیرد و کارش را شروع کند، بدون این‌که نیازی به بحث
+و دعوا با قلی باشد. نهایتا هم وقتی \lr{development} این دو فیچر تمام شد
+و به خوبی تست شدند، هر دو کدهایشان را روی برنچ \lr{\texttt{main}} مرج
+می‌کردند تا فیچرها به دست مشتری برسد. تصویر زیر، این حالت را نشون می‌دهد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-19.png}
+\end{figure}
+
+در این تصویر، می‌توانیم ببینیم که هر دو برنچ \lr{\texttt{do-maghsadeh}} و
+\lr{\texttt{hamsafar}}، از \lr{\texttt{main}} گرفته شدند و بعد از این که
+کار آن‌ها تمام شده، روی \lr{\texttt{main}} مرج شدند و تغییرات به
+\lr{\texttt{main}} منتقل شده است.
+
+\subsection{نمونه‌ی یک ساختار خوب برای \lr{branch} ها}
+
+حالا که با \lr{branch} ها آشنا شدیم، بیاید یک ساختار استانداردتر را برای
+آن‌ها بررسی کنیم. با توجه به این که شما قراره بعضی پروژه‌های آینده‌ را روی
+\lr{git} و به شکل گروهی پیش ببرید، خوبه که از این ساختار الهام بگیرید تا
+با مشکلات زیادی رو‌به‌رو نشید.
+
+هر نرم‌افزاری، یک برنچ \lr{\texttt{main}} به عنوان برنچ اصلی‌ دارد. این
+برنچ، عموما شامل یک نسخه‌ی \lr{stable} و تست شده‌ از آن نرم‌افزار است. به
+هیچ وجه نباید روی خط \lr{\texttt{main}} ، مستقیم \lr{commit} کنید! اگر
+قرار است تغییری در \lr{\texttt{main}} داده بشه، باید یک برنچ از آن
+بگیرید، تغییرات را روی آن انجام دهید، روی همان برنچ تستش کنید، و وقتی که
+مطمئن شدید که تغییرات جدید باگی ندارند، آن‌ها را روی \lr{\texttt{main}}
+مرج کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-20.png}
+\end{figure}
+
+شکل بالا \lr{branch} های مختلف یک اپ را نشان می‌دهد. برنچ
+\lr{\texttt{main}}، همواره \lr{stable} و تست شده‌ست. اولین برنچی که
+گرفتیم، برای اضافه کردن تعدادی دکمه به برنامه‌ست. این دکمه‌ها را در
+برنچ‌مان اضافه می‌کنیم، تست می‌کنیم، و وقتی فهمیدیم کار می‌کنند، آن‌ها را به
+\lr{\texttt{main}} اضافه می‌کنیم. باقی برنچ‌ها هم به شکلی مشابه درست شده و
+بعدا توی \lr{\texttt{main}} مرج می‌شوند.
+
+حتی خیلی از شرکت‌ها، به جای این که برنچ‌ها را مستقیم روی
+\lr{\texttt{main}} مرج کنند، روی خط دیگری مثل \lr{development} می‌برند تا
+\lr{\texttt{main}} استیبل‌تری داشته باشند. ولی شما فعلا لازم نیست این کار
+را بکنید.
+
+تنها کاری که لازم است در \lr{AP} و هر موقعیت دیگری انجام دهید، این است
+که هیچ‌وقت روی \lr{\texttt{main}} کامیت نکنید! مگر اولین کامیت برنامه‌، آن
+هم چون هنوز برنچ دیگه‌ای در ریپو ندارید. شما فقط می‌توانید به
+\lr{\texttt{main}} مرج کنید، حتی برای تغییرات کوچک. خیلی از شرکت‌ها،
+دسترسی همه‌ی کارکنان غیر از یک یا دو نفر از مدیران را به
+\lr{\texttt{main}} می‌بندند.
+
+\section{مرج کردن}
+
+وقتی کارتون در یک برنچ تموم شد، می‌توانید با \lr{merge} کردن آن برنچ روی
+برنچ‌های دیگر، تغییراتش را به آن برنچ منتقل کنید. مثال قبلی‌ و برنچ‌های
+\lr{\texttt{support-long}} و \lr{\texttt{main}} را به خاطر بیارید. اول
+از همه، با دستور \lr{\texttt{git branch}} چک کنید که حتما در برنچ
+\lr{\texttt{support-long}} باشید:
+
+\begin{codebox}{bash}
+main  
+* support-long
+\end{codebox}
+
+با \lr{\texttt{git log}} چک کنید که \lr{commit} آخر، مربوط به اضافه کردن
+قابلیت مرتبط با اعداد \lr{\texttt{long}} بوده:
+
+\begin{codebox}{bash}
+commit 3f48bc3d5c29522283dd4a8c811a72fc78feb4e8 (HEAD -> support-long)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 10:07:51 2025 +0330  
+  
+    add support for long numbers  
+  
+commit 97ea957914201c480912c24718e352abe42f8e72 (main)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Mon Feb 10 12:30:17 2025 +0330  
+  
+    initial commit
+\end{codebox}
+
+حالا برنچ \lr{\texttt{main}} را \lr{checkout} کنید و با استفاده از دستور
+زیر، برنچ \lr{\texttt{support-long}} را داخل آن مرج کنید:
+
+\begin{codebox}{bash}
+$ git merge support-long   
+  
+Updating 97ea957..3f48bc3  
+Fast-forward  
+ src/Main.java | 6 +++---  
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+\end{codebox}
+
+حالا، در برنچ \lr{\texttt{main}} دستور \lr{\texttt{git log}} را بزنید:
+
+\begin{codebox}{bash}
+commit 3f48bc3d5c29522283dd4a8c811a72fc78feb4e8 (HEAD -> main, support-long)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 10:07:51 2025 +0330  
+  
+    add support for long numbers  
+  
+commit 97ea957914201c480912c24718e352abe42f8e72  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Mon Feb 10 12:30:17 2025 +0330
+\end{codebox}
+
+می‌بینید که \lr{commit} مرتبط با اعداد \lr{\texttt{long}} ، روی
+\lr{\texttt{main}} هم دیده می‌شود! با دیدن فایل \lr{\texttt{Main.java}}،
+می‌توانید چک کنید که تغییرات کدها واقعا روی برنچ \lr{\texttt{main}} اعمال
+شدند. به این عملیات، \lr{merge} کردن می‌گویند.
+
+\subsection{حذف برنچ‌ها}
+
+اگر الآن دستور \lr{\texttt{git branch}} را اجرا کنید، خروجی زیر را
+می‌بینید:
+
+\begin{codebox}{bash}
+* main  
+support-long
+\end{codebox}
+
+همان‌طور که می‌بینید، برنچ \lr{\texttt{support-long}} اضافه‌ است و دیگر
+کاربردی ندارد، چون تغییراتش روی \lr{\texttt{main}} مرج شده است. اگر این
+برنچ‌ها زیاد باشند، ممکن است دردسرساز شوند. با استفاده از دستور زیر،
+می‌توانید برنچ‌های قدیمی را پاک کنید:
+
+\begin{codebox}{bash}
+$ git branch -d support-long  
+  
+Deleted branch support-long (was d5a71e9).
+\end{codebox}
+
+بهتر است که بعد از اتمام کار با یک برنچ، با استفاده از این دستور آن را
+حذف کنید تا لیست برنچ‌ها خالی بماند.
+
+تا اینجا آموختیم که چگونه برنچ بسازیم، بین آن‌ها جابه‌جا شویم و در نهایت
+آن‌ها را ادغام یا حذف کنیم. اما در دنیای واقعیِ توسعه نرم‌افزار، همیشه همه
+چیز طبق برنامه پیش نمی‌رود. گاهی فراموش می‌کنیم در کدام برنچ هستیم، گاهی
+تغییراتی را اشتباهاً کامیت می‌کنیم و گاهی نیاز داریم به عقب برگردیم. در
+این بخش، یاد می‌گیریم که چطور مانند یک حرفه‌ای، اشتباهات را مدیریت کنیم و
+اجازه ندهیم مخزن کد \lr{(repository)} ما دچار آشفتگی شود.
+
+\subsection{۱. جابه‌جایی هوشمندانه بین برنچ‌ها (نکته حیاتی)}
+
+یکی از سناریوهای پرکاربرد که اگر به آن توجه نشود می‌تواند باعث سردرگمی
+زیادی شود، وجود فایل‌های \lr{unstaged} یا \lr{modified} در هنگام تعویض
+برنچ است.
+
+سناریوی خطر: فرض کنید در برنچ \lr{\texttt{feature-A}} در حال تغییر فایل
+\lr{\texttt{Main.java}} هستید اما هنوز آن را کامیت نکرده‌اید. ناگهان
+تصمیم می‌گیرید با دستور \lr{\texttt{git checkout}} به برنچ
+\lr{\texttt{main}} بروید. در این حالت، گیت تغییرات کامیت نشده شما را به
+برنچ مقصد (در اینجا \lr{\texttt{main}}) منتقل می‌کند! مشکل کجاست؟ این کار
+باعث می‌شود کدهای ناتمام شما در برنچی که قرار بود \lr{stable} بماند ظاهر
+شود. اگر گیت متوجه شود که این تغییرات با کدهای برنچ مقصد تداخل جدی دارد،
+اصلاً اجازه جابه‌جایی نمی‌دهد و شما را متوقف می‌کند. راهکار حرفه‌ای: همیشه
+قبل از جابه‌جایی بین برنچ‌ها، با \lr{\texttt{git status}} وضعیت را چک
+کنید. اگر کارتان تمام نشده، از دستور \lr{\texttt{git stash}} استفاده
+کنید تا تغییرات موقتاً در یک فضای امن ذخیره شوند و
+\lr{\texttt{Working Directory}} شما پاک \lr{(Clean)} شود. پس از بازگشت
+به برنچ اصلی، می‌توانید با \lr{\texttt{git stash pop}} آن‌ها را برگردانید.
+یادتان باشد که هرگز با یک \lr{\texttt{Working Directory}} کثیف، برنچ عوض
+نکنید.
+
+\subsection{۲. دقت در مبدأ ساخت برنچ \lr{(Branching Base)}}
+
+همان‌طور که در سناریوی ممد و قلی دیدیم، برنچ‌ها از یکدیگر منشعب می‌شوند. یک
+نکته کلیدی که در داک‌های رسمی گیت کمتر به آن پرداخته می‌شود، \texttt{مبدأ}
+است.
+
+اشتباه رایج: شما در برنچ \lr{\texttt{fix-message}} هستید و ناگهان یادتان
+می‌افتد باید روی پارامترها هم کار کنید. همان‌جا دستور
+\lr{\texttt{git branch fix-parameter-name}} را می‌زنید. در این حالت، برنچ
+دوم شما از دلِ برنچ اول بیرون می‌آید، نه از \lr{\texttt{main}}! این یعنی
+تمام کدهای برنچ اول، در برنچ دوم هم حضور دارند. در چنین سناریویی،
+\lr{\texttt{Best Practice}} به این صورت است که همیشه قبل از ساخت یک برنچ
+جدید برای یک فیچر مجزا، ابتدا به برنچ \lr{\texttt{main}} بروید، آخرین
+تغییرات را \lr{\texttt{pull}} کنید و سپس برنچ جدید را بسازید. این کار
+باعث می‌شود نمودار درختی پروژه شما \lr{visualization} تمیز و قابل فهم
+باقی بماند.
+
+\begin{codebox}{text}
+main
+ │
+ ●───●───●
+          \
+           \
+            ●───●  fix-message
+                    \
+                     \
+                      ●───●  fix-parameter-name
+\end{codebox}
+
+مشکل:
+
+برنچ \lr{\texttt{fix-parameter-name}} از روی \lr{\texttt{fix-message}}
+ساخته شده است، نه از روی \lr{\texttt{main}}.
+
+در نتیجه تمام تغییرات موجود در \lr{\texttt{fix-message}} به صورت
+ناخواسته وارد \lr{\texttt{fix-parameter-name}} نیز می‌شوند. اگر برای
+\lr{\texttt{fix-parameter-name}} یک \lr{Pull Request} باز شود، تغییرات
+هر دو فیچر در آن دیده خواهد شد.
+
+\subsection{۳. اصلاح اشتباهات و بازگشت به عقب \lr{(Undo Changes)}}
+
+گیت مانند یک ماشین زمان است. اگر اشتباهی کردید، نیازی نیست پوشه پروژه را
+پاک کنید و دوباره از اول کلون بگیرید!
+
+\subsubsection{اصلاح آخرین کامیت \lr{(Amend)}}
+
+اگر کامیتی زدید و بلافاصله پشیمان شدید (مثلاً پیامتان غلط املایی داشت یا
+یک فایل را فراموش کردید)، از دستور زیر استفاده کنید:
+
+\begin{codebox}{bash}
+$ git commit --amend -m "پیام جدید و درست"
+\end{codebox}
+
+این دستور کامیت قبلی را پاک کرده و این نسخه اصلاح شده را جایگزین آن
+می‌کند.
+
+\subsubsection{تغییر نام برنچ}
+
+اگر نام برنچی را اشتباه انتخاب کردید، وقتی در آن برنچ هستید بزنید:
+
+\begin{codebox}{bash}
+$ git branch -m <new-name>
+\end{codebox}
+
+\subsubsection{لغو تغییرات یک فایل \lr{(Revert)}}
+
+\begin{itemize}
+\tightlist
+\item
+  اگر فایلی را تغییر دادید ولی هنوز \lr{add} نکردید و می‌خواهید به حالت
+  اول برگردد:
+\end{itemize}
+
+\begin{codebox}{bash}
+$ git restore <file>
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  اگر فایل را \lr{add} کردید ولی می‌خواهید از حالت آماده‌باش خارج شود:
+\end{itemize}
+
+\begin{codebox}{bash}
+$ git restore --staged <file>
+\end{codebox}
+
+\begin{itemize}
+\tightlist
+\item
+  اگر کلاً می‌خواهید یک کامیت که قبلاً ثبت شده را لغو کنید (بدون پاک کردن
+  تاریخچه):
+\end{itemize}
+
+\begin{codebox}{bash}
+$ git revert <commit-hash>
+\end{codebox}
+
+اکنون که یاد گرفتید چطور از تداخل‌های ناخواسته جلوگیری کنید و اشتباهات
+کوچک را اصلاح کنید، وقت آن است که به سراغ یکی از هیجان‌انگیزترین (و گاهی
+ترسناک‌ترین!) بخش‌های گیت یعنی \lr{\texttt{Conflict}} برویم؛ جایی که گیت
+نمی‌تواند به تنهایی تصمیم بگیرد و از شما کمک می‌خواهد.
+
+\section{\lr{conflict} ها و برطرف کردنشون}
+
+گلی و قلی را به خاطر بیارید، فرض کنید که در فرآیند کدنویسی برای فیچرهای
+جدید تپسی، هر دوی آن‌ها یک تکه از فایل \lr{\texttt{Main.java}} را عوض
+کردند. حالا \lr{git} باید از کجا بفهمه که کدام کد، کد درستی برای این
+فایل است؟ این‌جاست که گلی و قلی به \lr{conflict} برخوردند!
+
+بیاید تا با بررسی کد مجموع ارقام، ببینیم که \lr{conflict} ها چطور ایجاد
+می‌شوند و چطور می‌توان آن‌ها را درست کرد.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-22.png}
+\end{figure}
+
+\subsection{ایجاد \lr{conflict}}
+
+فرض کنید می‌خواهیم به برنامه مجموع اعداد که قبلا داشتیم، قابلیتی اضافه
+کنیم که در ابتدای برنامه یک پیام به کاربر نشان دهد که بداند باید چه چیزی
+را به عنوان ورودی وارد کند، مثلا: \lr{\texttt{"Enter a number: "}} .
+همزمان می‌خواهیم اسم ورودی تابع \lr{\texttt{sumOfDigits}} را به جای
+\lr{\texttt{number}}، \lr{\texttt{n}} بذاریم که متد کوتاه‌تری داشته
+باشیم. ما برای هر کدام از این کارها، یک \lr{branch} از
+\lr{\texttt{main}} می‌گیریم:
+
+\begin{codebox}{bash}
+$ git branch fix-message
+
+  
+$ git branch fix-parameter-name
+\end{codebox}
+
+برنچ \lr{\texttt{fix-message}} برای پرینت کردن پیام مناسب برای کاربر و
+برنچ \lr{\texttt{fix-parameter-name}} برای درست کردن اسم پارامتر ورودی
+\lr{\texttt{sumOfDigits}} است. اول بیاید قسمت پیام به کاربر را درست
+کنیم. برنچ مربوط به این کار را \lr{checkout} کنید:
+
+\begin{codebox}{bash}
+$ git checkout fix-message   
+  
+Switched to branch 'fix-message'
+\end{codebox}
+
+حالا، کد زیر را به متد \lr{\texttt{main}} ، در جای مناسب اضافه کنید:
+
+\begin{codebox}{java}
+System.out.println("Enter a number:");
+\end{codebox}
+
+تغییرات را بررسی کنید و اگر کدتان درست بود، تغییرات را \lr{\texttt{add}}
+و \lr{commit} کنید تا نهایتا، کامیتی مثل این را در \lr{log} ببینید:
+
+\begin{codebox}{bash}
+commit d5a71e9ec3242a27ae972896c1f267795912e90a (HEAD -> fix-message)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 11:52:40 2025 +0330  
+  
+    add input message
+\end{codebox}
+
+حالا، بعد از این که کارمان در این برنچ تمام شد، به برنچ
+\lr{\texttt{fix-parameter-name}} می‌رویم:
+
+\begin{codebox}{bash}
+$ git checkout fix-parameter-name
+
+  
+Switched to branch 'fix-parameter-name'
+\end{codebox}
+
+اگر به \lr{\texttt{Main.java}} نگاه کنید، خطی که
+\lr{\texttt{"Enter a number:"}} را چاپ می‌کرد، نمی‌بینید. حالا، اسم ورودی
+تابع \lr{\texttt{sumOfDigits}} را عوض کنید. طبیعتا با چیزی که از
+درس‌نامه‌ی «IntelliJ Tools» یاد گرفتید، باید بتوانید به راحتی این کار را
+انجام دهید:
+
+\begin{codebox}{java}
+public static int sumOfDigits(long n) {
+    var sum = 0;
+    while (n > 0) {  
+        sum += (int)(n % 10);  
+        n /= 10;  
+    }
+
+    return sum;  
+}
+\end{codebox}
+
+تغییرات را بررسی کنید و اگر درست بودند، آن‌ها را کامیت کنید تا به کامیت
+زیر برسید:
+
+\begin{codebox}{bash}
+commit 1f6ab68a77eaf63b4a394c49703bd36f3c81c7b1 (HEAD -> fix-parameter-name)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 11:57:24 2025 +0330  
+  
+    shorten parameter name
+\end{codebox}
+
+بعد از این که همه‌ی تغییرات را انجام دادید، به برنچ \lr{\texttt{main}}
+بروید:
+
+\begin{codebox}{bash}
+$ git checkout main  
+  
+Switched to branch 'main'
+\end{codebox}
+
+حالا، برنچ \lr{\texttt{fix-message}} را \lr{merge} کنید:
+
+\begin{codebox}{bash}
+$ git merge fix-message   
+  
+Updating 3f48bc3..d5a71e9  
+Fast-forward  
+ src/Main.java | 2 ++  
+ 1 file changed, 2 insertions(+)
+\end{codebox}
+
+بعد از آن، برنچ \lr{\texttt{fix-parameter-name}} را \lr{merge} کنید. با
+صفحه‌ای مثل صفحه‌ای که برای ایجاد کامنت کامیت‌ها می‌بینید، مواجه می‌شید. اگر
+خواستید پیام دیگری به جای \texttt{"Merge branch 'fix-parameter-name'"}
+بنویسیند. نهایتا، به خروجی‌ای مشابه زیر می‌رسید:
+
+\begin{codebox}{bash}
+$ git merge fix-parameter-name   
+  
+Auto-merging src/Main.java  
+Merge made by the 'ort' strategy.  
+ src/Main.java | 8 ++++----  
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+\end{codebox}
+
+چرا با این که در هر دو برنچ‌ فایل \lr{\texttt{Main.java}} را عوض کردیم،
+به هیچ مشکلی نخوردیم؟ اگر \lr{\texttt{Main}} را نگاه کنید، می‌بینید که به
+طرز جالبی هم \lr{\texttt{"Enter a number:"}} در آن هست، هم اسم متغیر
+ورودی \lr{\texttt{sumOfDigits}} کوتاه شده! فایل \lr{\texttt{Main.java}}
+الآن به شکل زیر است:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        var scn = new Scanner(System.in);  
+  
+        System.out.println("Enter a number:");
+        var input = scn.nextLong();  
+  
+        System.out.printf("Sum of digits: %d", sumOfDigits(input));  
+    }
+
+    public static int sumOfDigits(long n) {
+        var sum = 0;
+        while (n > 0) {  
+            sum += (int)(n % 10);  
+            n /= 10;  
+        }
+
+        return sum;  
+    }  
+}
+\end{codebox}
+
+گیت در مورد \lr{merge} ها، تا جایی که بتواند هوشمندانه عمل می‌کند! وقتی
+گیت هنگام مرج دو برنچ با هم، می‌بیند که هر دو برنچ یک فایل را تغییر
+داده‌اند، تلاش می‌کند تا آن‌ها را auto--merge کند. اگر به خروجی‌ای که هنگام
+اجرای کامند مرج \lr{\texttt{fix-parameter-name}} دیدید، دقت کنید. رد پای
+این \lr{auto-merge} را می‌بینید:
+
+\begin{codebox}{bash}
+Auto-merging src/Main.java  
+Merge made by the 'ort' strategy.  
+ src/Main.java | 8 ++++----  
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+\end{codebox}
+
+به خطوط زیر در خروجی توجه کنید:
+
+\begin{codebox}{bash}
+Auto-merging src/Main.java  
+Merge made by the 'ort' strategy.
+\end{codebox}
+
+می‌بینید که git، با استفاده از استراتژی‌ای به اسم ort، فایل
+\lr{\texttt{src/Main.java}} را، \lr{auto-merge} کرده و شما لازم نیست تا
+با \lr{merge} این دو برنچ درگیر شوید. حالا بیاید ببینیم که آیا می‌توانیم
+آنقدر گیت را اذیت کنیم تا بالاخره نتواند \lr{merge} را انجام دهد و به
+\lr{conflict} بخوریم؟
+
+\subsection{ایجاد \lr{conflict} واقعی}
+
+بیاید دوتا برنچ درست کنیم و در هر دوی آن‌ها، خط زیر را عوض کنیم تا ببینیم
+که آیا گیت می‌تواند آن‌ها را \lr{auto-merge} کند یا نه:
+
+\begin{codebox}{java}
+System.out.printf("Sum of digits: %d", sumOfDigits(input));
+\end{codebox}
+
+برنچ‌های \lr{\texttt{fix-output-1}} و \lr{\texttt{fix-output-2}} را از
+\lr{\texttt{main}} بگیرید. دقت کنید که برای این کار، برنچ فعلی‌ حتما باید
+\lr{\texttt{main}} باشد:
+
+\begin{codebox}{bash}
+$ git branch fix-output-1
+
+$ git branch fix-output-2
+\end{codebox}
+
+برنچ \lr{\texttt{fix-output-1}} را \lr{checkout} کنید و
+\lr{\texttt{printf}} را با \lr{\texttt{println}} جایگزین کنید:
+
+\begin{codebox}{java}
+System.out.println("Sum of digits: " + sumOfDigits(input));
+\end{codebox}
+
+تغییرات را \lr{commit} کنید و به برنچ \lr{\texttt{fix-output-2}} برید.
+باید مجددا خط \lr{\texttt{printf}} را به همان شکل قبلی ببینید. این بار،
+پیام داخل \lr{\texttt{printf}} را مثل شکل زیر عوض کنید تا خروجی دقیق‌تری
+به کاربر نشان دهیم:
+
+\begin{codebox}{java}
+System.out.printf("Sum of digits in your number: %d", sumOfDigits(input));
+\end{codebox}
+
+کدتان را روی این برنچ هم کامیت کنید و بعد، برای انجام مرج به
+\lr{\texttt{main}} برید. اول، \lr{\texttt{fix-output-1}} را مرج کنید:
+
+\begin{codebox}{bash}
+$ git merge fix-output-1  
+  
+Updating 0deaf11..53bf66b  
+Fast-forward  
+ src/Main.java | 2 +-  
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+\end{codebox}
+
+می‌بینید که تغییرات \lr{\texttt{fix-output-1}} به راحتی با
+\lr{\texttt{main}} مرج می‌شوند و متد \lr{\texttt{printf}} به
+\lr{\texttt{println}} تغییر پیدا می‌کند. حالا تلاش کنید تا
+\lr{\texttt{fix-output-2}} را هم مرج کنید:
+
+\begin{codebox}{bash}
+$ git merge fix-output-2  
+  
+Auto-merging src/Main.java  
+CONFLICT (content): Merge conflict in src/Main.java  
+Automatic merge failed; fix conflicts and then commit the result.
+\end{codebox}
+
+حالا می‌بینید که \lr{merge} به \lr{conflict} خورده و \lr{auto-merge} هم
+ناموفق بوده. اگر الآن \lr{\texttt{git status}} بزنید، با خروجی زیر مواجه
+می‌شوید:
+
+\begin{codebox}{bash}
+$ git status  
+  
+On branch main  
+You have unmerged paths.  
+  (fix conflicts and run "git commit")  
+  (use "git merge --abort" to abort the merge)  
+  
+Unmerged paths:  
+  (use "git add <file>..." to mark resolution)  
+        both modified:   src/Main.java  
+  
+no changes added to commit (use "git add" and/or "git commit -a")
+\end{codebox}
+
+می‌بینید که \lr{\texttt{src/Main.java}} ، در بخش جدیدی به اسم
+\lr{Unmerged paths} دیده می‌شود. این بخش، برای فایل‌هایی است که در عملیات
+مرج به \lr{conflict} خوردند. همچنین اگر الآن \lr{\texttt{git log}}
+بگیرید، می‌بینید که هیچ کدام از \lr{commit} های برنچ
+\lr{\texttt{fix-output-2}} در لاگ نیست.
+
+شما به اولین \lr{conflict} برخوردید! می‌توانید با بررسی فایل
+\lr{\texttt{Main.java}}، این \lr{conflict} را از نزدیک ببینید. این فایل
+الآن به این شکل در آمده:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        var scn = new Scanner(System.in);  
+  
+        System.out.println("Enter a number:");
+        var input = scn.nextLong(); 
+        
+ <<<<<<< HEAD
+        System.out.println("Sum of digits: " + sumOfDigits(input));  
+=======  
+        System.out.printf("Sum of digits in your number: %d", sumOfDigits(input));  
+ >>>>>>> fix-output-2 
+
+    }
+
+    public static int sumOfDigits(long n) {
+        var sum = 0;
+        while (n > 0) {  
+            sum += (int)(n % 10);  
+            n /= 10;  
+        }
+
+        return sum;  
+    }  
+}
+\end{codebox}
+
+تکه‌ای که \lr{conflict} داشته، همان بخشِ عجیب وسط است:
+
+\begin{codebox}{text}
+ <<<<<<< HEAD  
+        System.out.println("Sum of digits: " + sumOfDigits(input));  
+=======  
+        System.out.printf("Sum of digits in your number: %d", sumOfDigits(input));  
+ >>>>>>> fix-output-2
+
+\end{codebox}
+
+گیت با تغییر این فایل و اضافه کردن چند خط text، به شما می‌گوید که این بخش
+از کد در \lr{\texttt{fix-output-2}} به شکل زیر است:
+
+\begin{codebox}{java}
+System.out.printf("Sum of digits in your number: %d", sumOfDigits(input));
+\end{codebox}
+
+در حالی که در \lr{\texttt{HEAD}} (یا در اینجا همان \lr{\texttt{main}})،
+به شکل زیر است:
+
+\begin{codebox}{java}
+System.out.println("Sum of digits: " + sumOfDigits(input));
+\end{codebox}
+
+و از شما می‌خواهد که این \lr{conflict} را دستی درست کنید. خوشبختانه،
+این‌جا درست کردن \lr{conflict} کار سختی نیست. تمام این خط‌ها را حذف کنید و
+با کد زیر جایگزین کنید:
+
+\begin{codebox}{java}
+System.out.println("Sum of digits in your number: " + sumOfDigits(input));
+\end{codebox}
+
+این خط کد، هم پیام درست‌تر برنچ \lr{\texttt{fix-output-2}} را دارد و هم
+از \lr{\texttt{println}} جای \lr{\texttt{printf}} استفاده می‌کند. به
+عبارتی، این خط نمایان‌گر تغییرات هر دو برنچ در کنار هم است. به خاطر این
+که \lr{merge} به \lr{conflict} خورد، باید بعد رفع آن‌ها، در یک
+\lr{commit} جدا \lr{merge} را کامل کنیم. دوباره \lr{\texttt{git status}}
+بزنید:
+
+\begin{codebox}{bash}
+$ git status  
+  
+On branch main  
+You have unmerged paths.  
+  (fix conflicts and run "git commit")  
+  (use "git merge --abort" to abort the merge)  
+  
+Unmerged paths:  
+  (use "git add <file>..." to mark resolution)  
+        both modified:   src/Main.java  
+  
+no changes added to commit (use "git add" and/or "git commit -a")
+\end{codebox}
+
+همان‌طور که می‌بینید، \lr{\texttt{Main.java}} هنوز در \lr{Unmerged paths}
+است. حالا که \lr{conflict} ها را برطرف کردیم، با \lr{\texttt{git add}}،
+آن را \lr{stage} کنید:
+
+\begin{codebox}{bash}
+$ git add -A  
+  
+$ git status  
+  
+On branch main  
+All conflicts fixed but you are still merging.  
+  (use "git commit" to conclude merge)  
+  
+Changes to be committed:  
+        modified:   src/Main.java
+\end{codebox}
+
+حالا، تغییرات خودتان را با پیام مناسب کامیت کنید. این پیام باید مثل متن
+زیر باشد. به طور کلی متن کامیت‌های مرتبط با \lr{merge} را همیشه به این
+شکل می‌گذارند:
+
+\begin{codebox}{bash}
+$ git commit -m "merge 'fix-output-2' into 'main'"   
+  
+[main 0f8ac7a] merge 'fix-output-2' into 'main'
+\end{codebox}
+
+اگر حالا \lr{\texttt{git log}} بزنید، هم commitهای برنچ
+\lr{\texttt{fix-output-2}} را می‌بینید، هم \lr{commit} ای که برای
+\lr{merge} کردن زدید:
+
+\begin{codebox}{bash}
+commit 0f8ac7af0359825fba84562565457644013347ef (HEAD -> main)  
+Merge: 53bf66b 01f5dc0  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 14:58:45 2025 +0330  
+  
+    merge 'fix-output-2' into 'main'  
+  
+commit 01f5dc0ebd51ce196dd2a14f6e0e71b529ae55e9 (fix-output-2)  
+Author: Arman Hosseini <armanhosseini878787@gmail.com>  
+Date:   Tue Feb 11 12:27:31 2025 +0330  
+  
+    better output message
+\end{codebox}
+
+بررسی تغییرات
+
+با وجود اینکه \lr{\texttt{git status}}، فایل‌هایی که عوض شدند را نشان
+می‌دهد، ولی لازم است که قبل از \lr{commit} ، این که هر فایل چه تغییری
+کرده را هم بدانیم. برای این کار از یکی از ابزارهای \lr{IntelliJ} استفاده
+می‌کنیم.
+
+یک برنچ جدید به اسم \lr{\texttt{product-of-digits}} درست کنید و روی آن
+\lr{checkout} کنید. اگر می‌خواهید بعد از ساختن یک برنچ درجا \lr{checkout}
+کنید، می‌توانید به جای دو دستور زیر:
+
+\begin{codebox}{bash}
+$ git branch product-of-digits
+  
+$ git checkout product-of-digits
+\end{codebox}
+
+از دستور زیر استفاده کنید تا هر دو کار، همزمان انجام شوند:
+
+\begin{codebox}{bash}
+$ git checkout -b product-of-digits
+\end{codebox}
+
+در این برنچ، می‌خواهیم برنامه‌ را طوری عوض کنیم تا به جای مجموع ارقام، ضرب
+آن‌ها را نشان دهد. برای این کار، برنامه‌ را به شکل زیر تغییر بدید:
+
+\begin{codebox}{java}
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        var scn = new Scanner(System.in);  
+  
+        System.out.println("Enter a number:");
+        var input = scn.nextLong();  
+  
+        System.out.println("Product of digits in your number: " + productOfDigits(input));  
+    }
+
+    public static int sumOfDigits(long n) {
+        var sum = 0;
+        while (n > 0) {  
+            sum += (int)(n % 10);  
+            n /= 10;  
+        }
+
+        return sum;  
+    }
+
+    public static int productOfDigits(long n) {
+        if (n == 0) {
+            return 0;  
+        }
+
+        var product = 1;
+        while (n > 0) {  
+            product *= (int)(n % 10);  
+            n /= 10;  
+        }
+
+        return product;  
+    }  
+}
+\end{codebox}
+
+در کد جدید، علاوه بر متد \lr{\texttt{sumOfDigits}} ، متدی به اسم
+\lr{\texttt{productOfDigits}} هم داریم که حاصل ضرب ارقام عدد
+\lr{\texttt{n}} را برمی‌گرداند. کد جدید را تست کنید. اگر درست کار کرد، با
+\lr{\texttt{git add}} تغییرات را \lr{stage} کنید. برای دیدن تغییرات، به
+بخش \lr{commit} در \lr{IntelliJ} بروید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-23.png}
+\end{figure}
+
+با باز کردن این بخش، پنلی که \lr{IntelliJ} برای \lr{commit} کردن کدها به
+شما می‌دهد را می‌بینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-24.png}
+\end{figure}
+
+اینتلی‌جی به عنوان یک \lr{IDE} ی خیلی خوب، خیلی از امکانات گیت را بدون
+استفاده از \lr{shell} در اختیار شما می‌گذارد. در یک داک دیگر، بعضی از
+آن‌ها را بررسی می‌کنیم تا ببینید که چطور می‌توان با آن‌ها کار کرد.
+
+در پنلی که باز شد، روی \lr{\texttt{Main.java}} کلیک کنید تا صفحه‌ی زیر را
+ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-25.png}
+\end{figure}
+
+می‌بینید که \lr{IntelliJ} به خوبی تغییرات را قبل از کامیت، نشان می‌دهد.
+کدهایی که اضافه کردید یا تغییر دادید، دقیقا مشخص هستند. بعد از بررسی
+کدها، می‌توانید در بخش \lr{Commit Message} یک پیام برای کامیتتون بنویسید،
+فایل‌هایی که می‌خواهید \lr{commit} کنید را مشخص کنید و بعد با زدن دکمه‌ی
+Commit، آن‌ها را کامیت کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-26.png}
+\end{figure}
+
+این کار در \lr{shell} با دستور \lr{\texttt{git diff}} انجام می‌شود اما
+خروجی‌ آن به اندازه‌ی \lr{IntelliJ} تمیز نیست. اگر خواستید می‌توانید راجع
+بهش بخونید و یاد بگیرید، منابع لازم را در بخش «منابع بیشتر» انتهای این
+داک قرار دادیم.
+
+\section{آشنایی با \lr{remote} branchها}
+
+اگر یادتان باشد، یکی از مهم‌ترین چیزهایی که در مورد گیت گفتیم، این بود که
+شما و همکارهای شما، می‌توانید روی یک پروژه به شکل تیمی کار کنید، ولی تا
+حالا هر کاری کردید، فقط و فقط روی لپ‌تاپ خودتان بوده. به ریپویی که روی
+لپ‌تاپ شما باشد، ریپوی محلی یا \lr{local} می‌گویند.
+
+منطقا شما نمی‌توانید کد یک پروژه‌ی بزرگ را، از یک ریپوی رندوم لپ‌تاپ‌تان
+کنترل کنید! این‌جاست که مفهوم ریپوی \lr{remote} مطرح می‌شود؛ یک ریپو روی
+سرورهای شرکت، که کدهای پروژه را روی آن نگه می‌دارند تا همه‌ی توسعه‌دهنده‌ها
+بتوانند به آن دسترسی پیدا کنند.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-27.png}
+\end{figure}
+
+در این بخش بررسی می‌کنیم که چطور می‌توانید طریق یک ریپوی \lr{remote} درست
+کنید و یک پروژه را به آن وصل کنید.
+
+\subsection{\lr{GitHub}}
+
+\href{https://github.com/}{گیت‌هاب} پلتفرمی برای به اشتراک گذاشتن کدهایی
+است که از ‌git استفاده می‌کنند. میلیون‌ها برنامه‌نویس کدهای خودشان را آنجا
+به صورت متن‌باز \lr{(Open Source)} به اشتراک می‌گذارند تا برنامه‌نویس‌های
+دیگر بتوانند از آن کد‌ها استفاده کنند و آن پروژه را توسعه دهند. شما باید
+از داک \lr{tools} که در جلسه‌ی صفر منتشر شد، یک اکانت \lr{GitHub} درست
+کرده باشید، اگر نکردید به این داک برگردید و اکانت بسازید و در اکانتتان
+لاگین کنید.
+
+در مرحله بعد باید یک مخزن یا \lr{repository} برای پروژه خودتان بسازید.
+از طریق زدن علامت + بالای صفحه، \lr{New repository} را انتخاب کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-28.png}
+\end{figure}
+
+حالا باید مشخصات \lr{repository} را وارد کنید. اسم آن را
+\lr{\texttt{git-sample}} بذارید، می‌توانید یک توضیح کوتاه هم درباره پروژه‌
+در قسمت \lr{Description} بنویسید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-29.png}
+\end{figure}
+
+ریپوی شما می‌تواند \lr{public} یا \lr{private} باشد. اگر \lr{public} باشد
+همه می‌توانند آن را ببینند و اگر \lr{private} باشد فقط افرادی که شما مشخص
+می‌کنید، می‌توانند ببینند. البته در هر دو حالت، شما تعیین می‌کنید که چه کسی
+می‌تواند ریپو را عوض کند. فعلا نوع \lr{repository} را \lr{private}
+بگذارید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-30.png}
+\end{figure}
+
+امکان اضافه کردن فایل \lr{\texttt{README}} برای توضیحات بیشتر، فایل
+\lr{\texttt{.gitignore}} (که قبلا با آن آشنا شدیم) و \lr{License} که
+مجوز استفاده از کد شماست هم در این مرحله وجود دارد، اما فعلا با این
+بخش‌ها کاری نداریم. تیک‌ آن‌ها را بردارید و روی \lr{none} بگذارید. حالا روی
+دکمه سبز \lr{Create repository} در پایین صفحه کلیک کنید.
+
+حالا شما اولین \lr{repository} گیت‌هاب خودتان را ساختید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-31.png}
+\end{figure}
+
+\section{\lr{Push} کردن تغییرات به \lr{GitHub}}
+
+از بخش زیر، با زدن دکمه‌ی مشخص شده، لینک \lr{repo} گیت‌هاب را کپی کنید
+(حواستان باشد که لینک \lr{\texttt{HTTPS}} را کپی کنید نه
+\lr{\texttt{SSH}}):
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-32.png}
+\end{figure}
+
+به پروژه‌ی \lr{\texttt{learning-git}} که در \lr{IntelliJ} توسعه داده
+بودیم برگردید. حالا می‌خواهیم کدهایی که در آن زدیم را به \lr{github}
+ببریم. دستور زیر را در ترمینال‌ اجرا کنید و به جای \lr{\texttt{[url]}}،
+لینکی که کپی کردید را قرار دهید:
+
+\begin{codebox}{bash}
+$ git remote add origin [url]
+\end{codebox}
+
+دستورات \lr{git} remote، دستورات مرتبط با \lr{repo} ی ریموت پروژه‌ی شما
+هستند. در دستور بالا، ما از \lr{git} خواستیم که یک ریپوی \lr{remote}
+جدید، به اسم \lr{origin} و با یک لینک مشخص، به ریپوی شما اضافه کند تا
+بتوانید تغییراتتان را به آن اضافه کنید. با دستور زیر می‌توانید لیست
+ریپوهای ریموت را ببینید:
+
+\begin{codebox}{bash}
+$ git remote -v
+
+origin https://github.com/saniazzt/git-sample (fetch)  
+origin https://github.com/saniazzt/git-sample (push)
+\end{codebox}
+
+حالا از هر برنچی که هستید با دستور زیر به برنچ \lr{\texttt{main}}
+برگردید:
+
+\begin{codebox}{bash}
+$ git checkout main
+\end{codebox}
+
+و با زدن دستور \lr{\texttt{git status}} مطمئن شوید که تغییری روی برنچ
+\lr{\texttt{main}} ندارید. حالا با دستور \lr{\texttt{push}} تمام
+\lr{commit} ها و فایل‌ها را از روی برنچ \lr{\texttt{main}} به
+\lr{\texttt{origin}} منتقل کنید. در این مرحله باید یوزرنیم و پسورد
+گیت‌هابتان را بعد از زدن دستور زیر وارد کنید:
+
+\begin{codebox}{bash}
+$ git push origin main
+\end{codebox}
+
+به خطا خوردید!
+
+\begin{codebox}{bash}
+remote: Support for password authentication was removed on August 13, 2021.  
+remote: Please see https://docs.github.com/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.  
+fatal: Authentication failed for 'https://github.com/armaho/git-sample.git/'
+\end{codebox}
+
+\subsection{درست کردن یک \lr{access token}}
+
+بیاید متن خطا را با هم بخونیم. متن خطا به ما می‌گوید که ریموت شما، یعنی
+گیت‌هاب، از ۱۳ آگوست ۲۰۲۱ اجازه‌ی استفاده از پسورد برای کارهایی مثل
+\lr{push} یا \lr{pull} کردن را به شما نمی‌دهد و به همین دلیل،
+\lr{authentication} موفق نبوده.
+\href{https://docs.github.com/get-started/getting-started-with-git/about-remote-repositories\#cloning-with-https-urls}{یک
+لینک} هم قرار داده که می‌توانید شیوه‌های مختلف \lr{authentication} گیت‌هاب
+را آن‌جا ببینید. اگر به این لینک بروید، متن زیر را می‌بینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-33.png}
+\end{figure}
+
+این متن به شما می‌گوید که:
+
+\begin{codebox}{text}
+"When Git prompt you for your password, enter your personal access token"  
+\end{codebox}
+
+ولی شما \lr{personal access token} ای ندارید. در ادامه نوشته:
+
+\begin{codebox}{text}
+"For more Information, see Managing your personal access tokens"
+\end{codebox}
+
+روی آن کلیک کنید تا به یک صفحه‌ی جدید بروید که به شما یاد می‌دهد چطور
+\lr{token} بسازید.
+
+راهنمای بخش \lr{Creating a personal access token (classic)} را دنبال
+کنید. در این بخش \lr{scope} ، همه‌ی تیک‌ها را بزنید تا این توکن به همه چیز
+دسترسی داشته باشد. متنی که نهایتا کپی می‌کنید، همان \lr{access token} ای
+است که باید به جای پسورد وارد کنید. حتما آن را ذخیره کنید چون دوباره
+نشان داده نمی‌شود.
+
+دوباره دستور زیر را اجرا کنید و این بار به جای پسورد، \lr{access token}
+را وارد کنید:
+
+\begin{codebox}{bash}
+$ git push origin main
+
+Username for 'https://github.com': armanhosseini878787@gmail.com  
+Password for 'https://armanhosseini878787@gmail.com@github.com':   
+Enumerating objects: 34, done.  
+Counting objects: 100% (34/34), done.  
+Delta compression using up to 8 threads  
+Compressing objects: 100% (26/26), done.  
+Writing objects: 100% (34/34), 2.99 KiB | 340.00 KiB/s, done.  
+Total 34 (delta 16), reused 0 (delta 0), pack-reused 0  
+remote: Resolving deltas: 100% (16/16), done.  
+To https://github.com/armaho/git-sample.git  
+ * [new branch]      main -> main
+\end{codebox}
+
+حالا ریپو را در گیت‌هاب رفرش کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-34.png}
+\end{figure}
+
+کدتون الآن فقط روی کامپیوترتون نیست، بلکه یک کپی از آن، برای هر کس
+دیگری، در یک \lr{remote repo} روی گیت‌هاب هم وجود دارد. روی \lr{commits}
+کلیک کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-35.png}
+\end{figure}
+
+تمام تاریخچه‌ی ریپو این‌جا مشخص است:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-36.png}
+\end{figure}
+
+اگر روی یکی از کامیت‌ها کلیک کنید، می‌توانید تغییراتی که در کد داده هم
+ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-37.png}
+\end{figure}
+
+اگر بیشتر دقت کنید، می‌بیند که ریپوی \lr{remote} ، حتی برنچ‌هایی مثل
+\lr{\texttt{main}} را هم در خودش دارد. این یعنی می‌توانید در آینده، باقی
+\lr{branch} ها را هم به این ریپو بفرستید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-38.png}
+\end{figure}
+
+عموماً متن‌های خطا و داکیومنتیشن‌های گیت خیلی کامل هستند. خوبه که وقتی به
+خطایی می‌خورید و چیزی خراب می‌شود، حتماً متن خطا را کامل بخونید. همون‌طور که
+دیدید این‌جا، ما صرفاً با خوندن متن خطا، توانستیم مشکل
+\lr{personal access token} ها را برطرف کنیم.
+
+\section{دستور \texttt{fetch} و \texttt{clone}}
+
+بیاید این بار به جای این که یک ریپوی \lr{local} درست کنیم و بعد از روی
+آن، ریپوی \lr{remote} را بسازیم، از روی ریپوی remote، ریپوی \lr{local}
+را ایجاد کنیم. کنار دایرکتوری \lr{\texttt{learning-git}} ، که برای
+پروژه‌ی جاوا ساختید، یک دایرکتوری دیگر به اسم
+\lr{\texttt{learning-fetch}} درست کنید. حالا \lr{shell} را باز کنید و با
+استفاده از cd، به این دایرکتوری جدید برید.
+
+وقتی که مسیر \lr{shell} را تنظیم کردید، دستور \lr{\texttt{git init}} را
+وارد کنید تا یک ریپوی خالی ایجاد شود:
+
+\begin{codebox}{bash}
+$ git init
+
+Initialized empty Git repository in /Users/armaho/Projects/Learning/learning-fetch/.git/
+\end{codebox}
+
+به ریپوی جدید، یک ریپوی \lr{remote} به اسم \lr{origin} اضافه کنید که
+\lr{\texttt{url}} آن، \lr{\texttt{url}} ریپوی گیت‌هاب باشد:
+
+\begin{codebox}{bash}
+$ git remote add origin [url]
+\end{codebox}
+
+دستور \lr{\texttt{fetch}} را اجرا کنید. با اجرای این دستور \lr{branch}
+های جدید، \lr{tag} ها، \lr{ref} ها و باقی چیزهای ریپوی \lr{origin} (که
+همان ریپوی گیت‌هاب شماست) گرفته می‌شود. با این دستور در ادامه بیشتر کار
+می‌کنید:
+
+\begin{codebox}{bash}
+$ git fetch origin main
+\end{codebox}
+
+حالا دایرکتوری \lr{\texttt{learning-fetch}} را باز کنید. با یک فولدر
+خالی مواجه می‌شوید!
+
+نکته اینجاست که ریپوی \lr{local} شما بعد از دستور \lr{\texttt{fetch}}
+آپدیت نمی‌شود. برای آپدیت شدن و ادغام کردن کد‌های \lr{remote} با کدهای
+\lr{local} باید دستور \lr{\texttt{merge}} زیر را وارد کنید. این دستور،
+برنچ \lr{\texttt{main}} ای که در ریپوی \lr{origin} هست را با
+\lr{\texttt{main}} ریپوی \lr{local} شما \lr{merge} می‌کند:
+
+\begin{codebox}{bash}
+$ git merge origin/main
+\end{codebox}
+
+حالا دوباره به فولدر برگردید، بالاخره می‌بینید که فایل‌ها اضافه شدند:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-39.png}
+\end{figure}
+
+\subsection{یک کار راحت‌تر}
+
+کارهای بالا سخت و پیچیده بودند. مثلا نحوه کار \lr{\texttt{fetch}} یا
+مرج!
+
+برای این که دیگر لازم نباشد این کارها را بکنید، با استفاده از دستور
+\lr{\texttt{cd}} ، به دایرکتوری پدر \lr{\texttt{learning-fetch}} بروید
+(دایرکتوری پدر \lr{\texttt{learning-fetch}} ، همان دایرکتوری‌ای است که ما
+\lr{\texttt{learning-fetch}} را داخلش ساختیم). سپس دستور زیر را اجرا
+کنید و طبق معمول، به جای \lr{\texttt{[url]}}، آدرس ریپوی \lr{remote} را
+قرار دهید:
+
+\begin{codebox}{bash}
+$ git clone [url]
+
+Cloning into 'git-sample'...
+
+remote: Enumerating objects: 34, done.
+
+remote: Counting objects: 100% (34/34), done.
+
+remote: Compressing objects: 100% (10/10), done.
+
+remote: Total 34 (delta 16), reused 34 (delta 16), pack-reused 0 (from 0)
+
+Receiving objects: 100% (34/34), done.
+
+Resolving deltas: 100% (16/16), done.
+\end{codebox}
+
+می‌بینید که یک دایرکتوری جدید هم اسم ریپوی گیت‌هابتون ایجاد شد. اگر داخل
+آن را ببینید، شامل تمام فایل‌هایی است که در ریپو درست کرده بودید و دیگر
+لازم نیست چند دستور برای دریافت یک \lr{repo} بنویسید.
+
+\section{دستور \texttt{push}}
+
+\subsection{آماده‌سازی}
+
+الآن شما دو دایرکتوری دارید: یکی \lr{\texttt{learning-git}} ، که از اول
+درست کرده بودید و با آن کار می‌کردید، و دومی \lr{\texttt{git-sample}} ،
+که از ریپوی \lr{remote} در بخش قبل کلون کردید. حالا می‌خواهیم شما، خودتان
+را به جای دوتا از اعضای یک تیم برنامه‌نویسی، جک و تایلر بذارید.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-40.png}
+\end{figure}
+
+لطفا با استفاده از intelliJ، اسم پروژه‌ی \lr{\texttt{learning-git}} را به
+\lr{\texttt{jack}} و اسم دایرکتوری \lr{\texttt{git-sample}} را به
+\lr{\texttt{tyler}} تغییر دهید تا بتوانید این دو دایرکتوری را راحت‌تر از
+هم تشخیص دهید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-41.png}
+\end{figure}
+
+حتما این کار را با \lr{IntelliJ} انجام بدید، وگرنه ممکن است
+\lr{IntelliJ} پروژه‌ را به اسم‌های قدیمی بشناسد. \lr{IntelliJ} فقط اسم
+پروژه‌ها را عوض می‌کند و لازم است خودتان دستی اسم دایرکتوری‌های
+\lr{\texttt{learning-git}} و \lr{\texttt{git-sample}} را هم به
+\lr{\texttt{jack}} و \lr{\texttt{tyler}} عوض کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-42.png}
+\end{figure}
+
+نهایتا \lr{IntelliJ} را ببندید. لطفا دوتا صفحه‌ی \lr{IntelliJ} برای این
+دو پروژه کنار هم باز کنید؛ یکی برای پروژه‌ی \lr{\texttt{learning-git}} و
+دیگری برای \lr{\texttt{git-sample}} . در هر دو هم \lr{shell} داخلی
+\lr{IntelliJ} را باز کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-43.png}
+\end{figure}
+
+\subsection{آشنایی با \lr{push}}
+
+اگر دقت کنید، در کد متد \lr{\texttt{productOfDigits}} وجود ندارد. علتش
+آن است که ما هیچ وقت، برنچ \lr{\texttt{product-of-digits}} را توی
+\lr{\texttt{main}} مرج نکردیم و تغییرات آن هیچ‌گاه به \lr{\texttt{main}}
+نیامد. ولی شما می‌توانید این برنچ را، همچنان در ریپوی \lr{\texttt{jack}}
+ببینید:
+
+\begin{codebox}{bash}
+fix-message  
+fix-output-1  
+fix-output-2  
+fix-parameter-name  
+* main  
+product-of-digits
+\end{codebox}
+
+با استفاده از دستور زیر، این برنچ را به ریپوی \lr{remote} اضافه کنید:
+
+\begin{codebox}{bash}
+$ git push origin product-of-digits   
+  
+Enumerating objects: 7, done.  
+Counting objects: 100% (7/7), done.  
+Delta compression using up to 8 threads  
+Compressing objects: 100% (3/3), done.  
+Writing objects: 100% (4/4), 471 bytes | 471.00 KiB/s, done.  
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0  
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.  
+remote:   
+remote: Create a pull request for 'product-of-digits' on GitHub by visiting:  
+remote:      https://github.com/armaho/git-sample/pull/new/product-of-digits  
+remote:   
+To https://github.com/armaho/git-sample.git  
+ * [new branch]      product-of-digits -> product-of-digits
+\end{codebox}
+
+به ریپوی \lr{remote} روی گیت‌هاب بروید. الآن می‌تونید
+\lr{\texttt{product-of-digits}} هم در لیست برنچ‌ها ببینید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-44.png}
+\end{figure}
+
+برنامه‌ی شما هنوز یک مشکل دارد، آن هم این که
+\lr{\texttt{productOfDigits}} به ازای \lr{\texttt{n}} های منفی، خروجی
+غلطی نشان می‌دهد:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-45.png}
+\end{figure}
+
+برای تصحیح آن، کد \lr{\texttt{productOfDigits}} را در ریپوی جک به کد زیر
+تغییر دهید:
+
+\begin{codebox}{java}
+public static int productOfDigits(long n) {
+    if (n == 0) {
+        return 0;  
+    }
+
+    if (n < 0) {  
+        n = -1 * n;  
+    }
+
+    var product = 1;
+    while (n > 0) {  
+        product *= (int)(n % 10);  
+        n /= 10;  
+    }
+
+    return product;  
+}
+\end{codebox}
+
+حالا، تغییرات جدید را \lr{commit} کنید. سپس دوباره با دستور زیر، تغییرات
+را \lr{push} کنید:
+
+\begin{codebox}{bash}
+$ git push origin product-of-digits
+\end{codebox}
+
+حالا، می‌توانید تغییرات جدید را هم روی برنچ
+\lr{\texttt{product-of-digits}} در \lr{github} ببینید.
+
+\subsection{دریافت تغییرات برنج در ریپوی \texttt{tyler}}
+
+حالا به ریپوی \lr{\texttt{tyler}} بروید و آن‌جا \lr{\texttt{git branch}}
+بزنید. می‌بینید که در ریپوی \lr{\texttt{tyler}}، هنوز فقط یک برنچ
+\lr{\texttt{main}} وجود دارد:
+
+\begin{codebox}{bash}
+* main
+\end{codebox}
+
+تایلر چطور می‌تواند در ریپوی \lr{\texttt{local}} خودش، تغییرات جک را روی
+برنچ \lr{\texttt{product-of-digits}} ببیند و بررسی کند؟ برای این کار،
+اول در ریپوی تایلر \lr{\texttt{git fetch}} بزنید:
+
+\begin{codebox}{bash}
+$ git fetch  
+  
+remote: Enumerating objects: 11, done.  
+remote: Counting objects: 100% (11/11), done.  
+remote: Compressing objects: 100% (4/4), done.  
+remote: Total 8 (delta 2), reused 8 (delta 2), pack-reused 0 (from 0)  
+Unpacking objects: 100% (8/8), 796 bytes | 79.00 KiB/s, done.  
+From https://github.com/armaho/git-sample  
+ * [new branch]      product-of-digits -> origin/product-of-digits
+\end{codebox}
+
+در خروجی می‌بینید که یک برنچ جدید، به اسم \lr{\texttt{product-of-digits}}
+در ریپوی تایلر ایجاد شد، که معادل \lr{\texttt{origin/product-of-digits}}
+است. اگر الآن، در ریپوی تایلر \lr{\texttt{product-of-digits}} را
+\lr{checkout} کنید، تغییرات جک را آن‌جا می‌بینید.
+
+\section{ایجاد \lr{pull request}}
+
+همان‌طور که گفتیم، شما هیچوقت نباید روی برنچ \lr{\texttt{main}} کامیت
+کنید. بعضی از شرکت‌ها، حتی دسترسی \lr{push} کردن روی \lr{\texttt{main}}
+هم فقط به یک یا دو نفر از ادمین‌ها می‌دهند. علت این است که در یک پروژه
+برنچ main، عموما خطی است که کد نهایی و تست شده روی آن قرار می‌گیرد. به
+خاطر همین همه‌ی تغییرات باید قبل از این که روی برنچ \lr{\texttt{main}}
+براند، بررسی شوند.
+
+یکی از راه‌هایی که می‌شود به این بررسی‌ها نظم داد، این است که برای
+درخواست‌های \lr{merge} به خط \lr{\texttt{main}}، باید \lr{pull request}
+ثبت کرد. بعدها یکی از کسانی که در شرکت دسترسی دارد، این
+\lr{pull request} را \lr{review} می‌کند و اگر به نظرش بدون مشکل بود،
+اجازه‌ی ادغام آن برنچ به \lr{\texttt{main}} را می‌دهد.
+
+برای این که در مثال قبلی، \lr{\texttt{product-of-digits}} را داخل
+\lr{\texttt{main}} مرج کنیم، می‌توانیم از یک \lr{pull request} استفاده
+کنیم. برای این کار به ریپو \lr{github} بروید و آن را روی برنچ
+\lr{\texttt{product-of-digits}} ست بکنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-46.png}
+\end{figure}
+
+در بخش contribute، گزینه‌ی \lr{open pull request} را بزنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-47.png}
+\end{figure}
+
+این‌جا، می‌توانید یک اسم و توضیحات مناسب برای \lr{pull request} انتخاب
+کنید. در یک شرکت بزرگ، از سمت راست می‌توانید \lr{reviewer} ها (مثلا
+رئیس)، \lr{assignees} (مثلا همکارها) و سایر چیزها را هم انتخاب کنید.
+نهایتا، دکمه‌ی \lr{Create pull request} را بزنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-48.png}
+\end{figure}
+
+در این صفحه، یک سر به تب‌های \lr{commits} و \lr{files changed} بزنید، چه
+چیزایی می‌بینید؟
+
+بعد از بررسی تغییرات، دکمه‌ی \lr{Merge pull request} را بزنید و مرج را با
+کامنتی مناسب تایید کنید. بعد از این کار، اولین \lr{pull request} را
+انجام دادید و تغییرات توی \lr{\texttt{main}} مرج شدند. چون برنچ
+\lr{\texttt{product-of-digits}} دیگه به درد نمی‌خورد، گیت‌هاب پیشنهاد
+می‌دهد که آن را پاک کنید:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-49.png}
+\end{figure}
+
+حالا اگر در گیت‌هاب به برنچ \lr{\texttt{main}} بروید، می‌بینید که تغییرات
+جدید در آن اعمال شده‌اند.
+
+\section{دستور \lr{pull}}
+
+به دو صفحه‌ی \lr{IntelliJ} که کنار هم قرار دادید برگردید و خودتان را جای
+\lr{\texttt{jack}} بگذارید. برنچ \lr{\texttt{main}} را \lr{checkout}
+کنید. می‌بینید که \lr{\texttt{main}} هنوز قدیمی است و تغییرات برنچ
+\lr{\texttt{product-of-digits}} را ندارد. چطور می‌توانید آن را آپدیت کنید
+و تغییرات برنچ \lr{\texttt{main}} توی \lr{origin} را بگیرید؟
+
+شما با استفاده از \lr{\texttt{git pull}}، می‌توانید دقیقا همین‌کار را
+بکنید! این دستور ظاهرش شبیه دستور \lr{\texttt{push}} است. آن را اجرا
+کنید:
+
+\begin{codebox}{bash}
+$ git pull origin main  
+  
+From https://github.com/armaho/git-sample  
+ * branch            main       -> FETCH_HEAD  
+Updating 260148f..a610e32  
+Fast-forward  
+ src/Main.java | 19 ++++++++++++++++++-  
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+\end{codebox}
+
+بعدش فایل \lr{\texttt{Main.java}} را چک کنید تا ببینید که آپدیت شده است.
+
+یک خطای رایج
+
+حالا، به intelliJای که برای تایلر درست کرده بودید بروید. الآن، به عنوان
+تایلر، خط زیر را در جای مناسبی از برنامه‌ اضافه کنید تا قبل شروع کار، به
+کاربر سلام کند:
+
+\begin{codebox}{java}
+System.out.println("Hello there!");
+\end{codebox}
+
+تغییرات را روی \lr{\texttt{main}} کامیت کنید (شما می‌دونید که نباید این
+کار را بکنید!). بعد از این کار، تلاش کنید تا با استفاده از دستور
+\lr{\texttt{pull}}، تغییرات برنچ \lr{\texttt{main}} را در
+\lr{\texttt{origin}} دریافت کنید:
+
+\begin{codebox}{bash}
+$ git pull origin main  
+  
+From https://github.com/armaho/git-sample  
+ * branch            main       -> FETCH_HEAD  
+hint: You have divergent branches and need to specify how to reconcile them.  
+hint: You can do so by running one of the following commands sometime before  
+hint: your next pull:  
+hint:  
+hint:   git config pull.rebase false  # merge  
+hint:   git config pull.rebase true   # rebase  
+hint:   git config pull.ff only       # fast-forward only  
+hint:  
+hint: You can replace "git config" with "git config --global" to set a default  
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,  
+hint: or --ff-only on the command line to override the configured default per  
+hint: invocation.  
+fatal: Need to specify how to reconcile divergent branches.
+\end{codebox}
+
+می‌بینید که نمی‌شود این کار را کرد و از \lr{\texttt{fatal}} ای که ته خروجی
+می‌بینید، می‌توان فهمید که خطا خوردید! بیاید مثل همیشه، با هم متن خطا را
+بخونیم. گیت به شما می‌گوید که:
+
+\begin{codebox}{text}
+"You have divergent branches…"
+\end{codebox}
+
+منظور این است که برنچ \lr{\texttt{main}} ای که در ریپوی
+\lr{\texttt{local}} تایلر است، یک سری کامیت جدید دارد و برنچ
+\lr{\texttt{main}} ای که توی \lr{\texttt{origin}} هست هم یک سری کامیت
+جدید برای خودش دارد، به همین خاطر این دو برنچ \lr{divergent} (واگرا)
+شدند و گیت نمی‌داند که کدام \lr{\texttt{main}} ، درست است.
+
+در ادامه بهتون می‌گوید که:
+
+\begin{codebox}{text}
+"… and need to specify how to reconcile them. You can do so by running one of the following commands sometime before your next pull "
+\end{codebox}
+
+گیت می‌خواهد که یک شیوه برایش مشخص کنید که بداند چطور باید با برنچ‌های
+\lr{divergent} برخورد کند. در ادامه تعدادی دستور می‌دهد که با اجرا کردن
+آن‌ها، می‌توانید این شیوه را مشخص کنید. اگر دقت کنید، دستور اول به گیت
+می‌گوید که تلاش کند تا دو برنچ \lr{divergent} را \lr{merge} کند:
+
+\begin{codebox}{bash}
+$ git config pull.rebase false # merge
+\end{codebox}
+
+شما هم با اجرای این دستور، این شیوه را برای گیت مشخص کنید. در
+\lr{\texttt{pull}} بعدی، می‌توانید ببینید که گیت، تغییرات برنچ‌های
+\lr{\texttt{main}} تایلر و \lr{\texttt{origin/main}} را مرج می‌کند.
+\lr{\texttt{pull}} کنید تا این موفقیت را ببینید. دقت کنید که چون شما
+برای \lr{\texttt{pull}} کردن، برنچ \lr{\texttt{origin/main}} و
+\lr{\texttt{main}} را مرج می‌کنید، ممکن است که به \lr{merge conflict}
+بخورید و مجبور بشید مثل قبل آن‌ها را برطرف کنید.
+
+\section{منابع بیشتر}
+
+اگر هر جایی از مباحثی که در این داک گفته شد را به خوبی متوجه نشدید،
+می‌توانید از منبعی که خیلی‌ها با آن \lr{git} را یاد گرفتند، یعنی
+\href{https://faradars.org/courses/fvgit9609-git-github-gitlab}{دوره‌ی
+جادی در فرادرس} آن را دوباره بخونید.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/git-50.png}
+\end{figure}
+
+همچنین، اگر می‌خواهید بیشتر یاد بگیرید، می‌توانید یک نگاه به
+\href{https://git-scm.com/doc}{داک رسمی گیت} بندازید!
+
+\section{چه چیزی یاد گرفتیم؟}
+
+ما در این داک، به شما یاد دادیم که چطور می‌توانید از گیت استفاده کنید.
+این مهارت، هم در کار‌ آینده‌تون و هم در ادامه‌ی دانشگاه‌ خیلی به کار می‌آید،
+چون حدودا همه‌ی شرکت‌ها از \lr{git} برای هماهنگ کردن پروژه‌ها استفاده
+می‌کنند. شما یاد گرفتید که:
+
+\begin{itemize}
+\tightlist
+\item
+  گیت چیست، و \lr{Version Control} چه کاربردی دارد.
+\item
+  دستورهایی مثل \lr{stage} و \lr{commit} کردن یعنی چه و چطور می‌توانید با
+  آن‌ها کار کنید.
+\item
+  برنچ‌ها چی هستند و کجا کاربرد دارند.
+\item
+  مرج کردن چیست و چطور می‌توان \lr{conflict} ها را رفع کرد.
+\item
+  چطور می‌توان با یک \lr{remote repository} کار کرد.
+\end{itemize}
+
+کار کردن با گیت، در ابتدا ممکن است برای شما پر فروز و نشیب باشد. حتما در
+مورد مشکلاتی که دارید در گوگل سرچ کنید، از تدریس‌یارها بپرسید یا از
+\lr{ChatGPT} بخواهید که مشکل را توضیح دهد.
+	
+	
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
