@@ -425,7 +425,7 @@ int main(void) {
 
 همچنین، یک فایل `goodbye.txt` هم درست کنید و داخلش بنویسید:
 
-```txt
+```text
 Goodbye, Git :(
 ```
 
